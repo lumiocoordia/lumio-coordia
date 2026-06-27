@@ -84,3 +84,20 @@ h1,h2,h3{line-height:1.08}
 /* Hero h1: bolder presence */
 .hero-copy h1{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:700}
 .hero-copy p{font-size:18px;line-height:1.6;opacity:0.85}
+
+/* === DUNA-STYLE NAV LAYOUT === */
+
+/* Logo left | links centered (flex:1 + justify-content:center) | CTA right */
+.hero-nav{justify-content:space-between;align-items:center}
+.nav-pill{flex:1;justify-content:center;margin:0 16px}
+
+/* Nav CTA pill — solid dark button (Duna-style) */
+.nav-cta-pill{background:#111827;color:#fff!important;border-radius:999px;padding:10px 20px;font-size:13px;font-weight:600;white-space:nowrap;flex-shrink:0;transition:background .2s,transform .2s;box-shadow:0 2px 8px rgba(17,24,39,.18)}
+.nav-cta-pill:hover{background:#374151;transform:translateY(-1px)}
+
+/* Move language switcher below nav row so it doesn't overlap the CTA */
+.language-switcher{top:72px!important}
+@media (min-width:640px){.language-switcher{top:84px!important}}
+
+/* Hide nav CTA on very small screens */
+@media (max-width:480px){.nav-cta-pill{display:none}}
