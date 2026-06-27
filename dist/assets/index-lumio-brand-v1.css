@@ -65,3 +65,22 @@ h1,h2,h3{line-height:1.08}
 
 /* 8. Mobile nav scroll hint */
 @media (max-width:720px){.nav-pill{-webkit-mask-image:linear-gradient(to right,black 82%,transparent 100%);mask-image:linear-gradient(to right,black 82%,transparent 100%)}}
+
+/* === DUNA-INSPIRED ADDITIONS === */
+
+/* Solid primary CTA (duna-style dark button vs outline-only) */
+.hero-copy .outline-cta:last-of-type{background:#111827;color:#fff;border-color:#111827}
+.hero-copy .outline-cta:last-of-type:hover{background:#374151;border-color:#374151}
+
+/* Logo pill: fit the landscape logo naturally without side letterboxing */
+.logo-pill{width:auto;min-width:120px;max-width:200px;height:52px;border-radius:14px;padding:8px 14px}
+.logo-pill img{object-fit:contain;width:auto;height:100%;max-width:100%}
+@media (min-width:640px){.logo-pill{height:60px;padding:10px 16px;border-radius:16px;min-width:140px;max-width:240px}}
+@media (max-width:720px){.logo-pill{height:46px;padding:7px 12px;min-width:100px;max-width:170px}}
+
+/* Section heading: larger and more impactful (duna uses ~60-80px) */
+.content-page h2{font-size:clamp(40px,7vw,84px)}
+
+/* Hero h1: bolder presence */
+.hero-copy h1{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:700}
+.hero-copy p{font-size:18px;line-height:1.6;opacity:0.85}
