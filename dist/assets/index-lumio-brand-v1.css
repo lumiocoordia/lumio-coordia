@@ -34,70 +34,68 @@
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
-/* === DESIGN PHASE 6 OVERRIDES === */
 
-/* 1. Heading weight hierarchy */
-.template-hero h1{font-weight:700}
-.content-page h2{font-weight:600;letter-spacing:-0.02em}
+/* ============================================================
+   LUMIO — Design System Override v3 (clean replace of v1+v2)
+   Reference: duna.com visual language + LUMIO brand
+   ============================================================ */
+
+/* --- VARIABLES --- */
+:root{--gold:#d9a34f;--gold-light:#f5e6c8}
+
+/* ---- NAV: Duna-style (transparent, logo left | links center | CTA right) ---- */
+
+/* 1. Remove pill background from logo container */
+.logo-pill{background:transparent!important;box-shadow:none!important;border-radius:0!important;padding:0!important;height:44px;width:auto;min-width:unset;max-width:unset;overflow:visible;display:flex;align-items:center}
+.logo-pill img{object-fit:contain;height:44px;width:auto;max-width:200px;display:block}
+
+/* 2. Remove pill background from nav links container */
+.nav-pill{flex:1;display:flex;justify-content:center;align-items:center;gap:32px;background:transparent!important;box-shadow:none!important;border-radius:0!important;padding:0!important}
+.nav-pill a{color:#374151;font-size:14px;font-weight:500;white-space:nowrap}
+.nav-pill a:hover{color:#111827}
+
+/* 3. Nav layout: space-between for the 3-item row */
+.hero-nav{justify-content:space-between;align-items:center;padding:24px 40px 0;gap:0}
+
+/* 4. Nav CTA pill (injected via JS patch) */
+.nav-cta-pill{background:#111827;color:#fff!important;border-radius:999px;padding:10px 22px;font-size:13px;font-weight:600;white-space:nowrap;flex-shrink:0;transition:background .2s}
+.nav-cta-pill:hover{background:#374151}
+
+/* 5. Language switcher: below nav row, not overlapping CTA */
+.language-switcher{top:76px!important}
+@media (min-width:640px){.language-switcher{top:84px!important;right:40px!important}}
+
+/* Mobile nav: hide CTA, stack naturally */
+@media (max-width:640px){
+  .hero-nav{padding:14px 20px 0;gap:12px}
+  .nav-pill{flex:0 1 auto;gap:14px;overflow-x:auto;scrollbar-width:none;mask-image:linear-gradient(to right,black 85%,transparent 100%)}
+  .nav-pill::-webkit-scrollbar{display:none}
+  .nav-cta-pill{display:none}
+  .language-switcher{top:58px!important;left:20px!important;right:auto!important}
+}
+
+/* ---- TYPOGRAPHY ---- */
+.template-hero h1{font-weight:700;font-size:clamp(2rem,4vw,2.8rem);line-height:1.1}
+.hero-copy p{font-size:18px;line-height:1.6;opacity:.85}
+.content-page h2{font-weight:600;letter-spacing:-.02em;font-size:clamp(38px,5.5vw,66px);line-height:1.04}
 .product-card h3,.proof-card h3,.process-row h3{font-weight:600}
 
-/* 2. Standardise heading line-height */
-h1,h2,h3{line-height:1.08}
+/* ---- CARDS ---- */
+.product-card,.proof-card,.process-row,.contact-form{background:rgba(255,255,255,.93);box-shadow:0 2px 16px rgba(17,24,39,.08),0 1px 4px rgba(17,24,39,.04)}
 
-/* 3. Cards — less translucent, stronger presence */
-.product-card,.proof-card,.process-row,.contact-form{background:rgba(255,255,255,0.93);box-shadow:0 2px 16px rgba(17,24,39,0.08),0 1px 4px rgba(17,24,39,0.04)}
-
-/* 4. Gold accent (from LUMIO logo) reintroduced */
-:root{--gold:#d9a34f;--gold-light:#f5e6c8}
+/* ---- GOLD ACCENT (from LUMIO logo) ---- */
 .is-featured{border-color:var(--gold)!important}
 .hero-copy .outline-cta:first-of-type{border-color:var(--gold);color:var(--gold)}
 .hero-copy .outline-cta:first-of-type:hover{background:var(--gold);color:#111827;border-color:var(--gold)}
-
-/* 5. Button padding consistency */
-.outline-cta{padding:12px 24px;font-size:15px}
-
-/* 6. Reduce portfolio animation intensity */
-.hong-kong-preview,.macau-preview,.stayflow-preview{animation-duration:20s!important}
-.portfolio-preview-panel{opacity:0.92}
-
-/* 7. Alternate section backgrounds for visual rhythm */
-.content-page:nth-of-type(even){background:#f8f8f6}
-
-/* 8. Mobile nav scroll hint */
-@media (max-width:720px){.nav-pill{-webkit-mask-image:linear-gradient(to right,black 82%,transparent 100%);mask-image:linear-gradient(to right,black 82%,transparent 100%)}}
-
-/* === DUNA-INSPIRED ADDITIONS === */
-
-/* Solid primary CTA (duna-style dark button vs outline-only) */
 .hero-copy .outline-cta:last-of-type{background:#111827;color:#fff;border-color:#111827}
 .hero-copy .outline-cta:last-of-type:hover{background:#374151;border-color:#374151}
+.outline-cta{padding:12px 24px;font-size:15px}
 
-/* Logo pill: fit the landscape logo naturally without side letterboxing */
-.logo-pill{width:auto;min-width:120px;max-width:200px;height:52px;border-radius:14px;padding:8px 14px}
-.logo-pill img{object-fit:contain;width:auto;height:100%;max-width:100%}
-@media (min-width:640px){.logo-pill{height:60px;padding:10px 16px;border-radius:16px;min-width:140px;max-width:240px}}
-@media (max-width:720px){.logo-pill{height:46px;padding:7px 12px;min-width:100px;max-width:170px}}
+/* ---- SECTION RHYTHM ---- */
+.content-page:nth-of-type(even){background:#f8f8f6}
 
-/* Section heading: larger and more impactful (duna uses ~60-80px) */
-.content-page h2{font-size:clamp(40px,7vw,84px)}
+/* ---- ANIMATION — toned down ---- */
+.hong-kong-preview,.macau-preview,.stayflow-preview{animation-duration:20s!important}
 
-/* Hero h1: bolder presence */
-.hero-copy h1{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:700}
-.hero-copy p{font-size:18px;line-height:1.6;opacity:0.85}
-
-/* === DUNA-STYLE NAV LAYOUT === */
-
-/* Logo left | links centered (flex:1 + justify-content:center) | CTA right */
-.hero-nav{justify-content:space-between;align-items:center}
-.nav-pill{flex:1;justify-content:center;margin:0 16px}
-
-/* Nav CTA pill — solid dark button (Duna-style) */
-.nav-cta-pill{background:#111827;color:#fff!important;border-radius:999px;padding:10px 20px;font-size:13px;font-weight:600;white-space:nowrap;flex-shrink:0;transition:background .2s,transform .2s;box-shadow:0 2px 8px rgba(17,24,39,.18)}
-.nav-cta-pill:hover{background:#374151;transform:translateY(-1px)}
-
-/* Move language switcher below nav row so it doesn't overlap the CTA */
-.language-switcher{top:72px!important}
-@media (min-width:640px){.language-switcher{top:84px!important}}
-
-/* Hide nav CTA on very small screens */
-@media (max-width:480px){.nav-cta-pill{display:none}}
+/* ---- REDUCED MOTION ---- */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
