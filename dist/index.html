@@ -455,7 +455,8 @@
       transform-style: preserve-3d;
       transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
     }
-    .flip-card:hover .flip-inner { transform: rotateY(180deg); }
+    .flip-card:hover .flip-inner,
+    .flip-card.tapped .flip-inner { transform: rotateY(180deg); }
 
     .flip-front, .flip-back {
       position: absolute;
@@ -887,6 +888,105 @@
       transition: color 0.3s;
     }
     .process-card:hover .pc-desc { color: rgba(255,255,255,0.5); }
+
+    /* ════════════════════════════════════════════
+       MOBILE — comprehensive responsive fixes
+    ════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      /* Cursor: hide on touch */
+      #cursor { display: none; }
+      body { cursor: auto; }
+      a, button, .flip-card, .process-card, .accordion-header { cursor: pointer; }
+
+      /* Nav */
+      .hero-nav { padding: 14px 16px 0; gap: 6px; justify-content: space-between; }
+      .logo-pill { height: 44px; padding: 0 12px; }
+      .logo-pill img { height: 22px; min-width: unset; }
+      .nav-pill {
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        top: auto;
+        border-radius: 0;
+        border-top: 1px solid rgba(255,255,255,0.12);
+        justify-content: space-around;
+        padding: 10px 8px 14px;
+        gap: 0;
+        z-index: 100;
+        background: rgba(10,10,10,0.92) !important;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+      .nav-pill a { font-size: 10px; font-weight: 500; flex-direction: column; display: flex; align-items: center; gap: 2px; }
+      /* Language switcher */
+      .language-switcher { top: 16px; right: 16px; }
+      .language-switcher button { min-width: 30px; height: 28px; font-size: 10px; }
+
+      /* Hero */
+      .hero-surface { padding: 40px 20px 100px; }
+      .badge-link { font-size: 10px; padding: 6px 14px; margin-bottom: 20px; }
+      .hero-copy h1 { font-size: clamp(2rem, 9vw, 3rem); margin-bottom: 16px; }
+      .hero-copy p { font-size: 15px; margin-bottom: 28px; }
+      .hero-ctas { flex-direction: column; align-items: center; gap: 10px; }
+      .outline-cta { width: 100%; max-width: 300px; justify-content: center; padding: 12px 20px; font-size: 14px; }
+
+      /* Marquee */
+      .marquee-item { gap: 24px; padding: 0 24px; }
+
+      /* Sections — reduce padding */
+      section { padding: 72px 20px; }
+      #story { padding: 72px 20px; }
+      #portfolio { padding: 72px 20px; }
+      #help { padding: 72px 20px; }
+      #process-cards { padding: 72px 20px; }
+      #products { padding: 72px 20px; }
+      #support { padding: 72px 20px; }
+
+      /* Story — stack */
+      .story-grid { grid-template-columns: 1fr; gap: 36px; }
+      .story-headline { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+
+      /* Portfolio flip cards — single column on small, tap to flip */
+      .flip-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .flip-card { height: 240px; }
+      .flip-front { padding: 20px; }
+      .flip-front-title { font-size: 1.1rem; }
+      .flip-ghost { font-size: 6rem; }
+
+      /* Process accordion — remove 200px sidebar */
+      .process-layout { grid-template-columns: 1fr; gap: 24px; }
+      .process-sticky { position: static; }
+      .process-sticky .label { writing-mode: horizontal-tb; transform: none; }
+      .accordion-title { font-size: clamp(1.4rem, 5vw, 1.8rem); }
+      .accordion-header { padding: 24px 0; }
+      .accordion-content { grid-template-columns: 1fr; gap: 16px; }
+
+      /* Process cards — stack */
+      .cards-grid { grid-template-columns: 1fr; gap: 2px; }
+
+      /* Products header + grid — stack */
+      .products-header { grid-template-columns: 1fr; gap: 20px; }
+      .products-headline { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+      .pricing-grid { grid-template-columns: 1fr; gap: 20px; }
+      .pricing-card--featured { margin-top: 10px; }
+
+      /* Contact — stack */
+      .support-inner { grid-template-columns: 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; gap: 12px; }
+
+      /* Footer — stack */
+      footer { padding: 40px 20px 80px; } /* 80px bottom = above fixed nav */
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .footer-links { flex-wrap: wrap; gap: 16px 24px; }
+
+      /* Bottom padding on last section too */
+      #support { padding-bottom: 100px; }
+    }
+
+    @media (max-width: 480px) {
+      .flip-grid { grid-template-columns: 1fr; }
+      .flip-card { height: 200px; }
+      .hero-copy h1 { font-size: clamp(1.8rem, 10vw, 2.6rem); }
+    }
   </style>
 </head>
 <body>
@@ -1362,6 +1462,18 @@
         btn.classList.add('is-active');
       });
     });
+
+    /* ── Touch: tap-to-flip portfolio cards ── */
+    if ('ontouchstart' in window) {
+      document.querySelectorAll('.flip-front-hint').forEach(el => el.textContent = 'Tap to preview');
+      document.querySelectorAll('.flip-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const isFlipped = card.classList.contains('tapped');
+          document.querySelectorAll('.flip-card.tapped').forEach(c => c.classList.remove('tapped'));
+          if (!isFlipped) card.classList.add('tapped');
+        });
+      });
+    }
   </script>
 
   <!-- ═══ ATOMIC CANVAS ANIMATION ═══ -->
