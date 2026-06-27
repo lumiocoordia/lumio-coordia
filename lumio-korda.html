@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clear, practical websites for service businesses | LUMIO Coordia Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ════════════════════════════════════════════
+       RESET
+    ════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #fff;
+      color: #000;
+      cursor: none;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { cursor: none; background: none; border: none; font: inherit; }
+
+    /* ════════════════════════════════════════════
+       DESIGN TOKENS
+    ════════════════════════════════════════════ */
+    :root {
+      --accent:    #c8a96e;
+      --accent-dk: #a07840;
+      --bg-dark:   #000000;
+      --bg-light:  #f0ede6;
+      --bg-mid:    #faf8f4;
+      --text-light: #f5f5f5;
+      --text-muted-light: rgba(245,245,245,0.6);
+      --text-muted-dark: #605f5f;
+      --border: #e6e6e6;
+      --border-dark: rgba(255,255,255,0.1);
+    }
+
+    /* ════════════════════════════════════════════
+       CUSTOM CURSOR
+    ════════════════════════════════════════════ */
+    #cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      transition: width 0.3s cubic-bezier(0.16,1,0.3,1), height 0.3s cubic-bezier(0.16,1,0.3,1);
+      will-change: transform;
+    }
+    #cursor.expanded { width: 60px; height: 60px; }
+
+
+    /* ════════════════════════════════════════════
+       TYPOGRAPHY
+    ════════════════════════════════════════════ */
+    h1, h2, h3 {
+      font-family: 'Inter Tight', sans-serif;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+    }
+    .label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .label-muted { color: var(--text-muted-dark); }
+    .label-dark  { color: rgba(200,169,110,0.7); }
+
+    /* ════════════════════════════════════════════
+       SCROLL REVEAL
+    ════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+      will-change: transform;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ════════════════════════════════════════════
+       HERO — new dark split layout
+    ════════════════════════════════════════════ */
+    :root {
+      --pill:  rgba(255,255,255,0.1);
+      --pill-light: rgba(255,255,255,0.12);
+    }
+    .template-hero {
+      background: #000;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Nav */
+    .hero-nav {
+      position: relative;
+      z-index: 10;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 20px 24px 0;
+      display: flex;
+    }
+    .logo-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      padding: 0 20px;
+      display: flex;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    .logo-pill img {
+      height: 28px; width: auto; display: block; object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+    .nav-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      align-items: center;
+      gap: 28px;
+      padding: 14px 24px;
+      display: flex;
+      backdrop-filter: blur(12px);
+    }
+    .nav-pill a { color: rgba(255,255,255,0.7); font-size: 15px; font-weight: 500; transition: color 0.2s; cursor: none; }
+    .nav-pill a:hover { color: #fff; }
+    .nav-cta-pill {
+      background: var(--accent);
+      border-radius: 999px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.2s;
+      color: #fff !important;
+      cursor: none;
+    }
+    .nav-cta-pill:hover { background: var(--accent-dk); }
+
+    /* Language switcher */
+    .language-switcher {
+      z-index: 10;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      display: flex;
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      backdrop-filter: blur(12px);
+    }
+    .language-switcher button {
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      border-radius: 999px;
+      min-width: 36px;
+      height: 32px;
+      font-size: 11px;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .language-switcher button:hover,
+    .language-switcher button.is-active {
+      color: #fff;
+      background: rgba(255,255,255,0.15);
+    }
+    .language-switcher button:hover { transform: translateY(-1px); }
+
+    /* Hero — full-screen canvas bg, centered text */
+    .hero-canvas-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+    .hero-canvas-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+    }
+    .hero-canvas-bg canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+    }
+    /* dark gradient overlay so text is readable */
+    .hero-canvas-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.65) 100%);
+    }
+
+    /* centered content */
+    .hero-surface {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      padding: 60px 48px 100px;
+    }
+    .badge-link {
+      color: var(--accent);
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 28px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      display: inline-flex;
+      cursor: none;
+      border: 1px solid rgba(200,169,110,0.3);
+      padding: 8px 20px;
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+    }
+    .badge-link:hover { color: #fff; border-color: rgba(200,169,110,0.6); }
+    .arrow { transition: transform 0.2s; display: inline-block; }
+    a:hover .arrow { transform: translateX(2px); }
+
+    .hero-copy { display: flex; flex-direction: column; align-items: center; }
+    .hero-copy h1 {
+      color: #fff;
+      letter-spacing: -0.04em;
+      margin: 0 0 24px;
+      font-size: clamp(3rem, 6vw, 6rem);
+      font-weight: 500;
+      line-height: 1.0;
+      font-family: 'Inter Tight', sans-serif;
+      max-width: 900px;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.5);
+    }
+    .hero-copy p {
+      color: rgba(255,255,255,0.65);
+      margin: 0 0 40px;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.7;
+      font-family: 'Inter', sans-serif;
+      max-width: 480px;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .outline-cta {
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 999px;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+      display: inline-flex;
+      cursor: none;
+      font-family: 'Inter', sans-serif;
+      backdrop-filter: blur(8px);
+    }
+    .outline-cta:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.6); }
+    .outline-cta.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .outline-cta.primary:hover { background: var(--accent-dk); border-color: var(--accent-dk); }
+
+    @media (max-width: 768px) {
+      .nav-cta-pill { display: none; }
+      .language-switcher { top: 22px; right: 12px; }
+      .hero-copy h1 { font-size: clamp(2.4rem, 8vw, 3.5rem); }
+    }
+
+    /* ════════════════════════════════════════════
+       MARQUEE
+    ════════════════════════════════════════════ */
+    .marquee-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      padding: 14px 0;
+      background: #fff;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 24s linear infinite;
+    }
+    .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      padding: 0 40px;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #000;
+      white-space: nowrap;
+    }
+    .marquee-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════════════════
+       SHARED SECTION
+    ════════════════════════════════════════════ */
+    section { padding: 130px 48px; }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    .section-eyebrow {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 72px;
+    }
+
+    /* text-link with wipe underline */
+    .text-link {
+      position: relative;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .text-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 100%; height: 1px;
+      background: currentColor;
+      opacity: 0.3;
+      transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .text-link::before {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 100%; height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      z-index: 1;
+    }
+    .text-link:hover::before { transform: scaleX(1); }
+    .text-link:hover::after  { transform: scaleX(0); }
+
+    /* ════════════════════════════════════════════
+       STORY — dark
+    ════════════════════════════════════════════ */
+    #story {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      padding: 140px 48px;
+    }
+    .story-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .story-headline {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      color: var(--text-light);
+    }
+    .story-body p {
+      font-size: 15px;
+      color: var(--text-muted-light);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+    .story-body p:last-child { margin-bottom: 0; }
+
+    /* ════════════════════════════════════════════
+       PORTFOLIO — flip cards
+    ════════════════════════════════════════════ */
+    #portfolio {
+      background: #fff;
+      padding: 130px 48px;
+    }
+    .flip-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .flip-grid .flip-card:last-child:nth-child(3n+1) {
+      /* 4th card when grid is 3-col: shift it */
+    }
+
+    .flip-card {
+      perspective: 1200px;
+      height: 360px;
+      cursor: none;
+    }
+    .flip-inner {
+      position: relative;
+      width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .flip-card:hover .flip-inner { transform: rotateY(180deg); }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* Front face */
+    .flip-front {
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 32px;
+      border: 1px solid #1a1a1a;
+    }
+    .flip-front-num {
+      font-size: 10px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--accent);
+      font-weight: 500; margin-bottom: 12px;
+      font-family: 'Inter', sans-serif;
+    }
+    .flip-front-title {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: clamp(1.4rem, 2vw, 2rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .flip-front-meta {
+      font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-family: 'Inter', sans-serif;
+    }
+    .flip-front-hint {
+      position: absolute;
+      top: 24px; right: 24px;
+      font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      font-family: 'Inter', sans-serif;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .flip-front-hint::before {
+      content: '';
+      display: block; width: 20px; height: 1px;
+      background: rgba(255,255,255,0.15);
+    }
+    /* Ghost number */
+    .flip-ghost {
+      position: absolute;
+      top: -20px; right: 16px;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 9rem; font-weight: 600;
+      color: rgba(255,255,255,0.03);
+      line-height: 1; letter-spacing: -0.04em;
+      pointer-events: none;
+    }
+    /* accent bar */
+    .flip-front::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .flip-card:hover .flip-front::before { transform: scaleX(1); }
+
+    /* Back face */
+    .flip-back {
+      transform: rotateY(180deg);
+      background: #000;
+    }
+    .flip-back-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top;
+      opacity: 0.85;
+      display: block;
+    }
+    .flip-back-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+    }
+    .flip-back-link {
+      font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #fff;
+      font-weight: 500; font-family: 'Inter', sans-serif;
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 8px 18px; border-radius: 999px;
+      transition: background 0.2s, border-color 0.2s;
+      cursor: none;
+    }
+    .flip-back-link:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.6); }
+
+    /* "Soon" back */
+    .flip-back-soon {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px;
+    }
+    .flip-back-soon span {
+      font-size: 10px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.3);
+      font-family: 'Inter', sans-serif;
+    }
+
+    @media (max-width: 768px) {
+      .flip-grid { grid-template-columns: 1fr 1fr; }
+      .flip-card { height: 280px; }
+    }
+
+    /* ════════════════════════════════════════════
+       PROCESS — accordion style (dark)
+    ════════════════════════════════════════════ */
+    #help {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      padding: 140px 48px;
+    }
+    .process-layout {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 80px;
+    }
+    .process-sticky {
+      position: sticky;
+      top: 120px;
+      align-self: start;
+    }
+    .process-sticky .label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+    .accordion-list { border-top: 1px solid var(--border-dark); }
+    .accordion-item { border-bottom: 1px solid var(--border-dark); }
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 36px 0;
+      cursor: none;
+      gap: 24px;
+    }
+    .accordion-header:hover .accordion-title { opacity: 0.65; }
+    .accordion-title {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      transition: opacity 0.2s;
+    }
+    .accordion-icon {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+    .accordion-header:hover .accordion-icon { border-color: rgba(200,169,110,0.5); }
+    .accordion-icon svg { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .accordion-item.open .accordion-icon svg { transform: rotate(45deg); }
+    .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .accordion-item.open .accordion-body { max-height: 250px; }
+    .accordion-content { padding: 0 0 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .accordion-desc { font-size: 15px; color: var(--text-muted-light); line-height: 1.75; font-weight: 300; max-width: 360px; }
+    .accordion-num { font-family: 'Inter Tight', sans-serif; font-size: 5rem; font-weight: 500; color: rgba(255,255,255,0.05); letter-spacing: -0.04em; line-height: 1; align-self: start; text-align: right; }
+
+    /* ════════════════════════════════════════════
+       PRODUCTS / PRICING — dark with gold accent
+    ════════════════════════════════════════════ */
+    #products {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      padding: 140px 48px;
+      border-top: 1px solid var(--border-dark);
+    }
+    .products-inner { max-width: 1120px; margin: 0 auto; }
+    .products-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 72px;
+    }
+    .products-headline {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      color: var(--text-light);
+    }
+    .products-desc {
+      font-size: 15px;
+      color: var(--text-muted-light);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+    .pricing-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-dark);
+      border-radius: 16px;
+      padding: 36px 28px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .pricing-card:hover { border-color: rgba(200,169,110,0.4); background: rgba(255,255,255,0.07); }
+    .pricing-card--featured {
+      border: 1.5px solid var(--accent);
+      background: rgba(200,169,110,0.06);
+      position: relative;
+    }
+    .pricing-card--featured::before {
+      content: "Most Popular";
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+    }
+    .pricing-tier {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 16px;
+      font-family: 'Inter', sans-serif;
+    }
+    .pricing-price {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 2.4rem; font-weight: 500;
+      color: var(--text-light);
+      line-height: 1; margin-bottom: 16px;
+      letter-spacing: -0.03em;
+    }
+    .pricing-price sup { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 300; opacity: 0.45; vertical-align: super; }
+    .pricing-desc {
+      font-size: 13px; color: var(--text-muted-light); line-height: 1.65;
+      font-weight: 300; margin-bottom: 28px; padding-bottom: 28px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .pricing-features { list-style: none; margin-bottom: 36px; }
+    .pricing-features li {
+      font-size: 13px; color: rgba(245,245,245,0.75);
+      padding: 7px 0; display: flex; align-items: center;
+      gap: 10px; font-weight: 300;
+    }
+    .pricing-features li::before {
+      content: '';
+      display: block; width: 5px; height: 5px;
+      border-radius: 50%; background: var(--accent); flex-shrink: 0;
+    }
+    .btn-pricing {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 13px 20px;
+      background: var(--accent); color: #fff;
+      border-radius: 40px; font-size: 13px; font-weight: 500;
+      transition: background 0.2s, transform 0.2s;
+      cursor: none;
+    }
+    .btn-pricing:hover { background: var(--accent-dk); transform: translateY(-1px); }
+
+    /* ════════════════════════════════════════════
+       CONTACT — warm light
+    ════════════════════════════════════════════ */
+    #support { background: var(--bg-light); padding: 140px 48px; }
+    .support-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px; align-items: start;
+    }
+    .support-headline {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: #000;
+      margin-bottom: 20px;
+    }
+    .support-sub {
+      font-size: 15px; color: var(--text-muted-dark); line-height: 1.8; font-weight: 300;
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; }
+    .form-group label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-muted-dark);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      padding: 11px 14px; border: 1.5px solid #e0ddd6;
+      border-radius: 8px; background: #fff; color: #000;
+      transition: border-color 0.2s; outline: none; appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .select-wrap { position: relative; }
+    .select-wrap::after { content: '↓'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--text-muted-dark); pointer-events: none; }
+    .select-wrap select { width: 100%; padding-right: 36px; cursor: none; }
+
+    .form-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .btn-submit {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 32px; background: var(--accent); color: #fff;
+      border-radius: 40px; font-size: 13px; font-weight: 500;
+      border: none; cursor: none; transition: background 0.2s, transform 0.2s;
+    }
+    .btn-submit:hover { background: var(--accent-dk); transform: translateY(-1px); }
+    .whatsapp-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--text-muted-dark); transition: color 0.2s;
+      cursor: none;
+    }
+    .whatsapp-link:hover { color: var(--accent); }
+
+    /* ════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════ */
+    footer {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      padding: 60px 48px;
+      border-top: 1px solid var(--border-dark);
+    }
+    .footer-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;
+    }
+    .footer-logo img {
+      height: 44px; width: auto; display: block;
+      filter: brightness(0) invert(1); opacity: 0.85;
+    }
+    .footer-links { display: flex; gap: 32px; list-style: none; }
+    .footer-links a {
+      font-size: 11px; color: var(--text-muted-light); letter-spacing: 0.1em;
+      text-transform: uppercase; transition: color 0.2s; cursor: none;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(245,245,245,0.25);
+    }
+
+    /* ════════════════════════════════════════════
+       PROCESS CARDS (mid section between products)
+    ════════════════════════════════════════════ */
+    #process-cards {
+      background: var(--bg-mid);
+      padding: 130px 48px;
+    }
+    .cards-inner { max-width: 1120px; margin: 0 auto; }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 72px;
+    }
+    .process-card {
+      position: relative; overflow: hidden;
+      padding: 48px 36px;
+      border: 1px solid var(--border);
+      cursor: none;
+    }
+    .process-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: #000;
+      transform: scaleY(0); transform-origin: bottom;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+      will-change: transform;
+    }
+    .process-card:hover::after { transform: scaleY(1); }
+    .pc-inner { position: relative; z-index: 1; }
+    .pc-ghost {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 5rem; font-weight: 500;
+      color: rgba(0,0,0,0.04); line-height: 1;
+      position: absolute; top: -8px; right: 8px;
+      pointer-events: none; letter-spacing: -0.04em;
+      transition: color 0.3s;
+    }
+    .process-card:hover .pc-ghost { color: rgba(255,255,255,0.05); }
+    .pc-step {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 40px;
+      transition: color 0.3s;
+    }
+    .process-card:hover .pc-step { color: rgba(200,169,110,0.7); }
+    .pc-title {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 1.4rem; font-weight: 500;
+      letter-spacing: -0.02em; text-transform: uppercase;
+      margin-bottom: 14px; transition: color 0.3s;
+    }
+    .process-card:hover .pc-title { color: #fff; }
+    .pc-desc {
+      font-size: 13px; color: var(--text-muted-dark); line-height: 1.7; font-weight: 300;
+      transition: color 0.3s;
+    }
+    .process-card:hover .pc-desc { color: rgba(255,255,255,0.5); }
+  </style>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div id="cursor"></div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="template-hero" id="home">
+    <nav class="hero-nav" aria-label="Primary navigation">
+      <a href="#home" aria-label="LUMIO Coordia Intelligence home" class="logo-pill">
+        <img alt="LUMIO Coordia Intelligence" src="https://c48d783d.lumio-coordia-intelligence.pages.dev/assets/lumio-logo-lockup.png">
+      </a>
+      <div class="nav-pill">
+        <a href="#story">Story</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#help">Process</a>
+        <a href="#products">Products</a>
+        <a href="#support">Contact</a>
+      </div>
+      <a href="#products" class="nav-cta-pill">Get a website</a>
+    </nav>
+
+    <div class="language-switcher" role="group" aria-label="Language selector">
+      <button class="is-active" type="button">EN</button>
+      <button type="button">中文</button>
+      <button type="button">日本語</button>
+      <button type="button">한국어</button>
+    </div>
+
+    <!-- Full-screen canvas background -->
+    <div class="hero-canvas-bg">
+      <img src="bulb.jpg" alt="">
+      <canvas id="hero-canvas"></canvas>
+    </div>
+
+    <!-- Centered text overlay -->
+    <div class="hero-surface">
+      <a class="badge-link" href="#story">Digital growth for small businesses <span class="arrow">→</span></a>
+      <div class="hero-copy">
+        <h1>Simple websites. Serious results.</h1>
+        <p>Clear, practical websites built around your offer, your proof, and your next enquiry.</p>
+        <div class="hero-ctas">
+          <a class="outline-cta primary" href="#products">View website plans →</a>
+          <a class="outline-cta" href="#portfolio">View our work →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item">Website Design <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Business Automation <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Brand Identity <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Digital Systems <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Clear Messaging <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Lead Structure <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Australian Businesses <span class="marquee-dot"></span></div>
+      <!-- duplicate for seamless loop -->
+      <div class="marquee-item">Website Design <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Business Automation <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Brand Identity <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Digital Systems <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Clear Messaging <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Lead Structure <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Australian Businesses <span class="marquee-dot"></span></div>
+    </div>
+  </div>
+
+  <!-- ═══ STORY — dark ═══ -->
+  <section id="story">
+    <div class="story-grid">
+      <div>
+        <div class="label label-dark reveal" style="margin-bottom:24px">Story</div>
+        <h2 class="story-headline reveal reveal-delay-1">Your website should make the next step obvious.</h2>
+      </div>
+      <div class="story-body">
+        <p class="reveal reveal-delay-1">LUMIO Coordia Intelligence builds clear websites for service businesses that need visitors to understand the offer, trust the business, and know how to enquire.</p>
+        <p class="reveal reveal-delay-2">We shape the message, page journey, pricing path, proof, and contact flow before building, so the finished site feels useful rather than decorative.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PORTFOLIO — numbered rows ═══ -->
+  <section id="portfolio">
+    <div class="section-inner">
+      <div class="section-eyebrow">
+        <div>
+          <div class="label label-muted" style="margin-bottom:16px">Portfolio</div>
+          <h2 style="font-size: clamp(2.5rem,5vw,5rem); text-transform: uppercase;" class="reveal">Work</h2>
+        </div>
+        <a href="#support" class="text-link reveal" style="align-self:flex-end; color:#000; margin-bottom:8px;">
+          Start a project
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="flip-grid">
+
+        <!-- Card 1 -->
+        <div class="flip-card reveal">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="flip-ghost">01</div>
+              <span class="flip-front-hint">Hover to preview</span>
+              <div class="flip-front-num">01 — Hong Kong</div>
+              <div class="flip-front-title">Long Ieng</div>
+              <div class="flip-front-meta">Accounting consultancy</div>
+            </div>
+            <div class="flip-back">
+              <img class="flip-back-img" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Flongiengma.com%2F?w=900&h=600" alt="Long Ieng website">
+              <div class="flip-back-overlay">
+                <a class="flip-back-link" href="https://longiengma.com/" target="_blank">Visit site →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="flip-card reveal reveal-delay-1">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="flip-ghost">02</div>
+              <span class="flip-front-hint">Hover to preview</span>
+              <div class="flip-front-num">02 — Macau</div>
+              <div class="flip-front-title">Macau World Travel</div>
+              <div class="flip-front-meta">Travel agency</div>
+            </div>
+            <div class="flip-back">
+              <img class="flip-back-img" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fmacau-world-travel-agency.pages.dev%2F?w=900&h=600" alt="Macau World Travel website">
+              <div class="flip-back-overlay">
+                <a class="flip-back-link" href="https://macau-world-travel-agency.pages.dev/" target="_blank">Visit site →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="flip-card reveal reveal-delay-2">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="flip-ghost">03</div>
+              <span class="flip-front-hint">Hover to preview</span>
+              <div class="flip-front-num">03 — Malaysia</div>
+              <div class="flip-front-title">Stayflow Homestay</div>
+              <div class="flip-front-meta">Airbnb operations</div>
+            </div>
+            <div class="flip-back">
+              <img class="flip-back-img" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fstayflow-homestay-landing.pages.dev?w=900&h=600" alt="Stayflow website">
+              <div class="flip-back-overlay">
+                <a class="flip-back-link" href="https://stayflow-homestay-landing.pages.dev" target="_blank">Visit site →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="flip-card reveal reveal-delay-3">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="flip-ghost">04</div>
+              <div class="flip-front-num">04 — Coming soon</div>
+              <div class="flip-front-title">Work Visibility</div>
+              <div class="flip-front-meta">Construction</div>
+            </div>
+            <div class="flip-back">
+              <div class="flip-back-soon" style="background:#0a0a0a;">
+                <span style="font-size:2rem; opacity:0.15;">🏗</span>
+                <span>In progress</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="flip-card reveal reveal-delay-4">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="flip-ghost">05</div>
+              <div class="flip-front-num">05 — Coming soon</div>
+              <div class="flip-front-title">Professional Presence</div>
+              <div class="flip-front-meta">Corporate</div>
+            </div>
+            <div class="flip-back">
+              <div class="flip-back-soon" style="background:#0a0a0a;">
+                <span style="font-size:2rem; opacity:0.15;">🏢</span>
+                <span>In progress</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROCESS — accordion dark ═══ -->
+  <section id="help">
+    <div class="process-layout">
+      <div class="process-sticky">
+        <div class="label label-dark">Process</div>
+      </div>
+      <div>
+        <h2 style="font-size: clamp(2rem,4vw,3.5rem); text-transform:uppercase; color:var(--text-light); margin-bottom:64px;" class="reveal">Simple from<br>the client side.</h2>
+
+        <div class="accordion-list">
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span class="accordion-title">Share the need</span>
+              <div class="accordion-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 1v10M1 6h10" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <p class="accordion-desc">Tell us what you want to improve, launch, or simplify. No brief required — a conversation is enough to get started.</p>
+                <div class="accordion-num">01</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span class="accordion-title">Confirm the direction</span>
+              <div class="accordion-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 1v10M1 6h10" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <p class="accordion-desc">We turn the request into a clear offer, page structure, and build scope. You approve the direction before a single pixel is drawn.</p>
+                <div class="accordion-num">02</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span class="accordion-title">We execute</span>
+              <div class="accordion-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 1v10M1 6h10" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <p class="accordion-desc">We design, build, test, and prepare the approved work for launch. You bring the need. We handle the rest.</p>
+                <div class="accordion-num">03</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROCESS CARDS — fill sweep ═══ -->
+  <section id="process-cards">
+    <div class="cards-inner">
+      <div>
+        <div class="label label-muted reveal" style="margin-bottom:16px">How it works</div>
+      </div>
+      <div class="cards-grid">
+        <div class="process-card reveal">
+          <div class="pc-ghost">01</div>
+          <div class="pc-inner">
+            <div class="pc-step">Step 01</div>
+            <h3 class="pc-title">Share the need</h3>
+            <p class="pc-desc">Tell us what you want to improve, launch, or simplify.</p>
+          </div>
+        </div>
+        <div class="process-card reveal reveal-delay-1">
+          <div class="pc-ghost">02</div>
+          <div class="pc-inner">
+            <div class="pc-step">Step 02</div>
+            <h3 class="pc-title">Confirm direction</h3>
+            <p class="pc-desc">We turn the request into a clear offer, page structure, and build scope.</p>
+          </div>
+        </div>
+        <div class="process-card reveal reveal-delay-2">
+          <div class="pc-ghost">03</div>
+          <div class="pc-inner">
+            <div class="pc-step">Step 03</div>
+            <h3 class="pc-title">We execute</h3>
+            <p class="pc-desc">We design, build, test, and prepare the approved work for launch.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRODUCTS / PRICING — dark ═══ -->
+  <section id="products">
+    <div class="products-inner">
+      <div class="products-header">
+        <div>
+          <div class="label label-dark reveal" style="margin-bottom:20px">Products</div>
+          <h2 class="products-headline reveal reveal-delay-1">Choose<br>your level.</h2>
+        </div>
+        <p class="products-desc reveal reveal-delay-2">Choose the starting point that matches the job your website must do: establish trust, bring in better enquiries, or support a more complete sales path.</p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="pricing-card reveal">
+          <div class="pricing-tier">Starter</div>
+          <div class="pricing-price">AUD 990<sup>+</sup></div>
+          <p class="pricing-desc">A focused website for launch, credibility, and a clear contact path.</p>
+          <ul class="pricing-features">
+            <li>Simple website</li>
+            <li>Mobile ready</li>
+            <li>Clear contact path</li>
+          </ul>
+          <a href="#support" class="btn-pricing">Get started →</a>
+        </div>
+
+        <div class="pricing-card pricing-card--featured reveal reveal-delay-1">
+          <div class="pricing-tier">Growth</div>
+          <div class="pricing-price">AUD 2,500<sup>+</sup></div>
+          <p class="pricing-desc">A stronger web presence with clearer lead structure and basic automation.</p>
+          <ul class="pricing-features">
+            <li>Custom pages</li>
+            <li>Lead structure</li>
+            <li>Basic automation</li>
+          </ul>
+          <a href="#support" class="btn-pricing">Get started →</a>
+        </div>
+
+        <div class="pricing-card reveal reveal-delay-2">
+          <div class="pricing-tier">Premium</div>
+          <div class="pricing-price">AUD 5,000<sup>+</sup></div>
+          <p class="pricing-desc">A custom build for businesses that need better UX and connected systems.</p>
+          <ul class="pricing-features">
+            <li>Custom UX</li>
+            <li>Advanced build</li>
+            <li>System connection</li>
+          </ul>
+          <a href="#support" class="btn-pricing">Get started →</a>
+        </div>
+
+        <div class="pricing-card reveal reveal-delay-3">
+          <div class="pricing-tier">Custom</div>
+          <div class="pricing-price">Quote</div>
+          <p class="pricing-desc">For complex scopes, business systems, and ongoing support.</p>
+          <ul class="pricing-features">
+            <li>Complex scope</li>
+            <li>Business systems</li>
+            <li>Ongoing support</li>
+          </ul>
+          <a href="#support" class="btn-pricing">Get started →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="support">
+    <div class="support-inner">
+      <div>
+        <div class="label label-muted reveal" style="margin-bottom:20px">Contact</div>
+        <h2 class="support-headline reveal reveal-delay-1">Tell us the job<br>your website<br>needs to do.</h2>
+        <p class="support-sub reveal reveal-delay-2" style="margin-top:20px;">No sales pitch. We listen first, clarify the goal, and tell you honestly if we're the right fit.</p>
+      </div>
+      <form class="contact-form reveal reveal-delay-1">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="your@email.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="budget">Budget</label>
+            <div class="select-wrap">
+              <select id="budget">
+                <option value="">Choose one</option>
+                <option>AUD 990+ — Starter</option>
+                <option>AUD 2,500+ — Growth</option>
+                <option>AUD 5,000+ — Premium</option>
+                <option>Custom quote</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="type">Project Type</label>
+            <div class="select-wrap">
+              <select id="type">
+                <option value="">Choose one</option>
+                <option>Website</option>
+                <option>Automation</option>
+                <option>Business System</option>
+                <option>Not sure</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell us about your project…"></textarea>
+        </div>
+        <div class="form-footer">
+          <button type="submit" class="btn-submit">Send message →</button>
+          <a href="https://wa.me/60406300802" class="whatsapp-link" target="_blank">💬 WhatsApp us instead</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img alt="LUMIO Coordia Intelligence" src="https://c48d783d.lumio-coordia-intelligence.pages.dev/assets/lumio-logo-lockup.png">
+      </div>
+      <ul class="footer-links">
+        <li><a href="#story">Story</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#help">Process</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#support">Contact</a></li>
+      </ul>
+      <span class="footer-copy">© 2025 LUMIO Coordia Intelligence</span>
+    </div>
+  </footer>
+
+  <script>
+    /* ── Custom Cursor ── */
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, .project-item, .accordion-header, .process-card, .pricing-card').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+    });
+
+
+    /* ── Scroll Reveal ── */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ── Accordion ── */
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const item   = header.closest('.accordion-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    /* ── Language switcher ── */
+    document.querySelectorAll('.language-switcher button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.language-switcher button').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+      });
+    });
+  </script>
+
+  <!-- ═══ ATOMIC CANVAS ANIMATION ═══ -->
+  <script>
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width  = rect.width  * window.devicePixelRatio;
+      canvas.height = rect.height * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const CFG = { cx: 0.500, cy: 0.355, radius: 0.295 };
+
+    const ORBITS = [
+      { rxF: 0.82, ryF: 0.28, tilt: -0.45, speed: 0.80, phase: 0.0,  rgb: [255, 210,  80] },
+      { rxF: 0.68, ryF: 0.40, tilt:  1.10, speed: 1.25, phase: 2.10, rgb: [255, 175,  55] },
+      { rxF: 0.88, ryF: 0.22, tilt:  0.65, speed: 0.60, phase: 4.20, rgb: [255, 235, 130] },
+      { rxF: 0.55, ryF: 0.52, tilt:  0.05, speed: 1.55, phase: 1.05, rgb: [255, 195,  85] },
+      { rxF: 0.76, ryF: 0.35, tilt: -1.20, speed: 0.50, phase: 3.50, rgb: [255, 155,  45] },
+    ];
+
+    const NEURON_SEEDS = Array.from({ length: 9 }, (_, i) => {
+      const a = (i / 9) * Math.PI * 2;
+      const r = 0.25 + (i % 3) * 0.12;
+      return { a, r };
+    });
+
+    let t = 0;
+
+    function draw(ts) {
+      t = ts * 0.0008;
+      const rect = canvas.getBoundingClientRect();
+      const W = rect.width;
+      const H = rect.height;
+      ctx.clearRect(0, 0, W, H);
+
+      const cx = W * CFG.cx;
+      const cy = H * CFG.cy;
+      const R  = W * CFG.radius;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, R * 1.02, R * 1.02, 0, 0, Math.PI * 2);
+      ctx.clip();
+
+      const ig = ctx.createRadialGradient(cx, cy, 0, cx, cy, R);
+      ig.addColorStop(0,   'rgba(255,180,50,0.08)');
+      ig.addColorStop(0.7, 'rgba(100,60,10,0.05)');
+      ig.addColorStop(1,   'rgba(0,0,0,0)');
+      ctx.fillStyle = ig;
+      ctx.fillRect(0, 0, W, H);
+
+      const neurons = NEURON_SEEDS.map(s => {
+        const drift = Math.sin(t * 0.35 + s.a) * 0.08;
+        const aa = s.a + drift;
+        const rr = R * s.r;
+        return { x: cx + Math.cos(aa) * rr, y: cy + Math.sin(aa) * rr * 0.6 };
+      });
+      ctx.lineWidth = 0.6;
+      for (let i = 0; i < neurons.length; i++) {
+        for (let j = i + 1; j < neurons.length; j++) {
+          ctx.beginPath();
+          ctx.moveTo(neurons[i].x, neurons[i].y);
+          ctx.lineTo(neurons[j].x, neurons[j].y);
+          ctx.strokeStyle = 'rgba(255,185,65,0.06)';
+          ctx.stroke();
+        }
+      }
+      for (const n of neurons) {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 1, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,210,100,0.2)';
+        ctx.fill();
+      }
+
+      const ePos = [];
+      for (const orb of ORBITS) {
+        const rx = R * orb.rxF;
+        const ry = R * orb.ryF;
+        const angle = t * orb.speed + orb.phase;
+        const cos = Math.cos, sin = Math.sin;
+        const ex = cx + cos(angle) * rx * cos(orb.tilt) - sin(angle) * ry * sin(orb.tilt);
+        const ey = cy + cos(angle) * rx * sin(orb.tilt) + sin(angle) * ry * cos(orb.tilt);
+        ePos.push({ x: ex, y: ey, rgb: orb.rgb });
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(orb.tilt);
+        ctx.beginPath();
+        ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${orb.rgb[0]},${orb.rgb[1]},${orb.rgb[2]},0.18)`;
+        ctx.lineWidth = 0.9;
+        ctx.stroke();
+        ctx.restore();
+
+        for (let s = 1; s <= 20; s++) {
+          const ta = angle - s * 0.065;
+          const tx = cx + cos(ta) * rx * cos(orb.tilt) - sin(ta) * ry * sin(orb.tilt);
+          const ty = cy + cos(ta) * rx * sin(orb.tilt) + sin(ta) * ry * cos(orb.tilt);
+          const alpha = (1 - s / 20) * 0.55;
+          const radius = (1 - s / 20) * 2.8;
+          ctx.beginPath();
+          ctx.arc(tx, ty, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${orb.rgb[0]},${orb.rgb[1]},${orb.rgb[2]},${alpha})`;
+          ctx.fill();
+        }
+
+        const gs = R * 0.09;
+        const eg = ctx.createRadialGradient(ex, ey, 0, ex, ey, gs);
+        eg.addColorStop(0,   `rgba(${orb.rgb[0]},${orb.rgb[1]},${orb.rgb[2]},0.85)`);
+        eg.addColorStop(0.4, `rgba(${orb.rgb[0]},${orb.rgb[1]},${orb.rgb[2]},0.3)`);
+        eg.addColorStop(1,   'rgba(0,0,0,0)');
+        ctx.fillStyle = eg;
+        ctx.fillRect(ex - gs, ey - gs, gs * 2, gs * 2);
+
+        ctx.beginPath();
+        ctx.arc(ex, ey, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgb(${orb.rgb[0]},${orb.rgb[1]},${orb.rgb[2]})`;
+        ctx.fill();
+      }
+
+      ctx.lineWidth = 0.7;
+      for (let i = 0; i < ePos.length; i++) {
+        for (let j = i + 1; j < ePos.length; j++) {
+          const dx = ePos[j].x - ePos[i].x;
+          const dy = ePos[j].y - ePos[i].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const threshold = R * 0.85;
+          if (dist < threshold) {
+            const a = (1 - dist / threshold) * 0.3;
+            const mx = (ePos[i].x + ePos[j].x) / 2 + Math.sin(t * 1.8) * 10;
+            const my = (ePos[i].y + ePos[j].y) / 2 + Math.cos(t * 1.8) * 10;
+            ctx.beginPath();
+            ctx.moveTo(ePos[i].x, ePos[i].y);
+            ctx.quadraticCurveTo(mx, my, ePos[j].x, ePos[j].y);
+            ctx.strokeStyle = `rgba(255,210,100,${a})`;
+            ctx.stroke();
+          }
+        }
+      }
+
+      const pulse = Math.sin(t * 2.8) * 0.25 + 0.75;
+      const nr = R * 0.075 * pulse;
+      const ng = ctx.createRadialGradient(cx, cy, 0, cx, cy, nr * 3.5);
+      ng.addColorStop(0,   'rgba(255,255,220,0.92)');
+      ng.addColorStop(0.3, 'rgba(255,220,100,0.55)');
+      ng.addColorStop(0.7, 'rgba(255,155,35,0.18)');
+      ng.addColorStop(1,   'rgba(0,0,0,0)');
+      ctx.fillStyle = ng;
+      ctx.fillRect(cx - nr * 4, cy - nr * 4, nr * 8, nr * 8);
+      ctx.beginPath();
+      ctx.arc(cx, cy, nr, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFFAEE';
+      ctx.fill();
+
+      ctx.restore();
+      requestAnimationFrame(draw);
+    }
+
+    requestAnimationFrame(draw);
+  </script>
+</body>
+</html>
