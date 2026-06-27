@@ -33,3 +33,35 @@
 @media (max-width:720px){.hero-nav{justify-content:flex-start;padding-right:88px}.logo-pill{width:142px;height:56px;padding:7px 10px}.nav-pill{max-width:calc(100vw - 252px);overflow-x:auto;scrollbar-width:none}.nav-pill::-webkit-scrollbar{display:none}}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* === DESIGN PHASE 6 OVERRIDES === */
+
+/* 1. Heading weight hierarchy */
+.template-hero h1{font-weight:700}
+.content-page h2{font-weight:600;letter-spacing:-0.02em}
+.product-card h3,.proof-card h3,.process-row h3{font-weight:600}
+
+/* 2. Standardise heading line-height */
+h1,h2,h3{line-height:1.08}
+
+/* 3. Cards — less translucent, stronger presence */
+.product-card,.proof-card,.process-row,.contact-form{background:rgba(255,255,255,0.93);box-shadow:0 2px 16px rgba(17,24,39,0.08),0 1px 4px rgba(17,24,39,0.04)}
+
+/* 4. Gold accent (from LUMIO logo) reintroduced */
+:root{--gold:#d9a34f;--gold-light:#f5e6c8}
+.is-featured{border-color:var(--gold)!important}
+.hero-copy .outline-cta:first-of-type{border-color:var(--gold);color:var(--gold)}
+.hero-copy .outline-cta:first-of-type:hover{background:var(--gold);color:#111827;border-color:var(--gold)}
+
+/* 5. Button padding consistency */
+.outline-cta{padding:12px 24px;font-size:15px}
+
+/* 6. Reduce portfolio animation intensity */
+.hong-kong-preview,.macau-preview,.stayflow-preview{animation-duration:20s!important}
+.portfolio-preview-panel{opacity:0.92}
+
+/* 7. Alternate section backgrounds for visual rhythm */
+.content-page:nth-of-type(even){background:#f8f8f6}
+
+/* 8. Mobile nav scroll hint */
+@media (max-width:720px){.nav-pill{-webkit-mask-image:linear-gradient(to right,black 82%,transparent 100%);mask-image:linear-gradient(to right,black 82%,transparent 100%)}}
