@@ -36,63 +36,78 @@
 
 
 /* ============================================================
-   LUMIO — Design System Override v3 (clean replace of v1+v2)
-   Reference: duna.com visual language + LUMIO brand
+   LUMIO — Design System Override v4
+   Fixes: hero container, logo collapse, pricing CTAs,
+   submit button, process layout, contact padding, nav colour
    ============================================================ */
 
 /* --- VARIABLES --- */
 :root{--gold:#d9a34f;--gold-light:#f5e6c8}
 
-/* ---- NAV: Duna-style (transparent, logo left | links center | CTA right) ---- */
-
-/* 1. Remove pill background from logo container */
+/* ---- NAV ---- */
 .logo-pill{background:transparent!important;box-shadow:none!important;border-radius:0!important;padding:0!important;height:44px;width:auto;min-width:unset;max-width:unset;overflow:visible;display:flex;align-items:center}
-.logo-pill img{object-fit:contain;height:44px;width:auto;max-width:200px;display:block}
-
-/* 2. Remove pill background from nav links container */
+.logo-pill img{object-fit:contain;height:44px;width:auto;min-width:140px;max-width:200px;display:block}
 .nav-pill{flex:1;display:flex;justify-content:center;align-items:center;gap:32px;background:transparent!important;box-shadow:none!important;border-radius:0!important;padding:0!important}
-.nav-pill a{color:#374151;font-size:14px;font-weight:500;white-space:nowrap}
-.nav-pill a:hover{color:#111827}
-
-/* 3. Nav layout: space-between for the 3-item row */
+.nav-pill a{color:#111827;font-size:14px;font-weight:500;white-space:nowrap}
+.nav-pill a:hover{color:var(--blue,#3b82f6)}
 .hero-nav{justify-content:space-between;align-items:center;padding:24px 40px 0;gap:0}
-
-/* 4. Nav CTA pill (injected via JS patch) */
 .nav-cta-pill{background:#111827;color:#fff!important;border-radius:999px;padding:10px 22px;font-size:13px;font-weight:600;white-space:nowrap;flex-shrink:0;transition:background .2s}
 .nav-cta-pill:hover{background:#374151}
-
-/* 5. Language switcher: below nav row, not overlapping CTA */
 .language-switcher{top:76px!important}
 @media (min-width:640px){.language-switcher{top:84px!important;right:40px!important}}
-
-/* Mobile nav: hide CTA, stack naturally */
 @media (max-width:640px){
   .hero-nav{padding:14px 20px 0;gap:12px}
-  .nav-pill{flex:0 1 auto;gap:14px;overflow-x:auto;scrollbar-width:none;mask-image:linear-gradient(to right,black 85%,transparent 100%)}
+  .nav-pill{flex:0 1 auto;gap:14px;overflow-x:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,black 85%,transparent 100%);mask-image:linear-gradient(to right,black 85%,transparent 100%)}
   .nav-pill::-webkit-scrollbar{display:none}
   .nav-cta-pill{display:none}
   .language-switcher{top:58px!important;left:20px!important;right:auto!important}
 }
 
-/* ---- TYPOGRAPHY ---- */
-.template-hero h1{font-weight:700;font-size:clamp(2rem,4vw,2.8rem);line-height:1.1}
-.hero-copy p{font-size:18px;line-height:1.6;opacity:.85}
-.content-page h2{font-weight:600;letter-spacing:-.02em;font-size:clamp(38px,5.5vw,66px);line-height:1.04}
-.product-card h3,.proof-card h3,.process-row h3{font-weight:600}
+/* ---- HERO ---- */
+.hero-copy>*{max-width:560px}
+.template-hero h1{font-weight:700;font-size:clamp(2.4rem,4.8vw,3.8rem);line-height:1.08}
+.hero-copy p{font-size:18px;line-height:1.6;opacity:.85;max-width:480px}
+.hero-copy{gap:16px;display:flex;flex-direction:column;align-items:flex-start}
 
-/* ---- CARDS ---- */
-.product-card,.proof-card,.process-row,.contact-form{background:rgba(255,255,255,.93);box-shadow:0 2px 16px rgba(17,24,39,.08),0 1px 4px rgba(17,24,39,.04)}
-
-/* ---- GOLD ACCENT (from LUMIO logo) ---- */
-.is-featured{border-color:var(--gold)!important}
+/* Hero CTA pair — first=gold outline, second=solid dark */
 .hero-copy .outline-cta:first-of-type{border-color:var(--gold);color:var(--gold)}
 .hero-copy .outline-cta:first-of-type:hover{background:var(--gold);color:#111827;border-color:var(--gold)}
 .hero-copy .outline-cta:last-of-type{background:#111827;color:#fff;border-color:#111827}
 .hero-copy .outline-cta:last-of-type:hover{background:#374151;border-color:#374151}
+
+/* Wrap both CTAs in a row */
+.hero-copy a.outline-cta{display:inline-flex}
+
+/* ---- TYPOGRAPHY ---- */
+.content-page h2{font-weight:600;letter-spacing:-.02em;font-size:clamp(36px,5vw,64px);line-height:1.04}
+.product-card h3,.proof-card h3,.process-row h3{font-weight:600}
+.product-card h3{letter-spacing:-.025em}
+
+/* ---- CARDS ---- */
+.product-card,.proof-card,.process-row,.contact-form{background:rgba(255,255,255,.93);box-shadow:0 2px 16px rgba(17,24,39,.08),0 1px 4px rgba(17,24,39,.04)}
+
+/* ---- PRICING ---- */
+.product-card{min-height:460px;padding:28px;gap:20px}
+/* Recommended tier = Growth = 2nd card */
+.product-grid .product-card:nth-child(2){border-color:var(--gold)!important;box-shadow:0 8px 40px rgba(217,163,79,.16),0 2px 8px rgba(17,24,39,.08)}
+/* CTA inside each pricing card */
+.product-cta{margin-top:auto;width:100%;justify-content:center;background:#111827;color:#fff!important;border-color:#111827}
+.product-cta:hover{background:#374151;border-color:#374151}
 .outline-cta{padding:12px 24px;font-size:15px}
+
+/* ---- PROCESS ---- */
+.process-row{grid-template-columns:48px .9fr 1.2fr;padding:22px 24px}
+
+/* ---- CONTACT ---- */
+.contact-form{padding:28px;gap:18px}
+.form-actions button{background:#111827;color:#fff!important;border-color:#111827}
+.form-actions button:hover{background:#374151;border-color:#374151}
 
 /* ---- SECTION RHYTHM ---- */
 .content-page:nth-of-type(even){background:#f8f8f6}
+
+/* ---- GOLD ACCENT ---- */
+.is-featured{border-color:var(--gold)!important}
 
 /* ---- ANIMATION — toned down ---- */
 .hong-kong-preview,.macau-preview,.stayflow-preview{animation-duration:20s!important}
