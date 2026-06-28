@@ -427,7 +427,7 @@
     .story-body p:last-child { margin-bottom: 0; }
 
     /* ════════════════════════════════════════════
-       PORTFOLIO — flip cards
+       PORTFOLIO — flip cards v2
     ════════════════════════════════════════════ */
     #portfolio {
       background: #fff;
@@ -438,150 +438,251 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .flip-grid .flip-card:last-child:nth-child(3n+1) {
-      /* 4th card when grid is 3-col: shift it */
+      gap: 14px;
     }
 
-    .flip-card {
-      perspective: 1200px;
-      height: 360px;
+    /* Flip wrapper */
+    .card-wrap {
+      perspective: 1000px;
+      height: 260px;
       cursor: none;
     }
-    .flip-inner {
+    .card-inner {
       position: relative;
       width: 100%; height: 100%;
       transform-style: preserve-3d;
-      transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+      transition: transform 0.6s cubic-bezier(.4, 0, .2, 1);
     }
-    .flip-card:hover .flip-inner,
-    .flip-card.tapped .flip-inner { transform: rotateY(180deg); }
+    .card-wrap:hover .card-inner,
+    .card-wrap.tapped .card-inner { transform: rotateY(180deg); }
 
-    .flip-front, .flip-back {
+    .face {
       position: absolute;
       inset: 0;
+      border-radius: 14px;
       backface-visibility: hidden;
-      border-radius: 16px;
+      -webkit-backface-visibility: hidden;
       overflow: hidden;
     }
 
-    /* Front face */
-    .flip-front {
-      background: #000;
+    /* FRONT */
+    .front {
+      background: #0a0a0a;
+      border: 0.5px solid rgba(255,255,255,0.08);
+    }
+    .front-line {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--accent), rgba(200,169,110,0));
+    }
+    .front-stripe {
+      position: absolute;
+      top: 0; right: 0;
+      width: 80px; height: 80px;
+      overflow: hidden;
+    }
+    .front-stripe::after {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 80px; height: 80px;
+      background: rgba(200,169,110,0.07);
+      transform: rotate(45deg);
+    }
+    .front-num {
+      position: absolute;
+      right: -8px; bottom: -20px;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 110px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -6px;
+      color: rgba(255,255,255,0.03);
+      user-select: none;
+    }
+    .front-content {
+      position: absolute;
+      inset: 0;
+      padding: 1.25rem 1.25rem 1.25rem 1.5rem;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 32px;
-      border: 1px solid #1a1a1a;
+      justify-content: space-between;
     }
-    .flip-front-num {
-      font-size: 10px; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--accent);
-      font-weight: 500; margin-bottom: 12px;
-      font-family: 'Inter', sans-serif;
+    .front-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .flip-front-title {
-      font-family: 'Inter Tight', sans-serif;
-      font-size: clamp(1.4rem, 2vw, 2rem);
+    .front-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .front-idx {
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: .14em;
       font-weight: 500;
-      letter-spacing: -0.03em;
+    }
+    .front-location {
+      font-size: 10px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: .1em;
+    }
+    .front-cat {
+      font-size: 9.5px;
+      color: rgba(255,255,255,0.28);
+      letter-spacing: .1em;
+      margin-bottom: 7px;
       text-transform: uppercase;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 10px;
     }
-    .flip-front-meta {
-      font-size: 11px; letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      font-family: 'Inter', sans-serif;
-    }
-    .flip-front-hint {
-      position: absolute;
-      top: 24px; right: 24px;
-      font-size: 10px; letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.2);
-      font-family: 'Inter', sans-serif;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .flip-front-hint::before {
-      content: '';
-      display: block; width: 20px; height: 1px;
-      background: rgba(255,255,255,0.15);
-    }
-    /* Ghost number */
-    .flip-ghost {
-      position: absolute;
-      top: -20px; right: 16px;
+    .front-title {
       font-family: 'Inter Tight', sans-serif;
-      font-size: 9rem; font-weight: 600;
-      color: rgba(255,255,255,0.03);
-      line-height: 1; letter-spacing: -0.04em;
-      pointer-events: none;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -.03em;
+      line-height: 1.15;
     }
-    /* accent bar */
-    .flip-front::before {
-      content: '';
+    .front-arrow {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(to right, var(--accent), transparent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      right: 1.25rem; bottom: 1.25rem;
+      width: 28px; height: 28px;
+      border: 0.5px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 12px;
+      transition: border-color .3s, color .3s;
     }
-    .flip-card:hover .flip-front::before { transform: scaleX(1); }
+    .card-wrap:hover .front-arrow {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
 
-    /* Back face */
-    .flip-back {
+    /* BACK */
+    .back {
       transform: rotateY(180deg);
-      background: #000;
+      background: #111;
+      border: 0.5px solid rgba(255,255,255,0.1);
+      display: flex;
+      flex-direction: column;
     }
-    .flip-back-img {
+    .back-screen {
+      flex: 1;
+      overflow: hidden;
+      margin: 10px 10px 0;
+    }
+    .back-screen-frame {
+      width: 100%; height: 100%;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: #1a1a1a;
+    }
+    .back-screen-bar {
+      height: 20px;
+      background: #0f0f0f;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .back-screen-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+    }
+    .back-screen-content {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .back-screen-content img {
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: top;
-      opacity: 0.85;
       display: block;
     }
-    .flip-back-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
-      display: flex;
-      align-items: flex-end;
-      padding: 24px;
-    }
-    .flip-back-link {
-      font-size: 11px; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #fff;
-      font-weight: 500; font-family: 'Inter', sans-serif;
-      display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid rgba(255,255,255,0.3);
-      padding: 8px 18px; border-radius: 999px;
-      transition: background 0.2s, border-color 0.2s;
-      cursor: none;
-    }
-    .flip-back-link:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.6); }
-
-    /* "Soon" back */
-    .flip-back-soon {
+    .mock {
       width: 100%; height: 100%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 12px;
+      display: flex;
+      flex-direction: column;
     }
-    .flip-back-soon span {
-      font-size: 10px; letter-spacing: 0.16em;
-      text-transform: uppercase; color: rgba(255,255,255,0.3);
-      font-family: 'Inter', sans-serif;
+    .mock-hero {
+      flex: 0 0 48%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
+    .mock-body {
+      flex: 1;
+      padding: 6px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mock-bar { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.07); }
+    .mock-bar.short { width: 55%; }
+    .mock-bar.med   { width: 78%; }
+    .mock-bar.wide  { width: 95%; }
+    .back-info {
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .back-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -.01em;
+    }
+    .back-cat {
+      font-size: 9px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: .08em;
+      margin-top: 2px;
+    }
+    .back-btn {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .1em;
+      border: 0.5px solid var(--accent);
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      text-decoration: none;
+      cursor: none;
+      transition: background .2s;
+    }
+    .back-btn:hover { background: rgba(200,169,110,0.12); }
 
-    @media (max-width: 768px) {
-      .flip-grid { grid-template-columns: 1fr 1fr; }
-      .flip-card { height: 280px; }
+    /* Coming soon dimmed state */
+    .dimmed .front { opacity: .45; }
+    .dimmed .back-screen-frame { filter: grayscale(1) brightness(.35); }
+    .coming-soon-badge {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8px;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,0.4);
+      background: rgba(0,0,0,0.7);
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 0.5px solid rgba(255,255,255,0.1);
+      white-space: nowrap;
+      z-index: 2;
+      font-family: 'Inter', sans-serif;
     }
 
     /* ════════════════════════════════════════════
@@ -896,7 +997,7 @@
       /* Cursor: hide on touch */
       #cursor { display: none; }
       body { cursor: auto; }
-      a, button, .flip-card, .process-card, .accordion-header { cursor: pointer; }
+      a, button, .card-wrap, .process-card, .accordion-header { cursor: pointer; }
 
       /* Nav */
       .hero-nav { padding: 14px 16px 0; gap: 6px; justify-content: space-between; }
@@ -945,12 +1046,9 @@
       .story-grid { grid-template-columns: 1fr; gap: 36px; }
       .story-headline { font-size: clamp(1.8rem, 6vw, 2.4rem); }
 
-      /* Portfolio flip cards — single column on small, tap to flip */
-      .flip-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-      .flip-card { height: 240px; }
-      .flip-front { padding: 20px; }
-      .flip-front-title { font-size: 1.1rem; }
-      .flip-ghost { font-size: 6rem; }
+      /* Portfolio flip cards */
+      .flip-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .card-wrap { height: 220px; }
 
       /* Process accordion — remove 200px sidebar */
       .process-layout { grid-template-columns: 1fr; gap: 24px; }
@@ -984,7 +1082,7 @@
 
     @media (max-width: 480px) {
       .flip-grid { grid-template-columns: 1fr; }
-      .flip-card { height: 200px; }
+      .card-wrap { height: 200px; }
       .hero-copy h1 { font-size: clamp(1.8rem, 10vw, 2.6rem); }
     }
   </style>
@@ -1088,94 +1186,231 @@
 
       <div class="flip-grid">
 
-        <!-- Card 1 -->
-        <div class="flip-card reveal">
-          <div class="flip-inner">
-            <div class="flip-front">
-              <div class="flip-ghost">01</div>
-              <span class="flip-front-hint">Hover to preview</span>
-              <div class="flip-front-num">01 — Hong Kong</div>
-              <div class="flip-front-title">Long Ieng</div>
-              <div class="flip-front-meta">Accounting consultancy</div>
+        <!-- 01 Long Ieng -->
+        <div class="card-wrap reveal">
+          <div class="card-inner">
+            <div class="face front">
+              <div class="front-line"></div>
+              <div class="front-stripe"></div>
+              <div class="front-num">01</div>
+              <div class="front-content">
+                <div class="front-top">
+                  <span class="front-dot"></span>
+                  <span class="front-idx">01</span>
+                  <span class="front-location">— HONG KONG</span>
+                </div>
+                <div>
+                  <p class="front-cat">Accounting Consultancy</p>
+                  <p class="front-title">Long Ieng</p>
+                </div>
+              </div>
+              <div class="front-arrow">↗</div>
             </div>
-            <div class="flip-back">
-              <img class="flip-back-img" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Flongiengma.com%2F?w=900&h=600" alt="Long Ieng website">
-              <div class="flip-back-overlay">
-                <a class="flip-back-link" href="https://longiengma.com/" target="_blank">Visit site →</a>
+            <div class="face back">
+              <div class="back-screen">
+                <div class="back-screen-frame">
+                  <div class="back-screen-bar">
+                    <div class="back-screen-dot" style="background:#ff5f57"></div>
+                    <div class="back-screen-dot" style="background:#febc2e"></div>
+                    <div class="back-screen-dot" style="background:#28c840"></div>
+                  </div>
+                  <div class="back-screen-content">
+                    <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Flongiengma.com%2F?w=900&h=600" alt="Long Ieng website">
+                  </div>
+                </div>
+              </div>
+              <div class="back-info">
+                <div>
+                  <p class="back-name">Long Ieng</p>
+                  <p class="back-cat">ACCOUNTING CONSULTANCY</p>
+                </div>
+                <a href="https://longiengma.com/" target="_blank" class="back-btn">VIEW ↗</a>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="flip-card reveal reveal-delay-1">
-          <div class="flip-inner">
-            <div class="flip-front">
-              <div class="flip-ghost">02</div>
-              <span class="flip-front-hint">Hover to preview</span>
-              <div class="flip-front-num">02 — Macau</div>
-              <div class="flip-front-title">Macau World Travel</div>
-              <div class="flip-front-meta">Travel agency</div>
+        <!-- 02 Macau World Travel -->
+        <div class="card-wrap reveal reveal-delay-1">
+          <div class="card-inner">
+            <div class="face front">
+              <div class="front-line"></div>
+              <div class="front-stripe"></div>
+              <div class="front-num">02</div>
+              <div class="front-content">
+                <div class="front-top">
+                  <span class="front-dot"></span>
+                  <span class="front-idx">02</span>
+                  <span class="front-location">— MACAU</span>
+                </div>
+                <div>
+                  <p class="front-cat">Travel Agency</p>
+                  <p class="front-title">Macau World Travel</p>
+                </div>
+              </div>
+              <div class="front-arrow">↗</div>
             </div>
-            <div class="flip-back">
-              <img class="flip-back-img" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fmacau-world-travel-agency.pages.dev%2F?w=900&h=600" alt="Macau World Travel website">
-              <div class="flip-back-overlay">
-                <a class="flip-back-link" href="https://macau-world-travel-agency.pages.dev/" target="_blank">Visit site →</a>
+            <div class="face back">
+              <div class="back-screen">
+                <div class="back-screen-frame">
+                  <div class="back-screen-bar">
+                    <div class="back-screen-dot" style="background:#ff5f57"></div>
+                    <div class="back-screen-dot" style="background:#febc2e"></div>
+                    <div class="back-screen-dot" style="background:#28c840"></div>
+                  </div>
+                  <div class="back-screen-content">
+                    <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fmacau-world-travel-agency.pages.dev%2F?w=900&h=600" alt="Macau World Travel website">
+                  </div>
+                </div>
+              </div>
+              <div class="back-info">
+                <div>
+                  <p class="back-name">Macau World Travel</p>
+                  <p class="back-cat">TRAVEL AGENCY</p>
+                </div>
+                <a href="https://macau-world-travel-agency.pages.dev/" target="_blank" class="back-btn">VIEW ↗</a>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="flip-card reveal reveal-delay-2">
-          <div class="flip-inner">
-            <div class="flip-front">
-              <div class="flip-ghost">03</div>
-              <span class="flip-front-hint">Hover to preview</span>
-              <div class="flip-front-num">03 — Malaysia</div>
-              <div class="flip-front-title">Stayflow Homestay</div>
-              <div class="flip-front-meta">Airbnb operations</div>
+        <!-- 03 Stayflow Homestay -->
+        <div class="card-wrap reveal reveal-delay-2">
+          <div class="card-inner">
+            <div class="face front">
+              <div class="front-line"></div>
+              <div class="front-stripe"></div>
+              <div class="front-num">03</div>
+              <div class="front-content">
+                <div class="front-top">
+                  <span class="front-dot"></span>
+                  <span class="front-idx">03</span>
+                  <span class="front-location">— MALAYSIA</span>
+                </div>
+                <div>
+                  <p class="front-cat">Airbnb Operations</p>
+                  <p class="front-title">Stayflow Homestay</p>
+                </div>
+              </div>
+              <div class="front-arrow">↗</div>
             </div>
-            <div class="flip-back">
-              <img class="flip-back-img" src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fstayflow-homestay-landing.pages.dev?w=900&h=600" alt="Stayflow website">
-              <div class="flip-back-overlay">
-                <a class="flip-back-link" href="https://stayflow-homestay-landing.pages.dev" target="_blank">Visit site →</a>
+            <div class="face back">
+              <div class="back-screen">
+                <div class="back-screen-frame">
+                  <div class="back-screen-bar">
+                    <div class="back-screen-dot" style="background:#ff5f57"></div>
+                    <div class="back-screen-dot" style="background:#febc2e"></div>
+                    <div class="back-screen-dot" style="background:#28c840"></div>
+                  </div>
+                  <div class="back-screen-content">
+                    <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fstayflow-homestay-landing.pages.dev?w=900&h=600" alt="Stayflow website">
+                  </div>
+                </div>
+              </div>
+              <div class="back-info">
+                <div>
+                  <p class="back-name">Stayflow Homestay</p>
+                  <p class="back-cat">AIRBNB OPERATIONS</p>
+                </div>
+                <a href="https://stayflow-homestay-landing.pages.dev" target="_blank" class="back-btn">VIEW ↗</a>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 4 -->
-        <div class="flip-card reveal reveal-delay-3">
-          <div class="flip-inner">
-            <div class="flip-front">
-              <div class="flip-ghost">04</div>
-              <div class="flip-front-num">04 — Coming soon</div>
-              <div class="flip-front-title">Work Visibility</div>
-              <div class="flip-front-meta">Construction</div>
+        <!-- 04 Coming Soon -->
+        <div class="card-wrap dimmed reveal reveal-delay-3">
+          <div class="card-inner">
+            <div class="face front">
+              <div class="front-line" style="background:linear-gradient(to bottom,rgba(255,255,255,0.12),rgba(255,255,255,0))"></div>
+              <div class="front-num">04</div>
+              <div class="front-content">
+                <div class="front-top">
+                  <span class="front-dot" style="background:rgba(255,255,255,0.2)"></span>
+                  <span class="front-idx" style="color:rgba(255,255,255,0.2)">04</span>
+                  <span class="front-location">— COMING SOON</span>
+                </div>
+                <div>
+                  <p class="front-cat">Construction</p>
+                  <p class="front-title">Work Visibility</p>
+                </div>
+              </div>
             </div>
-            <div class="flip-back">
-              <div class="flip-back-soon" style="background:#0a0a0a;">
-                <span style="font-size:2rem; opacity:0.15;">🏗</span>
-                <span>In progress</span>
+            <div class="face back">
+              <div class="back-screen">
+                <div class="back-screen-frame">
+                  <div class="back-screen-bar">
+                    <div class="back-screen-dot" style="background:#333"></div>
+                    <div class="back-screen-dot" style="background:#333"></div>
+                    <div class="back-screen-dot" style="background:#333"></div>
+                  </div>
+                  <div class="back-screen-content" style="position:relative">
+                    <div class="mock">
+                      <div class="mock-hero" style="background:#0d0d0d">
+                        <div class="coming-soon-badge">COMING SOON</div>
+                      </div>
+                      <div class="mock-body">
+                        <div class="mock-bar wide"></div>
+                        <div class="mock-bar med"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="back-info">
+                <div>
+                  <p class="back-name" style="color:rgba(255,255,255,0.3)">Work Visibility</p>
+                  <p class="back-cat">CONSTRUCTION</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 5 -->
-        <div class="flip-card reveal reveal-delay-4">
-          <div class="flip-inner">
-            <div class="flip-front">
-              <div class="flip-ghost">05</div>
-              <div class="flip-front-num">05 — Coming soon</div>
-              <div class="flip-front-title">Professional Presence</div>
-              <div class="flip-front-meta">Corporate</div>
+        <!-- 05 Coming Soon -->
+        <div class="card-wrap dimmed reveal reveal-delay-4">
+          <div class="card-inner">
+            <div class="face front">
+              <div class="front-line" style="background:linear-gradient(to bottom,rgba(255,255,255,0.12),rgba(255,255,255,0))"></div>
+              <div class="front-num">05</div>
+              <div class="front-content">
+                <div class="front-top">
+                  <span class="front-dot" style="background:rgba(255,255,255,0.2)"></span>
+                  <span class="front-idx" style="color:rgba(255,255,255,0.2)">05</span>
+                  <span class="front-location">— COMING SOON</span>
+                </div>
+                <div>
+                  <p class="front-cat">Corporate</p>
+                  <p class="front-title">Professional Presence</p>
+                </div>
+              </div>
             </div>
-            <div class="flip-back">
-              <div class="flip-back-soon" style="background:#0a0a0a;">
-                <span style="font-size:2rem; opacity:0.15;">🏢</span>
-                <span>In progress</span>
+            <div class="face back">
+              <div class="back-screen">
+                <div class="back-screen-frame">
+                  <div class="back-screen-bar">
+                    <div class="back-screen-dot" style="background:#333"></div>
+                    <div class="back-screen-dot" style="background:#333"></div>
+                    <div class="back-screen-dot" style="background:#333"></div>
+                  </div>
+                  <div class="back-screen-content" style="position:relative">
+                    <div class="mock">
+                      <div class="mock-hero" style="background:#0d0d0d">
+                        <div class="coming-soon-badge">COMING SOON</div>
+                      </div>
+                      <div class="mock-body">
+                        <div class="mock-bar wide"></div>
+                        <div class="mock-bar med"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="back-info">
+                <div>
+                  <p class="back-name" style="color:rgba(255,255,255,0.3)">Professional Presence</p>
+                  <p class="back-cat">CORPORATE</p>
+                </div>
               </div>
             </div>
           </div>
@@ -1433,7 +1668,7 @@
       cursor.style.left = e.clientX + 'px';
       cursor.style.top  = e.clientY + 'px';
     });
-    document.querySelectorAll('a, button, .project-item, .accordion-header, .process-card, .pricing-card').forEach(el => {
+    document.querySelectorAll('a, button, .card-wrap, .accordion-header, .process-card, .pricing-card').forEach(el => {
       el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
     });
@@ -1465,11 +1700,10 @@
 
     /* ── Touch: tap-to-flip portfolio cards ── */
     if ('ontouchstart' in window) {
-      document.querySelectorAll('.flip-front-hint').forEach(el => el.textContent = 'Tap to preview');
-      document.querySelectorAll('.flip-card').forEach(card => {
+      document.querySelectorAll('.card-wrap').forEach(card => {
         card.addEventListener('click', () => {
           const isFlipped = card.classList.contains('tapped');
-          document.querySelectorAll('.flip-card.tapped').forEach(c => c.classList.remove('tapped'));
+          document.querySelectorAll('.card-wrap.tapped').forEach(c => c.classList.remove('tapped'));
           if (!isFlipped) card.classList.add('tapped');
         });
       });
