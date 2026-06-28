@@ -78,6 +78,10 @@
       text-transform: uppercase;
       color: var(--accent);
     }
+    .process-sticky .label {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+    }
     .label-muted { color: var(--text-muted-dark); }
     .label-dark  { color: rgba(200,169,110,0.7); }
 
@@ -114,13 +118,17 @@
 
     /* Nav */
     .hero-nav {
-      position: relative;
-      z-index: 10;
+      position: sticky;
+      top: 0;
+      z-index: 20;
       justify-content: center;
       align-items: center;
-      gap: 8px;
-      padding: 20px 24px 0;
+      gap: 10px;
+      padding: 14px 24px;
       display: flex;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(0,0,0,0.35);
     }
     .logo-pill {
       background: rgba(255,255,255,0.08);
@@ -129,14 +137,14 @@
       flex-shrink: 0;
       align-items: center;
       justify-content: center;
-      height: 60px;
-      padding: 0 18px;
+      height: 66px;
+      padding: 0 20px;
       display: flex;
       overflow: hidden;
       backdrop-filter: blur(12px);
     }
     .logo-pill img {
-      height: 42px; width: auto; display: block; object-fit: contain;
+      height: 46px; width: auto; display: block; object-fit: contain;
       filter: brightness(0) invert(1);
     }
     .nav-pill {
@@ -144,18 +152,18 @@
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 14px;
       align-items: center;
-      gap: 28px;
-      padding: 14px 24px;
+      gap: 32px;
+      padding: 18px 28px;
       display: flex;
       backdrop-filter: blur(12px);
     }
-    .nav-pill a { color: rgba(255,255,255,0.7); font-size: 15px; font-weight: 500; transition: color 0.2s; cursor: none; }
+    .nav-pill a { color: rgba(255,255,255,0.7); font-size: 16px; font-weight: 500; transition: color 0.2s; cursor: none; }
     .nav-pill a:hover { color: #fff; }
     .nav-cta-pill {
       background: var(--accent);
       border-radius: 999px;
-      padding: 14px 28px;
-      font-size: 15px;
+      padding: 18px 32px;
+      font-size: 16px;
       font-weight: 600;
       white-space: nowrap;
       flex-shrink: 0;
@@ -167,7 +175,7 @@
 
     /* Language switcher */
     .language-switcher {
-      z-index: 10;
+      z-index: 25;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 999px;
@@ -175,8 +183,8 @@
       gap: 4px;
       padding: 4px;
       display: flex;
-      position: absolute;
-      top: 20px;
+      position: fixed;
+      top: 22px;
       right: 24px;
       backdrop-filter: blur(12px);
     }
