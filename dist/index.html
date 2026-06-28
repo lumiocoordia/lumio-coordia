@@ -173,39 +173,83 @@
     }
     .nav-cta-pill:hover { background: var(--accent-dk); }
 
-    /* Language switcher */
+    /* Language switcher — dropdown */
     .language-switcher {
       z-index: 25;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 999px;
-      align-items: center;
-      gap: 4px;
-      padding: 4px;
-      display: flex;
       position: fixed;
       top: 22px;
       right: 24px;
-      backdrop-filter: blur(12px);
     }
-    .language-switcher button {
-      color: rgba(255,255,255,0.5);
-      cursor: pointer;
-      background: transparent;
-      border: 0;
+    .lang-trigger {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: 999px;
-      min-width: 36px;
-      height: 32px;
+      padding: 7px 14px;
+      color: #fff;
       font-size: 11px;
       font-weight: 600;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: background 0.2s, border-color 0.2s;
+      white-space: nowrap;
     }
-    .language-switcher button:hover,
-    .language-switcher button.is-active {
-      color: #fff;
-      background: rgba(255,255,255,0.15);
+    .lang-trigger:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.22); }
+    .lang-trigger svg { transition: transform 0.25s cubic-bezier(0.16,1,0.3,1); }
+    .language-switcher.open .lang-trigger svg { transform: rotate(180deg); }
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: rgba(12,12,12,0.92);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 130px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 0.2s cubic-bezier(0.16,1,0.3,1), transform 0.2s cubic-bezier(0.16,1,0.3,1);
     }
-    .language-switcher button:hover { transform: translateY(-1px); }
+    .language-switcher.open .lang-dropdown {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .lang-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+      letter-spacing: 0.04em;
+    }
+    .lang-option:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .lang-option.is-active { color: #fff; background: rgba(255,255,255,0.06); }
+    .lang-option.is-active::after {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
 
     /* Hero — full-screen canvas bg, centered text */
     .hero-canvas-bg {
@@ -1028,7 +1072,7 @@
       .nav-pill a { font-size: 10px; font-weight: 500; flex-direction: column; display: flex; align-items: center; gap: 2px; }
       /* Language switcher */
       .language-switcher { top: 16px; right: 16px; }
-      .language-switcher button { min-width: 30px; height: 28px; font-size: 10px; }
+      .lang-trigger { padding: 6px 10px; font-size: 10px; }
 
       /* Hero */
       .hero-surface { padding: 40px 20px 100px; }
@@ -1116,11 +1160,17 @@
       <a href="#products" class="nav-cta-pill">Get a website</a>
     </nav>
 
-    <div class="language-switcher" role="group" aria-label="Language selector">
-      <button class="is-active" type="button">EN</button>
-      <button type="button">中文</button>
-      <button type="button">日本語</button>
-      <button type="button">한국어</button>
+    <div class="language-switcher" aria-label="Language selector">
+      <button class="lang-trigger" type="button" aria-expanded="false" aria-haspopup="listbox">
+        <span class="lang-current">EN</span>
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="rgba(255,255,255,0.6)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="lang-dropdown" role="listbox">
+        <button class="lang-option is-active" type="button" data-lang="EN">English</button>
+        <button class="lang-option" type="button" data-lang="中文">中文</button>
+        <button class="lang-option" type="button" data-lang="日本語">日本語</button>
+        <button class="lang-option" type="button" data-lang="한국어">한국어</button>
+      </div>
     </div>
 
     <!-- Full-screen canvas background -->
@@ -1698,12 +1748,30 @@
       });
     });
 
-    /* ── Language switcher ── */
-    document.querySelectorAll('.language-switcher button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.language-switcher button').forEach(b => b.classList.remove('is-active'));
-        btn.classList.add('is-active');
+    /* ── Language switcher dropdown ── */
+    const langSwitcher = document.querySelector('.language-switcher');
+    const langTrigger  = langSwitcher.querySelector('.lang-trigger');
+    const langCurrent  = langSwitcher.querySelector('.lang-current');
+
+    langTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = langSwitcher.classList.toggle('open');
+      langTrigger.setAttribute('aria-expanded', isOpen);
+    });
+
+    langSwitcher.querySelectorAll('.lang-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        langSwitcher.querySelectorAll('.lang-option').forEach(o => o.classList.remove('is-active'));
+        opt.classList.add('is-active');
+        langCurrent.textContent = opt.dataset.lang;
+        langSwitcher.classList.remove('open');
+        langTrigger.setAttribute('aria-expanded', 'false');
       });
+    });
+
+    document.addEventListener('click', () => {
+      langSwitcher.classList.remove('open');
+      langTrigger.setAttribute('aria-expanded', 'false');
     });
 
     /* ── Touch: tap-to-flip portfolio cards ── */
