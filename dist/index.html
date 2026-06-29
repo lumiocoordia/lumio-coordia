@@ -55,5 +55,53 @@
     <a href="#home" style="position:absolute;top:-9999px;left:0;z-index:9999;padding:8px 16px;background:#111;color:#fff;font-size:14px;text-decoration:none;border-radius:0 0 4px 0" onfocus="this.style.top='0'" onblur="this.style.top='-9999px'">Skip to main content</a>
 
     <div id="root"></div>
+
+    <!-- Lead capture: Google Apps Script → Sheets + Email + WhatsApp -->
+    <script>
+    (function () {
+      var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwxXJJYE1quis_TrdVqG4r5tmOc2GOq8DZAt3mk0P3DlTwr_vXB7degPXCqBErVHRChVQ/exec';
+
+      function attachHandler() {
+        var form = document.getElementById('contact-form');
+        if (!form || form.__lumio_hooked) return;
+        form.__lumio_hooked = true;
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+
+          var btn = form.querySelector('button[type="submit"]');
+          var originalText = btn ? btn.textContent : 'Send message →';
+          if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
+
+          var data = new FormData(form);
+
+          fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: data })
+            .then(function () {
+              form.reset();
+              if (btn) {
+                btn.textContent = '✅ Message sent!';
+                setTimeout(function () {
+                  btn.textContent = originalText;
+                  btn.disabled = false;
+                }, 4000);
+              }
+            })
+            .catch(function () {
+              if (btn) {
+                btn.textContent = '❌ Try WhatsApp instead';
+                btn.disabled = false;
+              }
+            });
+        }, true); // capture phase — intercepts before React/Formspree
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        attachHandler();
+        new MutationObserver(function () { attachHandler(); })
+          .observe(document.body, { childList: true, subtree: true });
+      });
+    })();
+    </script>
   </body>
 </html>
