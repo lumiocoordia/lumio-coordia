@@ -2637,9 +2637,11 @@
       });
     }
 
-    // Contact form — Formspree submission
+    // Contact form — direct submission to Supabase
     const contactForm = document.getElementById('contact-form');
     const formSuccess = document.getElementById('form-success');
+    const SUPABASE_URL = 'https://kzglqjridvhckhlqyloc.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Ff6_46rAYg_d7LMV2zzqgQ_1yaX3S-p';
     if (contactForm) {
       contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -2649,10 +2651,23 @@
         btn.textContent = t.sendingText;
         btn.disabled = true;
         try {
-          const res = await fetch('https://formspree.io/f/xeebkldb', {
+          const data = Object.fromEntries(new FormData(contactForm).entries());
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/lumio_contact_submissions`, {
             method: 'POST',
-            headers: { 'Accept': 'application/json' },
-            body: new FormData(contactForm)
+            headers: {
+              'Content-Type': 'application/json',
+              apikey: SUPABASE_ANON_KEY,
+              Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+              Prefer: 'return=minimal'
+            },
+            body: JSON.stringify([{
+              name: data.name,
+              email: data.email,
+              budget: data.budget || null,
+              project_type: data.project_type || null,
+              message: data.message || null,
+              source: 'website'
+            }])
           });
           if (res.ok) {
             contactForm.style.display = 'none';
