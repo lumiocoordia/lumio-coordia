@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Design for Service Businesses | LUMIO Coordia Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════
+       ORIGINAL HERO CSS — untouched
+    ═══════════════════════════════════════ */
+    :root {
+      --paper: #f0f0ee;
+      --pill:  #ededed;
+      --ink:   #111827;
+      --muted: #9ca3af;
+      --line:  #1118271f;
+      --blue:  #3b82f6;
+      --blue-strong: #2563eb;
+      --card:  #ffffffbd;
+      --max:   1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--paper); color: var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; text-rendering: optimizeLegibility; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+
+    .site-shell { background: var(--paper); min-height: 100vh; }
+
+    /* Hero */
+    .template-hero { background: var(--paper); min-height: 100vh; position: relative; overflow: hidden; }
+    .hero-video { object-fit: cover; width: 100%; height: 100%; position: absolute; inset: 0; }
+    .hero-surface { z-index: 1; flex-direction: column; min-height: 100vh; display: flex; position: relative; }
+
+    /* Language switcher */
+    .language-switcher { z-index: 2; background: var(--pill); border-radius: 999px; align-items: center; gap: 4px; padding: 4px; display: flex; position: absolute; top: 16px; right: 16px; box-shadow: rgba(17,24,39,0.06) 0px 10px 28px; }
+    .language-switcher button { color: rgb(75,85,99); cursor: pointer; background: transparent; border: 0; border-radius: 999px; min-width: 36px; height: 32px; font-size: 11px; font-weight: 600; transition: background 0.2s, color 0.2s, transform 0.2s; }
+    .language-switcher button:hover,
+    .language-switcher button.is-active { color: rgb(17,24,39); background: rgba(255,255,255,0.78); }
+    .language-switcher button:hover { transform: translateY(-1px); }
+
+    /* Nav */
+    .hero-nav { justify-content: center; align-items: center; gap: 8px; padding: 16px 16px 0; display: flex; }
+    .logo-pill { background: var(--pill); border-radius: 12px; flex-shrink: 0; align-items: center; justify-content: center; height: 40px; padding: 0 14px; display: flex; overflow: hidden; box-shadow: rgba(17,24,39,0.06) 0px 10px 28px; }
+    .logo-pill img { height: 22px; width: auto; display: block; object-fit: contain; }
+    .nav-pill { background: var(--pill); border-radius: 12px; align-items: center; gap: 16px; padding: 10px 16px; display: flex; }
+    .nav-pill a { color: rgb(55,65,81); font-size: 12px; font-weight: 500; transition: color 0.2s; }
+    .nav-pill a:hover { color: rgb(17,24,39); }
+    .nav-cta-pill { background: rgb(17,24,39); border-radius: 999px; padding: 10px 22px; font-size: 13px; font-weight: 600; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; color: #fff !important; }
+    .nav-cta-pill:hover { background: rgb(55,65,81); }
+
+    /* Hero copy */
+    .hero-copy { flex-direction: column; flex: 1; justify-content: flex-end; align-items: flex-start; width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 24px 40px; display: flex; }
+    .hero-copy > * { max-width: 380px; }
+    .badge-link { color: var(--blue); align-items: center; gap: 6px; margin-bottom: 12px; font-size: 14px; font-weight: 500; transition: color 0.2s; display: inline-flex; }
+    .badge-link:hover { color: var(--blue-strong); }
+    .arrow { transition: transform 0.2s; display: inline-block; }
+    a:hover .arrow { transform: translateX(2px); }
+    .hero-copy h1 { color: rgb(17,24,39); letter-spacing: 0; margin: 0 0 12px; font-size: 2rem; font-weight: 500; line-height: 1.15; }
+    .hero-copy p { color: rgb(75,85,99); margin: 0 0 12px; font-size: 17px; font-weight: 400; }
+    .outline-cta { color: var(--blue); border: 1px solid rgb(96,165,250); border-radius: 999px; align-items: center; gap: 8px; padding: 10px 20px; font-size: 15px; font-weight: 500; transition: background 0.2s, color 0.2s, border-color 0.2s; display: inline-flex; }
+    .outline-cta:hover { border-color: var(--blue); background: var(--blue); color: #fff; }
+
+    /* Mobile hero */
+    @media (max-width: 640px) {
+      .hero-nav { padding: 14px 20px 0; gap: 12px; }
+      .nav-pill { flex: 0 1 auto; gap: 14px; overflow-x: auto; scrollbar-width: none; mask-image: linear-gradient(to right, black 85%, transparent 100%); }
+      .nav-pill::-webkit-scrollbar { display: none; }
+      .nav-cta-pill { display: none; }
+      .language-switcher { top: 58px !important; right: 12px; }
+    }
+
+    /* ═══════════════════════════════════════
+       REDESIGN VARIABLES & GLOBALS
+    ═══════════════════════════════════════ */
+    :root {
+      --bg-light:   #f0ede6;
+      --bg-mid:     #faf8f4;
+      --bg-dark:    #111111;
+      --bg-card:    #ffffff;
+      --text-dark:  #0d0d0d;
+      --text-light: #f5f5f5;
+      --text-muted-light: rgba(245,245,245,0.65);
+      --text-muted-dark:  #6b6b6b;
+      --accent:     #c8a96e;
+      --accent-dk:  #a07840;
+      --border:     #e0ddd6;
+      --border-dark: rgba(255,255,255,0.1);
+    }
+
+    h1, h2, h3 { font-family: 'DM Serif Display', Georgia, serif; line-height: 1.1; letter-spacing: -0.01em; }
+    /* hero h1 overrides — keep original style */
+    .hero-copy h1 { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; letter-spacing: 0; }
+
+    /* ── STORY ── */
+    #story {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      padding: 140px 48px;
+    }
+    .story-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 24px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .story-headline { font-size: clamp(2.2rem, 4vw, 3.2rem); color: var(--text-light); }
+    .story-body p { color: var(--text-muted-light); font-size: 1rem; line-height: 1.8; font-weight: 300; margin-bottom: 20px; font-family: 'DM Sans', sans-serif; }
+    .story-body p:last-child { margin-bottom: 0; }
+
+    /* ── PORTFOLIO ── */
+    #portfolio {
+      background: var(--bg-light);
+      padding: 140px 48px;
+    }
+    .section-header {
+      max-width: 1120px;
+      margin: 0 auto 72px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+    }
+    .section-headline { font-size: clamp(2rem, 3.5vw, 3rem); color: var(--text-dark); }
+    .section-desc { color: var(--text-muted-dark); font-size: 0.95rem; line-height: 1.75; font-weight: 300; font-family: 'DM Sans', sans-serif; }
+
+    .portfolio-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .portfolio-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: pointer;
+      display: block;
+    }
+    .portfolio-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.1); }
+
+    .card-image { width: 100%; height: 200px; overflow: hidden; }
+    .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+    .portfolio-card:hover .card-image img { transform: scale(1.04); }
+
+    .card-image-gradient {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+    .card-image-gradient.g1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+    .card-image-gradient.g2 { background: linear-gradient(135deg, #1a2c1a 0%, #1e3a1e 50%, #0d3b0d 100%); }
+    .card-image-gradient-label { font-family: 'DM Serif Display', serif; font-size: 2rem; color: rgba(255,255,255,0.12); line-height: 1; }
+
+    .card-body { padding: 16px 20px 24px; }
+    .card-category { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 6px; font-family: 'DM Sans', sans-serif; }
+    .card-title { font-family: 'DM Serif Display', serif; font-size: 1.35rem; color: var(--text-dark); margin-bottom: 10px; line-height: 1.2; }
+    .card-desc { font-size: 0.85rem; color: var(--text-muted-dark); line-height: 1.65; font-weight: 300; margin-bottom: 16px; font-family: 'DM Sans', sans-serif; }
+    .card-link { font-size: 0.8rem; color: var(--accent); font-weight: 500; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s; font-family: 'DM Sans', sans-serif; }
+    .portfolio-card:hover .card-link { gap: 10px; }
+
+    /* ── PROCESS ── */
+    #help {
+      background: var(--bg-mid);
+      padding: 140px 48px;
+    }
+    .process-inner { max-width: 1120px; margin: 0 auto; }
+    .process-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 80px;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .process-step { padding: 48px 36px; background: var(--bg-card); position: relative; overflow: hidden; }
+    .process-step-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 5rem;
+      color: rgba(0,0,0,0.05);
+      line-height: 1;
+      position: absolute;
+      top: 16px; right: 20px;
+      pointer-events: none;
+      font-style: italic;
+    }
+    .step-index { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 20px; font-family: 'DM Sans', sans-serif; }
+    .process-step h3 { font-size: 1.3rem; margin-bottom: 14px; color: var(--text-dark); }
+    .process-step p { font-size: 0.9rem; color: var(--text-muted-dark); line-height: 1.7; font-weight: 300; font-family: 'DM Sans', sans-serif; }
+
+    /* ── PRODUCTS / PRICING ── */
+    #products {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      padding: 140px 48px;
+    }
+    .products-inner { max-width: 1120px; margin: 0 auto; }
+    .products-header { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 72px; }
+    .products-header .section-headline { color: var(--text-light); }
+    .products-header .section-desc { color: var(--text-muted-light); }
+
+    .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start; }
+    .pricing-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-dark);
+      border-radius: 16px;
+      padding: 36px 28px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .pricing-card:hover { border-color: rgba(200,169,110,0.4); background: rgba(255,255,255,0.07); }
+
+    .pricing-card--featured {
+      border: 1.5px solid var(--accent);
+      background: rgba(200,169,110,0.07);
+      position: relative;
+    }
+    .pricing-card--featured::before {
+      content: "Most Popular";
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .pricing-tier { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 16px; font-family: 'DM Sans', sans-serif; }
+    .pricing-price { font-family: 'DM Serif Display', serif; font-size: 2.6rem; color: var(--text-light); line-height: 1; margin-bottom: 16px; }
+    .pricing-price sup { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 300; opacity: 0.5; vertical-align: super; }
+    .pricing-desc { font-size: 0.85rem; color: var(--text-muted-light); line-height: 1.65; font-weight: 300; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border-dark); font-family: 'DM Sans', sans-serif; }
+
+    .pricing-features { list-style: none; margin-bottom: 36px; }
+    .pricing-features li { font-size: 0.85rem; color: rgba(245,245,245,0.8); padding: 7px 0; display: flex; align-items: center; gap: 10px; font-weight: 300; font-family: 'DM Sans', sans-serif; }
+    .pricing-features li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    .btn-pricing { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 20px; background: var(--accent); color: #fff; border-radius: 40px; font-size: 0.875rem; font-weight: 500; transition: background 0.2s, transform 0.2s; font-family: 'DM Sans', sans-serif; }
+    .btn-pricing:hover { background: var(--accent-dk); transform: translateY(-1px); }
+
+    /* ── CONTACT ── */
+    #support { background: var(--bg-light); padding: 140px 48px; }
+    .support-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px; align-items: start; }
+    .support-headline { font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--text-dark); margin-bottom: 20px; }
+    .support-sub { font-size: 0.95rem; color: var(--text-muted-dark); line-height: 1.8; font-weight: 300; font-family: 'DM Sans', sans-serif; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; }
+    .form-group label { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em; color: var(--text-dark); font-family: 'DM Sans', sans-serif; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 8px; background: white; color: var(--text-dark); transition: border-color 0.2s; outline: none; appearance: none; -webkit-appearance: none; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .btn-submit { display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; background: var(--accent); color: #fff; border-radius: 40px; font-size: 0.9rem; font-weight: 500; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s, transform 0.2s; }
+    .btn-submit:hover { background: var(--accent-dk); transform: translateY(-1px); }
+    .whatsapp-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted-dark); font-family: 'DM Sans', sans-serif; transition: color 0.2s; }
+    .whatsapp-link:hover { color: var(--accent); }
+
+    .select-wrap { position: relative; }
+    .select-wrap::after { content: '↓'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 0.75rem; color: var(--text-muted-dark); pointer-events: none; }
+    .select-wrap select { width: 100%; padding-right: 36px; cursor: pointer; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--bg-dark); color: var(--text-light); padding: 60px 48px; }
+    .footer-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+    .footer-logo img {
+      height: 52px;
+      width: auto;
+      display: block;
+      /* Invert to white on the dark footer background */
+      filter: brightness(0) invert(1);
+      opacity: 0.85;
+    }
+    .footer-links { display: flex; gap: 32px; list-style: none; }
+    .footer-links a { font-size: 0.8rem; color: var(--text-muted-light); letter-spacing: 0.04em; font-family: 'DM Sans', sans-serif; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 0.75rem; color: rgba(245,245,245,0.35); font-family: 'DM Sans', sans-serif; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HERO — original markup & video, untouched ═══ -->
+  <section class="template-hero" id="home">
+    <video class="hero-video"
+      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4"
+      autoplay loop playsinline muted></video>
+
+    <div class="hero-surface">
+      <nav class="hero-nav" aria-label="Primary navigation">
+        <a href="#home" aria-label="LUMIO Coordia Intelligence home" class="logo-pill">
+          <!-- Replace src with your uploaded logo file path when implementing -->
+          <img alt="LUMIO Coordia Intelligence" src="https://c48d783d.lumio-coordia-intelligence.pages.dev/assets/lumio-logo-lockup.png">
+        </a>
+        <div class="nav-pill">
+          <a href="#story">Story</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#help">Process</a>
+          <a href="#products">Products</a>
+          <a href="#support">Contact</a>
+        </div>
+        <a href="#products" class="nav-cta-pill">Get a website</a>
+      </nav>
+
+      <div class="language-switcher" role="group" aria-label="Language selector">
+        <button class="is-active" type="button">EN</button>
+        <button type="button">中文</button>
+        <button type="button">日本語</button>
+        <button type="button">한국어</button>
+      </div>
+
+      <div class="hero-copy">
+        <a class="badge-link" href="#story">Websites for growing Australian businesses <span class="arrow" aria-hidden="true">→</span></a>
+        <h1 id="hero-title">Make your business easy to understand, trust, and contact.</h1>
+        <p>Clear, practical websites built around your offer, your proof, and your next enquiry.</p>
+        <a class="outline-cta" href="#portfolio">View our work <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="outline-cta" href="#products">View website plans <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STORY — dark section ═══ -->
+  <section id="story">
+    <div class="story-inner">
+      <div>
+        <div class="section-label">Story</div>
+        <h2 class="story-headline">Your website should make the next step obvious.</h2>
+      </div>
+      <div class="story-body">
+        <p>LUMIO Coordia Intelligence builds clear websites for service businesses that need visitors to understand the offer, trust the business, and know how to enquire.</p>
+        <p>We shape the message, page journey, pricing path, proof, and contact flow before building, so the finished site feels useful rather than decorative.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PORTFOLIO ═══ -->
+  <section id="portfolio">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Portfolio</div>
+        <h2 class="section-headline">Selected website work.</h2>
+      </div>
+      <p class="section-desc">If you are not sure what direction you want yet, start here. Browse the examples and find the look, structure, or feeling you want for your own site.</p>
+    </div>
+
+    <div class="portfolio-grid">
+      <a href="https://longiengma.com/" target="_blank" class="portfolio-card reveal">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Hong Kong skyline" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-category">Hong Kong accounting consultancy</div>
+          <h3 class="card-title">LONG IENG</h3>
+          <p class="card-desc">A website for a Hong Kong advisory firm supporting clients with overseas expansion projects.</p>
+          <span class="card-link">View live site →</span>
+        </div>
+      </a>
+
+      <a href="https://macau-world-travel-agency.pages.dev/" target="_blank" class="portfolio-card reveal reveal-delay-1">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Macau" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-category">Macau travel agency</div>
+          <h3 class="card-title">Macau World Travel Agency</h3>
+          <p class="card-desc">A travel agency and transport page for Macau visitors, partners, and hotel enquiries.</p>
+          <span class="card-link">View live site →</span>
+        </div>
+      </a>
+
+      <div class="portfolio-card reveal reveal-delay-2">
+        <div class="card-image-gradient g1">
+          <div class="card-image-gradient-label">Construction</div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Construction</div>
+          <h3 class="card-title">Work visibility</h3>
+          <p class="card-desc">A digital presence for project updates and credibility.</p>
+        </div>
+      </div>
+
+      <a href="https://stayflow-homestay-landing.pages.dev" target="_blank" class="portfolio-card reveal">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Kuala Lumpur" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-category">Malaysia Airbnb operations</div>
+          <h3 class="card-title">Stayflow Homestay</h3>
+          <p class="card-desc">A landing page for a Kuala Lumpur Airbnb management company focused on guest check-in and booking confidence.</p>
+          <span class="card-link">View live site →</span>
+        </div>
+      </a>
+
+      <div class="portfolio-card reveal reveal-delay-1">
+        <div class="card-image-gradient g2">
+          <div class="card-image-gradient-label">Corporate</div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Corporate</div>
+          <h3 class="card-title">Professional presence</h3>
+          <p class="card-desc">A sharper brand page for trust and enquiry.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROCESS ═══ -->
+  <section id="help">
+    <div class="process-inner">
+      <div class="process-header">
+        <div>
+          <div class="section-label">Process</div>
+          <h2 class="section-headline">Simple from the client side.</h2>
+        </div>
+        <p class="section-desc">You bring the need. We shape it into a clear direction, then execute the approved build.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step reveal">
+          <div class="process-step-number">01</div>
+          <div class="step-index">Step 01</div>
+          <h3>Share the need</h3>
+          <p>Tell us what you want to improve, launch, or simplify.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <div class="process-step-number">02</div>
+          <div class="step-index">Step 02</div>
+          <h3>Confirm the direction</h3>
+          <p>We turn the request into a clear offer, page structure, and build scope.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <div class="process-step-number">03</div>
+          <div class="step-index">Step 03</div>
+          <h3>We execute</h3>
+          <p>We design, build, test, and prepare the approved work for launch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRODUCTS — dark section ═══ -->
+  <section id="products">
+    <div class="products-inner">
+      <div class="products-header">
+        <div>
+          <div class="section-label">Products</div>
+          <h2 class="section-headline">Choose your level.</h2>
+        </div>
+        <p class="section-desc">Choose the starting point that matches the job your website must do: establish trust, bring in better enquiries, or support a more complete sales path.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card reveal">
+          <div class="pricing-tier">Starter</div>
+          <div class="pricing-price">AUD 990<sup>+</sup></div>
+          <p class="pricing-desc">A focused website for launch, credibility, and a clear contact path.</p>
+          <ul class="pricing-features">
+            <li>Simple website</li>
+            <li>Mobile ready</li>
+            <li>Contact path</li>
+          </ul>
+          <a href="#support" class="btn-pricing">Get started →</a>
+        </div>
+
+        <div class="pricing-card pricing-card--featured reveal reveal-delay-1">
+          <div class="pricing-tier">Growth</div>
+          <div class="pricing-price">AUD 2,500<sup>+</sup></div>
+          <p class="pricing-desc">A stronger web presence with clearer lead structure and basic automation.</p>
+          <ul class="pricing-features">
+            <li>Custom pages</li>
+            <li>Lead structure</li>
+            <li>Basic automation</li>
+          </ul>
+          <a href="#support" class="btn-pricing">Get started →</a>
+        </div>
+
+        <div class="pricing-card reveal reveal-delay-2">
+          <div class="pricing-tier">Premium</div>
+          <div class="pricing-price">AUD 5,000<sup>+</sup></div>
+          <p class="pricing-desc">A custom build for businesses that need better UX and connected systems.</p>
+          <ul class="pricing-features">
+            <li>Custom UX</li>
+            <li>Advanced build</li>
+            <li>System connection</li>
+          </ul>
+          <a href="#support" class="btn-pricing">Get started →</a>
+        </div>
+
+        <div class="pricing-card reveal reveal-delay-3">
+          <div class="pricing-tier">Custom</div>
+          <div class="pricing-price">Quote</div>
+          <p class="pricing-desc">For complex scopes, business systems, and ongoing support.</p>
+          <ul class="pricing-features">
+            <li>Complex scope</li>
+            <li>Business systems</li>
+            <li>Ongoing support</li>
+          </ul>
+          <a href="#support" class="btn-pricing">Get started →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="support">
+    <div class="support-inner">
+      <div>
+        <div class="section-label">Contact</div>
+        <h2 class="support-headline">Tell us the job your website needs to do.</h2>
+        <p class="support-sub">No sales pitch. We listen first, clarify the goal, and tell you honestly if we're the right fit.</p>
+      </div>
+      <form class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="your@email.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="budget">Budget</label>
+            <div class="select-wrap">
+              <select id="budget">
+                <option value="">Choose one</option>
+                <option>AUD 990+</option>
+                <option>AUD 2,500+</option>
+                <option>AUD 5,000+</option>
+                <option>Custom</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="type">Project Type</label>
+            <div class="select-wrap">
+              <select id="type">
+                <option value="">Choose one</option>
+                <option>Website</option>
+                <option>Automation</option>
+                <option>Business System</option>
+                <option>Not sure</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell us about your project…"></textarea>
+        </div>
+        <div class="form-footer">
+          <button type="submit" class="btn-submit">Send message →</button>
+          <a href="https://wa.me/60406300802" class="whatsapp-link" target="_blank">💬 WhatsApp us instead</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <!-- filter: brightness(0) invert(1) makes the logo white on dark bg -->
+        <img alt="LUMIO Coordia Intelligence" src="https://c48d783d.lumio-coordia-intelligence.pages.dev/assets/lumio-logo-lockup.png">
+      </div>
+      <ul class="footer-links">
+        <li><a href="#story">Story</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#help">Process</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#support">Contact</a></li>
+      </ul>
+      <span class="footer-copy">© 2025 LUMIO Coordia Intelligence</span>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Language switcher
+    document.querySelectorAll('.language-switcher button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.language-switcher button').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+      });
+    });
+  </script>
+</body>
+</html>
