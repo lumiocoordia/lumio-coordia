@@ -4,9 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clear, practical websites for service businesses | LUMIO Coordia Intelligence</title>
+  <meta name="description" content="LUMIO Coordia Intelligence builds clear, conversion-focused websites for Malaysian service businesses — so visitors understand your offer, trust your business, and know how to enquire.">
+  <link rel="canonical" href="https://lumio-coordia-intelligence.pages.dev/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/lumio-logo-lockup.png">
+  <link rel="apple-touch-icon" href="/assets/lumio-logo-lockup.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="LUMIO Coordia Intelligence">
+  <meta property="og:title" content="Clear, practical websites for Malaysian businesses | LUMIO">
+  <meta property="og:description" content="Conversion-focused website design for Malaysian service businesses. Clear message, clear pricing, clear next enquiry.">
+  <meta property="og:url" content="https://lumio-coordia-intelligence.pages.dev/">
+  <meta property="og:image" content="https://lumio-coordia-intelligence.pages.dev/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Clear, practical websites for Malaysian businesses | LUMIO">
+  <meta name="twitter:description" content="Conversion-focused website design for Malaysian service businesses. Clear message, clear pricing, clear next enquiry.">
+  <meta name="twitter:image" content="https://lumio-coordia-intelligence.pages.dev/assets/og-image.jpg">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "LUMIO Coordia Intelligence",
+    "description": "Conversion-focused website design for Malaysian service businesses.",
+    "url": "https://lumio-coordia-intelligence.pages.dev/",
+    "image": "https://lumio-coordia-intelligence.pages.dev/assets/og-image.jpg",
+    "logo": "https://lumio-coordia-intelligence.pages.dev/assets/lumio-logo-lockup.png",
+    "email": "lumiocoordia@gmail.com",
+    "telephone": "+60177209159",
+    "priceRange": "RM1,500–RM8,000+",
+    "areaServed": { "@type": "Country", "name": "Malaysia" },
+    "availableLanguage": ["English", "Chinese", "Japanese", "Korean"],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "telephone": "+60177209159",
+      "email": "lumiocoordia@gmail.com",
+      "availableLanguage": ["English", "Chinese", "Japanese", "Korean"]
+    }
+  }
+  </script>
+
+  <link rel="preload" as="image" href="/assets/bulb.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
   <style>
     /* ════════════════════════════════════════════
@@ -31,16 +81,39 @@
        DESIGN TOKENS
     ════════════════════════════════════════════ */
     :root {
-      --accent:    #c8a96e;
-      --accent-dk: #a07840;
-      --bg-dark:   #000000;
-      --bg-light:  #f0ede6;
-      --bg-mid:    #faf8f4;
-      --text-light: #f5f5f5;
-      --text-muted-light: rgba(245,245,245,0.6);
-      --text-muted-dark: #605f5f;
-      --border: #e6e6e6;
-      --border-dark: rgba(255,255,255,0.1);
+      /* Ink (dark surfaces) */
+      --ink-900: #0b0c0e;
+      --ink-850: #111317;
+      --ink-800: #171a1f;
+      --ink-700: #232730;
+      --ink-600: #353b47;
+      /* Paper (text on dark) */
+      --paper-100: #f5f3ee;
+      --paper-300: #c8c6bf;
+      --paper-500: #8e8c85;
+      /* Accent — brass/gold */
+      --accent:      #c8a24b;
+      --accent-dk:   #a8852f;
+      --accent-pale: #3a2f12;
+      /* Legacy aliases (keep for older rules) */
+      --bg-dark:  var(--ink-900);
+      --bg-light: #f0ede6;
+      --bg-mid:   #faf8f4;
+      --text-light: var(--paper-100);
+      --text-muted-light: var(--paper-300);
+      --text-muted-dark: var(--paper-500);
+      --border: var(--ink-700);
+      --border-dark: rgba(255,255,255,0.08);
+      /* Semantic */
+      --success: #5bbf8a;
+      --error:   #e0654f;
+      --focus:   #6fa8ff;
+      --pain-bg: #0e0f12;
+      --gain-bg: #16140c;
+      /* Typography */
+      --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      /* Elevation */
+      --glow-accent: 0 0 0 1px var(--accent), 0 8px 30px rgba(200,162,75,0.18);
     }
 
     /* ════════════════════════════════════════════
@@ -68,22 +141,159 @@
       font-family: 'Inter Tight', sans-serif;
       font-weight: 500;
       letter-spacing: -0.03em;
-      line-height: 0.95;
+      line-height: 1.08;
     }
     .label {
-      font-family: 'Inter', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--accent);
     }
     .process-sticky .label {
-      font-size: 13px;
-      letter-spacing: 0.18em;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: clamp(28px, 3.4vw, 46px);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      color: var(--accent);
     }
     .label-muted { color: var(--text-muted-dark); }
     .label-dark  { color: rgba(200,169,110,0.7); }
+
+    /* Editorial serif display headlines — premium signal */
+    .hero-copy h1,
+    .story-headline,
+    .products-headline,
+    .support-headline,
+    .pain-mirror h2,
+    .refund-banner h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .hero-copy h1 { line-height: 1.04; }
+
+    /* Accessible focus ring (universal, high-contrast) */
+    a:focus-visible, button:focus-visible,
+    input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+      .reveal { transition: opacity 0.2s ease !important; transform: none !important; }
+    }
+
+    /* ════════════════════════════════════════════
+       PAIN MIRROR
+    ════════════════════════════════════════════ */
+    .pain-mirror { background: var(--ink-900); padding: clamp(72px,10vw,128px) 24px; }
+    .pain-mirror-inner { max-width: 1080px; margin: 0 auto; }
+    .pain-mirror-head { text-align: center; margin-bottom: clamp(36px,5vw,64px); }
+    .pain-mirror h2 { color: var(--text-light); font-size: clamp(2rem,4vw,3rem); line-height: 1.1; }
+    .pain-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--ink-700); border-radius: 20px; overflow: hidden;
+    }
+    .pain-col { padding: clamp(28px,4vw,48px); }
+    .pain-col.before { background: #0e0f12; }
+    .pain-col.after  { background: #16140c; position: relative; }
+    .pain-col.after::before {
+      content: ""; position: absolute; left: 0; top: 12%; bottom: 12%; width: 1px;
+      background: linear-gradient(180deg, transparent, var(--accent), transparent);
+    }
+    .pain-col .label { margin-bottom: 28px; display: block; }
+    .pain-col.before .label { color: var(--text-muted-dark); }
+    .pain-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+    .pain-list li { display: flex; gap: 14px; align-items: flex-start; font-size: clamp(15px,1.4vw,18px); line-height: 1.5; }
+    .pain-col.before .pain-list li { color: rgba(245,245,245,0.5); }
+    .pain-col.after  .pain-list li { color: var(--text-light); }
+    .pain-ic { flex-shrink: 0; width: 22px; height: 22px; margin-top: 1px; }
+    .pain-col.before .pain-ic { color: var(--text-muted-dark); }
+    .pain-col.after  .pain-ic { color: var(--accent); }
+    @media (max-width: 760px) {
+      .pain-grid { grid-template-columns: 1fr; }
+      .pain-col.after::before { left: 12%; right: 12%; top: 0; bottom: auto; width: auto; height: 1px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+    }
+
+    /* ════ HERO TRUST PILLS ════ */
+    .hero-trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px; margin-top: 28px; }
+    .trust-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.75); font-size: 13px; font-weight: 500;
+      backdrop-filter: blur(8px); transition: border-color 0.2s, color 0.2s;
+    }
+    a.trust-pill:hover { border-color: var(--accent); color: #fff; }
+    .trust-pill svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--accent); }
+    @media (max-width: 760px) { .hero-trust { gap: 8px; } .trust-pill { font-size: 12px; padding: 7px 12px; } }
+
+    /* ════ REFUND BANNER ════ */
+    .refund-banner { background: var(--ink-850); border-top: 1px solid rgba(217,163,79,0.25); padding: clamp(64px,8vw,104px) 24px; }
+    .refund-banner-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+    .refund-shield { width: 52px; height: 52px; color: var(--success); margin-bottom: 24px; }
+    .refund-banner-title { color: var(--text-light); font-size: clamp(1.7rem,3.2vw,2.6rem); line-height: 1.15; margin-bottom: 18px; }
+    .refund-banner-sub { color: var(--text-muted-light); font-size: clamp(15px,1.5vw,18px); line-height: 1.6; max-width: 56ch; margin: 0 auto 28px; }
+    .refund-banner-link {
+      color: var(--accent); font-weight: 600; font-size: 15px; letter-spacing: 0.01em;
+      border-bottom: 1px solid transparent; transition: border-color 0.2s; padding: 4px 0;
+    }
+    .refund-banner-link:hover { border-color: var(--accent); }
+    .refund-points { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
+    .refund-point {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 13px; color: rgba(245,245,245,0.7);
+      padding: 7px 16px; border: 1px solid var(--border-dark); border-radius: 999px;
+    }
+    .refund-point::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--success); }
+
+    /* Pricing refund note */
+    .pricing-refund-note {
+      display: flex; align-items: center; gap: 10px; margin: 36px auto 0; padding: 12px 20px;
+      border: 1px solid rgba(91,191,138,0.3); border-radius: 999px; background: rgba(91,191,138,0.06);
+      color: rgba(245,245,245,0.85); font-size: 14px; font-weight: 500; width: fit-content; max-width: 100%;
+      transition: border-color 0.2s, background 0.2s; text-align: left;
+    }
+    .pricing-refund-note:hover { border-color: var(--success); background: rgba(91,191,138,0.12); }
+    .pricing-refund-note svg { width: 18px; height: 18px; color: var(--success); flex-shrink: 0; }
+    @media (max-width: 760px) { .pricing-refund-note { font-size: 13px; padding: 11px 16px; } }
+
+    /* ════ CLIENT PROOF ════ */
+    .proof { background: var(--bg-light); padding: clamp(72px,9vw,120px) 24px; }
+    .proof-inner { max-width: 1180px; margin: 0 auto; }
+    .proof-head { margin-bottom: clamp(36px,5vw,60px); }
+    .proof-label { display: block; margin-bottom: 16px; }
+    .proof-h2 { font-size: clamp(1.8rem,3.4vw,2.8rem); color: #111; }
+    .proof-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .proof-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 16px;
+      padding: 32px; display: flex; flex-direction: column; gap: 20px;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s;
+    }
+    .proof-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+    .proof-chip {
+      align-self: flex-start; font-size: 12px; font-weight: 600; letter-spacing: 0.03em;
+      color: var(--accent-dk); background: rgba(217,163,79,0.12);
+      border: 1px solid rgba(217,163,79,0.3); padding: 6px 12px; border-radius: 999px;
+    }
+    .proof-quote {
+      font-family: var(--font-display); font-style: italic;
+      font-size: clamp(16px,1.5vw,19px); line-height: 1.5; color: #1a1a1a; flex: 1;
+    }
+    .proof-cap { display: flex; align-items: center; gap: 12px; }
+    .proof-avatar {
+      width: 40px; height: 40px; border-radius: 50%; background: #111; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 600; flex-shrink: 0; letter-spacing: 0.02em;
+    }
+    .proof-name { display: block; font-weight: 600; font-size: 14px; color: #111; }
+    .proof-role { display: block; font-size: 13px; color: var(--text-muted-dark); }
+    @media (max-width: 860px) { .proof-grid { grid-template-columns: 1fr; } }
 
     /* ════════════════════════════════════════════
        SCROLL REVEAL
@@ -108,7 +318,7 @@
       --pill-light: rgba(255,255,255,0.12);
     }
     .template-hero {
-      background: #000;
+      background: var(--ink-900);
       min-height: 100vh;
       position: relative;
       overflow: hidden;
@@ -162,8 +372,8 @@
     .nav-cta-pill {
       background: var(--accent);
       border-radius: 999px;
-      padding: 18px 32px;
-      font-size: 16px;
+      padding: 12px 24px;
+      font-size: 14px;
       font-weight: 600;
       white-space: nowrap;
       flex-shrink: 0;
@@ -302,29 +512,29 @@
       transition: color 0.2s;
       display: inline-flex;
       cursor: none;
-      border: 1px solid rgba(200,169,110,0.3);
+      border: 1px solid rgba(217,163,79,0.55);
       padding: 8px 20px;
       border-radius: 999px;
       backdrop-filter: blur(8px);
     }
-    .badge-link:hover { color: #fff; border-color: rgba(200,169,110,0.6); }
+    .badge-link:hover { color: #fff; border-color: rgba(217,163,79,0.9); }
     .arrow { transition: transform 0.2s; display: inline-block; }
     a:hover .arrow { transform: translateX(2px); }
 
     .hero-copy { display: flex; flex-direction: column; align-items: center; }
     .hero-copy h1 {
-      color: #fff;
-      letter-spacing: -0.04em;
+      color: var(--paper-100);
+      letter-spacing: -0.01em;
       margin: 0 0 24px;
       font-size: clamp(3rem, 6vw, 6rem);
-      font-weight: 500;
-      line-height: 1.0;
-      font-family: 'Inter Tight', sans-serif;
+      font-weight: 400;
+      line-height: 1.04;
+      font-family: var(--font-display);
       max-width: 900px;
       text-shadow: 0 2px 40px rgba(0,0,0,0.5);
     }
     .hero-copy p {
-      color: rgba(255,255,255,0.65);
+      color: var(--paper-300);
       margin: 0 0 40px;
       font-size: 18px;
       font-weight: 300;
@@ -718,24 +928,6 @@
     }
     .back-btn:hover { background: rgba(200,169,110,0.12); }
 
-    /* Coming soon dimmed state */
-    .dimmed .front { opacity: .45; }
-    .dimmed .back-screen-frame { filter: grayscale(1) brightness(.35); }
-    .coming-soon-badge {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 8px;
-      letter-spacing: .12em;
-      color: rgba(255,255,255,0.4);
-      background: rgba(0,0,0,0.7);
-      padding: 4px 10px;
-      border-radius: 20px;
-      border: 0.5px solid rgba(255,255,255,0.1);
-      white-space: nowrap;
-      z-index: 2;
-      font-family: 'Inter', sans-serif;
-    }
 
     /* ════════════════════════════════════════════
        PROCESS — accordion style (dark)
@@ -847,8 +1039,8 @@
       background: rgba(200,169,110,0.06);
       position: relative;
     }
-    .pricing-card--featured::before {
-      content: "Most Popular";
+    .featured-badge {
+      display: block;
       position: absolute;
       top: -14px; left: 50%;
       transform: translateX(-50%);
@@ -950,12 +1142,12 @@
       border: none; cursor: none; transition: background 0.2s, transform 0.2s;
     }
     .btn-submit:hover { background: var(--accent-dk); transform: translateY(-1px); }
-    .whatsapp-link {
+    .whatsapp-link, .email-link {
       display: inline-flex; align-items: center; gap: 8px;
       font-size: 13px; color: var(--text-muted-dark); transition: color 0.2s;
-      cursor: none;
+      cursor: none; text-decoration: none;
     }
-    .whatsapp-link:hover { color: var(--accent); }
+    .whatsapp-link:hover, .email-link:hover { color: var(--accent); }
 
     /* ════════════════════════════════════════════
        FOOTER
@@ -984,6 +1176,38 @@
       font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
       color: rgba(245,245,245,0.25);
     }
+    .footer-legal { margin-top: 8px; }
+    .footer-legal-link {
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(245,245,245,0.5); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-legal-link:hover { color: rgba(245,245,245,0.85); }
+
+    /* ── Refund Policy Modal ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.72);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; padding: 24px;
+    }
+    .modal-box {
+      background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 40px; max-width: 560px; width: 100%;
+      max-height: 85vh; overflow-y: auto; position: relative;
+      color: rgba(245,245,245,0.85);
+    }
+    .modal-box h2 { font-size: 22px; font-weight: 700; margin: 0 0 24px; color: #fff; }
+    .modal-box h3 { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent,#d9a34f); margin: 20px 0 8px; }
+    .modal-box p { font-size: 14px; line-height: 1.65; margin: 0 0 8px; }
+    .modal-box a { color: var(--accent,#d9a34f); }
+    .modal-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 8px 0; }
+    .modal-table td { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .modal-table td:last-child { text-align: right; }
+    .modal-close {
+      position: absolute; top: 16px; right: 20px; background: none; border: none;
+      color: rgba(245,245,245,0.4); font-size: 24px; cursor: none; line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: #fff; }
 
     /* ════════════════════════════════════════════
        PROCESS CARDS (mid section between products)
@@ -1007,7 +1231,7 @@
     }
     .process-card::after {
       content: ''; position: absolute; inset: 0;
-      background: #000;
+      background: var(--ink-900);
       transform: scaleY(0); transform-origin: bottom;
       transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
       will-change: transform;
@@ -1137,6 +1361,228 @@
       .card-wrap { height: 200px; }
       .hero-copy h1 { font-size: clamp(1.8rem, 10vw, 2.6rem); }
     }
+
+    /* ── Custom-cursor fallback ──
+       The page sets cursor:none everywhere for the JS dot. Until JS adds
+       .cursor-on to <body> (fine pointer + motion OK), keep the native cursor
+       so the page never looks frozen if JS fails or is disabled. */
+    #cursor { display: none; }
+    body.cursor-on #cursor { display: block; }
+    body:not(.cursor-on), body:not(.cursor-on) * { cursor: auto !important; }
+    body:not(.cursor-on) a,
+    body:not(.cursor-on) button,
+    body:not(.cursor-on) .card-wrap,
+    body:not(.cursor-on) .accordion-header,
+    body:not(.cursor-on) .process-card,
+    body:not(.cursor-on) .pricing-card,
+    body:not(.cursor-on) .lang-trigger,
+    body:not(.cursor-on) .lang-option { cursor: pointer !important; }
+
+    /* ════════════════════════════════════════════
+       BRIGHT THEME OVERRIDE  (visual only — no script/markup logic changed)
+    ════════════════════════════════════════════ */
+    :root{
+      --ink-900:#ffffff; --ink-850:#faf9f6; --ink-800:#f4f2ec;
+      --ink-700:#e7e4dc; --ink-600:#d8d4cc;
+      --paper-100:#0b0c0e; --paper-300:#4a4a46; --paper-500:#6f6e68;
+      --accent:#111111; --accent-dk:#000000; --accent-pale:#ececec;
+      --bg-dark:#ffffff; --bg-light:#ffffff; --bg-mid:#faf9f6;
+      --text-light:#0b0c0e; --text-muted-light:#5b5a55; --text-muted-dark:#6f6e68;
+      --border:#e7e4dc; --border-dark:rgba(0,0,0,0.10);
+      --pain-bg:#f4f2ec; --gain-bg:#0b0c0e;
+      --glow-accent:0 0 0 1px #111, 0 8px 30px rgba(0,0,0,0.12);
+    }
+    body{ background:#fff; color:#000; }
+    .label,.label-dark,.pc-step,.pricing-tier,.front-idx{ color:#6f6e68 !important; }
+
+    /* HERO — bright; hide the dark canvas + overlay (script keeps running) */
+    .template-hero{ background:#fff; min-height:auto; }
+    .hero-canvas-bg,.hero-canvas-bg canvas,.hero-canvas-bg img,.hero-canvas-bg::after{ display:none !important; }
+    .hero-nav{ background:rgba(255,255,255,0.72); }
+    .logo-pill{ background:rgba(0,0,0,0.03); border-color:rgba(0,0,0,0.08); }
+    .logo-pill img,.footer-logo img{ filter:none !important; }
+    .nav-pill{ background:rgba(0,0,0,0.03); border-color:rgba(0,0,0,0.08); }
+    .nav-pill a{ color:rgba(0,0,0,0.65); }
+    .nav-pill a:hover{ color:#000; }
+    .lang-trigger{ background:rgba(0,0,0,0.04); border-color:rgba(0,0,0,0.1); color:#000; }
+    .lang-trigger:hover{ background:rgba(0,0,0,0.08); border-color:rgba(0,0,0,0.2); }
+    .lang-dropdown{ background:rgba(255,255,255,0.97); border-color:rgba(0,0,0,0.1); }
+    .lang-option{ color:rgba(0,0,0,0.6); }
+    .lang-option:hover{ background:rgba(0,0,0,0.05); color:#000; }
+    .lang-option.is-active{ color:#000; background:rgba(0,0,0,0.05); }
+    .hero-surface{ padding-top:120px; }
+    .hero-copy h1{ color:#0b0c0e; text-shadow:none; }
+    .hero-copy p{ color:#5b5a55; }
+    .badge-link{ color:#6f6e68; border-color:rgba(0,0,0,0.18); }
+    .badge-link:hover{ color:#000; border-color:rgba(0,0,0,0.4); }
+    .outline-cta{ color:#000; border-color:rgba(0,0,0,0.2); }
+    .outline-cta:hover{ background:rgba(0,0,0,0.05); border-color:rgba(0,0,0,0.5); }
+    .outline-cta.primary{ background:#111; border-color:#111; color:#fff; }
+    .outline-cta.primary:hover{ background:#000; border-color:#000; }
+    .trust-pill{ border-color:rgba(0,0,0,0.14); background:rgba(0,0,0,0.03); color:rgba(0,0,0,0.7); }
+    .trust-pill svg{ color:#111; }
+    a.trust-pill:hover{ border-color:#111; color:#000; }
+
+    /* MARQUEE */
+    .marquee-dot{ background:#111; }
+
+    /* STORY (was dark) */
+    #story{ background:#fff; color:#0b0c0e; border-top:1px solid var(--border); }
+
+    /* PAIN MIRROR — before light, after = black accent block */
+    .pain-mirror{ background:#fff; border-top:1px solid var(--border); }
+    .pain-mirror h2{ color:#0b0c0e; }
+    .pain-grid{ border-color:var(--border); }
+    .pain-col.before{ background:#f4f2ec; }
+    .pain-col.before .label{ color:#6f6e68 !important; }
+    .pain-col.before .pain-list li{ color:rgba(0,0,0,0.55); }
+    .pain-col.before .pain-ic{ color:#9a988f; }
+    .pain-col.after{ background:#0b0c0e; }
+    .pain-col.after .label{ color:rgba(255,255,255,0.6) !important; }
+    .pain-col.after .pain-list li{ color:#f5f3ee; }
+    .pain-col.after .pain-ic{ color:#fff; }
+    .pain-col.after::before{ background:linear-gradient(180deg,transparent,rgba(255,255,255,0.5),transparent); }
+
+    /* REFUND BANNER (was dark) */
+    .refund-banner{ background:#f4f2ec; border-top:1px solid var(--border); }
+    .refund-banner-title{ color:#0b0c0e; }
+    .refund-banner-sub{ color:#5b5a55; }
+    .refund-banner-link{ color:#111; }
+    .refund-banner-link:hover{ border-color:#111; }
+    .refund-point{ color:#5b5a55; border-color:var(--border); }
+
+    /* PROOF — chip gold->neutral */
+    .proof-chip{ color:#333; background:rgba(0,0,0,0.05); border-color:rgba(0,0,0,0.12); }
+
+    /* PROCESS accordion (was dark) */
+    #help{ background:#fff; color:#0b0c0e; }
+    .accordion-title{ color:#0b0c0e; }
+    .accordion-num{ color:rgba(0,0,0,0.06) !important; }
+    .accordion-list,.accordion-item,.accordion-icon{ border-color:var(--border); }
+    .accordion-desc{ color:#5b5a55; }
+
+    /* PROCESS CARDS — keep hover-flip-to-dark */
+    .process-card{ border-color:var(--border); }
+    .process-card::after{ background:#0b0c0e; }
+    .pc-ghost{ color:rgba(0,0,0,0.05); }
+    .process-card:hover .pc-ghost{ color:rgba(255,255,255,0.08); }
+    .process-card:hover .pc-step{ color:rgba(255,255,255,0.65) !important; }
+    .process-card:hover .pc-title{ color:#fff; }
+    .process-card:hover .pc-desc{ color:rgba(255,255,255,0.6); }
+
+    /* PRODUCTS (was dark) */
+    #products{ background:#fff; color:#0b0c0e; border-top:1px solid var(--border); }
+    .products-headline,.pricing-price{ color:#0b0c0e; }
+    .products-desc,.pricing-desc{ color:#5b5a55; }
+    .pricing-card{ background:#faf9f6; border-color:var(--border); }
+    .pricing-card:hover{ border-color:rgba(0,0,0,0.35); background:#f4f2ec; }
+    .pricing-features li{ color:rgba(0,0,0,0.7); }
+    .pricing-refund-note{ color:#2f7d56; background:rgba(91,191,138,0.08); }
+    .pricing-card--featured{ border:1.5px solid #111; background:#0b0c0e; }
+    .pricing-card--featured .pricing-tier{ color:rgba(255,255,255,0.6) !important; }
+    .pricing-card--featured .pricing-price{ color:#fff; }
+    .pricing-card--featured .pricing-desc{ color:rgba(255,255,255,0.65); border-color:rgba(255,255,255,0.15); }
+    .pricing-card--featured .pricing-features li{ color:rgba(255,255,255,0.85); }
+    .pricing-card--featured .pricing-features li::before{ background:#fff; }
+    .pricing-card--featured .btn-pricing{ background:#fff; color:#000; }
+    .pricing-card--featured .btn-pricing:hover{ background:rgba(255,255,255,0.85); }
+    .pricing-card--featured:hover{ background:#0b0c0e; border-color:#111; }
+    .featured-badge{ background:#fff; color:#000; }
+
+    /* CONTACT (#support) — accents */
+    .support-headline{ color:#000; }
+    .support-sub{ color:#5b5a55; }
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{ border-color:#111; }
+    .btn-submit,.btn-pricing{ background:#111; color:#fff; }
+    .btn-submit:hover,.btn-pricing:hover{ background:#000; }
+    .whatsapp-link:hover,.email-link:hover{ color:#111; }
+
+    /* FOOTER (was dark) */
+    footer{ background:#fff; color:#0b0c0e; border-top:1px solid var(--border); }
+    .footer-logo img{ opacity:1; }
+    .footer-links a{ color:#5b5a55; }
+    .footer-links a:hover{ color:#000; }
+    .footer-copy{ color:rgba(0,0,0,0.35); }
+    .footer-legal-link{ color:rgba(0,0,0,0.5); }
+    .footer-legal-link:hover{ color:#000; }
+
+    /* REFUND MODAL -> light */
+    .modal-overlay{ background:rgba(0,0,0,0.45); }
+    .modal-box{ background:#fff; border-color:rgba(0,0,0,0.1); color:rgba(0,0,0,0.8); }
+    .modal-box h2{ color:#000; }
+    .modal-box h3{ color:#111; }
+    .modal-box a{ color:#111; }
+    .modal-table td{ border-color:rgba(0,0,0,0.08); }
+    .modal-close{ color:rgba(0,0,0,0.4); }
+    .modal-close:hover{ color:#000; }
+
+    /* NEW PORTFOLIO — 2x2 bright image showcase */
+    #portfolio{ background:#fff; }
+    .work-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .work-card{ position:relative; overflow:hidden; aspect-ratio:4/3; background:#f0ede6; display:block; cursor:none; }
+    .work-card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; transition:transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .work-card:hover img{ transform:scale(1.04); }
+    .work-card::after{ content:""; position:absolute; inset:0; background:rgba(11,12,14,0); transition:background 0.4s; }
+    .work-card:hover::after{ background:rgba(11,12,14,0.12); }
+    .work-top{ position:absolute; left:16px; top:16px; z-index:3; display:flex; gap:8px; align-items:center; }
+    .work-top span{ background:rgba(0,0,0,0.6); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); color:#fff; font-size:11px; font-weight:600; letter-spacing:0.04em; padding:4px 9px; }
+    .work-top .work-region{ text-transform:uppercase; letter-spacing:0.16em; }
+    .work-arrow{ position:absolute; right:16px; top:16px; z-index:3; width:30px; height:30px; border:1px solid rgba(255,255,255,0.5); color:#fff; display:flex; align-items:center; justify-content:center; font-size:13px; }
+    .work-plate{ position:absolute; left:0; bottom:0; z-index:4; background:#fff; padding:14px 18px; max-width:80%; }
+    .work-plate h3{ font-family:'Inter Tight',sans-serif; font-size:clamp(1.2rem,2vw,1.7rem); font-weight:600; letter-spacing:-0.02em; color:#0b0c0e; line-height:1.1; }
+    .work-meta{ display:flex; align-items:center; gap:14px; margin-top:6px; }
+    .work-cat{ font-size:11px; letter-spacing:0.04em; text-transform:uppercase; color:rgba(0,0,0,0.55); }
+    .work-view{ font-size:11px; font-weight:600; color:#000; white-space:nowrap; }
+    @media (max-width:760px){ .work-grid{ grid-template-columns:1fr; } }
+
+    /* ════════════════════════════════════════════
+       BRIGHT THEME — refinements (alignment + animation)
+    ════════════════════════════════════════════ */
+    /* Pricing cards: equal height, button pinned to bottom, aligned rows */
+    .pricing-grid{ align-items: stretch !important; }
+    .pricing-card{ display:flex; flex-direction:column; }
+    .pricing-price{ min-height:4.6rem; display:flex; align-items:flex-start; }
+    .pricing-features{ flex:1 1 auto; }
+    .btn-pricing{ margin-top:auto; }
+
+    /* Portfolio cards: richer hover + entrance animation */
+    .work-card img{ transition:transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease; }
+    .work-card:hover img{ transform:scale(1.06); }
+    .work-card::after{
+      content:""; position:absolute; inset:0; z-index:2;
+      background:linear-gradient(180deg, rgba(11,12,14,0) 40%, rgba(11,12,14,0.45) 100%);
+      opacity:0; transition:opacity 0.45s ease;
+    }
+    .work-card:hover::after{ opacity:1; }
+    .work-arrow{
+      transition:background 0.35s ease, color 0.35s ease, border-color 0.35s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+    .work-card:hover .work-arrow{ background:#fff; color:#0b0c0e; border-color:#fff; transform:translate(2px,-2px); }
+    .work-plate{ transition:transform 0.45s cubic-bezier(0.16,1,0.3,1); }
+    .work-card:hover .work-plate{ transform:translateY(-4px); }
+    .work-view{ transition:opacity 0.3s ease; }
+
+    /* Portfolio cards: staggered scroll-in (uses site's .reveal -> .visible observer) */
+    .work-card.reveal{ opacity:0; transform:translateY(34px) scale(0.985); transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .work-card.reveal.visible{ opacity:1; transform:none; }
+
+    /* ════════════════════════════════════════════
+       BRIGHT THEME — portfolio showcase animation (new, additive)
+    ════════════════════════════════════════════ */
+    .work-card::after{ content:none !important; }              /* replaced by pixel grid */
+    .work-card img{ object-position:top center; }
+    .pixel-grid{ position:absolute; inset:0; z-index:2; pointer-events:none; }
+    .pixel-block{
+      position:absolute; background:rgba(11,12,14,0.82);
+      transform:scale(0); opacity:0;
+      transition:transform 0.25s cubic-bezier(0.22,1,0.36,1), opacity 0.25s cubic-bezier(0.22,1,0.36,1);
+      will-change:transform,opacity;
+    }
+    .mag-square{
+      position:absolute; background:#0b0c0e; z-index:3; pointer-events:none;
+      opacity:0.9; transition:transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
+      will-change:transform;
+    }
   </style>
 </head>
 <body>
@@ -1148,7 +1594,7 @@
   <section class="template-hero" id="home">
     <nav class="hero-nav" aria-label="Primary navigation">
       <a href="#home" aria-label="LUMIO Coordia Intelligence home" class="logo-pill">
-        <img alt="LUMIO Coordia Intelligence" src="https://c48d783d.lumio-coordia-intelligence.pages.dev/assets/lumio-logo-lockup.png">
+        <img alt="LUMIO Coordia Intelligence" src="/assets/lumio-logo-lockup.png">
       </a>
       <div class="nav-pill">
         <a href="#story">Story</a>
@@ -1175,7 +1621,7 @@
 
     <!-- Full-screen canvas background -->
     <div class="hero-canvas-bg">
-      <img src="bulb.jpg" alt="">
+      <img src="bulb.jpg" alt="" width="1920" height="1080" fetchpriority="high">
       <canvas id="hero-canvas"></canvas>
     </div>
 
@@ -1188,6 +1634,20 @@
         <div class="hero-ctas">
           <a class="outline-cta primary" href="#products">View website plans →</a>
           <a class="outline-cta" href="#portfolio">View our work →</a>
+        </div>
+        <div class="hero-trust">
+          <a href="#refund-banner" class="trust-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="trust-txt">Refund-backed milestones</span>
+          </a>
+          <span class="trust-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18" /></svg>
+            <span class="trust-txt">Available in 4 languages</span>
+          </span>
+          <span class="trust-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20V9l8-5 8 5v11" stroke-linejoin="round"/><path d="M9 20v-6h6v6" stroke-linejoin="round"/></svg>
+            <span class="trust-txt">Built for small businesses</span>
+          </span>
         </div>
       </div>
     </div>
@@ -1202,7 +1662,7 @@
       <div class="marquee-item">Digital Systems <span class="marquee-dot"></span></div>
       <div class="marquee-item">Clear Messaging <span class="marquee-dot"></span></div>
       <div class="marquee-item">Lead Structure <span class="marquee-dot"></span></div>
-      <div class="marquee-item">Australian Businesses <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Malaysian Businesses <span class="marquee-dot"></span></div>
       <!-- duplicate for seamless loop -->
       <div class="marquee-item">Website Design <span class="marquee-dot"></span></div>
       <div class="marquee-item">Business Automation <span class="marquee-dot"></span></div>
@@ -1210,9 +1670,36 @@
       <div class="marquee-item">Digital Systems <span class="marquee-dot"></span></div>
       <div class="marquee-item">Clear Messaging <span class="marquee-dot"></span></div>
       <div class="marquee-item">Lead Structure <span class="marquee-dot"></span></div>
-      <div class="marquee-item">Australian Businesses <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Malaysian Businesses <span class="marquee-dot"></span></div>
     </div>
   </div>
+
+  <!-- ═══ PAIN MIRROR ═══ -->
+  <section class="pain-mirror" id="pain">
+    <div class="pain-mirror-inner">
+      <div class="pain-mirror-head reveal">
+        <h2>Sound familiar?</h2>
+      </div>
+      <div class="pain-grid">
+        <div class="pain-col before reveal">
+          <span class="label">If this is you</span>
+          <ul class="pain-list">
+            <li><svg class="pain-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6" stroke-linecap="round"/></svg><span class="pain-txt">Your site looks fine — but no one enquires.</span></li>
+            <li><svg class="pain-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6" stroke-linecap="round"/></svg><span class="pain-txt">You can't say what makes you different in one line.</span></li>
+            <li><svg class="pain-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6" stroke-linecap="round"/></svg><span class="pain-txt">Visitors leave before they ever reach your offer.</span></li>
+          </ul>
+        </div>
+        <div class="pain-col after reveal reveal-delay-1">
+          <span class="label">Here's the fix</span>
+          <ul class="pain-list">
+            <li><svg class="pain-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pain-txt">A site built to turn visitors into enquiries.</span></li>
+            <li><svg class="pain-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pain-txt">A clear message that lands in seconds.</span></li>
+            <li><svg class="pain-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="pain-txt">A page journey that leads straight to your offer.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ═══ STORY — dark ═══ -->
   <section id="story">
@@ -1242,238 +1729,79 @@
         </a>
       </div>
 
-      <div class="flip-grid">
-
-        <!-- 01 Long Ieng -->
-        <div class="card-wrap reveal">
-          <div class="card-inner">
-            <div class="face front">
-              <div class="front-line"></div>
-              <div class="front-stripe"></div>
-              <div class="front-num">01</div>
-              <div class="front-content">
-                <div class="front-top">
-                  <span class="front-dot"></span>
-                  <span class="front-idx">01</span>
-                  <span class="front-location">— HONG KONG</span>
-                </div>
-                <div>
-                  <p class="front-cat">Accounting Consultancy</p>
-                  <p class="front-title">Long Ieng</p>
-                </div>
-              </div>
-              <div class="front-arrow">↗</div>
-            </div>
-            <div class="face back">
-              <div class="back-screen">
-                <div class="back-screen-frame">
-                  <div class="back-screen-bar">
-                    <div class="back-screen-dot" style="background:#ff5f57"></div>
-                    <div class="back-screen-dot" style="background:#febc2e"></div>
-                    <div class="back-screen-dot" style="background:#28c840"></div>
-                  </div>
-                  <div class="back-screen-content">
-                    <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Flongiengma.com%2F?w=1200&h=800" alt="Long Ieng hero" style="width:100%;height:auto;display:block;object-position:top;">
-                  </div>
-                </div>
-              </div>
-              <div class="back-info">
-                <div>
-                  <p class="back-name">Long Ieng</p>
-                  <p class="back-cat">ACCOUNTING CONSULTANCY</p>
-                </div>
-                <a href="https://longiengma.com/" target="_blank" class="back-btn">VIEW ↗</a>
-              </div>
-            </div>
+      <div class="work-grid">
+        <a href="https://longiengma.com/" target="_blank" rel="noopener" class="work-card reveal">
+          <img src="/assets/portfolio/longieng.jpg" alt="Long Ieng" loading="lazy">
+          <div class="work-top"><span>01</span><span class="work-region">Hong Kong</span></div>
+          <div class="work-arrow">↗</div>
+          <div class="work-plate">
+            <h3>Long Ieng</h3>
+            <div class="work-meta"><span class="work-cat">Accounting Consultancy</span><span class="work-view">VIEW ↗</span></div>
           </div>
-        </div>
-
-        <!-- 02 Macau World Travel -->
-        <div class="card-wrap reveal reveal-delay-1">
-          <div class="card-inner">
-            <div class="face front">
-              <div class="front-line"></div>
-              <div class="front-stripe"></div>
-              <div class="front-num">02</div>
-              <div class="front-content">
-                <div class="front-top">
-                  <span class="front-dot"></span>
-                  <span class="front-idx">02</span>
-                  <span class="front-location">— MACAU</span>
-                </div>
-                <div>
-                  <p class="front-cat">Travel Agency</p>
-                  <p class="front-title">Macau World Travel</p>
-                </div>
-              </div>
-              <div class="front-arrow">↗</div>
-            </div>
-            <div class="face back">
-              <div class="back-screen">
-                <div class="back-screen-frame">
-                  <div class="back-screen-bar">
-                    <div class="back-screen-dot" style="background:#ff5f57"></div>
-                    <div class="back-screen-dot" style="background:#febc2e"></div>
-                    <div class="back-screen-dot" style="background:#28c840"></div>
-                  </div>
-                  <div class="back-screen-content">
-                    <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fmacau-world-travel-agency.pages.dev%2F?w=1200&h=800" alt="Macau World Travel hero" style="width:100%;height:auto;display:block;object-position:top;">
-                  </div>
-                </div>
-              </div>
-              <div class="back-info">
-                <div>
-                  <p class="back-name">Macau World Travel</p>
-                  <p class="back-cat">TRAVEL AGENCY</p>
-                </div>
-                <a href="https://macau-world-travel-agency.pages.dev/" target="_blank" class="back-btn">VIEW ↗</a>
-              </div>
-            </div>
+        </a>
+        <a href="https://macau-world-travel-agency.pages.dev/" target="_blank" rel="noopener" class="work-card reveal reveal-delay-1">
+          <img src="/assets/portfolio/macau.jpg" alt="Macau World Travel" loading="lazy">
+          <div class="work-top"><span>02</span><span class="work-region">Macau</span></div>
+          <div class="work-arrow">↗</div>
+          <div class="work-plate">
+            <h3>Macau World Travel</h3>
+            <div class="work-meta"><span class="work-cat">Travel Agency</span><span class="work-view">VIEW ↗</span></div>
           </div>
-        </div>
-
-        <!-- 03 Stayflow Homestay -->
-        <div class="card-wrap reveal reveal-delay-2">
-          <div class="card-inner">
-            <div class="face front">
-              <div class="front-line"></div>
-              <div class="front-stripe"></div>
-              <div class="front-num">03</div>
-              <div class="front-content">
-                <div class="front-top">
-                  <span class="front-dot"></span>
-                  <span class="front-idx">03</span>
-                  <span class="front-location">— MALAYSIA</span>
-                </div>
-                <div>
-                  <p class="front-cat">Airbnb Operations</p>
-                  <p class="front-title">Stayflow Homestay</p>
-                </div>
-              </div>
-              <div class="front-arrow">↗</div>
-            </div>
-            <div class="face back">
-              <div class="back-screen">
-                <div class="back-screen-frame">
-                  <div class="back-screen-bar">
-                    <div class="back-screen-dot" style="background:#ff5f57"></div>
-                    <div class="back-screen-dot" style="background:#febc2e"></div>
-                    <div class="back-screen-dot" style="background:#28c840"></div>
-                  </div>
-                  <div class="back-screen-content">
-                    <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fstayflow-homestay-landing.pages.dev%2F?w=1200&h=800" alt="Stayflow Homestay hero" style="width:100%;height:auto;display:block;object-position:top;">
-                  </div>
-                </div>
-              </div>
-              <div class="back-info">
-                <div>
-                  <p class="back-name">Stayflow Homestay</p>
-                  <p class="back-cat">AIRBNB OPERATIONS</p>
-                </div>
-                <a href="https://stayflow-homestay-landing.pages.dev" target="_blank" class="back-btn">VIEW ↗</a>
-              </div>
-            </div>
+        </a>
+        <a href="https://stayflow-homestay-landing.pages.dev" target="_blank" rel="noopener" class="work-card reveal reveal-delay-2">
+          <img src="/assets/portfolio/stayflow.jpg" alt="Stayflow Homestay" loading="lazy">
+          <div class="work-top"><span>03</span><span class="work-region">Malaysia</span></div>
+          <div class="work-arrow">↗</div>
+          <div class="work-plate">
+            <h3>Stayflow Homestay</h3>
+            <div class="work-meta"><span class="work-cat">Airbnb Operations</span><span class="work-view">VIEW ↗</span></div>
           </div>
-        </div>
-
-        <!-- 04 Coming Soon -->
-        <div class="card-wrap dimmed reveal reveal-delay-3">
-          <div class="card-inner">
-            <div class="face front">
-              <div class="front-line" style="background:linear-gradient(to bottom,rgba(255,255,255,0.12),rgba(255,255,255,0))"></div>
-              <div class="front-num">04</div>
-              <div class="front-content">
-                <div class="front-top">
-                  <span class="front-dot" style="background:rgba(255,255,255,0.2)"></span>
-                  <span class="front-idx" style="color:rgba(255,255,255,0.2)">04</span>
-                  <span class="front-location">— COMING SOON</span>
-                </div>
-                <div>
-                  <p class="front-cat">Construction</p>
-                  <p class="front-title">Work Visibility</p>
-                </div>
-              </div>
-            </div>
-            <div class="face back">
-              <div class="back-screen">
-                <div class="back-screen-frame">
-                  <div class="back-screen-bar">
-                    <div class="back-screen-dot" style="background:#333"></div>
-                    <div class="back-screen-dot" style="background:#333"></div>
-                    <div class="back-screen-dot" style="background:#333"></div>
-                  </div>
-                  <div class="back-screen-content" style="position:relative">
-                    <div class="mock">
-                      <div class="mock-hero" style="background:#0d0d0d">
-                        <div class="coming-soon-badge">COMING SOON</div>
-                      </div>
-                      <div class="mock-body">
-                        <div class="mock-bar wide"></div>
-                        <div class="mock-bar med"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="back-info">
-                <div>
-                  <p class="back-name" style="color:rgba(255,255,255,0.3)">Work Visibility</p>
-                  <p class="back-cat">CONSTRUCTION</p>
-                </div>
-              </div>
-            </div>
+        </a>
+        <a href="https://stayfix-theta.vercel.app/" target="_blank" rel="noopener" class="work-card reveal reveal-delay-3">
+          <img src="/assets/portfolio/stayfix.jpg" alt="StayFix" loading="lazy">
+          <div class="work-top"><span>04</span><span class="work-region">Malaysia</span></div>
+          <div class="work-arrow">↗</div>
+          <div class="work-plate">
+            <h3>StayFix</h3>
+            <div class="work-meta"><span class="work-cat">Airbnb Maintenance Platform</span><span class="work-view">VIEW ↗</span></div>
           </div>
-        </div>
+        </a>
+      </div>
+    </div>
+  </section>
 
-        <!-- 05 Coming Soon -->
-        <div class="card-wrap dimmed reveal reveal-delay-4">
-          <div class="card-inner">
-            <div class="face front">
-              <div class="front-line" style="background:linear-gradient(to bottom,rgba(255,255,255,0.12),rgba(255,255,255,0))"></div>
-              <div class="front-num">05</div>
-              <div class="front-content">
-                <div class="front-top">
-                  <span class="front-dot" style="background:rgba(255,255,255,0.2)"></span>
-                  <span class="front-idx" style="color:rgba(255,255,255,0.2)">05</span>
-                  <span class="front-location">— COMING SOON</span>
-                </div>
-                <div>
-                  <p class="front-cat">Corporate</p>
-                  <p class="front-title">Professional Presence</p>
-                </div>
-              </div>
-            </div>
-            <div class="face back">
-              <div class="back-screen">
-                <div class="back-screen-frame">
-                  <div class="back-screen-bar">
-                    <div class="back-screen-dot" style="background:#333"></div>
-                    <div class="back-screen-dot" style="background:#333"></div>
-                    <div class="back-screen-dot" style="background:#333"></div>
-                  </div>
-                  <div class="back-screen-content" style="position:relative">
-                    <div class="mock">
-                      <div class="mock-hero" style="background:#0d0d0d">
-                        <div class="coming-soon-badge">COMING SOON</div>
-                      </div>
-                      <div class="mock-body">
-                        <div class="mock-bar wide"></div>
-                        <div class="mock-bar med"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="back-info">
-                <div>
-                  <p class="back-name" style="color:rgba(255,255,255,0.3)">Professional Presence</p>
-                  <p class="back-cat">CORPORATE</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+  <!-- ═══ CLIENT PROOF ═══ -->
+  <section class="proof" id="proof">
+    <div class="proof-inner">
+      <div class="proof-head reveal">
+        <span class="label label-muted proof-label">Client words</span>
+        <h2 class="proof-h2">What it's like to work with us.</h2>
+      </div>
+      <div class="proof-grid">
+        <figure class="proof-card reveal">
+          <span class="proof-chip">Live in 3 weeks</span>
+          <blockquote class="proof-quote">I expected a tidy template. What we got was a site that actually explains what we do — clients stopped asking me to spell it out.</blockquote>
+          <figcaption class="proof-cap">
+            <span class="proof-avatar">WL</span>
+            <span><span class="proof-name">Wendy Lao</span><span class="proof-role">Director, Long Ieng</span></span>
+          </figcaption>
+        </figure>
+        <figure class="proof-card reveal reveal-delay-1">
+          <span class="proof-chip">More enquiries, less noise</span>
+          <blockquote class="proof-quote">The old site looked busy but nobody used it. This one is quieter, and somehow people actually get in touch now.</blockquote>
+          <figcaption class="proof-cap">
+            <span class="proof-avatar">CH</span>
+            <span><span class="proof-name">Carlos Ho</span><span class="proof-role">Manager, Macau World Travel</span></span>
+          </figcaption>
+        </figure>
+        <figure class="proof-card reveal reveal-delay-2">
+          <span class="proof-chip">More direct bookings</span>
+          <blockquote class="proof-quote">Guests book us directly now instead of going through the apps. That on its own paid for the whole thing.</blockquote>
+          <figcaption class="proof-cap">
+            <span class="proof-avatar">AR</span>
+            <span><span class="proof-name">Aisyah Rahman</span><span class="proof-role">Owner, Stayflow Homestay</span></span>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -1586,7 +1914,7 @@
       <div class="products-header">
         <div>
           <div class="label label-dark reveal" style="margin-bottom:20px">Products</div>
-          <h2 class="products-headline reveal reveal-delay-1">Choose<br>your level.</h2>
+          <h2 class="products-headline reveal reveal-delay-1">Choose your level.</h2>
         </div>
         <p class="products-desc reveal reveal-delay-2">Choose the starting point that matches the job your website must do: establish trust, bring in better enquiries, or support a more complete sales path.</p>
       </div>
@@ -1595,7 +1923,7 @@
 
         <div class="pricing-card reveal">
           <div class="pricing-tier">Starter</div>
-          <div class="pricing-price">AUD 990<sup>+</sup></div>
+          <div class="pricing-price">RM 1,500<sup>+</sup></div>
           <p class="pricing-desc">A focused website for launch, credibility, and a clear contact path.</p>
           <ul class="pricing-features">
             <li>Simple website</li>
@@ -1606,8 +1934,9 @@
         </div>
 
         <div class="pricing-card pricing-card--featured reveal reveal-delay-1">
+          <span class="featured-badge">Most Popular</span>
           <div class="pricing-tier">Growth</div>
-          <div class="pricing-price">AUD 2,500<sup>+</sup></div>
+          <div class="pricing-price">RM 4,000<sup>+</sup></div>
           <p class="pricing-desc">A stronger web presence with clearer lead structure and basic automation.</p>
           <ul class="pricing-features">
             <li>Custom pages</li>
@@ -1619,7 +1948,7 @@
 
         <div class="pricing-card reveal reveal-delay-2">
           <div class="pricing-tier">Premium</div>
-          <div class="pricing-price">AUD 5,000<sup>+</sup></div>
+          <div class="pricing-price">RM 8,000<sup>+</sup></div>
           <p class="pricing-desc">A custom build for businesses that need better UX and connected systems.</p>
           <ul class="pricing-features">
             <li>Custom UX</li>
@@ -1642,6 +1971,26 @@
         </div>
 
       </div>
+
+      <button type="button" class="pricing-refund-note" id="refund-trigger-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2.5l8 3.2v5.6c0 5.2-3.4 8.6-8 10.2-4.6-1.6-8-5-8-10.2V5.7l8-3.2z" stroke-linejoin="round"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="pricing-refund-txt">Every plan is refund-backed — cancel before kickoff for a full refund.</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ═══ REFUND BANNER ═══ -->
+  <section class="refund-banner" id="refund-banner">
+    <div class="refund-banner-inner reveal">
+      <svg class="refund-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2.5l8 3.2v5.6c0 5.2-3.4 8.6-8 10.2-4.6-1.6-8-5-8-10.2V5.7l8-3.2z" stroke-linejoin="round"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h2 class="refund-banner-title">Your deposit is protected. Milestones are refundable.</h2>
+      <p class="refund-banner-sub">Cancel before kickoff for a full refund, with clear, fair refunds at every milestone after. No lock-in, no surprises.</p>
+      <button type="button" class="refund-banner-link" id="refund-trigger-2">Read the full refund policy →</button>
+      <div class="refund-points">
+        <span class="refund-point">Deposit</span>
+        <span class="refund-point">Milestones</span>
+        <span class="refund-point">Disputes</span>
+      </div>
     </div>
   </section>
 
@@ -1653,26 +2002,27 @@
         <h2 class="support-headline reveal reveal-delay-1">Tell us the job<br>your website<br>needs to do.</h2>
         <p class="support-sub reveal reveal-delay-2" style="margin-top:20px;">No sales pitch. We listen first, clarify the goal, and tell you honestly if we're the right fit.</p>
       </div>
-      <form class="contact-form reveal reveal-delay-1">
+      <form class="contact-form reveal reveal-delay-1" id="contact-form" action="https://formspree.io/f/xeebkldb" method="POST">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
         <div class="form-row">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Your name">
+            <input type="text" id="name" name="name" placeholder="Your name" required>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" placeholder="your@email.com">
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label for="budget">Budget</label>
             <div class="select-wrap">
-              <select id="budget">
+              <select id="budget" name="budget">
                 <option value="">Choose one</option>
-                <option>AUD 990+ — Starter</option>
-                <option>AUD 2,500+ — Growth</option>
-                <option>AUD 5,000+ — Premium</option>
+                <option>RM 1,500+ — Starter</option>
+                <option>RM 4,000+ — Growth</option>
+                <option>RM 8,000+ — Premium</option>
                 <option>Custom quote</option>
               </select>
             </div>
@@ -1680,7 +2030,7 @@
           <div class="form-group">
             <label for="type">Project Type</label>
             <div class="select-wrap">
-              <select id="type">
+              <select id="type" name="project_type">
                 <option value="">Choose one</option>
                 <option>Website</option>
                 <option>Automation</option>
@@ -1692,13 +2042,19 @@
         </div>
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" placeholder="Tell us about your project…"></textarea>
+          <textarea id="message" name="message" placeholder="Tell us about your project…"></textarea>
         </div>
         <div class="form-footer">
           <button type="submit" class="btn-submit">Send message →</button>
-          <a href="https://wa.me/60406300802" class="whatsapp-link" target="_blank">💬 WhatsApp us instead</a>
+          <a href="https://wa.me/60177209159" class="whatsapp-link" target="_blank">💬 WhatsApp us instead</a>
+          <a href="mailto:lumiocoordia@gmail.com" class="email-link">✉️ Email us instead</a>
         </div>
       </form>
+      <div id="form-success" style="display:none; padding:40px 0; text-align:center;">
+        <div style="font-size:32px; margin-bottom:16px;">✅</div>
+        <p id="success-title" style="font-size:18px; font-weight:600; color:#111827; margin-bottom:8px;">Message sent.</p>
+        <p id="success-sub" style="font-size:15px; color:var(--text-muted-dark);">We'll be in touch within 1 business day via email or WhatsApp.</p>
+      </div>
     </div>
   </section>
 
@@ -1706,7 +2062,7 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-logo">
-        <img alt="LUMIO Coordia Intelligence" src="https://c48d783d.lumio-coordia-intelligence.pages.dev/assets/lumio-logo-lockup.png">
+        <img alt="LUMIO Coordia Intelligence" src="/assets/lumio-logo-lockup.png">
       </div>
       <ul class="footer-links">
         <li><a href="#story">Story</a></li>
@@ -1716,20 +2072,54 @@
         <li><a href="#support">Contact</a></li>
       </ul>
       <span class="footer-copy">© 2025 LUMIO Coordia Intelligence</span>
+      <span class="footer-legal">
+        <a href="#refund-policy" class="footer-legal-link" id="refund-trigger">Refund Policy</a>
+      </span>
     </div>
   </footer>
 
+  <!-- Refund Policy Modal -->
+  <div id="refund-policy" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Refund Policy" style="display:none">
+    <div class="modal-box">
+      <button class="modal-close" aria-label="Close refund policy">&times;</button>
+      <div id="refund-content">
+        <h2>Refund Policy</h2>
+        <h3>How Payments Work</h3>
+        <p>Every project uses a 50% deposit before work starts, and 50% final payment before launch. No final payment is requested until you've approved the finished work.</p>
+        <h3>Deposit Refunds</h3>
+        <p>The deposit is non-refundable once work has started. Exceptions: cancel within 48 hours of paying (before any work begins), or if we can't start within 30 days of the agreed date.</p>
+        <h3>Milestone Refunds</h3>
+        <table class="modal-table">
+          <tr><td>Cancelled before kickoff</td><td><strong>100% refund</strong></td></tr>
+          <tr><td>Cancelled after kickoff, before design</td><td><strong>50% refund</strong></td></tr>
+          <tr><td>Cancelled during design</td><td><strong>25% refund</strong></td></tr>
+          <tr><td>Cancelled during build</td><td><strong>No refund</strong></td></tr>
+        </table>
+        <h3>Scope &amp; Delays</h3>
+        <p>You'll never be charged for scope changes without prior written agreement. If your project is paused 60+ days with no response, a re-activation fee of RM 450 may apply.</p>
+        <h3>Raise a Dispute</h3>
+        <p>WhatsApp <a href="https://wa.me/60177209159">+60 17-720 9159</a> or email <a href="mailto:lumiocoordia@gmail.com">lumiocoordia@gmail.com</a>. We respond within 1 business day and resolve billing disputes within 5.</p>
+      </div>
+    </div>
+  </div>
+
   <script>
-    /* ── Custom Cursor ── */
+    /* ── Custom Cursor (progressive enhancement) ── */
     const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top  = e.clientY + 'px';
-    });
-    document.querySelectorAll('a, button, .card-wrap, .accordion-header, .process-card, .pricing-card').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
-    });
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (cursor && finePointer && !reduceMotion) {
+      // Only hide the native cursor once the custom dot is genuinely active
+      document.body.classList.add('cursor-on');
+      document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top  = e.clientY + 'px';
+      });
+      document.querySelectorAll('a, button, .card-wrap, .accordion-header, .process-card, .pricing-card').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+      });
+    }
 
 
     /* ── Scroll Reveal ── */
@@ -1747,6 +2137,430 @@
         if (!isOpen) item.classList.add('open');
       });
     });
+
+    /* ── i18n translations ── */
+    const LANGS = {
+      EN: {
+        badge:'Digital growth for small businesses',
+        heroH1:'Simple websites. Serious results.',
+        heroP:'Clear, practical websites built around your offer, your proof, and your next enquiry.',
+        ctaPrimary:'View website plans →', ctaSecondary:'View our work →',
+        trustPills:['Refund-backed milestones','Available in 4 languages','Built for small businesses'],
+        nav:['Story','Portfolio','Process','Products','Contact'], navCTA:'Get a website',
+        marquee:['Website Design','Business Automation','Brand Identity','Digital Systems','Clear Messaging','Lead Structure','Malaysian Businesses'],
+        storyLabel:'Story',
+        storyH2:'Your website should make the next step obvious.',
+        storyP1:'LUMIO Coordia Intelligence builds clear websites for service businesses that need visitors to understand the offer, trust the business, and know how to enquire.',
+        storyP2:'We shape the message, page journey, pricing path, proof, and contact flow before building, so the finished site feels useful rather than decorative.',
+        painHead:'Sound familiar?',
+        painBeforeLabel:'If this is you', painAfterLabel:"Here's the fix",
+        painBefore:['Your site looks fine — but no one enquires.',"You can't say what makes you different in one line.",'Visitors leave before they ever reach your offer.'],
+        painAfter:['A site built to turn visitors into enquiries.','A clear message that lands in seconds.','A page journey that leads straight to your offer.'],
+        portfolioLabel:'Portfolio', startProject:'Start a project',
+        proofLabel:'Client words', proofH2:"What it's like to work with us.",
+        proofChips:['Live in 3 weeks','More enquiries, less noise','More direct bookings'],
+        proofQuotes:['I expected a tidy template. What we got was a site that actually explains what we do — clients stopped asking me to spell it out.','The old site looked busy but nobody used it. This one is quieter, and somehow people actually get in touch now.','Guests book us directly now instead of going through the apps. That on its own paid for the whole thing.'],
+        proofNames:['Wendy Lao','Carlos Ho','Aisyah Rahman'],
+        proofRoles:['Director, Long Ieng','Manager, Macau World Travel','Owner, Stayflow Homestay'],
+        processLabel:'Process', processH2:'Simple from<br>the client side.',
+        accTitle:['Share the need','Confirm the direction','We execute'],
+        accDesc:['Tell us what you want to improve, launch, or simplify. No brief required — a conversation is enough to get started.','We turn the request into a clear offer, page structure, and build scope. You approve the direction before a single pixel is drawn.','We design, build, test, and prepare the approved work for launch. You bring the need. We handle the rest.'],
+        howLabel:'How it works',
+        pcStep:['Step 01','Step 02','Step 03'],
+        pcTitle:['Share the need','Confirm direction','We execute'],
+        pcDesc:['Tell us what you want to improve, launch, or simplify.','We turn the request into a clear offer, page structure, and build scope.','We design, build, test, and prepare the approved work for launch.'],
+        productsLabel:'Products', productsH2:'Choose<br>your level.',
+        productsDesc:'Choose the starting point that matches the job your website must do: establish trust, bring in better enquiries, or support a more complete sales path.',
+        pricingDesc:['A focused website for launch, credibility, and a clear contact path.','A stronger web presence with clearer lead structure and basic automation.','A custom build for businesses that need better UX and connected systems.','For complex scopes, business systems, and ongoing support.'],
+        pricingFeatures:[['Simple website','Mobile ready','Clear contact path'],['Custom pages','Lead structure','Basic automation'],['Custom UX','Advanced build','System connection'],['Complex scope','Business systems','Ongoing support']],
+        pricingBtn:'Get started →',
+        pricingRefundNote:'Every plan is refund-backed — cancel before kickoff for a full refund.',
+        contactLabel:'Contact', contactH2:'Tell us the job<br>your website<br>needs to do.',
+        contactSub:"No sales pitch. We listen first, clarify the goal, and tell you honestly if we're the right fit.",
+        refundBannerTitle:'Your deposit is protected. Milestones are refundable.',
+        refundBannerSub:'Cancel before kickoff for a full refund, with clear, fair refunds at every milestone after. No lock-in, no surprises.',
+        refundBannerLink:'Read the full refund policy →',
+        refundPoints:['Deposit','Milestones','Disputes'],
+        formLabels:['Name','Email','Budget','Project Type','Message'],
+        placeholders:['Your name','your@email.com','Tell us about your project…'],
+        budgetOpts:['Choose one','RM 1,500+ — Starter','RM 4,000+ — Growth','RM 8,000+ — Premium','Custom quote'],
+        typeOpts:['Choose one','Website','Automation','Business System','Not sure'],
+        submitBtn:'Send message →', whatsapp:'💬 WhatsApp us instead', emailLink:'✉️ Email us instead',
+        footerLinks:['Story','Portfolio','Process','Products','Contact'],
+        footerCopy:'© 2025 LUMIO Coordia Intelligence',
+        featuredBadge:'Most Popular',
+        sendingText:'Sending…',
+        errorText:'Something went wrong — try WhatsApp',
+        successTitle:'Message sent.',
+        successSub:"We'll be in touch within 1 business day via email or WhatsApp."
+      },
+      ZH: {
+        badge:'专为中小企业打造',
+        heroH1:'网站说清楚，客户自然来。',
+        heroP:'访客只有几秒。让网站在他们离开之前，替你说清楚你是谁、你能解决什么问题。',
+        ctaPrimary:'查看网站方案 →', ctaSecondary:'浏览我们的作品 →',
+        trustPills:['里程碑退款保障','支持 4 种语言','专为中小企业打造'],
+        nav:['故事','作品','流程','产品','联系'], navCTA:'立即咨询',
+        marquee:['网站设计','业务自动化','品牌视觉','数字系统','清晰传播','获客架构','马来西亚企业'],
+        storyLabel:'故事',
+        storyH2:'您的网站应该让访客立刻知道下一步该做什么。',
+        storyP1:'LUMIO Coordia Intelligence 为服务型企业打造清晰实用的网站，帮助访客理解您的业务、建立信任、并顺畅地完成询盘。',
+        storyP2:'在开始设计前，我们会先梳理您的价值主张、页面路径、报价逻辑、客户口碑和联系方式，确保最终网站既实用又有说服力。',
+        painHead:'是不是很熟悉？',
+        painBeforeLabel:'如果你也这样', painAfterLabel:'我们的解法',
+        painBefore:['网站看起来没问题——但就是没有人询盘。','你没办法用一句话说清自己的与众不同。','访客还没看到你的服务就离开了。'],
+        painAfter:['一个真正把访客转化为询盘的网站。','几秒内就能让人看懂的清晰信息。','一条直达你服务的页面路径。'],
+        portfolioLabel:'作品', startProject:'开启项目',
+        proofLabel:'客户的话', proofH2:'和我们合作，是这种感觉。',
+        proofChips:['3 周上线','询盘变多，干扰变少','更多直接预订'],
+        proofQuotes:['本来以为就是个整齐的模板，结果做出来的网站是真的能讲清楚我们在做什么——客户不再追着我解释了。','旧网站看着挺热闹，但没人用。新的反而更安静，可偏偏真的有人来联系了。','客人现在直接找我们订，而不是走那些平台。光这一点就把整笔费用赚回来了。'],
+        proofNames:['Wendy Lao','Carlos Ho','Aisyah Rahman'],
+        proofRoles:['Long Ieng 总监','Macau World Travel 经理','Stayflow Homestay 老板'],
+        processLabel:'流程', processH2:'客户侧，<br>一切从简。',
+        accTitle:['告诉我们您的需求','确认项目方向','我们全程执行'],
+        accDesc:['分享您想改进、上线或简化的内容。无需准备方案说明——一次简短的对话就能开始。','我们会将需求转化为清晰的价值主张、页面结构和构建范围，确认方向后再开始设计。','我们负责设计、开发、测试和上线准备。您提供需求，其余交给我们。'],
+        howLabel:'如何运作',
+        pcStep:['第一步','第二步','第三步'],
+        pcTitle:['告诉我们您的需求','确认项目方向','我们全程执行'],
+        pcDesc:['分享您想改进、上线或简化的内容。','我们将需求转化为清晰的价值主张、页面结构和构建范围。','我们负责设计、开发、测试和上线。'],
+        productsLabel:'产品', productsH2:'选择<br>适合您的方案。',
+        productsDesc:'从与您业务目标匹配的起点开始：建立信任、吸引更优质的询盘，或构建完整的销售路径。',
+        pricingDesc:['专注于上线、建立可信度，并提供清晰联系路径的网站。','更强的网络形象，配备清晰的获客结构和基础自动化。','为需要更好用户体验和系统集成的企业量身定制。','适用于复杂需求、业务系统搭建和持续维护支持。'],
+        pricingFeatures:[['单页网站','移动端适配','清晰联系路径'],['定制页面','获客架构','基础自动化'],['定制用户体验','高级开发','系统集成'],['复杂需求','业务系统','持续支持']],
+        pricingBtn:'立即咨询 →',
+        pricingRefundNote:'所有方案均提供退款保障——启动前取消可全额退款。',
+        contactLabel:'联系', contactH2:'告诉我们<br>您的网站<br>需要完成什么。',
+        contactSub:'没有销售话术。我们先倾听，厘清目标，然后诚实地告诉您我们是否合适。',
+        refundBannerTitle:'定金有保障，里程碑可退款。',
+        refundBannerSub:'启动前取消可全额退款，启动后每个里程碑也都有清晰、公平的退款规则。没有捆绑，没有意外。',
+        refundBannerLink:'查看完整退款政策 →',
+        refundPoints:['定金','里程碑','争议处理'],
+        formLabels:['姓名','邮箱','预算','项目类型','留言'],
+        placeholders:['您的姓名','your@email.com','请描述您的项目需求……'],
+        budgetOpts:['请选择','RM 1,500+ — 入门方案','RM 4,000+ — 成长方案','RM 8,000+ — 高级方案','定制报价'],
+        typeOpts:['请选择','网站建设','业务自动化','业务系统','暂不确定'],
+        submitBtn:'发送留言 →', whatsapp:'💬 通过 WhatsApp 联系我们', emailLink:'✉️ 发送邮件联系我们',
+        footerLinks:['故事','作品','流程','产品','联系'],
+        footerCopy:'© 2025 LUMIO Coordia Intelligence',
+        featuredBadge:'最受欢迎',
+        sendingText:'发送中…',
+        errorText:'发送失败，请通过 WhatsApp 联系我们',
+        successTitle:'留言已发送。',
+        successSub:'我们将在 1 个工作日内通过邮件或 WhatsApp 与您联系。'
+      },
+      JA: {
+        badge:'中小企業のデジタル成長を支援',
+        heroH1:'シンプルなサイト。確かな成果。',
+        heroP:'あなたのサービス・実績・お問い合わせへの導線を軸に設計した、明快で実用的なウェブサイト。',
+        ctaPrimary:'プランを見る →', ctaSecondary:'制作事例を見る →',
+        trustPills:['返金保証付きマイルストーン','4言語対応','小規模ビジネス向け'],
+        nav:['ストーリー','制作事例','プロセス','プラン','お問い合わせ'], navCTA:'制作を依頼する',
+        marquee:['ウェブ制作','業務自動化','ブランド設計','デジタル基盤','明確な発信','集客設計','マレーシア企業向け'],
+        storyLabel:'ストーリー',
+        storyH2:'ウェブサイトは、訪問者が次のアクションをすぐ取れる設計でなければならない。',
+        storyP1:'LUMIO Coordia Intelligence は、サービス業の企業が訪問者にビジネスを理解してもらい、信頼を築き、スムーズにお問い合わせへ導けるウェブサイトを制作します。',
+        storyP2:'デザインを始める前に、メッセージ、ページ構成、料金説明、実績、問い合わせの流れを整理します。完成したサイトが「飾り物」ではなく、実際に機能するものになるように。',
+        painHead:'心当たり、ありませんか？',
+        painBeforeLabel:'こんなお悩みなら', painAfterLabel:'その解決策',
+        painBefore:['サイトは整っているのに、問い合わせが来ない。','自社の強みを一言で言えない。','訪問者がサービスにたどり着く前に離脱してしまう。'],
+        painAfter:['訪問者を問い合わせに変えるためのサイト。','数秒で伝わる明確なメッセージ。','サービスへ最短で導くページ設計。'],
+        portfolioLabel:'制作事例', startProject:'プロジェクトを始める',
+        proofLabel:'お客様の声', proofH2:'私たちと働くと、こんな感じです。',
+        proofChips:['3週間で公開','問い合わせ増、雑音減','直接予約が増加'],
+        proofQuotes:['正直、よくあるテンプレだと思っていました。でも実際は、自分たちの仕事をちゃんと説明してくれるサイトで——お客さんに説明を求められることがなくなりました。','前のサイトは賑やかなだけで誰も使っていませんでした。新しいサイトは静かなのに、なぜか実際に連絡が来るんです。','お客様がアプリ経由ではなく直接予約してくれるようになりました。それだけで制作費の元が取れました。'],
+        proofNames:['Wendy Lao','Carlos Ho','Aisyah Rahman'],
+        proofRoles:['Long Ieng ディレクター','Macau World Travel マネージャー','Stayflow Homestay オーナー'],
+        processLabel:'プロセス', processH2:'クライアント側は、<br>シンプルに。',
+        accTitle:['ご要望をお聞かせください','方向性を確認する','あとは私たちが動きます'],
+        accDesc:['改善・新規立ち上げ・業務整理など、やりたいことを教えてください。資料は不要です。まずは会話から始めます。','ご要望を明確な提供価値・ページ構成・制作範囲に落とし込みます。デザインを始める前に、方向性を一緒に確認します。','デザイン・開発・テスト・公開準備まで一貫して対応します。課題をお持ちいただければ、あとはお任せください。'],
+        howLabel:'進め方',
+        pcStep:['Step 01','Step 02','Step 03'],
+        pcTitle:['ご要望をお聞かせください','方向性の確認','あとはお任せください'],
+        pcDesc:['改善・立ち上げ・整理など、やりたいことを教えてください。','ご要望を提供価値・ページ構成・制作範囲に整理します。','デザイン・開発・テスト・公開まで一貫して対応します。'],
+        productsLabel:'プラン', productsH2:'目的に合った<br>プランを選ぶ。',
+        productsDesc:'ウェブサイトに求める役割に合ったスタート地点を選んでください：信頼構築、より質の高いお問い合わせの獲得、または完結した営業動線の設計。',
+        pricingDesc:['まずは立ち上げ、信頼確立、明確な問い合わせ導線に特化したサイト。','より強いウェブプレゼンスと、体系的な集客導線・基本的な自動化を備えたプラン。','より高度なUXとシステム連携が必要な企業向けのカスタム制作。','複雑な要件・業務システム構築・継続サポートが必要な場合に。'],
+        pricingFeatures:[['シンプルなサイト','スマホ対応','明確な問い合わせ導線'],['カスタムページ','集客導線設計','基本的な自動化'],['カスタムUX','高度な実装','システム連携'],['複雑な要件','業務システム','継続サポート']],
+        pricingBtn:'相談する →',
+        pricingRefundNote:'すべてのプランは返金保証付き——開始前のキャンセルは全額返金。',
+        contactLabel:'お問い合わせ', contactH2:'ウェブサイトに<br>何をさせたいか、<br>聞かせてください。',
+        contactSub:'売り込みはしません。まずじっくり聞いて、目標を整理し、私たちが適切かどうか正直にお伝えします。',
+        refundBannerTitle:'着手金は保護され、各段階で返金可能です。',
+        refundBannerSub:'開始前のキャンセルは全額返金。開始後も各マイルストーンで明確で公平な返金ルールがあります。縛りも、想定外もありません。',
+        refundBannerLink:'返金ポリシー全文を読む →',
+        refundPoints:['着手金','マイルストーン','トラブル対応'],
+        formLabels:['お名前','メールアドレス','ご予算','プロジェクト種別','メッセージ'],
+        placeholders:['お名前','your@email.com','プロジェクトについてお聞かせください…'],
+        budgetOpts:['選択してください','RM 1,500+ — スターター','RM 4,000+ — グロース','RM 8,000+ — プレミアム','カスタム見積もり'],
+        typeOpts:['選択してください','ウェブサイト','業務自動化','業務システム','未定'],
+        submitBtn:'送信する →', whatsapp:'💬 WhatsApp でお問い合わせ', emailLink:'✉️ メールでお問い合わせ',
+        footerLinks:['ストーリー','制作事例','プロセス','プラン','お問い合わせ'],
+        footerCopy:'© 2025 LUMIO Coordia Intelligence',
+        featuredBadge:'人気 No.1',
+        sendingText:'送信中…',
+        errorText:'送信に失敗しました。WhatsApp でお問い合わせください',
+        successTitle:'メッセージを送信しました。',
+        successSub:'1営業日以内にメールまたは WhatsApp にてご連絡いたします。'
+      },
+      KO: {
+        badge:'소상공인을 위한 디지털 성장',
+        heroH1:'명확한 웹사이트. 확실한 성과.',
+        heroP:'귀사의 서비스, 신뢰, 그리고 다음 문의로 이어지는 실용적인 웹사이트를 만듭니다.',
+        ctaPrimary:'플랜 보기 →', ctaSecondary:'포트폴리오 보기 →',
+        trustPills:['환불 보장 마일스톤','4개 언어 지원','소상공인 맞춤'],
+        nav:['스토리','포트폴리오','프로세스','서비스','문의'], navCTA:'웹사이트 만들기',
+        marquee:['웹사이트 제작','업무 자동화','브랜드 디자인','디지털 시스템','명확한 메시지','고객 유입 구조','말레이시아 비즈니스'],
+        storyLabel:'스토리',
+        storyH2:'웹사이트는 방문자가 다음 단계를 바로 알 수 있게 만들어야 합니다.',
+        storyP1:'LUMIO Coordia Intelligence는 서비스 기업을 위해 명확한 웹사이트를 구축합니다. 방문자가 서비스를 이해하고, 신뢰를 쌓고, 자연스럽게 문의로 이어지도록 설계합니다.',
+        storyP2:'디자인을 시작하기 전에 메시지, 페이지 흐름, 가격 경로, 신뢰 자료, 문의 구조를 정리합니다. 완성된 사이트가 장식이 아닌 실제로 기능하도록.',
+        painHead:'혹시 익숙한가요?',
+        painBeforeLabel:'이런 고민이라면', painAfterLabel:'이렇게 해결합니다',
+        painBefore:['사이트는 멀쩡해 보이는데, 문의가 없습니다.','무엇이 다른지 한 문장으로 말하기 어렵습니다.','방문자가 제안을 보기도 전에 떠납니다.'],
+        painAfter:['방문자를 문의로 바꾸는 사이트.','몇 초 만에 전달되는 명확한 메시지.','제안으로 곧장 이어지는 페이지 흐름.'],
+        portfolioLabel:'포트폴리오', startProject:'프로젝트 시작하기',
+        proofLabel:'고객의 말', proofH2:'저희와 일하면, 이런 느낌입니다.',
+        proofChips:['3주 만에 오픈','문의는 늘고, 잡음은 줄고','직접 예약 증가'],
+        proofQuotes:['그냥 깔끔한 템플릿일 거라 생각했어요. 그런데 실제로는 우리가 뭘 하는지 제대로 설명해주는 사이트였고 — 고객이 더는 저한테 설명을 요구하지 않더라고요.','예전 사이트는 복잡하기만 하고 아무도 안 썼어요. 새 사이트는 더 조용한데, 이상하게 사람들이 실제로 연락을 해와요.','이제 고객이 앱을 거치지 않고 직접 예약해요. 그것만으로 제작비를 다 뽑았습니다.'],
+        proofNames:['Wendy Lao','Carlos Ho','Aisyah Rahman'],
+        proofRoles:['Long Ieng 디렉터','Macau World Travel 매니저','Stayflow Homestay 대표'],
+        processLabel:'프로세스', processH2:'고객 입장에서는<br>간단합니다.',
+        accTitle:['니즈를 공유해주세요','방향을 확인합니다','나머지는 저희가 합니다'],
+        accDesc:['개선, 런칭, 혹은 단순화하고 싶은 내용을 말씀해 주세요. 별도 기획서 없이 대화 한 번으로 시작할 수 있습니다.','요청 사항을 명확한 제안, 페이지 구조, 제작 범위로 정리합니다. 픽셀 하나도 그리기 전에 방향을 함께 확인합니다.','디자인, 개발, 테스트, 런칭 준비까지 모두 담당합니다. 니즈만 가져오세요. 나머지는 저희가 처리합니다.'],
+        howLabel:'진행 방식',
+        pcStep:['Step 01','Step 02','Step 03'],
+        pcTitle:['니즈를 공유해주세요','방향 확인','나머지는 저희가'],
+        pcDesc:['개선, 런칭, 혹은 단순화하고 싶은 내용을 말씀해 주세요.','요청 사항을 제안, 페이지 구조, 제작 범위로 정리합니다.','디자인, 개발, 테스트, 런칭까지 모두 담당합니다.'],
+        productsLabel:'서비스', productsH2:'목적에 맞는<br>플랜을 선택하세요.',
+        productsDesc:'웹사이트가 수행해야 할 역할에 맞는 출발점을 선택하세요: 신뢰 구축, 더 나은 문의 유입, 또는 완성된 영업 흐름 설계.',
+        pricingDesc:['런칭, 신뢰도 확립, 명확한 문의 경로에 집중한 웹사이트.','더 강력한 웹 존재감과 체계적인 고객 유입 구조, 기본 자동화가 포함된 플랜.','더 나은 UX와 시스템 연동이 필요한 기업을 위한 맞춤 제작.','복잡한 범위, 비즈니스 시스템 구축, 지속적인 지원이 필요한 경우.'],
+        pricingFeatures:[['기본 웹사이트','모바일 최적화','명확한 문의 경로'],['맞춤 페이지','고객 유입 구조','기본 자동화'],['맞춤 UX','고도 개발','시스템 연동'],['복잡한 범위','비즈니스 시스템','지속 지원']],
+        pricingBtn:'상담하기 →',
+        pricingRefundNote:'모든 플랜은 환불 보장 — 착수 전 취소 시 전액 환불.',
+        contactLabel:'문의', contactH2:'웹사이트가 해야 할<br>역할을<br>알려주세요.',
+        contactSub:'영업 멘트 없습니다. 먼저 듣고, 목표를 명확히 하고, 저희가 적합한지 솔직하게 말씀드립니다.',
+        refundBannerTitle:'착수금은 보호되고, 마일스톤은 환불 가능합니다.',
+        refundBannerSub:'착수 전 취소 시 전액 환불, 이후에도 각 마일스톤마다 명확하고 공정한 환불 규정이 적용됩니다. 묶어두기도, 예상 밖 일도 없습니다.',
+        refundBannerLink:'전체 환불 정책 보기 →',
+        refundPoints:['착수금','마일스톤','분쟁 처리'],
+        formLabels:['이름','이메일','예산','프로젝트 유형','메시지'],
+        placeholders:['이름을 입력하세요','your@email.com','프로젝트에 대해 알려주세요…'],
+        budgetOpts:['선택하세요','RM 1,500+ — 스타터','RM 4,000+ — 그로스','RM 8,000+ — 프리미엄','커스텀 견적'],
+        typeOpts:['선택하세요','웹사이트','업무 자동화','비즈니스 시스템','미정'],
+        submitBtn:'메시지 보내기 →', whatsapp:'💬 WhatsApp으로 문의하기', emailLink:'✉️ 이메일로 문의하기',
+        footerLinks:['스토리','포트폴리오','프로세스','서비스','문의'],
+        footerCopy:'© 2025 LUMIO Coordia Intelligence',
+        featuredBadge:'가장 인기',
+        sendingText:'전송 중…',
+        errorText:'전송 실패 — WhatsApp으로 문의해 주세요',
+        successTitle:'메시지가 전송되었습니다.',
+        successSub:'1영업일 이내에 이메일 또는 WhatsApp으로 연락드리겠습니다.'
+      }
+    };
+
+    const LANG_MAP = { 'EN':'EN', '中文':'ZH', '日本語':'JA', '한국어':'KO' };
+
+    // Refund Policy modal content per language (concept-for-concept, MYR amounts)
+    const REFUND = {
+      EN: {
+        title:'Refund Policy',
+        h:['How Payments Work','Deposit Refunds','Milestone Refunds','Scope &amp; Delays','Raise a Dispute'],
+        p1:"Every project uses a 50% deposit before work starts, and 50% final payment before launch. No final payment is requested until you've approved the finished work.",
+        p2:"The deposit is non-refundable once work has started. Exceptions: cancel within 48 hours of paying (before any work begins), or if we can't start within 30 days of the agreed date.",
+        rows:[['Cancelled before kickoff','100% refund'],['Cancelled after kickoff, before design','50% refund'],['Cancelled during design','25% refund'],['Cancelled during build','No refund']],
+        p3:'You\'ll never be charged for scope changes without prior written agreement. If your project is paused 60+ days with no response, a re-activation fee of RM 450 may apply.',
+        p4:'WhatsApp <a href="https://wa.me/60177209159">+60 17-720 9159</a> or email <a href="mailto:lumiocoordia@gmail.com">lumiocoordia@gmail.com</a>. We respond within 1 business day and resolve billing disputes within 5.'
+      },
+      ZH: {
+        title:'退款政策',
+        h:['付款方式','订金退款','阶段性退款','范围与延误','提出异议'],
+        p1:'每个项目在开始前收取 50% 订金，上线前支付 50% 尾款。在您确认成品之前，我们不会收取尾款。',
+        p2:'工作一旦开始，订金不予退还。例外情况：付款后 48 小时内（且尚未开始任何工作）取消，或我们未能在约定日期起 30 天内开始项目。',
+        rows:[['启动会议前取消','全额退款'],['启动后、设计前取消','退款 50%'],['设计阶段取消','退款 25%'],['开发阶段取消','不予退款']],
+        p3:'未经事先书面同意，我们绝不会就范围变更收费。若项目因您未回复而暂停超过 60 天，可能收取 RM 450 的重新启动费。',
+        p4:'WhatsApp <a href="https://wa.me/60177209159">+60 17-720 9159</a> 或电邮 <a href="mailto:lumiocoordia@gmail.com">lumiocoordia@gmail.com</a>。我们将在 1 个工作日内回复，并在 5 个工作日内解决账务争议。'
+      },
+      JA: {
+        title:'返金ポリシー',
+        h:['お支払いの流れ','着手金の返金','進行段階別の返金','範囲と遅延','お問い合わせ'],
+        p1:'各プロジェクトは着手前に 50% の着手金、公開前に残り 50% をお支払いいただきます。完成物をご承認いただくまで、最終支払いは請求いたしません。',
+        p2:'作業開始後、着手金は返金できません。例外：お支払いから 48 時間以内（作業開始前）のキャンセル、または合意日から 30 日以内に当方が開始できなかった場合。',
+        rows:[['キックオフ前のキャンセル','全額返金'],['キックオフ後・設計前のキャンセル','50% 返金'],['設計段階でのキャンセル','25% 返金'],['制作段階でのキャンセル','返金なし']],
+        p3:'事前の書面合意なく範囲変更の費用を請求することはありません。ご返信がなくプロジェクトが 60 日以上停止した場合、RM 450 の再開費用が発生することがあります。',
+        p4:'WhatsApp <a href="https://wa.me/60177209159">+60 17-720 9159</a> またはメール <a href="mailto:lumiocoordia@gmail.com">lumiocoordia@gmail.com</a>。1 営業日以内に返信し、請求に関する問題は 5 営業日以内に解決します。'
+      },
+      KO: {
+        title:'환불 정책',
+        h:['결제 방식','계약금 환불','단계별 환불','범위 및 지연','문의하기'],
+        p1:'모든 프로젝트는 시작 전 50% 계약금, 런칭 전 50% 잔금으로 진행됩니다. 완성물을 승인하시기 전까지 잔금을 청구하지 않습니다.',
+        p2:'작업이 시작되면 계약금은 환불되지 않습니다. 예외: 결제 후 48시간 이내(작업 시작 전) 취소, 또는 합의된 날짜로부터 30일 이내에 저희가 시작하지 못한 경우.',
+        rows:[['킥오프 전 취소','전액 환불'],['킥오프 후·디자인 전 취소','50% 환불'],['디자인 단계 취소','25% 환불'],['개발 단계 취소','환불 불가']],
+        p3:'사전 서면 합의 없이 범위 변경 비용을 청구하지 않습니다. 회신이 없어 프로젝트가 60일 이상 중단되면 RM 450의 재개 수수료가 부과될 수 있습니다.',
+        p4:'WhatsApp <a href="https://wa.me/60177209159">+60 17-720 9159</a> 또는 이메일 <a href="mailto:lumiocoordia@gmail.com">lumiocoordia@gmail.com</a>. 영업일 기준 1일 이내에 답변하고, 청구 분쟁은 5일 이내에 해결합니다.'
+      }
+    };
+    function renderRefund(key) {
+      const r = REFUND[key] || REFUND.EN;
+      const el = document.getElementById('refund-content');
+      if (!el) return;
+      const rows = r.rows.map(([a,b]) => `<tr><td>${a}</td><td><strong>${b}</strong></td></tr>`).join('');
+      el.innerHTML =
+        `<h2>${r.title}</h2>` +
+        `<h3>${r.h[0]}</h3><p>${r.p1}</p>` +
+        `<h3>${r.h[1]}</h3><p>${r.p2}</p>` +
+        `<h3>${r.h[2]}</h3><table class="modal-table">${rows}</table>` +
+        `<h3>${r.h[3]}</h3><p>${r.p3}</p>` +
+        `<h3>${r.h[4]}</h3><p>${r.p4}</p>`;
+    }
+
+    const langAttrMap = { EN:'en', ZH:'zh', JA:'ja', KO:'ko' };
+    let currentLangKey = 'EN';
+
+    function applyLang(key) {
+      currentLangKey = key;
+      const t = LANGS[key] || LANGS.EN;
+      document.documentElement.lang = langAttrMap[key] || 'en';
+
+      // Badge
+      const badge = document.querySelector('.badge-link');
+      if (badge) { const arrow = badge.querySelector('.arrow'); badge.textContent = t.badge + ' '; if (arrow) badge.appendChild(arrow); }
+
+      // Hero
+      const h1 = document.querySelector('.hero-copy h1');
+      if (h1) h1.textContent = t.heroH1;
+      const heroP = document.querySelector('.hero-copy p');
+      if (heroP) heroP.textContent = t.heroP;
+
+      // Hero CTAs
+      const ctas = document.querySelectorAll('.hero-ctas .outline-cta');
+      if (ctas[0]) ctas[0].textContent = t.ctaPrimary;
+      if (ctas[1]) ctas[1].textContent = t.ctaSecondary;
+
+      // Hero trust pills
+      if (t.trustPills) document.querySelectorAll('.hero-trust .trust-txt').forEach((el, i) => { if (t.trustPills[i]) el.textContent = t.trustPills[i]; });
+
+      // Nav
+      document.querySelectorAll('.nav-pill a').forEach((a, i) => { if (t.nav[i]) a.textContent = t.nav[i]; });
+      const navCTA = document.querySelector('.nav-cta-pill');
+      if (navCTA) navCTA.textContent = t.navCTA;
+
+      // Marquee
+      document.querySelectorAll('.marquee-item').forEach((el, i) => {
+        const dot = document.createElement('span'); dot.className = 'marquee-dot';
+        el.textContent = t.marquee[i % 7] + ' '; el.appendChild(dot);
+      });
+
+      // Story
+      const storyLabel = document.querySelector('#story .label');
+      if (storyLabel) storyLabel.textContent = t.storyLabel;
+      const storyH2 = document.querySelector('.story-headline');
+      if (storyH2) storyH2.textContent = t.storyH2;
+      const storyPs = document.querySelectorAll('.story-body p');
+      if (storyPs[0]) storyPs[0].textContent = t.storyP1;
+      if (storyPs[1]) storyPs[1].textContent = t.storyP2;
+
+      // Pain Mirror
+      const painHead = document.querySelector('.pain-mirror h2');
+      if (painHead) painHead.textContent = t.painHead;
+      const painBL = document.querySelector('.pain-col.before .label');
+      if (painBL) painBL.textContent = t.painBeforeLabel;
+      const painAL = document.querySelector('.pain-col.after .label');
+      if (painAL) painAL.textContent = t.painAfterLabel;
+      document.querySelectorAll('.pain-col.before .pain-txt').forEach((el, i) => { if (t.painBefore[i]) el.textContent = t.painBefore[i]; });
+      document.querySelectorAll('.pain-col.after .pain-txt').forEach((el, i) => { if (t.painAfter[i]) el.textContent = t.painAfter[i]; });
+
+      // Portfolio
+      const portfolioLabel = document.querySelector('#portfolio .label');
+      if (portfolioLabel) portfolioLabel.textContent = t.portfolioLabel;
+      const textLink = document.querySelector('.text-link.reveal');
+      if (textLink) { const svg = textLink.querySelector('svg'); textLink.textContent = t.startProject + ' '; if (svg) textLink.appendChild(svg); }
+
+      // Client proof
+      const proofLabel = document.querySelector('.proof-label');
+      if (proofLabel) proofLabel.textContent = t.proofLabel;
+      const proofH2 = document.querySelector('.proof-h2');
+      if (proofH2) proofH2.textContent = t.proofH2;
+      if (t.proofChips) document.querySelectorAll('.proof-chip').forEach((el, i) => { if (t.proofChips[i]) el.textContent = t.proofChips[i]; });
+      if (t.proofQuotes) document.querySelectorAll('.proof-quote').forEach((el, i) => { if (t.proofQuotes[i]) el.textContent = t.proofQuotes[i]; });
+      if (t.proofNames) document.querySelectorAll('.proof-name').forEach((el, i) => { if (t.proofNames[i]) el.textContent = t.proofNames[i]; });
+      if (t.proofRoles) document.querySelectorAll('.proof-role').forEach((el, i) => { if (t.proofRoles[i]) el.textContent = t.proofRoles[i]; });
+
+      // Process accordion
+      const processLabel = document.querySelector('.process-sticky .label');
+      if (processLabel) processLabel.textContent = t.processLabel;
+      const processH2 = document.querySelector('#help h2');
+      if (processH2) processH2.innerHTML = t.processH2;
+      document.querySelectorAll('.accordion-title').forEach((el, i) => { if (t.accTitle[i]) el.textContent = t.accTitle[i]; });
+      document.querySelectorAll('.accordion-desc').forEach((el, i) => { if (t.accDesc[i]) el.textContent = t.accDesc[i]; });
+
+      // Process cards
+      const howLabel = document.querySelector('#process-cards .label');
+      if (howLabel) howLabel.textContent = t.howLabel;
+      document.querySelectorAll('.pc-step').forEach((el, i) => { if (t.pcStep[i]) el.textContent = t.pcStep[i]; });
+      document.querySelectorAll('.pc-title').forEach((el, i) => { if (t.pcTitle[i]) el.textContent = t.pcTitle[i]; });
+      document.querySelectorAll('.pc-desc').forEach((el, i) => { if (t.pcDesc[i]) el.textContent = t.pcDesc[i]; });
+
+      // Products
+      const productsLabel = document.querySelector('#products .label');
+      if (productsLabel) productsLabel.textContent = t.productsLabel;
+      const productsH2 = document.querySelector('.products-headline');
+      if (productsH2) productsH2.innerHTML = t.productsH2;
+      const productsDesc = document.querySelector('.products-desc');
+      if (productsDesc) productsDesc.textContent = t.productsDesc;
+      document.querySelectorAll('.pricing-desc').forEach((el, i) => { if (t.pricingDesc[i]) el.textContent = t.pricingDesc[i]; });
+      document.querySelectorAll('.pricing-features').forEach((ul, i) => {
+        if (t.pricingFeatures[i]) ul.querySelectorAll('li').forEach((li, j) => { if (t.pricingFeatures[i][j]) li.textContent = t.pricingFeatures[i][j]; });
+      });
+      document.querySelectorAll('.btn-pricing').forEach(btn => { btn.textContent = t.pricingBtn; });
+      const prn = document.querySelector('.pricing-refund-txt');
+      if (prn && t.pricingRefundNote) prn.textContent = t.pricingRefundNote;
+
+      // Refund banner
+      const rbTitle = document.querySelector('.refund-banner-title');
+      if (rbTitle) rbTitle.textContent = t.refundBannerTitle;
+      const rbSub = document.querySelector('.refund-banner-sub');
+      if (rbSub) rbSub.textContent = t.refundBannerSub;
+      const rbLink = document.querySelector('.refund-banner-link');
+      if (rbLink) rbLink.textContent = t.refundBannerLink;
+      if (t.refundPoints) document.querySelectorAll('.refund-point').forEach((el, i) => { if (t.refundPoints[i]) el.textContent = t.refundPoints[i]; });
+
+      // Contact
+      const contactLabel = document.querySelector('#support .label');
+      if (contactLabel) contactLabel.textContent = t.contactLabel;
+      const supportH2 = document.querySelector('.support-headline');
+      if (supportH2) supportH2.innerHTML = t.contactH2;
+      const supportSub = document.querySelector('.support-sub');
+      if (supportSub) supportSub.textContent = t.contactSub;
+
+      // Form
+      document.querySelectorAll('.contact-form label').forEach((el, i) => { if (t.formLabels[i]) el.textContent = t.formLabels[i]; });
+      const ni = document.getElementById('name'); if (ni) ni.placeholder = t.placeholders[0];
+      const ei = document.getElementById('email'); if (ei) ei.placeholder = t.placeholders[1];
+      const mi = document.getElementById('message'); if (mi) mi.placeholder = t.placeholders[2];
+      const bs = document.getElementById('budget');
+      if (bs) bs.querySelectorAll('option').forEach((o, i) => { if (t.budgetOpts[i]) o.text = t.budgetOpts[i]; });
+      const ts = document.getElementById('type');
+      if (ts) ts.querySelectorAll('option').forEach((o, i) => { if (t.typeOpts[i]) o.text = t.typeOpts[i]; });
+      const sb = document.querySelector('.btn-submit'); if (sb) sb.textContent = t.submitBtn;
+      const wa = document.querySelector('.whatsapp-link'); if (wa) wa.textContent = t.whatsapp;
+      const el = document.querySelector('.email-link'); if (el) el.textContent = t.emailLink;
+
+      // Featured badge
+      const fb = document.querySelector('.featured-badge');
+      if (fb) fb.textContent = t.featuredBadge;
+
+      // Success message
+      const st = document.getElementById('success-title');
+      const ss = document.getElementById('success-sub');
+      if (st) st.textContent = t.successTitle;
+      if (ss) ss.textContent = t.successSub;
+
+      // Footer
+      document.querySelectorAll('.footer-links a').forEach((a, i) => { if (t.footerLinks[i]) a.textContent = t.footerLinks[i]; });
+      const fc = document.querySelector('.footer-copy'); if (fc) fc.textContent = t.footerCopy;
+      // Refund Policy modal
+      renderRefund(key);
+    }
 
     /* ── Language switcher dropdown ── */
     const langSwitcher = document.querySelector('.language-switcher');
@@ -1766,6 +2580,7 @@
         langCurrent.textContent = opt.dataset.lang;
         langSwitcher.classList.remove('open');
         langTrigger.setAttribute('aria-expanded', 'false');
+        applyLang(LANG_MAP[opt.dataset.lang] || 'EN');
       });
     });
 
@@ -1782,6 +2597,74 @@
           document.querySelectorAll('.card-wrap.tapped').forEach(c => c.classList.remove('tapped'));
           if (!isFlipped) card.classList.add('tapped');
         });
+      });
+    }
+
+    // Refund Policy Modal
+    const refundTrigger = document.getElementById('refund-trigger');
+    const refundModal = document.getElementById('refund-policy');
+    const refundClose = refundModal && refundModal.querySelector('.modal-close');
+    if (refundTrigger && refundModal) {
+      refundTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        refundModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+      refundClose.addEventListener('click', () => {
+        refundModal.style.display = 'none';
+        document.body.style.overflow = '';
+      });
+      refundModal.addEventListener('click', (e) => {
+        if (e.target === refundModal) {
+          refundModal.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      });
+      // Refund banner + pricing note buttons → same modal
+      ['refund-trigger-2','refund-trigger-3'].forEach(id => {
+        const tr = document.getElementById(id);
+        if (tr) tr.addEventListener('click', () => {
+          refundModal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      // Esc closes modal
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && refundModal.style.display === 'flex') {
+          refundModal.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      });
+    }
+
+    // Contact form — Formspree submission
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = contactForm.querySelector('.btn-submit');
+        const originalText = btn.textContent;
+        const t = LANGS[currentLangKey] || LANGS.EN;
+        btn.textContent = t.sendingText;
+        btn.disabled = true;
+        try {
+          const res = await fetch('https://formspree.io/f/xeebkldb', {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(contactForm)
+          });
+          if (res.ok) {
+            contactForm.style.display = 'none';
+            formSuccess.style.display = 'block';
+          } else {
+            btn.textContent = t.errorText;
+            btn.disabled = false;
+          }
+        } catch {
+          btn.textContent = t.errorText;
+          btn.disabled = false;
+        }
       });
     }
   </script>
@@ -1950,5 +2833,48 @@
 
     requestAnimationFrame(draw);
   </script>
+
+  <script>
+    /* ── Portfolio showcase FX (additive; does not touch existing scripts) ── */
+    (function(){
+      var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+      var COLS = 10, ROWS = 7;
+      var SQUARES = [[6,18,16],[12,30,10],[8,70,8],[86,68,14],[90,82,9]];
+      function build(card){
+        if (card.dataset.fx) return; card.dataset.fx = '1';
+        var grid = document.createElement('div'); grid.className = 'pixel-grid';
+        var blocks = [];
+        for (var r=0;r<ROWS;r++) for (var c=0;c<COLS;c++){
+          var b = document.createElement('div'); b.className = 'pixel-block';
+          b.style.left=(100/COLS*c)+'%'; b.style.top=(100/ROWS*r)+'%';
+          b.style.width=(100/COLS)+'%'; b.style.height=(100/ROWS)+'%';
+          b.dataset.din = ((r+c)*18); b.dataset.dout = (((ROWS-r)+(COLS-c))*12);
+          grid.appendChild(b); blocks.push(b);
+        }
+        card.appendChild(grid);
+        var mags = SQUARES.map(function(q){
+          var m = document.createElement('div'); m.className='mag-square';
+          m.style.left=q[0]+'%'; m.style.top=q[1]+'%'; m.style.width=q[2]+'px'; m.style.height=q[2]+'px';
+          m._ax=q[0]/100; m._ay=q[1]/100; card.appendChild(m); return m;
+        });
+        if (!fine) return; /* touch: keep static squares, skip hover fx */
+        card.addEventListener('mouseenter', function(){
+          blocks.forEach(function(b){ b.style.transitionDelay=b.dataset.din+'ms'; b.style.transform='scale(1)'; b.style.opacity='1'; });
+        });
+        card.addEventListener('mouseleave', function(){
+          blocks.forEach(function(b){ b.style.transitionDelay=b.dataset.dout+'ms'; b.style.transform='scale(0)'; b.style.opacity='0'; });
+          mags.forEach(function(m){ m.style.transform='translate(0,0)'; });
+        });
+        card.addEventListener('mousemove', function(e){
+          var r=card.getBoundingClientRect();
+          var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+          mags.forEach(function(m){ m.style.transform='translate('+((px-m._ax)*40)+'px,'+((py-m._ay)*40)+'px)'; });
+        });
+      }
+      function init(){ document.querySelectorAll('.work-card').forEach(build); }
+      if (document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded', init);
+    })();
+  </script>
+
 </body>
 </html>
