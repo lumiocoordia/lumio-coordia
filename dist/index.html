@@ -52,7 +52,6 @@
   }
   </script>
 
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -323,13 +322,16 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      padding-top: 94px;
     }
 
     /* Nav */
     .hero-nav {
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 20;
+      left: 0;
+      right: 0;
+      z-index: 1000;
       justify-content: center;
       align-items: center;
       gap: 10px;
@@ -384,7 +386,7 @@
 
     /* Language switcher — dropdown */
     .language-switcher {
-      z-index: 25;
+      z-index: 1001;
       position: fixed;
       top: 22px;
       right: 24px;
@@ -473,6 +475,7 @@
       width: 100%; height: 100%;
       object-fit: cover;
       opacity: 0.35;
+      display: none;
     }
     .hero-canvas-bg canvas {
       position: absolute;
@@ -694,33 +697,38 @@
       background: #fff;
       padding: 130px 48px;
     }
+    #portfolio .section-inner {
+      max-width: 1340px;
+    }
     .flip-grid {
-      max-width: 1120px;
+      max-width: 1340px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
     }
 
     /* Flip wrapper */
     .card-wrap {
       perspective: 1000px;
-      height: 260px;
+      height: clamp(460px, 44vw, 640px);
       cursor: none;
     }
     .card-inner {
       position: relative;
       width: 100%; height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(.4, 0, .2, 1);
+      transition: transform 0.4s cubic-bezier(.16, 1, .3, 1), box-shadow 0.4s cubic-bezier(.16, 1, .3, 1);
     }
     .card-wrap:hover .card-inner,
-    .card-wrap.tapped .card-inner { transform: rotateY(180deg); }
+    .card-wrap.tapped .card-inner {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.22);
+    }
 
     .face {
       position: absolute;
       inset: 0;
-      border-radius: 14px;
+      border-radius: 22px;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
       overflow: hidden;
@@ -728,97 +736,123 @@
 
     /* FRONT */
     .front {
-      background: #0a0a0a;
-      border: 0.5px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 54%, rgba(0,0,0,0.84) 78%, rgba(0,0,0,0.96) 100%);
+      border: 1px solid rgba(0,0,0,0.08);
+      z-index: 2;
+    }
+    .front::before {
+      display: none;
+    }
+    .front::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        linear-gradient(90deg, rgba(200,169,110,0.16), transparent 18%, transparent 82%, rgba(255,255,255,0.06)),
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 22%);
+      opacity: .24;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    .card-wrap:hover .front::before,
+    .card-wrap.tapped .front::before {
+      opacity: 0.72;
+      transform: translateY(-4px);
     }
     .front-line {
       position: absolute;
       left: 0; top: 0; bottom: 0;
-      width: 3px;
+      width: 4px;
       background: linear-gradient(to bottom, var(--accent), rgba(200,169,110,0));
     }
     .front-stripe {
-      position: absolute;
-      top: 0; right: 0;
-      width: 80px; height: 80px;
-      overflow: hidden;
+      display: none;
     }
     .front-stripe::after {
       content: '';
       position: absolute;
       top: -40px; right: -40px;
-      width: 80px; height: 80px;
+      width: 140px; height: 140px;
       background: rgba(200,169,110,0.07);
       transform: rotate(45deg);
     }
     .front-num {
-      position: absolute;
-      right: -8px; bottom: -20px;
-      font-family: 'Inter Tight', sans-serif;
-      font-size: 110px;
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -6px;
-      color: rgba(255,255,255,0.03);
-      user-select: none;
+      display: none;
     }
     .front-content {
       position: absolute;
       inset: 0;
-      padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+      padding: clamp(1.5rem, 3vw, 2.5rem);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      z-index: 3;
     }
     .front-top {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      width: fit-content;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      background: rgba(7,7,7,0.58);
+      box-shadow: 0 10px 34px rgba(0,0,0,0.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .front-dot {
-      width: 6px; height: 6px;
+      width: 7px; height: 7px;
       border-radius: 50%;
       background: var(--accent);
       flex-shrink: 0;
     }
     .front-idx {
-      font-size: 10px;
+      font-size: 12px;
       color: var(--accent);
       letter-spacing: .14em;
       font-weight: 500;
     }
     .front-location {
-      font-size: 10px;
-      color: rgba(255,255,255,0.25);
+      font-size: 12px;
+      color: rgba(255,255,255,0.58);
       letter-spacing: .1em;
     }
     .front-cat {
-      font-size: 9.5px;
-      color: rgba(255,255,255,0.28);
+      font-size: 12px;
+      color: rgba(255,255,255,0.62);
       letter-spacing: .1em;
-      margin-bottom: 7px;
+      margin-bottom: 12px;
       text-transform: uppercase;
     }
     .front-title {
       font-family: 'Inter Tight', sans-serif;
-      font-size: 20px;
+      font-size: clamp(2rem, 3.4vw, 3.75rem);
       font-weight: 700;
       color: #fff;
       letter-spacing: -.03em;
       line-height: 1.15;
+      text-shadow: 0 8px 40px rgba(0,0,0,0.65);
     }
     .front-arrow {
       position: absolute;
-      right: 1.25rem; bottom: 1.25rem;
-      width: 28px; height: 28px;
-      border: 0.5px solid rgba(255,255,255,0.12);
+      right: clamp(1.4rem, 3vw, 2.5rem);
+      bottom: clamp(1.4rem, 3vw, 2.5rem);
+      width: 46px; height: 46px;
+      border: 1px solid rgba(255,255,255,0.16);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(255,255,255,0.3);
-      font-size: 12px;
+      color: rgba(255,255,255,0.78);
+      font-size: 18px;
       transition: border-color .3s, color .3s;
+      z-index: 4;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(10,10,10,0.42);
     }
     .card-wrap:hover .front-arrow {
       border-color: var(--accent);
@@ -827,36 +861,54 @@
 
     /* BACK */
     .back {
-      transform: rotateY(180deg);
+      transform: none;
       background: #111;
       border: 0.5px solid rgba(255,255,255,0.1);
       display: flex;
       flex-direction: column;
+      z-index: 1;
     }
     .back-screen {
-      flex: 1;
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      right: 18px;
+      bottom: auto;
+      aspect-ratio: 16 / 9;
+      max-height: calc(100% - 170px);
       overflow: hidden;
-      margin: 10px 10px 0;
+      margin: 0;
     }
     .back-screen-frame {
       width: 100%; height: 100%;
-      border-radius: 6px;
+      border-radius: 16px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      background: #1a1a1a;
+      background: #050607;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.1);
     }
     .back-screen-bar {
-      height: 20px;
-      background: #0f0f0f;
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 3;
+      width: 96px;
+      height: 26px;
+      border-radius: 999px;
+      background: rgba(15,15,15,0.58);
       display: flex;
       align-items: center;
-      padding: 0 8px;
-      gap: 4px;
+      padding: 0 12px;
+      gap: 6px;
       flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
     .back-screen-dot {
-      width: 5px; height: 5px;
+      width: 7px; height: 7px;
       border-radius: 50%;
     }
     .back-screen-content {
@@ -864,11 +916,74 @@
       overflow: hidden;
       position: relative;
     }
-    .back-screen-content img {
+    .back-screen-content::after {
+      display: none;
+    }
+    .back-screen-content img,
+    .back-screen-content video {
       width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: top;
+      object-fit: contain;
+      object-position: center;
       display: block;
+      opacity: 1;
+      filter: saturate(1) contrast(1) brightness(0.98);
+      transform: none;
+      animation: none;
+      transition: opacity .45s cubic-bezier(.16, 1, .3, 1), filter .45s cubic-bezier(.16, 1, .3, 1);
+    }
+    .card-wrap:nth-child(2) .back-screen-content img,
+    .card-wrap:nth-child(2) .back-screen-content video,
+    .card-wrap:nth-child(2) .back-screen-content::after {
+      animation-delay: -3.2s;
+    }
+    .card-wrap:nth-child(3) .back-screen-content img,
+    .card-wrap:nth-child(3) .back-screen-content video,
+    .card-wrap:nth-child(3) .back-screen-content::after {
+      animation-delay: -6.4s;
+    }
+    .card-wrap:nth-child(4) .back-screen-content img,
+    .card-wrap:nth-child(4) .back-screen-content video,
+    .card-wrap:nth-child(4) .back-screen-content::after {
+      animation-delay: -8.6s;
+    }
+    .card-wrap:nth-child(5) .back-screen-content img,
+    .card-wrap:nth-child(5) .back-screen-content video,
+    .card-wrap:nth-child(5) .back-screen-content::after {
+      animation-delay: -10.8s;
+    }
+    .card-wrap:hover .back-screen-content img,
+    .card-wrap:hover .back-screen-content video,
+    .card-wrap.tapped .back-screen-content img,
+    .card-wrap.tapped .back-screen-content video {
+      opacity: 1;
+      filter: saturate(1.04) contrast(1.04) brightness(1);
+      animation-play-state: paused;
+    }
+    .card-wrap:hover .back-screen-content::after,
+    .card-wrap.tapped .back-screen-content::after {
+      animation-play-state: paused;
+      opacity: 0.35;
+    }
+    @keyframes portfolioPreviewDrift {
+      0%, 100% { transform: scale(1.04) translateY(0); }
+      42% { transform: scale(1.075) translateY(-4.5%); }
+      68% { transform: scale(1.06) translateY(2%); }
+    }
+    @keyframes portfolioLightSweep {
+      0%, 38% { left: -42%; opacity: 0; }
+      48% { opacity: 0.55; }
+      62%, 100% { left: 114%; opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .back-screen-content img,
+      .back-screen-content video,
+      .back-screen-content::after {
+        animation: none !important;
+      }
+      .back-screen-content img,
+      .back-screen-content video {
+        transform: none;
+      }
     }
     .mock {
       width: 100%; height: 100%;
@@ -894,31 +1009,32 @@
     .mock-bar.med   { width: 78%; }
     .mock-bar.wide  { width: 95%; }
     .back-info {
-      padding: 10px 12px;
+      padding: 18px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-shrink: 0;
+      display: none;
     }
     .back-name {
-      font-size: 12px;
+      font-size: clamp(1.1rem, 2vw, 1.6rem);
       font-weight: 600;
       color: #fff;
       letter-spacing: -.01em;
     }
     .back-cat {
-      font-size: 9px;
+      font-size: 11px;
       color: rgba(255,255,255,0.3);
       letter-spacing: .08em;
-      margin-top: 2px;
+      margin-top: 5px;
     }
     .back-btn {
-      font-size: 9px;
+      font-size: 11px;
       font-weight: 600;
       color: var(--accent);
       letter-spacing: .1em;
       border: 0.5px solid var(--accent);
-      padding: 4px 10px;
+      padding: 8px 14px;
       border-radius: 20px;
       white-space: nowrap;
       text-decoration: none;
@@ -1275,6 +1391,7 @@
       a, button, .card-wrap, .process-card, .accordion-header { cursor: pointer; }
 
       /* Nav */
+      .template-hero { padding-top: 64px; }
       .hero-nav { padding: 14px 16px 0; gap: 6px; justify-content: space-between; }
       .logo-pill { height: auto; padding: 12px 0 0 16px; background: none; border: none; backdrop-filter: none; }
       .logo-pill img { height: 32px; min-width: unset; }
@@ -1322,8 +1439,13 @@
       .story-headline { font-size: clamp(1.8rem, 6vw, 2.4rem); }
 
       /* Portfolio flip cards */
-      .flip-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .card-wrap { height: 220px; }
+      .flip-grid { grid-template-columns: 1fr; gap: 18px; }
+      .card-wrap { height: min(118vw, 520px); }
+      .front-num { font-size: 150px; }
+      .front-title { font-size: clamp(2rem, 11vw, 3rem); }
+      .front-cat, .front-idx, .front-location { font-size: 10px; }
+      .back-screen { top: 14px; left: 14px; right: 14px; bottom: auto; max-height: calc(100% - 154px); margin: 0; }
+      .back-info { padding: 14px 16px; }
 
       /* Process accordion — remove 200px sidebar */
       .process-layout { grid-template-columns: 1fr; gap: 24px; }
@@ -1357,7 +1479,7 @@
 
     @media (max-width: 480px) {
       .flip-grid { grid-template-columns: 1fr; }
-      .card-wrap { height: 200px; }
+      .card-wrap { height: 430px; }
       .hero-copy h1 { font-size: clamp(1.8rem, 10vw, 2.6rem); }
     }
 
@@ -1376,218 +1498,15 @@
     body:not(.cursor-on) .pricing-card,
     body:not(.cursor-on) .lang-trigger,
     body:not(.cursor-on) .lang-option { cursor: pointer !important; }
-
-    /* ════════════════════════════════════════════
-       BRIGHT THEME OVERRIDE  (visual only — no script/markup logic changed)
-    ════════════════════════════════════════════ */
-    :root{
-      --ink-900:#ffffff; --ink-850:#faf9f6; --ink-800:#f4f2ec;
-      --ink-700:#e7e4dc; --ink-600:#d8d4cc;
-      --paper-100:#0b0c0e; --paper-300:#4a4a46; --paper-500:#6f6e68;
-      --accent:#111111; --accent-dk:#000000; --accent-pale:#ececec;
-      --bg-dark:#ffffff; --bg-light:#ffffff; --bg-mid:#faf9f6;
-      --text-light:#0b0c0e; --text-muted-light:#5b5a55; --text-muted-dark:#6f6e68;
-      --border:#e7e4dc; --border-dark:rgba(0,0,0,0.10);
-      --pain-bg:#f4f2ec; --gain-bg:#0b0c0e;
-      --glow-accent:0 0 0 1px #111, 0 8px 30px rgba(0,0,0,0.12);
-    }
-    body{ background:#fff; color:#000; }
-    .label,.label-dark,.pc-step,.pricing-tier,.front-idx{ color:#6f6e68 !important; }
-
-    /* HERO — bright; hide the dark canvas + overlay (script keeps running) */
-    .template-hero{ background:#fff; min-height:auto; }
-    .hero-canvas-bg,.hero-canvas-bg canvas,.hero-canvas-bg img,.hero-canvas-bg::after{ display:none !important; }
-    .hero-nav{ background:rgba(255,255,255,0.72); }
-    .logo-pill{ background:rgba(0,0,0,0.03); border-color:rgba(0,0,0,0.08); }
-    .logo-pill img,.footer-logo img{ filter:none !important; }
-    .nav-pill{ background:rgba(0,0,0,0.03); border-color:rgba(0,0,0,0.08); }
-    .nav-pill a{ color:rgba(0,0,0,0.65); }
-    .nav-pill a:hover{ color:#000; }
-    .lang-trigger{ background:rgba(0,0,0,0.04); border-color:rgba(0,0,0,0.1); color:#000; }
-    .lang-trigger:hover{ background:rgba(0,0,0,0.08); border-color:rgba(0,0,0,0.2); }
-    .lang-dropdown{ background:rgba(255,255,255,0.97); border-color:rgba(0,0,0,0.1); }
-    .lang-option{ color:rgba(0,0,0,0.6); }
-    .lang-option:hover{ background:rgba(0,0,0,0.05); color:#000; }
-    .lang-option.is-active{ color:#000; background:rgba(0,0,0,0.05); }
-    .hero-surface{ padding-top:120px; }
-    .hero-copy h1{ color:#0b0c0e; text-shadow:none; }
-    .hero-copy p{ color:#5b5a55; }
-    .badge-link{ color:#6f6e68; border-color:rgba(0,0,0,0.18); }
-    .badge-link:hover{ color:#000; border-color:rgba(0,0,0,0.4); }
-    .outline-cta{ color:#000; border-color:rgba(0,0,0,0.2); }
-    .outline-cta:hover{ background:rgba(0,0,0,0.05); border-color:rgba(0,0,0,0.5); }
-    .outline-cta.primary{ background:#111; border-color:#111; color:#fff; }
-    .outline-cta.primary:hover{ background:#000; border-color:#000; }
-    .trust-pill{ border-color:rgba(0,0,0,0.14); background:rgba(0,0,0,0.03); color:rgba(0,0,0,0.7); }
-    .trust-pill svg{ color:#111; }
-    a.trust-pill:hover{ border-color:#111; color:#000; }
-
-    /* MARQUEE */
-    .marquee-dot{ background:#111; }
-
-    /* STORY (was dark) */
-    #story{ background:#fff; color:#0b0c0e; border-top:1px solid var(--border); }
-
-    /* PAIN MIRROR — before light, after = black accent block */
-    .pain-mirror{ background:#fff; border-top:1px solid var(--border); }
-    .pain-mirror h2{ color:#0b0c0e; }
-    .pain-grid{ border-color:var(--border); }
-    .pain-col.before{ background:#f4f2ec; }
-    .pain-col.before .label{ color:#6f6e68 !important; }
-    .pain-col.before .pain-list li{ color:rgba(0,0,0,0.55); }
-    .pain-col.before .pain-ic{ color:#9a988f; }
-    .pain-col.after{ background:#0b0c0e; }
-    .pain-col.after .label{ color:rgba(255,255,255,0.6) !important; }
-    .pain-col.after .pain-list li{ color:#f5f3ee; }
-    .pain-col.after .pain-ic{ color:#fff; }
-    .pain-col.after::before{ background:linear-gradient(180deg,transparent,rgba(255,255,255,0.5),transparent); }
-
-    /* REFUND BANNER (was dark) */
-    .refund-banner{ background:#f4f2ec; border-top:1px solid var(--border); }
-    .refund-banner-title{ color:#0b0c0e; }
-    .refund-banner-sub{ color:#5b5a55; }
-    .refund-banner-link{ color:#111; }
-    .refund-banner-link:hover{ border-color:#111; }
-    .refund-point{ color:#5b5a55; border-color:var(--border); }
-
-    /* PROOF — chip gold->neutral */
-    .proof-chip{ color:#333; background:rgba(0,0,0,0.05); border-color:rgba(0,0,0,0.12); }
-
-    /* PROCESS accordion (was dark) */
-    #help{ background:#fff; color:#0b0c0e; }
-    .accordion-title{ color:#0b0c0e; }
-    .accordion-num{ color:rgba(0,0,0,0.06) !important; }
-    .accordion-list,.accordion-item,.accordion-icon{ border-color:var(--border); }
-    .accordion-desc{ color:#5b5a55; }
-
-    /* PROCESS CARDS — keep hover-flip-to-dark */
-    .process-card{ border-color:var(--border); }
-    .process-card::after{ background:#0b0c0e; }
-    .pc-ghost{ color:rgba(0,0,0,0.05); }
-    .process-card:hover .pc-ghost{ color:rgba(255,255,255,0.08); }
-    .process-card:hover .pc-step{ color:rgba(255,255,255,0.65) !important; }
-    .process-card:hover .pc-title{ color:#fff; }
-    .process-card:hover .pc-desc{ color:rgba(255,255,255,0.6); }
-
-    /* PRODUCTS (was dark) */
-    #products{ background:#fff; color:#0b0c0e; border-top:1px solid var(--border); }
-    .products-headline,.pricing-price{ color:#0b0c0e; }
-    .products-desc,.pricing-desc{ color:#5b5a55; }
-    .pricing-card{ background:#faf9f6; border-color:var(--border); }
-    .pricing-card:hover{ border-color:rgba(0,0,0,0.35); background:#f4f2ec; }
-    .pricing-features li{ color:rgba(0,0,0,0.7); }
-    .pricing-refund-note{ color:#2f7d56; background:rgba(91,191,138,0.08); }
-    .pricing-card--featured{ border:1.5px solid #111; background:#0b0c0e; }
-    .pricing-card--featured .pricing-tier{ color:rgba(255,255,255,0.6) !important; }
-    .pricing-card--featured .pricing-price{ color:#fff; }
-    .pricing-card--featured .pricing-desc{ color:rgba(255,255,255,0.65); border-color:rgba(255,255,255,0.15); }
-    .pricing-card--featured .pricing-features li{ color:rgba(255,255,255,0.85); }
-    .pricing-card--featured .pricing-features li::before{ background:#fff; }
-    .pricing-card--featured .btn-pricing{ background:#fff; color:#000; }
-    .pricing-card--featured .btn-pricing:hover{ background:rgba(255,255,255,0.85); }
-    .pricing-card--featured:hover{ background:#0b0c0e; border-color:#111; }
-    .featured-badge{ background:#fff; color:#000; }
-
-    /* CONTACT (#support) — accents */
-    .support-headline{ color:#000; }
-    .support-sub{ color:#5b5a55; }
-    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{ border-color:#111; }
-    .btn-submit,.btn-pricing{ background:#111; color:#fff; }
-    .btn-submit:hover,.btn-pricing:hover{ background:#000; }
-    .whatsapp-link:hover,.email-link:hover{ color:#111; }
-
-    /* FOOTER (was dark) */
-    footer{ background:#fff; color:#0b0c0e; border-top:1px solid var(--border); }
-    .footer-logo img{ opacity:1; }
-    .footer-links a{ color:#5b5a55; }
-    .footer-links a:hover{ color:#000; }
-    .footer-copy{ color:rgba(0,0,0,0.35); }
-    .footer-legal-link{ color:rgba(0,0,0,0.5); }
-    .footer-legal-link:hover{ color:#000; }
-
-    /* REFUND MODAL -> light */
-    .modal-overlay{ background:rgba(0,0,0,0.45); }
-    .modal-box{ background:#fff; border-color:rgba(0,0,0,0.1); color:rgba(0,0,0,0.8); }
-    .modal-box h2{ color:#000; }
-    .modal-box h3{ color:#111; }
-    .modal-box a{ color:#111; }
-    .modal-table td{ border-color:rgba(0,0,0,0.08); }
-    .modal-close{ color:rgba(0,0,0,0.4); }
-    .modal-close:hover{ color:#000; }
-
-    /* NEW PORTFOLIO — 2x2 bright image showcase */
-    #portfolio{ background:#fff; }
-    .work-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-    .work-card{ position:relative; overflow:hidden; aspect-ratio:4/3; background:#f0ede6; display:block; cursor:none; }
-    .work-card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; transition:transform 0.6s cubic-bezier(0.16,1,0.3,1); }
-    .work-card:hover img{ transform:scale(1.04); }
-    .work-card::after{ content:""; position:absolute; inset:0; background:rgba(11,12,14,0); transition:background 0.4s; }
-    .work-card:hover::after{ background:rgba(11,12,14,0.12); }
-    .work-top{ position:absolute; left:16px; top:16px; z-index:3; display:flex; gap:8px; align-items:center; }
-    .work-top span{ background:rgba(0,0,0,0.6); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); color:#fff; font-size:11px; font-weight:600; letter-spacing:0.04em; padding:4px 9px; }
-    .work-top .work-region{ text-transform:uppercase; letter-spacing:0.16em; }
-    .work-arrow{ position:absolute; right:16px; top:16px; z-index:3; width:30px; height:30px; border:1px solid rgba(255,255,255,0.5); color:#fff; display:flex; align-items:center; justify-content:center; font-size:13px; }
-    .work-plate{ position:absolute; left:0; bottom:0; z-index:4; background:#fff; padding:14px 18px; max-width:80%; }
-    .work-plate h3{ font-family:'Inter Tight',sans-serif; font-size:clamp(1.2rem,2vw,1.7rem); font-weight:600; letter-spacing:-0.02em; color:#0b0c0e; line-height:1.1; }
-    .work-meta{ display:flex; align-items:center; gap:14px; margin-top:6px; }
-    .work-cat{ font-size:11px; letter-spacing:0.04em; text-transform:uppercase; color:rgba(0,0,0,0.55); }
-    .work-view{ font-size:11px; font-weight:600; color:#000; white-space:nowrap; }
-    @media (max-width:760px){ .work-grid{ grid-template-columns:1fr; } }
-
-    /* ════════════════════════════════════════════
-       BRIGHT THEME — refinements (alignment + animation)
-    ════════════════════════════════════════════ */
-    /* Pricing cards: equal height, button pinned to bottom, aligned rows */
-    .pricing-grid{ align-items: stretch !important; }
-    .pricing-card{ display:flex; flex-direction:column; }
-    .pricing-price{ min-height:4.6rem; display:flex; align-items:flex-start; }
-    .pricing-features{ flex:1 1 auto; }
-    .btn-pricing{ margin-top:auto; }
-
-    /* Portfolio cards: richer hover + entrance animation */
-    .work-card img{ transition:transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease; }
-    .work-card:hover img{ transform:scale(1.06); }
-    .work-card::after{
-      content:""; position:absolute; inset:0; z-index:2;
-      background:linear-gradient(180deg, rgba(11,12,14,0) 40%, rgba(11,12,14,0.45) 100%);
-      opacity:0; transition:opacity 0.45s ease;
-    }
-    .work-card:hover::after{ opacity:1; }
-    .work-arrow{
-      transition:background 0.35s ease, color 0.35s ease, border-color 0.35s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1);
-    }
-    .work-card:hover .work-arrow{ background:#fff; color:#0b0c0e; border-color:#fff; transform:translate(2px,-2px); }
-    .work-plate{ transition:transform 0.45s cubic-bezier(0.16,1,0.3,1); }
-    .work-card:hover .work-plate{ transform:translateY(-4px); }
-    .work-view{ transition:opacity 0.3s ease; }
-
-    /* Portfolio cards: staggered scroll-in (uses site's .reveal -> .visible observer) */
-    .work-card.reveal{ opacity:0; transform:translateY(34px) scale(0.985); transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
-    .work-card.reveal.visible{ opacity:1; transform:none; }
-
-    /* ════════════════════════════════════════════
-       BRIGHT THEME — portfolio showcase animation (new, additive)
-    ════════════════════════════════════════════ */
-    .work-card::after{ content:none !important; }              /* replaced by pixel grid */
-    .work-card img{ object-position:top center; }
-    .pixel-grid{ position:absolute; inset:0; z-index:2; pointer-events:none; }
-    .pixel-block{
-      position:absolute; background:rgba(11,12,14,0.82);
-      transform:scale(0); opacity:0;
-      transition:transform 0.25s cubic-bezier(0.22,1,0.36,1), opacity 0.25s cubic-bezier(0.22,1,0.36,1);
-      will-change:transform,opacity;
-    }
-    .mag-square{
-      position:absolute; background:#0b0c0e; z-index:3; pointer-events:none;
-      opacity:0.9; transition:transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
-      will-change:transform;
+    #portfolio .reveal{
+      opacity:1 !important;
+      transform:none !important;
     }
 
     /* ════════════════════════════════════════════
-       HOTFIX 2026-07-03 — restore the approved dark hero
-       The bright override above is useful for later white sections, but it
-       accidentally hid the hero canvas and left mobile navigation in a mixed
-       light/dark state. Keep the page content, restore the first impression.
+       HOTFIX 2026-07-03 — restore mobile hero fit
+       Keep the recovered five-card portfolio, but prevent the hero heading,
+       nav, logo, language switcher, and trust pills from clipping on phones.
     ════════════════════════════════════════════ */
     .template-hero{
       background:#0b0c0e !important;
@@ -1880,6 +1799,257 @@
     </div>
   </section>
 
+  <!-- lumio-layout-update-20260629-sticky-work -->
+  <!-- lumio-portfolio-preview-effect-20260629 -->
+  <!-- lumio-portfolio-clean-preview-20260629 -->
+  <!-- lumio-portfolio-autoplay-preview-20260629 -->
+  <!-- lumio-portfolio-singapore-case-20260630 -->
+  <!-- lumio-portfolio-paybittech-case-20260630 -->
+  <!-- lumio-portfolio-hero-video-cards-20260630 -->
+  <!-- lumio-portfolio-stayfix-case-20260630 -->
+  <!-- lumio-portfolio-contained-media-20260630 -->
+  <!-- lumio-portfolio-media-above-text-20260630 -->
+  <!-- ═══ PORTFOLIO — numbered rows ═══ -->
+  <section id="portfolio">
+    <div class="section-inner">
+      <div class="section-eyebrow">
+        <div>
+          <div class="label label-muted" style="margin-bottom:16px">Portfolio</div>
+          <h2 style="font-size: clamp(2.5rem,5vw,5rem); text-transform: uppercase;" class="reveal">Work</h2>
+        </div>
+        <a href="#support" class="text-link reveal" style="align-self:flex-end; color:#000; margin-bottom:8px;">
+          Start a project
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="flip-grid">
+
+        <!-- 01 Long Ieng -->
+        <div class="card-wrap reveal">
+          <div class="card-inner">
+            <div class="face front">
+              <div class="front-line"></div>
+              <div class="front-stripe"></div>
+              <div class="front-num">01</div>
+              <div class="front-content">
+                <div class="front-top">
+                  <span class="front-dot"></span>
+                  <span class="front-idx">01</span>
+                  <span class="front-location">— HONG KONG</span>
+                </div>
+                <div>
+                  <p class="front-cat">Accounting Consultancy</p>
+                  <p class="front-title">Long Ieng</p>
+                </div>
+              </div>
+              <a class="front-arrow" href="https://longiengma.com/" target="_blank" rel="noopener" aria-label="View Long Ieng live site">↗</a>
+            </div>
+            <div class="face back">
+              <div class="back-screen">
+                <div class="back-screen-frame">
+                  <div class="back-screen-bar">
+                    <div class="back-screen-dot" style="background:#ff5f57"></div>
+                    <div class="back-screen-dot" style="background:#febc2e"></div>
+                    <div class="back-screen-dot" style="background:#28c840"></div>
+                  </div>
+                  <div class="back-screen-content">
+                    <video src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4" poster="/assets/portfolio/longieng.jpg" autoplay muted loop playsinline webkit-playsinline preload="metadata" aria-label="Long Ieng hero video preview"></video>
+                  </div>
+                </div>
+              </div>
+              <div class="back-info">
+                <div>
+                  <p class="back-name">Long Ieng</p>
+                  <p class="back-cat">ACCOUNTING CONSULTANCY</p>
+                </div>
+                <a href="https://longiengma.com/" target="_blank" rel="noopener" class="back-btn">VIEW ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 Macau World Travel -->
+        <div class="card-wrap reveal reveal-delay-1">
+          <div class="card-inner">
+            <div class="face front">
+              <div class="front-line"></div>
+              <div class="front-stripe"></div>
+              <div class="front-num">02</div>
+              <div class="front-content">
+                <div class="front-top">
+                  <span class="front-dot"></span>
+                  <span class="front-idx">02</span>
+                  <span class="front-location">— MACAU</span>
+                </div>
+                <div>
+                  <p class="front-cat">Travel Agency</p>
+                  <p class="front-title">Macau World Travel</p>
+                </div>
+              </div>
+              <a class="front-arrow" href="https://macau-world-travel-agency.pages.dev/" target="_blank" rel="noopener" aria-label="View Macau World Travel live site">↗</a>
+            </div>
+            <div class="face back">
+              <div class="back-screen">
+                <div class="back-screen-frame">
+                  <div class="back-screen-bar">
+                    <div class="back-screen-dot" style="background:#ff5f57"></div>
+                    <div class="back-screen-dot" style="background:#febc2e"></div>
+                    <div class="back-screen-dot" style="background:#28c840"></div>
+                  </div>
+                  <div class="back-screen-content">
+                    <video src="https://videos.pexels.com/video-files/36837386/15607551_1920_1080_30fps.mp4" poster="/assets/portfolio/macau.jpg" autoplay muted loop playsinline webkit-playsinline preload="metadata" aria-label="Macau World Travel hero video preview"></video>
+                  </div>
+                </div>
+              </div>
+              <div class="back-info">
+                <div>
+                  <p class="back-name">Macau World Travel</p>
+                  <p class="back-cat">TRAVEL AGENCY</p>
+                </div>
+                <a href="https://macau-world-travel-agency.pages.dev/" target="_blank" rel="noopener" class="back-btn">VIEW ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 Stayflow Homestay -->
+        <div class="card-wrap reveal reveal-delay-2">
+          <div class="card-inner">
+            <div class="face front">
+              <div class="front-line"></div>
+              <div class="front-stripe"></div>
+              <div class="front-num">03</div>
+              <div class="front-content">
+                <div class="front-top">
+                  <span class="front-dot"></span>
+                  <span class="front-idx">03</span>
+                  <span class="front-location">— MALAYSIA</span>
+                </div>
+                <div>
+                  <p class="front-cat">Airbnb Operations</p>
+                  <p class="front-title">Stayflow Homestay</p>
+                </div>
+              </div>
+              <a class="front-arrow" href="https://stayflow-homestay-landing.pages.dev" target="_blank" rel="noopener" aria-label="View Stayflow Homestay live site">↗</a>
+            </div>
+            <div class="face back">
+              <div class="back-screen">
+                <div class="back-screen-frame">
+                  <div class="back-screen-bar">
+                    <div class="back-screen-dot" style="background:#ff5f57"></div>
+                    <div class="back-screen-dot" style="background:#febc2e"></div>
+                    <div class="back-screen-dot" style="background:#28c840"></div>
+                  </div>
+                  <div class="back-screen-content">
+                    <video src="https://stayflow-homestay-landing.pages.dev/public/assets/stayflow/hero-video.mp4" poster="/assets/portfolio/stayflow.jpg" autoplay muted loop playsinline webkit-playsinline preload="metadata" aria-label="Stayflow Homestay hero video preview"></video>
+                  </div>
+                </div>
+              </div>
+              <div class="back-info">
+                <div>
+                  <p class="back-name">Stayflow Homestay</p>
+                  <p class="back-cat">AIRBNB OPERATIONS</p>
+                </div>
+                <a href="https://stayflow-homestay-landing.pages.dev" target="_blank" rel="noopener" class="back-btn">VIEW ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 StayFix Dispatch -->
+        <div class="card-wrap reveal reveal-delay-3">
+          <div class="card-inner">
+            <div class="face front">
+              <div class="front-line"></div>
+              <div class="front-stripe"></div>
+              <div class="front-num">04</div>
+              <div class="front-content">
+                <div class="front-top">
+                  <span class="front-dot"></span>
+                  <span class="front-idx">04</span>
+                  <span class="front-location">— MALAYSIA</span>
+                </div>
+                <div>
+                  <p class="front-cat">Repair Dispatch</p>
+                  <p class="front-title">StayFix Dispatch</p>
+                </div>
+              </div>
+              <a class="front-arrow" href="https://stayfix-dispatch-intake.pages.dev/" target="_blank" rel="noopener" aria-label="View StayFix Dispatch live site">↗</a>
+            </div>
+            <div class="face back">
+              <div class="back-screen">
+                <div class="back-screen-frame">
+                  <div class="back-screen-bar">
+                    <div class="back-screen-dot" style="background:#ff5f57"></div>
+                    <div class="back-screen-dot" style="background:#febc2e"></div>
+                    <div class="back-screen-dot" style="background:#28c840"></div>
+                  </div>
+                  <div class="back-screen-content">
+                    <img src="/assets/portfolio/stayfix.png" alt="StayFix Dispatch website preview" loading="lazy">
+                  </div>
+                </div>
+              </div>
+              <div class="back-info">
+                <div>
+                  <p class="back-name">StayFix Dispatch</p>
+                  <p class="back-cat">REPAIR DISPATCH</p>
+                </div>
+                <a href="https://stayfix-dispatch-intake.pages.dev/" target="_blank" rel="noopener" class="back-btn">VIEW ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 Paybit Tech -->
+        <div class="card-wrap reveal reveal-delay-4">
+          <div class="card-inner">
+            <div class="face front">
+              <div class="front-line"></div>
+              <div class="front-stripe"></div>
+              <div class="front-num">05</div>
+              <div class="front-content">
+                <div class="front-top">
+                  <span class="front-dot"></span>
+                  <span class="front-idx">05</span>
+                  <span class="front-location">— SINGAPORE</span>
+                </div>
+                <div>
+                  <p class="front-cat">Finance Software</p>
+                  <p class="front-title">Paybit Tech</p>
+                </div>
+              </div>
+              <a class="front-arrow" href="https://paybittech.pages.dev" target="_blank" rel="noopener" aria-label="View Paybit Tech live site">↗</a>
+            </div>
+            <div class="face back">
+              <div class="back-screen">
+                <div class="back-screen-frame">
+                  <div class="back-screen-bar">
+                    <div class="back-screen-dot" style="background:#ff5f57"></div>
+                    <div class="back-screen-dot" style="background:#febc2e"></div>
+                    <div class="back-screen-dot" style="background:#28c840"></div>
+                  </div>
+                  <div class="back-screen-content">
+                    <video src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260423_161253_c72b1869-400f-45ed-ac0c-52f68c2ed5bd.mp4" poster="/assets/portfolio/paybittech.png" autoplay muted loop playsinline webkit-playsinline preload="metadata" aria-label="Paybit Tech hero video preview"></video>
+                  </div>
+                </div>
+              </div>
+              <div class="back-info">
+                <div>
+                  <p class="back-name">Paybit Tech</p>
+                  <p class="back-cat">FINANCE SOFTWARE</p>
+                </div>
+                <a href="https://paybittech.pages.dev" target="_blank" rel="noopener" class="back-btn">VIEW ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ MARQUEE ═══ -->
   <div class="marquee-wrap">
     <div class="marquee-track">
@@ -1938,61 +2108,6 @@
       <div class="story-body">
         <p class="reveal reveal-delay-1">LUMIO Coordia Intelligence builds clear websites for service businesses that need visitors to understand the offer, trust the business, and know how to enquire.</p>
         <p class="reveal reveal-delay-2">We shape the message, page journey, pricing path, proof, and contact flow before building, so the finished site feels useful rather than decorative.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ PORTFOLIO — numbered rows ═══ -->
-  <section id="portfolio">
-    <div class="section-inner">
-      <div class="section-eyebrow">
-        <div>
-          <div class="label label-muted" style="margin-bottom:16px">Portfolio</div>
-          <h2 style="font-size: clamp(2.5rem,5vw,5rem); text-transform: uppercase;" class="reveal">Work</h2>
-        </div>
-        <a href="#support" class="text-link reveal" style="align-self:flex-end; color:#000; margin-bottom:8px;">
-          Start a project
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <div class="work-grid">
-        <a href="https://longiengma.com/" target="_blank" rel="noopener" class="work-card reveal">
-          <img src="/assets/portfolio/longieng.jpg" alt="Long Ieng" loading="lazy">
-          <div class="work-top"><span>01</span><span class="work-region">Hong Kong</span></div>
-          <div class="work-arrow">↗</div>
-          <div class="work-plate">
-            <h3>Long Ieng</h3>
-            <div class="work-meta"><span class="work-cat">Accounting Consultancy</span><span class="work-view">VIEW ↗</span></div>
-          </div>
-        </a>
-        <a href="https://macau-world-travel-agency.pages.dev/" target="_blank" rel="noopener" class="work-card reveal reveal-delay-1">
-          <img src="/assets/portfolio/macau.jpg" alt="Macau World Travel" loading="lazy">
-          <div class="work-top"><span>02</span><span class="work-region">Macau</span></div>
-          <div class="work-arrow">↗</div>
-          <div class="work-plate">
-            <h3>Macau World Travel</h3>
-            <div class="work-meta"><span class="work-cat">Travel Agency</span><span class="work-view">VIEW ↗</span></div>
-          </div>
-        </a>
-        <a href="https://stayflow-homestay-landing.pages.dev" target="_blank" rel="noopener" class="work-card reveal reveal-delay-2">
-          <img src="/assets/portfolio/stayflow.jpg" alt="Stayflow Homestay" loading="lazy">
-          <div class="work-top"><span>03</span><span class="work-region">Malaysia</span></div>
-          <div class="work-arrow">↗</div>
-          <div class="work-plate">
-            <h3>Stayflow Homestay</h3>
-            <div class="work-meta"><span class="work-cat">Airbnb Operations</span><span class="work-view">VIEW ↗</span></div>
-          </div>
-        </a>
-        <a href="https://stayfix-theta.vercel.app/" target="_blank" rel="noopener" class="work-card reveal reveal-delay-3">
-          <img src="/assets/portfolio/stayfix.jpg" alt="StayFix" loading="lazy">
-          <div class="work-top"><span>04</span><span class="work-region">Malaysia</span></div>
-          <div class="work-arrow">↗</div>
-          <div class="work-plate">
-            <h3>StayFix</h3>
-            <div class="work-meta"><span class="work-cat">Airbnb Maintenance Platform</span><span class="work-view">VIEW ↗</span></div>
-          </div>
-        </a>
       </div>
     </div>
   </section>
@@ -2864,11 +2979,9 @@
       });
     }
 
-    // Contact form — direct submission to Supabase
+    // Contact form — Formspree submission
     const contactForm = document.getElementById('contact-form');
     const formSuccess = document.getElementById('form-success');
-    const SUPABASE_URL = 'https://kzglqjridvhckhlqyloc.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_Ff6_46rAYg_d7LMV2zzqgQ_1yaX3S-p';
     if (contactForm) {
       contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -2878,23 +2991,10 @@
         btn.textContent = t.sendingText;
         btn.disabled = true;
         try {
-          const data = Object.fromEntries(new FormData(contactForm).entries());
-          const res = await fetch(`${SUPABASE_URL}/rest/v1/lumio_contact_submissions`, {
+          const res = await fetch('https://formspree.io/f/xeebkldb', {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              apikey: SUPABASE_ANON_KEY,
-              Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-              Prefer: 'return=minimal'
-            },
-            body: JSON.stringify([{
-              name: data.name,
-              email: data.email,
-              budget: data.budget || null,
-              project_type: data.project_type || null,
-              message: data.message || null,
-              source: 'website'
-            }])
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(contactForm)
           });
           if (res.ok) {
             contactForm.style.display = 'none';
@@ -3075,48 +3175,5 @@
 
     requestAnimationFrame(draw);
   </script>
-
-  <script>
-    /* ── Portfolio showcase FX (additive; does not touch existing scripts) ── */
-    (function(){
-      var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-      var COLS = 10, ROWS = 7;
-      var SQUARES = [[6,18,16],[12,30,10],[8,70,8],[86,68,14],[90,82,9]];
-      function build(card){
-        if (card.dataset.fx) return; card.dataset.fx = '1';
-        var grid = document.createElement('div'); grid.className = 'pixel-grid';
-        var blocks = [];
-        for (var r=0;r<ROWS;r++) for (var c=0;c<COLS;c++){
-          var b = document.createElement('div'); b.className = 'pixel-block';
-          b.style.left=(100/COLS*c)+'%'; b.style.top=(100/ROWS*r)+'%';
-          b.style.width=(100/COLS)+'%'; b.style.height=(100/ROWS)+'%';
-          b.dataset.din = ((r+c)*18); b.dataset.dout = (((ROWS-r)+(COLS-c))*12);
-          grid.appendChild(b); blocks.push(b);
-        }
-        card.appendChild(grid);
-        var mags = SQUARES.map(function(q){
-          var m = document.createElement('div'); m.className='mag-square';
-          m.style.left=q[0]+'%'; m.style.top=q[1]+'%'; m.style.width=q[2]+'px'; m.style.height=q[2]+'px';
-          m._ax=q[0]/100; m._ay=q[1]/100; card.appendChild(m); return m;
-        });
-        if (!fine) return; /* touch: keep static squares, skip hover fx */
-        card.addEventListener('mouseenter', function(){
-          blocks.forEach(function(b){ b.style.transitionDelay=b.dataset.din+'ms'; b.style.transform='scale(1)'; b.style.opacity='1'; });
-        });
-        card.addEventListener('mouseleave', function(){
-          blocks.forEach(function(b){ b.style.transitionDelay=b.dataset.dout+'ms'; b.style.transform='scale(0)'; b.style.opacity='0'; });
-          mags.forEach(function(m){ m.style.transform='translate(0,0)'; });
-        });
-        card.addEventListener('mousemove', function(e){
-          var r=card.getBoundingClientRect();
-          var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-          mags.forEach(function(m){ m.style.transform='translate('+((px-m._ax)*40)+'px,'+((py-m._ay)*40)+'px)'; });
-        });
-      }
-      function init(){ document.querySelectorAll('.work-card').forEach(build); }
-      if (document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded', init);
-    })();
-  </script>
-
 </body>
 </html>
