@@ -613,29 +613,88 @@
     }
     .outline-cta.primary:hover { background: var(--accent-dk); border-color: var(--accent-dk); }
     .hero-showcase {
-      width: min(560px, calc(100vw - 48px));
+      width: min(680px, calc(100vw - 48px));
       margin: 26px auto 0;
-      padding: 10px 14px;
+      padding: 9px 12px;
       border: 1px solid rgba(255,255,255,0.14);
       border-radius: 999px;
-      background: rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.08);
       color: rgba(255,255,255,0.78);
       font-size: 12px;
       line-height: 1.4;
       overflow: hidden;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12);
     }
     .hero-showcase__track {
       display: flex;
       width: 300%;
       animation: heroShowcaseSlide 12s cubic-bezier(.65,0,.35,1) infinite;
     }
-    .hero-showcase__track span {
+    .hero-showcase:hover .hero-showcase__track,
+    .hero-showcase:hover .hero-showcase__bars i::after {
+      animation-play-state: paused;
+    }
+    .hero-showcase__item {
       width: 33.333%;
       flex: 0 0 33.333%;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 38px;
+      padding: 3px 12px;
+      border-radius: 999px;
+      text-align: left;
       white-space: nowrap;
+      color: rgba(255,255,255,0.82);
+      cursor: pointer;
+      transition: background 0.2s ease-out, color 0.2s ease-out, transform 0.2s ease-out;
+    }
+    .hero-showcase__item:hover,
+    .hero-showcase__item:focus-visible {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      transform: scale(1.025);
+      outline: none;
+    }
+    .hero-showcase__thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      background: rgba(200,162,75,0.15);
+      border: 1px solid rgba(200,162,75,0.35);
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      font-family: 'Inter', sans-serif;
+    }
+    .hero-showcase__copy {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+    }
+    .hero-showcase__name {
+      font-weight: 500;
+      color: inherit;
+    }
+    .hero-showcase__result {
+      font-size: 11px;
+      color: rgba(255,255,255,0.56);
+    }
+    .hero-showcase__arrow {
+      color: var(--accent);
+      transition: transform 0.2s ease-out;
+    }
+    .hero-showcase__item:hover .hero-showcase__arrow,
+    .hero-showcase__item:focus-visible .hero-showcase__arrow {
+      transform: translateX(2px);
     }
     .hero-showcase__bars {
       display: flex;
@@ -682,6 +741,8 @@
       .nav-cta-pill { display: none; }
       .language-switcher { top: 22px; right: 12px; }
       .hero-copy h1 { font-size: clamp(2.4rem, 8vw, 3.5rem); }
+      .hero-showcase__thumb { width: 28px; height: 28px; }
+      .hero-showcase__result { display: none; }
     }
 
     /* ════════════════════════════════════════════
@@ -847,6 +908,7 @@
       perspective: 1000px;
       height: clamp(460px, 44vw, 640px);
       cursor: none;
+      scroll-margin-top: 120px;
     }
     .card-inner {
       position: relative;
@@ -1295,29 +1357,41 @@
       border: 1px solid var(--border-dark);
       border-radius: 16px;
       padding: 36px 28px;
-      transition: border-color 0.3s, background 0.3s;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s cubic-bezier(0.16,1,0.3,1);
     }
-    .pricing-card:hover { border-color: rgba(200,169,110,0.4); background: rgba(255,255,255,0.07); }
+    .pricing-card:hover { border-color: rgba(200,169,110,0.4); background: rgba(255,255,255,0.07); transform: translateY(-3px); }
     .pricing-card--featured {
-      border: 1.5px solid var(--accent);
-      background: rgba(200,169,110,0.06);
+      border: 2px solid #c9a96e;
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(201,169,110,0.08));
       position: relative;
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(201, 169, 110, 0.2);
+    }
+    .pricing-card--featured:hover {
+      border-color: #d6b875;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(201,169,110,0.11));
+      transform: translateY(-12px);
+      box-shadow: 0 16px 38px rgba(201, 169, 110, 0.24);
     }
     .featured-badge {
-      display: block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       position: absolute;
-      top: -14px; left: 50%;
-      transform: translateX(-50%);
-      background: var(--accent);
+      top: -18px;
+      right: 22px;
+      min-height: 30px;
+      background: #c9a96e;
       color: #fff;
-      font-size: 10px;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 5px 16px;
-      border-radius: 20px;
+      padding: 0 16px;
+      border-radius: 999px;
       white-space: nowrap;
       font-family: 'Inter', sans-serif;
+      box-shadow: 0 8px 20px rgba(201,169,110,0.3);
     }
     .pricing-tier {
       font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
@@ -1351,12 +1425,23 @@
     .btn-pricing {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       width: 100%; padding: 13px 20px;
-      background: var(--accent); color: #fff;
+      background: transparent; color: var(--text-light);
+      border: 1px solid rgba(255,255,255,0.18);
       border-radius: 40px; font-size: 13px; font-weight: 500;
-      transition: background 0.2s, transform 0.2s;
+      transition: background 0.2s, transform 0.2s, border-color 0.2s, color 0.2s;
       cursor: none;
     }
-    .btn-pricing:hover { background: var(--accent-dk); transform: translateY(-1px); }
+    .btn-pricing:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.32); transform: translateY(-1px); }
+    .pricing-card--featured .btn-pricing {
+      background: #c9a96e;
+      border-color: #c9a96e;
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(201,169,110,0.22);
+    }
+    .pricing-card--featured .btn-pricing:hover {
+      background: var(--accent-dk);
+      border-color: var(--accent-dk);
+    }
     .pricing-compare {
       margin-top: 48px;
       border: 1px solid var(--border-dark);
@@ -1431,6 +1516,16 @@
     .support-sub {
       font-size: 15px; color: var(--text-muted-dark); line-height: 1.8; font-weight: 300;
     }
+    .form-intro {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #55524c;
+      margin: 0 0 24px;
+    }
+    .form-intro strong {
+      color: #111;
+      font-weight: 600;
+    }
     .support-direct {
       display: flex;
       flex-direction: column;
@@ -1475,12 +1570,19 @@
     .select-wrap select { width: 100%; padding-right: 36px; cursor: none; }
 
     .form-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .form-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
     .btn-submit {
       display: inline-flex; align-items: center; gap: 10px;
       padding: 14px 32px; background: var(--accent); color: #fff;
       border-radius: 40px; font-size: 13px; font-weight: 500;
       border: none; cursor: none; transition: background 0.2s, transform 0.2s;
     }
+    .btn-submit:disabled { opacity: 0.72; transform: none; }
     .btn-submit:hover { background: var(--accent-dk); transform: translateY(-1px); }
     .whatsapp-link, .email-link {
       display: inline-flex; align-items: center; gap: 8px;
@@ -1718,7 +1820,9 @@
       .products-header { grid-template-columns: 1fr; gap: 20px; }
       .products-headline { font-size: clamp(1.8rem, 6vw, 2.4rem); }
       .pricing-grid { grid-template-columns: 1fr; gap: 20px; }
-      .pricing-card--featured { margin-top: 10px; }
+      .pricing-card--featured { margin-top: 10px; transform: none; }
+      .pricing-card--featured:hover { transform: translateY(-4px); }
+      .featured-badge { top: -14px; right: 18px; min-height: 28px; font-size: 11px; }
       .compare-head { flex-direction: column; align-items: flex-start; padding: 22px; }
       .pricing-compare table { min-width: 680px; }
 
@@ -1990,7 +2094,7 @@
         max-width:min(calc(100vw - 70px), 300px) !important;
         overflow:hidden !important;
         white-space:nowrap !important;
-        transform:translateX(-45px) !important;
+        transform:none !important;
       }
       .hero-copy p{
         font-size:16px !important;
@@ -2007,13 +2111,19 @@
         width:min(calc(100vw - 70px), 300px) !important;
         max-width:min(calc(100vw - 70px), 300px) !important;
         font-size:11px !important;
-        transform:translateX(-45px) !important;
+        transform:none !important;
       }
-      .hero-showcase__track span{
+      .hero-showcase__item{
+        overflow:hidden !important;
+        padding:3px 8px !important;
+      }
+      .hero-showcase__copy{
+        min-width:0 !important;
+      }
+      .hero-showcase__name{
         overflow:hidden !important;
         text-overflow:ellipsis !important;
         white-space:nowrap !important;
-        padding:0 4px !important;
       }
       .trust-pill{
         max-width:100% !important;
@@ -2079,9 +2189,30 @@
         </div>
         <div class="hero-showcase" aria-label="Selected project preview">
           <div class="hero-showcase__track">
-            <span>Long Ieng, 100+ businesses served</span>
-            <span>Macau World Travel, more enquiries</span>
-            <span>Stayflow, more direct bookings</span>
+            <a class="hero-showcase__item" href="#portfolio-card-1" aria-label="View Long Ieng case">
+              <span class="hero-showcase__thumb">01</span>
+              <span class="hero-showcase__copy">
+                <span class="hero-showcase__name">Long Ieng</span>
+                <span class="hero-showcase__result">100+ businesses served</span>
+              </span>
+              <span class="hero-showcase__arrow">→</span>
+            </a>
+            <a class="hero-showcase__item" href="#portfolio-card-2" aria-label="View Macau World Travel case">
+              <span class="hero-showcase__thumb">02</span>
+              <span class="hero-showcase__copy">
+                <span class="hero-showcase__name">Macau World Travel</span>
+                <span class="hero-showcase__result">More enquiries</span>
+              </span>
+              <span class="hero-showcase__arrow">→</span>
+            </a>
+            <a class="hero-showcase__item" href="#portfolio-card-3" aria-label="View Stayflow Homestay case">
+              <span class="hero-showcase__thumb">03</span>
+              <span class="hero-showcase__copy">
+                <span class="hero-showcase__name">Stayflow</span>
+                <span class="hero-showcase__result">More direct bookings</span>
+              </span>
+              <span class="hero-showcase__arrow">→</span>
+            </a>
           </div>
           <div class="hero-showcase__bars" aria-hidden="true">
             <i></i><i></i><i></i>
@@ -2132,7 +2263,7 @@
       <div class="flip-grid">
 
         <!-- 01 Long Ieng -->
-        <div class="card-wrap reveal">
+        <div class="card-wrap reveal" id="portfolio-card-1">
           <div class="card-inner">
             <div class="face front">
               <div class="front-line"></div>
@@ -2178,7 +2309,7 @@
         </div>
 
         <!-- 02 Macau World Travel -->
-        <div class="card-wrap reveal reveal-delay-1">
+        <div class="card-wrap reveal reveal-delay-1" id="portfolio-card-2">
           <div class="card-inner">
             <div class="face front">
               <div class="front-line"></div>
@@ -2224,7 +2355,7 @@
         </div>
 
         <!-- 03 Stayflow Homestay -->
-        <div class="card-wrap reveal reveal-delay-2">
+        <div class="card-wrap reveal reveal-delay-2" id="portfolio-card-3">
           <div class="card-inner">
             <div class="face front">
               <div class="front-line"></div>
@@ -2270,7 +2401,7 @@
         </div>
 
         <!-- 04 StayFix Dispatch -->
-        <div class="card-wrap reveal reveal-delay-3">
+        <div class="card-wrap reveal reveal-delay-3" id="portfolio-card-4">
           <div class="card-inner">
             <div class="face front">
               <div class="front-line"></div>
@@ -2316,7 +2447,7 @@
         </div>
 
         <!-- 05 Paybit Tech -->
-        <div class="card-wrap reveal reveal-delay-4">
+        <div class="card-wrap reveal reveal-delay-4" id="portfolio-card-5">
           <div class="card-inner">
             <div class="face front">
               <div class="front-line"></div>
@@ -2718,6 +2849,8 @@
       </div>
       <form class="contact-form reveal reveal-delay-1" id="contact-form" action="https://formspree.io/f/xeebkldb" method="POST">
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
+        <input type="hidden" name="_subject" value="New LUMIO website enquiry">
+        <p class="form-intro">Or send us a message and we'll get back to you within 24 hours. <strong>No brief required — just tell us what you need.</strong></p>
         <div class="form-row">
           <div class="form-group">
             <label for="name">Name</label>
@@ -2728,46 +2861,35 @@
             <input type="email" id="email" name="email" placeholder="your@email.com" required>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="budget">Budget</label>
-            <div class="select-wrap">
-              <select id="budget" name="budget">
-                <option value="">Choose one</option>
-                <option>RM 1,500+ — Starter</option>
-                <option>RM 4,000+ — Growth</option>
-                <option>RM 8,000+ — Premium</option>
-                <option>Custom quote</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="type">Project Type</label>
-            <div class="select-wrap">
-              <select id="type" name="project_type">
-                <option value="">Choose one</option>
-                <option>Website</option>
-                <option>Automation</option>
-                <option>Business System</option>
-                <option>Not sure</option>
-              </select>
-            </div>
-          </div>
+        <div class="form-group">
+          <label for="message">What do you need?</label>
+          <textarea id="message" name="message" rows="4" placeholder="Tell us about your project — what do you want to improve, launch, or simplify?" required></textarea>
         </div>
         <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell us about your project…"></textarea>
+          <label for="budget">Budget range</label>
+          <div class="select-wrap">
+            <select id="budget" name="budget">
+              <option value="">Not selected</option>
+              <option>Under RM 2,000</option>
+              <option>RM 2,000 - RM 5,000</option>
+              <option>RM 5,000 - RM 10,000</option>
+              <option>Above RM 10,000</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
         </div>
         <div class="form-footer">
           <button type="submit" class="btn-submit">Send message →</button>
-          <a href="https://wa.me/85363287209" class="whatsapp-link" target="_blank">WhatsApp us instead</a>
-          <a href="mailto:ShanyiDanyi@outlook.com" class="email-link">Email us instead</a>
+          <div class="form-actions">
+            <a href="https://wa.me/85363287209" class="whatsapp-link" target="_blank" rel="noopener">WhatsApp us instead</a>
+            <a href="mailto:ShanyiDanyi@outlook.com" class="email-link">Email us instead</a>
+          </div>
         </div>
       </form>
       <div id="form-success" style="display:none; padding:40px 0; text-align:center;">
-        <div style="font-size:32px; margin-bottom:16px;">✅</div>
-        <p id="success-title" style="font-size:18px; font-weight:600; color:#111827; margin-bottom:8px;">Message sent.</p>
-        <p id="success-sub" style="font-size:15px; color:var(--text-muted-dark);">We'll be in touch within 1 business day via email or WhatsApp.</p>
+        <div style="font-size:32px; margin-bottom:16px;">✓</div>
+        <p id="success-title" style="font-size:18px; font-weight:600; color:#111827; margin-bottom:8px;">Thanks! We'll get back to you within 24 hours.</p>
+        <p id="success-sub" style="font-size:15px; color:var(--text-muted-dark);">You can also message us on WhatsApp if the project is urgent.</p>
       </div>
     </div>
   </section>
@@ -2879,7 +3001,7 @@
         heroP:'Clear, practical websites built around your offer, your proof, and your next enquiry.',
         ctaPrimary:'View website plans →', ctaSecondary:'View our work →',
         trustPills:['Refund-backed milestones','Available in 4 languages','Built for small businesses'],
-        heroShowcase:['Long Ieng, 100+ businesses served','Macau World Travel, more enquiries','Stayflow, more direct bookings'],
+        heroShowcase:[['Long Ieng','100+ businesses served'],['Macau World Travel','More enquiries'],['Stayflow','More direct bookings']],
         nav:['Story','Portfolio','Process','Pricing','Contact'], navCTA:'Get a website',
         marquee:['Website Design','Business Automation','Brand Identity','Digital Systems','Clear Messaging','Lead Structure','Malaysian Businesses'],
         storyLabel:'Story',
@@ -2923,10 +3045,10 @@
         refundBannerSub:'Cancel before kickoff for a full refund, with clear, fair refunds at every milestone after. No lock-in, no surprises.',
         refundBannerLink:'Read the full refund policy →',
         refundPoints:['Deposit','Milestones','Disputes'],
-        formLabels:['Name','Email','Budget','Project Type','Message'],
-        placeholders:['Your name','your@email.com','Tell us about your project…'],
-        budgetOpts:['Choose one','RM 1,500+ — Starter','RM 4,000+ — Growth','RM 8,000+ — Premium','Custom quote'],
-        typeOpts:['Choose one','Website','Automation','Business System','Not sure'],
+        formIntro:"Or send us a message and we'll get back to you within 24 hours. <strong>No brief required — just tell us what you need.</strong>",
+        formLabels:['Name','Email','What do you need?','Budget range'],
+        placeholders:['Your name','your@email.com','Tell us about your project — what do you want to improve, launch, or simplify?'],
+        budgetOpts:['Not selected','Under RM 2,000','RM 2,000 - RM 5,000','RM 5,000 - RM 10,000','Above RM 10,000','Not sure yet'],
         submitBtn:'Send message →', whatsapp:'WhatsApp us instead', emailLink:'Email us instead',
         footerHeads:['Navigation','Contact','Legal'],
         footerBrandDesc:'Clear websites for service businesses.',
@@ -2937,8 +3059,8 @@
         featuredBadge:'Most Popular',
         sendingText:'Sending…',
         errorText:'Something went wrong — try WhatsApp',
-        successTitle:'Message sent.',
-        successSub:"We'll be in touch within 1 business day via email or WhatsApp."
+        successTitle:"Thanks! We'll get back to you within 24 hours.",
+        successSub:'You can also message us on WhatsApp if the project is urgent.'
       },
       ZH: {
         badge:'专为中小企业打造',
@@ -2981,18 +3103,18 @@
         refundBannerSub:'启动前取消可全额退款，启动后每个里程碑也都有清晰、公平的退款规则。没有捆绑，没有意外。',
         refundBannerLink:'查看完整退款政策 →',
         refundPoints:['定金','里程碑','争议处理'],
-        formLabels:['姓名','邮箱','预算','项目类型','留言'],
-        placeholders:['您的姓名','your@email.com','请描述您的项目需求……'],
-        budgetOpts:['请选择','RM 1,500+ — 入门方案','RM 4,000+ — 成长方案','RM 8,000+ — 高级方案','定制报价'],
-        typeOpts:['请选择','网站建设','业务自动化','业务系统','暂不确定'],
+        formIntro:'或者直接发送留言，我们会在 24 小时内回复。<strong>无需准备 brief，只要告诉我们你需要什么。</strong>',
+        formLabels:['姓名','邮箱','你需要什么？','预算范围'],
+        placeholders:['您的姓名','your@email.com','请描述你的项目：你想改善、上线或简化什么？'],
+        budgetOpts:['暂不选择','低于 RM 2,000','RM 2,000 - RM 5,000','RM 5,000 - RM 10,000','高于 RM 10,000','还不确定'],
         submitBtn:'发送留言 →', whatsapp:'💬 通过 WhatsApp 联系我们', emailLink:'✉️ 发送邮件联系我们',
         footerLinks:['故事','作品','流程','产品','联系'],
         footerCopy:'© 2026 LUMIO Coordia Intelligence. All rights reserved.',
         featuredBadge:'最受欢迎',
         sendingText:'发送中…',
         errorText:'发送失败，请通过 WhatsApp 联系我们',
-        successTitle:'留言已发送。',
-        successSub:'我们将在 1 个工作日内通过邮件或 WhatsApp 与您联系。'
+        successTitle:'谢谢！我们会在 24 小时内回复。',
+        successSub:'如果项目比较紧急，也可以直接通过 WhatsApp 联系我们。'
       },
       JA: {
         badge:'中小企業のデジタル成長を支援',
@@ -3035,18 +3157,18 @@
         refundBannerSub:'開始前のキャンセルは全額返金。開始後も各マイルストーンで明確で公平な返金ルールがあります。縛りも、想定外もありません。',
         refundBannerLink:'返金ポリシー全文を読む →',
         refundPoints:['着手金','マイルストーン','トラブル対応'],
-        formLabels:['お名前','メールアドレス','ご予算','プロジェクト種別','メッセージ'],
-        placeholders:['お名前','your@email.com','プロジェクトについてお聞かせください…'],
-        budgetOpts:['選択してください','RM 1,500+ — スターター','RM 4,000+ — グロース','RM 8,000+ — プレミアム','カスタム見積もり'],
-        typeOpts:['選択してください','ウェブサイト','業務自動化','業務システム','未定'],
+        formIntro:'またはメッセージをお送りください。24時間以内にご連絡します。<strong>資料は不要です。必要なことだけ教えてください。</strong>',
+        formLabels:['お名前','メールアドレス','必要なこと','ご予算の範囲'],
+        placeholders:['お名前','your@email.com','改善・立ち上げ・整理したい内容を教えてください。'],
+        budgetOpts:['未選択','RM 2,000 未満','RM 2,000 - RM 5,000','RM 5,000 - RM 10,000','RM 10,000 以上','まだ未定'],
         submitBtn:'送信する →', whatsapp:'💬 WhatsApp でお問い合わせ', emailLink:'✉️ メールでお問い合わせ',
         footerLinks:['ストーリー','制作事例','プロセス','プラン','お問い合わせ'],
         footerCopy:'© 2026 LUMIO Coordia Intelligence. All rights reserved.',
         featuredBadge:'人気 No.1',
         sendingText:'送信中…',
         errorText:'送信に失敗しました。WhatsApp でお問い合わせください',
-        successTitle:'メッセージを送信しました。',
-        successSub:'1営業日以内にメールまたは WhatsApp にてご連絡いたします。'
+        successTitle:'ありがとうございます。24時間以内にご連絡します。',
+        successSub:'お急ぎの場合は WhatsApp から直接ご連絡ください。'
       },
       KO: {
         badge:'소상공인을 위한 디지털 성장',
@@ -3089,18 +3211,18 @@
         refundBannerSub:'착수 전 취소 시 전액 환불, 이후에도 각 마일스톤마다 명확하고 공정한 환불 규정이 적용됩니다. 묶어두기도, 예상 밖 일도 없습니다.',
         refundBannerLink:'전체 환불 정책 보기 →',
         refundPoints:['착수금','마일스톤','분쟁 처리'],
-        formLabels:['이름','이메일','예산','프로젝트 유형','메시지'],
-        placeholders:['이름을 입력하세요','your@email.com','프로젝트에 대해 알려주세요…'],
-        budgetOpts:['선택하세요','RM 1,500+ — 스타터','RM 4,000+ — 그로스','RM 8,000+ — 프리미엄','커스텀 견적'],
-        typeOpts:['선택하세요','웹사이트','업무 자동화','비즈니스 시스템','미정'],
+        formIntro:'또는 메시지를 남겨주세요. 24시간 이내에 답변드리겠습니다. <strong>별도 브리프는 필요 없습니다. 필요한 내용을 알려주세요.</strong>',
+        formLabels:['이름','이메일','필요한 내용','예산 범위'],
+        placeholders:['이름을 입력하세요','your@email.com','개선, 런칭, 또는 단순화하고 싶은 내용을 알려주세요.'],
+        budgetOpts:['선택 안 함','RM 2,000 미만','RM 2,000 - RM 5,000','RM 5,000 - RM 10,000','RM 10,000 이상','아직 모르겠음'],
         submitBtn:'메시지 보내기 →', whatsapp:'💬 WhatsApp으로 문의하기', emailLink:'✉️ 이메일로 문의하기',
         footerLinks:['스토리','포트폴리오','프로세스','서비스','문의'],
         footerCopy:'© 2026 LUMIO Coordia Intelligence. All rights reserved.',
         featuredBadge:'가장 인기',
         sendingText:'전송 중…',
         errorText:'전송 실패 — WhatsApp으로 문의해 주세요',
-        successTitle:'메시지가 전송되었습니다.',
-        successSub:'1영업일 이내에 이메일 또는 WhatsApp으로 연락드리겠습니다.'
+        successTitle:'감사합니다. 24시간 이내에 연락드리겠습니다.',
+        successSub:'급한 프로젝트라면 WhatsApp으로 바로 연락해 주세요.'
       }
     };
     LANGS.SC = {
@@ -3122,7 +3244,7 @@
       heroP:'訪客只有幾秒。讓網站在他們離開之前，替你說清楚你是誰、你能解決什麼問題。',
       ctaPrimary:'查看網站方案 →', ctaSecondary:'瀏覽我們的作品 →',
       trustPills:['里程碑退款保障','支援 4 種語言','專為中小企業打造'],
-      heroShowcase:['Long Ieng，服務 100+ 間企業','Macau World Travel，更多有效查詢','Stayflow，更多直接預訂'],
+      heroShowcase:[['Long Ieng','服務 100+ 間企業'],['Macau World Travel','更多有效查詢'],['Stayflow','更多直接預訂']],
       nav:['故事','作品','流程','方案','聯絡'], navCTA:'立即諮詢',
       storyLabel:'故事',
       storyH2:'你的網站應該讓訪客立刻知道下一步。',
@@ -3145,9 +3267,13 @@
       compareTable:[['功能','Starter','Growth','Premium','Custom'],['頁面數量','1-3 頁','5-8 頁','10+ 頁','自定義'],['手機端適配','有','有','有','有'],['聯絡表單','有','有','有','有'],['SEO 基礎設定','有','有','有','有'],['自動化流程','沒有','有','有','有'],['多語言','沒有','沒有','有','有'],['自定義 UX 設計','沒有','沒有','有','有'],['系統整合','沒有','沒有','沒有','有'],['後續維護','沒有','沒有','沒有','有']],
       contactLabel:'聯絡', contactH2:'Start a project',
       contactSub:'告訴我們你想改善、推出或簡化什麼。無需準備 brief。',
-      formLabels:['姓名','電郵','預算','項目類型','留言'],
-      placeholders:['你的姓名','your@email.com','請描述你的項目需求……'],
+      formIntro:'或者直接發送訊息，我們會在 24 小時內回覆。<strong>無需準備 brief，只要告訴我們你需要什麼。</strong>',
+      formLabels:['姓名','電郵','你需要什麼？','預算範圍'],
+      placeholders:['你的姓名','your@email.com','請描述你的項目：你想改善、推出或簡化什麼？'],
+      budgetOpts:['暫不選擇','低於 RM 2,000','RM 2,000 - RM 5,000','RM 5,000 - RM 10,000','高於 RM 10,000','還不確定'],
       submitBtn:'發送訊息 →', whatsapp:'改用 WhatsApp 聯絡', emailLink:'改用 Email 聯絡',
+      successTitle:'謝謝！我們會在 24 小時內回覆。',
+      successSub:'如果項目比較緊急，也可以直接透過 WhatsApp 聯絡我們。',
       footerHeads:['導航','聯絡','法律'],
       footerBrandDesc:'為服務型企業打造清晰網站。',
       footerLinks:['首頁','作品','流程','方案','聯絡'],
@@ -3162,7 +3288,7 @@
       heroP:'Laman web praktikal yang dibina sekitar tawaran, bukti, dan pertanyaan seterusnya.',
       ctaPrimary:'Lihat pakej laman web →', ctaSecondary:'Lihat kerja kami →',
       trustPills:['Milestone dengan perlindungan bayaran balik','Tersedia dalam 4 bahasa','Dibina untuk perniagaan kecil'],
-      heroShowcase:['Long Ieng, 100+ perniagaan dibantu','Macau World Travel, lebih banyak pertanyaan','Stayflow, lebih banyak tempahan terus'],
+      heroShowcase:[['Long Ieng','100+ perniagaan dibantu'],['Macau World Travel','Lebih banyak pertanyaan'],['Stayflow','Lebih banyak tempahan terus']],
       nav:['Story','Portfolio','Proses','Harga','Hubungi'], navCTA:'Bina laman web',
       marquee:['Reka Bentuk Laman Web','Automasi Perniagaan','Identiti Jenama','Sistem Digital','Mesej Jelas','Struktur Lead','Perniagaan Malaysia'],
       storyLabel:'Story',
@@ -3187,9 +3313,13 @@
       pricingBtn:'Mulakan →',
       contactLabel:'Hubungi', contactH2:'Start a project',
       contactSub:'Beritahu kami apa yang mahu diperbaiki, dilancarkan, atau dipermudahkan. Brief tidak diperlukan.',
-      formLabels:['Nama','Email','Bajet','Jenis Projek','Mesej'],
-      placeholders:['Nama anda','your@email.com','Ceritakan tentang projek anda…'],
+      formIntro:'Atau hantar mesej dan kami akan balas dalam 24 jam. <strong>Brief tidak diperlukan, beritahu sahaja apa yang anda perlukan.</strong>',
+      formLabels:['Nama','Email','Apa yang anda perlukan?','Julat bajet'],
+      placeholders:['Nama anda','your@email.com','Ceritakan tentang projek anda: apa yang mahu diperbaiki, dilancarkan, atau dipermudahkan?'],
+      budgetOpts:['Tidak dipilih','Bawah RM 2,000','RM 2,000 - RM 5,000','RM 5,000 - RM 10,000','Lebih RM 10,000','Belum pasti'],
       submitBtn:'Hantar mesej →', whatsapp:'Guna WhatsApp', emailLink:'Guna Email',
+      successTitle:'Terima kasih. Kami akan balas dalam 24 jam.',
+      successSub:'Jika projek ini segera, anda juga boleh mesej kami melalui WhatsApp.',
       footerHeads:['Navigasi','Hubungi','Legal'],
       footerBrandDesc:'Laman web jelas untuk perniagaan servis.',
       footerLinks:['Home','Work','Proses','Harga','Hubungi'],
@@ -3287,7 +3417,16 @@
       const ctas = document.querySelectorAll('.hero-ctas .outline-cta');
       if (ctas[0]) ctas[0].textContent = t.ctaPrimary;
       if (ctas[1]) ctas[1].textContent = t.ctaSecondary;
-      if (t.heroShowcase) document.querySelectorAll('.hero-showcase__track span').forEach((el, i) => { if (t.heroShowcase[i]) el.textContent = t.heroShowcase[i]; });
+      if (t.heroShowcase) {
+        document.querySelectorAll('.hero-showcase__item').forEach((item, i) => {
+          const entry = t.heroShowcase[i];
+          if (!entry) return;
+          const name = item.querySelector('.hero-showcase__name');
+          const result = item.querySelector('.hero-showcase__result');
+          if (name) name.textContent = entry[0];
+          if (result) result.textContent = entry[1];
+        });
+      }
 
       // Hero trust pills
       if (t.trustPills) document.querySelectorAll('.hero-trust .trust-txt').forEach((el, i) => { if (t.trustPills[i]) el.textContent = t.trustPills[i]; });
@@ -3417,14 +3556,14 @@
       if (supportSub) supportSub.textContent = t.contactSub;
 
       // Form
+      const formIntro = document.querySelector('.form-intro');
+      if (formIntro && t.formIntro) formIntro.innerHTML = t.formIntro;
       document.querySelectorAll('.contact-form label').forEach((el, i) => { if (t.formLabels[i]) el.textContent = t.formLabels[i]; });
       const ni = document.getElementById('name'); if (ni) ni.placeholder = t.placeholders[0];
       const ei = document.getElementById('email'); if (ei) ei.placeholder = t.placeholders[1];
       const mi = document.getElementById('message'); if (mi) mi.placeholder = t.placeholders[2];
       const bs = document.getElementById('budget');
       if (bs) bs.querySelectorAll('option').forEach((o, i) => { if (t.budgetOpts[i]) o.text = t.budgetOpts[i]; });
-      const ts = document.getElementById('type');
-      if (ts) ts.querySelectorAll('option').forEach((o, i) => { if (t.typeOpts[i]) o.text = t.typeOpts[i]; });
       const sb = document.querySelector('.btn-submit'); if (sb) sb.textContent = t.submitBtn;
       const wa = document.querySelector('.whatsapp-link'); if (wa) wa.textContent = t.whatsapp;
       const el = document.querySelector('.email-link'); if (el) el.textContent = t.emailLink;
