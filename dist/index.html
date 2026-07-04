@@ -307,6 +307,46 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .cta p{color:#999;max-width:480px;margin:0 auto 48px;line-height:1.65}
 .cta .btn-talk{background:#fff;color:#000}
 .cta .btn-talk:hover{background:#e5e5e5}
+
+/* ═══════════ CONTACT FORM ═══════════ */
+.contact-sec{background:var(--black);color:#fff;padding:clamp(90px,14vw,160px) var(--pad)}
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(48px,6vw,90px);max-width:1200px;margin:0 auto}
+.contact-copy .big-h{margin-bottom:20px}
+.contact-copy .big-h .outline{color:transparent;-webkit-text-stroke:2px #fff}
+.contact-copy p{color:#999;line-height:1.65;max-width:400px;margin-bottom:36px}
+.contact-direct{display:flex;flex-direction:column;gap:14px}
+.contact-direct a{display:inline-flex;align-items:center;gap:10px;color:#ccc;font-size:.92rem;transition:color .3s}
+.contact-direct a:hover{color:var(--accent)}
+.contact-form{display:flex;flex-direction:column;gap:20px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-group label{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:#999}
+.form-group input,.form-group textarea,.form-group select{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:10px;
+  padding:14px 16px;color:#fff;font:inherit;font-size:.95rem;transition:border-color .25s,background .25s;
+}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{
+  outline:none;border-color:var(--accent);background:rgba(255,255,255,.08);
+}
+.form-group textarea{resize:vertical;min-height:110px}
+.form-group select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M2 3.5L5 6.5L8 3.5' stroke='%23999' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.form-group select option{background:#111;color:#fff}
+.form-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:4px}
+.btn-submit{
+  background:var(--accent);color:#241a12;border:none;border-radius:999px;padding:16px 34px;
+  font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+  transition:background .3s,transform .3s;
+}
+.btn-submit:hover{background:var(--accent-dk);transform:translateY(-1px)}
+.btn-submit:disabled{opacity:.6;cursor:default;transform:none}
+.form-alt{display:flex;gap:20px;flex-wrap:wrap}
+.form-alt a{font-size:.85rem;color:#999;transition:color .3s}
+.form-alt a:hover{color:var(--accent)}
+.form-success{display:none;padding:32px 0;text-align:left}
+.form-success .fs-check{font-size:1.8rem;margin-bottom:14px}
+.form-success .fs-title{font-size:1.05rem;font-weight:700;margin-bottom:6px}
+.form-success .fs-sub{font-size:.9rem;color:#999}
+@media(max-width:820px){.contact-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
 footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-top:1px solid #222}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:48px}
 .nav-logo{font-weight:900;letter-spacing:.05em;font-size:1.05rem}
@@ -628,10 +668,58 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
 </section>
 
 <!-- CTA / CONTACT -->
-<section class="cta" id="contact">
-  <h2 class="big-h reveal">Start a project.<br><span class="outline">Tell us what you need.</span></h2>
-  <p class="reveal reveal-d1">No brief required. We'll get back to you within 24 hours.</p>
-  <a class="btn-talk reveal reveal-d2" href="https://wa.me/60177209159">WhatsApp us <span class="arr">→</span></a>
+<section class="contact-sec" id="contact">
+  <div class="contact-grid">
+    <div class="contact-copy">
+      <h2 class="big-h reveal">Start a project.<br><span class="outline">Tell us what you need.</span></h2>
+      <p class="reveal reveal-d1">No brief required — just tell us what you need, and we'll get back to you within 24 hours.</p>
+      <div class="contact-direct reveal reveal-d2">
+        <a href="https://wa.me/60177209159">WhatsApp: +60 17 720 9159</a>
+        <a href="mailto:lumiocoordia@gmail.com">Email: lumiocoordia@gmail.com</a>
+      </div>
+    </div>
+
+    <form class="contact-form reveal reveal-d2" id="contact-form">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="message">What do you need?</label>
+        <textarea id="message" name="message" rows="4" placeholder="Tell us about your project — what do you want to improve, launch, or simplify?" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="budget">Budget range</label>
+        <select id="budget" name="budget">
+          <option value="">Not selected</option>
+          <option>Under RM 2,000</option>
+          <option>RM 2,000 - RM 5,000</option>
+          <option>RM 5,000 - RM 10,000</option>
+          <option>Above RM 10,000</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-footer">
+        <button type="submit" class="btn-submit">Send message →</button>
+        <div class="form-alt">
+          <a href="https://wa.me/60177209159" target="_blank" rel="noopener">WhatsApp us instead</a>
+          <a href="mailto:lumiocoordia@gmail.com">Email us instead</a>
+        </div>
+      </div>
+    </form>
+    <div class="form-success" id="form-success">
+      <div class="fs-check">✓</div>
+      <p class="fs-title">Opening WhatsApp... We'll get back to you within 24 hours.</p>
+      <p class="fs-sub">Your message has been saved and prepared in WhatsApp.</p>
+    </div>
+  </div>
 </section>
 
 <footer>
@@ -685,6 +773,64 @@ const cio = new IntersectionObserver(entries=>{
   });
 },{threshold:.6});
 document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+/* ── Contact form — write to Supabase, then open WhatsApp ── */
+const contactForm = document.getElementById('contact-form');
+const formSuccess = document.getElementById('form-success');
+const LUMIO_WHATSAPP_NUMBER = '60177209159';
+const SUPABASE_URL = 'https://kzglqjridvhckhlqyloc.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Ff6_46rAYg_d7LMV2zzqgQ_1yaX3S-p';
+if(contactForm){
+  contactForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    if(!contactForm.checkValidity()){ contactForm.reportValidity(); return; }
+    const gotcha = contactForm.querySelector('[name="_gotcha"]');
+    if(gotcha && gotcha.value) return;
+
+    const btn = contactForm.querySelector('.btn-submit');
+    const originalText = btn.textContent;
+    const data = Object.fromEntries(new FormData(contactForm).entries());
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try{
+      await fetch(`${SUPABASE_URL}/rest/v1/lumio_contact_submissions`, {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          apikey: SUPABASE_ANON_KEY,
+          Authorization:`Bearer ${SUPABASE_ANON_KEY}`,
+          Prefer:'return=minimal'
+        },
+        body: JSON.stringify([{
+          name: data.name,
+          email: data.email,
+          budget: data.budget || null,
+          project_type: null,
+          message: data.message || null,
+          source: 'website'
+        }])
+      });
+    }catch(err){
+      console.error('Supabase submission failed, continuing to WhatsApp', err);
+    }
+
+    const whatsappMessage = [
+      'Hi LUMIO Team,', '',
+      `Name: ${data.name}`, `Email: ${data.email}`,
+      `Budget: ${data.budget || 'Not sure yet'}`, '',
+      data.message
+    ].join('\n');
+    const whatsappUrl = `https://wa.me/${LUMIO_WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+
+    contactForm.style.display = 'none';
+    if(formSuccess) formSuccess.style.display = 'block';
+    const opened = window.open(whatsappUrl, '_blank', 'noopener');
+    if(!opened) window.location.href = whatsappUrl;
+
+    window.setTimeout(()=>{ btn.textContent = originalText; btn.disabled = false; }, 2200);
+  });
+}
 
 /* ── Language switcher dropdown (visual only) ── */
 const langSwitcher = document.querySelector('.language-switcher');
