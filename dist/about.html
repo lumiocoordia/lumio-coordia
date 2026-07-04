@@ -71,6 +71,33 @@ nav{
 .nav-cta:hover{background:#fff;color:#000}
 @media(max-width:820px){.nav-links{display:none}}
 
+/* LANGUAGE SWITCHER */
+.nav-right{display:flex;align-items:center;gap:12px}
+.language-switcher{position:relative}
+.lang-trigger{
+  display:flex;align-items:center;gap:6px;border:1px solid #fff;border-radius:999px;padding:9px 15px;
+  color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.1em;white-space:nowrap;
+  transition:opacity .2s;
+}
+.lang-trigger:hover{opacity:.75}
+.lang-trigger svg{transition:transform .25s var(--ease)}
+.language-switcher.open .lang-trigger svg{transform:rotate(180deg)}
+.lang-dropdown{
+  position:absolute;z-index:1201;top:calc(100% + 8px);right:0;background:#0a0e14;
+  border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:6px;display:flex;flex-direction:column;
+  gap:2px;min-width:160px;opacity:0;transform:translateY(-6px);
+  pointer-events:none;transition:opacity .2s var(--ease),transform .2s var(--ease);
+}
+.language-switcher.open .lang-dropdown{opacity:1;transform:translateY(0);pointer-events:auto}
+.lang-option{
+  display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;
+  font-size:.78rem;font-weight:500;color:rgba(255,255,255,.65);transition:background .15s,color .15s;
+  width:100%;text-align:left;letter-spacing:.02em;
+}
+.lang-option:hover{background:rgba(255,255,255,.1);color:#fff}
+.lang-option.is-active{color:#fff;background:rgba(255,255,255,.08)}
+.lang-option.is-active::after{content:'';width:5px;height:5px;border-radius:50%;background:#fff;flex-shrink:0}
+
 /* SHARED */
 section{padding:clamp(80px,12vw,160px) var(--pad)}
 .sec-label{
@@ -211,7 +238,23 @@ footer a:hover{color:#fff}
     <a href="/pricing">Pricing</a>
     <a href="/about" style="opacity:1">About</a>
   </div>
-  <a class="nav-cta" href="https://wa.me/60177209159">Let's talk</a>
+  <div class="nav-right">
+    <a class="nav-cta" href="https://wa.me/60177209159">Let's talk</a>
+    <div class="language-switcher" aria-label="Language selector">
+      <button class="lang-trigger" type="button" aria-expanded="false" aria-haspopup="listbox">
+        <span class="lang-current">EN</span>
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="lang-dropdown" role="listbox">
+        <button class="lang-option is-active" type="button" data-lang="en">English</button>
+        <button class="lang-option" type="button" data-lang="zh-Hant">繁體中文</button>
+        <button class="lang-option" type="button" data-lang="zh-Hans">简体中文</button>
+        <button class="lang-option" type="button" data-lang="ms">Bahasa Malaysia</button>
+        <button class="lang-option" type="button" data-lang="ja">日本語</button>
+        <button class="lang-option" type="button" data-lang="ko">한국어</button>
+      </div>
+    </div>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -293,6 +336,8 @@ footer a:hover{color:#fff}
     <span class="lang-chip">繁體中文</span>
     <span class="lang-chip">Bahasa Malaysia</span>
     <span class="lang-chip">简体中文</span>
+    <span class="lang-chip">日本語</span>
+    <span class="lang-chip">한국어</span>
   </div>
 </section>
 
@@ -304,7 +349,7 @@ footer a:hover{color:#fff}
 </section>
 
 <footer>
-  <span>© 2025 LUMIO Coordia Intelligence</span>
+  <span>© 2026 LUMIO Coordia Intelligence</span>
   <div class="f-links">
     <a href="/">Home</a>
     <a href="/#work">Work</a>
@@ -333,6 +378,126 @@ const cio = new IntersectionObserver(entries=>{
   });
 },{threshold:.6});
 document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+</script>
+
+<!-- ═══ LANGUAGE SWITCHER + TRANSLATIONS ═══ -->
+<script>
+const langSwitcher = document.querySelector('.language-switcher');
+if(langSwitcher){
+  const langTrigger = langSwitcher.querySelector('.lang-trigger');
+  const langCurrent = langSwitcher.querySelector('.lang-current');
+  const langOptions = langSwitcher.querySelectorAll('.lang-option');
+  const languageLabels = {
+    en:'EN',
+    'zh-Hant':'繁中',
+    'zh-Hans':'简中',
+    ms:'BM',
+    ja:'日本語',
+    ko:'한국어'
+  };
+  const supportedLanguages = Object.keys(languageLabels);
+  const textCopy = {
+    'Story':{'zh-Hant':'故事','zh-Hans':'故事',ms:'Cerita',ja:'ストーリー',ko:'스토리'},
+    'Portfolio':{'zh-Hant':'作品集','zh-Hans':'作品集',ms:'Portfolio',ja:'実績',ko:'포트폴리오'},
+    'Process':{'zh-Hant':'流程','zh-Hans':'流程',ms:'Proses',ja:'流れ',ko:'프로세스'},
+    'About':{'zh-Hant':'關於','zh-Hans':'关于',ms:'Tentang',ja:'会社情報',ko:'소개'},
+    'Pricing':{'zh-Hant':'方案','zh-Hans':'方案',ms:'Harga',ja:'料金',ko:'가격'},
+    "Let's talk":{'zh-Hant':'聊一聊','zh-Hans':'聊一聊',ms:'Jom bincang',ja:'相談する',ko:'문의하기'},
+    'About LUMIO Coordia Intelligence':{'zh-Hant':'關於 LUMIO Coordia Intelligence','zh-Hans':'关于 LUMIO Coordia Intelligence',ms:'Tentang LUMIO Coordia Intelligence',ja:'LUMIO Coordia Intelligenceについて',ko:'LUMIO Coordia Intelligence 소개'},
+    'We make':{'zh-Hant':'我們讓','zh-Hans':'我们让',ms:'Kami bina',ja:'私たちは',ko:'우리는'},
+    'websites':{'zh-Hant':'網站','zh-Hans':'网站',ms:'laman web',ja:'ウェブサイトを',ko:'웹사이트를'},
+    'unmistakable.':{'zh-Hant':'與眾不同。','zh-Hans':'与众不同。',ms:'yang tersendiri.',ja:'唯一無二に。',ko:'특별하게 만듭니다.'},
+    'A clarity-first web studio for service businesses in Malaysia, Hong Kong, and Macau. We don\'t sell decoration — we build the shortest honest path from "who are you?" to "how do I enquire?"':{'zh-Hant':'一間以清晰為先的網站工作室，服務馬來西亞、香港和澳門的服務型企業。我們不賣裝飾——我們打造從「你是誰？」到「怎樣查詢？」之間最短、最誠實的路徑。','zh-Hans':'一家以清晰为先的网站工作室，服务马来西亚、香港和澳门的服务型企业。我们不卖装饰——我们打造从「你是谁？」到「怎么咨询？」之间最短、最诚实的路径。',ms:'Studio web yang mengutamakan kejelasan untuk perniagaan perkhidmatan di Malaysia, Hong Kong dan Macau. Kami tidak menjual hiasan — kami bina laluan paling jelas dari “siapa anda?” ke “bagaimana nak bertanya?”',ja:'マレーシア・香港・マカオのサービス業のための、わかりやすさ第一のウェブ制作スタジオ。装飾ではなく、「誰？」から「どう問い合わせる？」までの最短で誠実な導線をつくります。',ko:'말레이시아·홍콩·마카오의 서비스 기업을 위한 명확함 우선 웹 스튜디오. 우리는 장식을 팔지 않습니다 — “누구지?”에서 “어떻게 문의하지?”까지 가장 짧고 정직한 경로를 만듭니다.'},
+    'Our story':{'zh-Hant':'我們的故事','zh-Hans':'我们的故事',ms:'Kisah kami',ja:'私たちのストーリー',ko:'우리의 이야기'},
+    'Most small-business websites fail quietly. They look fine, cost real money, and':{'zh-Hant':'大多數小企業網站都在無聲地失敗。它們看起來不錯，花了真金白銀，卻','zh-Hans':'大多数小企业网站都在无声地失败。它们看起来不错，花了真金白银，却',ms:'Kebanyakan laman web perniagaan kecil gagal secara senyap. Nampak elok, kosnya nyata, tetapi',ja:'小さなビジネスのウェブサイトの多くは、静かに失敗しています。見た目は悪くなく、費用もかかっているのに、',ko:'대부분의 소기업 웹사이트는 조용히 실패합니다. 보기엔 괜찮고 돈도 들였지만,'},
+    'generate nothing':{'zh-Hant':'帶不來任何成果','zh-Hans':'带不来任何成果',ms:'tidak menghasilkan apa-apa',ja:'成果を生みません',ko:'아무 성과도 내지 못합니다'},
+    '. We started LUMIO because we kept watching good businesses lose enquiries to':{'zh-Hant':'。我們創立 LUMIO，是因為一再看到好企業把查詢輸給了','zh-Hans':'。我们创立 LUMIO，是因为一再看到好企业把咨询输给了',ms:'. Kami mulakan LUMIO kerana terus melihat perniagaan yang bagus kehilangan pertanyaan kepada',ja:'。LUMIOを始めたのは、良いビジネスが問い合わせを逃し続けるのを見てきたからです——',ko:'. 좋은 기업들이 문의를 계속 놓치는 모습을 보며 LUMIO를 시작했습니다 —'},
+    'pages that never made the next step obvious.':{'zh-Hant':'那些從不把下一步說清楚的頁面。','zh-Hans':'那些从不把下一步说清楚的页面。',ms:'halaman yang tidak pernah menjelaskan langkah seterusnya.',ja:'次の一歩が見えないページに。',ko:'다음 단계가 보이지 않는 페이지들에게.'},
+    'What we believe.':{'zh-Hant':'我們的信念。','zh-Hans':'我们的信念。',ms:'Apa yang kami percaya.',ja:'私たちの信念。',ko:'우리의 믿음.'},
+    'A website is a promise about how you do business. If the page is confusing, slow, or vague, that\'s what a visitor assumes working with you will feel like. Clarity isn\'t a style — it\'s the product.':{'zh-Hant':'網站是你做生意方式的承諾。如果頁面混亂、緩慢或含糊，訪客就會認為與你合作也是這種感覺。清晰不是一種風格——它就是產品本身。','zh-Hans':'网站是你做生意方式的承诺。如果页面混乱、缓慢或含糊，访客就会认为与你合作也是这种感觉。清晰不是一种风格——它就是产品本身。',ms:'Laman web ialah janji tentang cara anda berniaga. Jika halaman mengelirukan, perlahan atau kabur, itulah tanggapan pelawat tentang bekerja dengan anda. Kejelasan bukan gaya — ia produk itu sendiri.',ja:'ウェブサイトは、あなたの仕事ぶりを示す約束です。ページがわかりにくく、遅く、曖昧なら、訪問者は「一緒に働く体験も同じだろう」と感じます。わかりやすさはスタイルではなく、プロダクトそのものです。',ko:'웹사이트는 당신이 일하는 방식에 대한 약속입니다. 페이지가 혼란스럽고 느리고 모호하면, 방문자는 협업도 그럴 것이라 여깁니다. 명확함은 스타일이 아니라 제품 그 자체입니다.'},
+    'How we work.':{'zh-Hant':'我們的工作方式。','zh-Hans':'我们的工作方式。',ms:'Cara kami bekerja.',ja:'私たちの進め方。',ko:'우리의 방식.'},
+    'We shape the message, page journey, pricing path, proof, and contact flow before anything gets built. Strategy first, pixels second. You approve the direction before a single pixel is drawn.':{'zh-Hant':'在動手搭建之前，我們先梳理訊息、頁面動線、定價路徑、信任證明和聯絡流程。策略先行，像素其次。在畫下第一個像素之前，方向都由你先確認。','zh-Hans':'在动手搭建之前，我们先梳理信息、页面动线、定价路径、信任证明和联系流程。策略先行，像素其次。在画下第一个像素之前，方向都由你先确认。',ms:'Kami susun mesej, aliran halaman, laluan harga, bukti dan aliran hubungan sebelum apa-apa dibina. Strategi dahulu, piksel kemudian. Anda meluluskan hala tuju sebelum satu piksel pun dilukis.',ja:'制作前に、メッセージ、ページ導線、価格への道筋、信頼材料、問い合わせフローを設計します。戦略が先、ピクセルは後。1ピクセル描く前に方向性をご承認いただきます。',ko:'제작에 앞서 메시지, 페이지 여정, 가격 경로, 신뢰 자료, 문의 흐름부터 설계합니다. 전략이 먼저, 픽셀은 그다음. 픽셀 하나 그리기 전에 방향을 먼저 승인받습니다.'},
+    'Why it\'s safe.':{'zh-Hant':'為何安心。','zh-Hans':'为何安心。',ms:'Mengapa selamat.',ja:'安心できる理由。',ko:'안심할 수 있는 이유.'},
+    'Every project is refund-backed with clear milestones — cancel before kickoff for a full refund. No lock-in, no surprises, no final payment until you\'ve approved the finished work.':{'zh-Hant':'每個項目都有清晰里程碑和退款保障——開工前取消可全額退款。不綁約、沒有意外，在你驗收完成品之前不收尾款。','zh-Hans':'每个项目都有清晰里程碑和退款保障——开工前取消可全额退款。不绑约、没有意外，在你验收成品之前不收尾款。',ms:'Setiap projek disokong jaminan bayaran balik dengan pencapaian yang jelas — batal sebelum mula untuk bayaran balik penuh. Tiada ikatan, tiada kejutan, tiada bayaran akhir sehingga anda meluluskan hasil kerja.',ja:'すべての案件は明確なマイルストーンと返金保証つき。キックオフ前のキャンセルは全額返金。縛りも不意打ちもなく、完成品をご承認いただくまで最終支払いはありません。',ko:'모든 프로젝트는 명확한 마일스톤과 환불 보장이 함께합니다 — 킥오프 전 취소 시 전액 환불. 약정도, 돌발 비용도 없으며 완성작 승인 전까지 잔금은 받지 않습니다.'},
+    'Businesses served':{'zh-Hant':'服務企業','zh-Hans':'服务企业',ms:'Perniagaan dibantu',ja:'支援企業数',ko:'지원 기업'},
+    'Regions':{'zh-Hant':'服務地區','zh-Hans':'服务地区',ms:'Wilayah',ja:'対応地域',ko:'서비스 지역'},
+    'Payback mindset':{'zh-Hant':'回本思維','zh-Hans':'回本思维',ms:'Minda pulang modal',ja:'投資回収の考え方',ko:'투자 회수 관점'},
+    'Refund pre-kickoff':{'zh-Hant':'開工前可退款','zh-Hans':'开工前可退款',ms:'Bayaran balik pra-mula',ja:'開始前は全額返金',ko:'킥오프 전 환불'},
+    'What we stand for':{'zh-Hant':'我們的原則','zh-Hans':'我们的原则',ms:'Pendirian kami',ja:'私たちの価値観',ko:'우리의 원칙'},
+    'Nothing decorative.':{'zh-Hant':'拒絕裝飾。','zh-Hans':'拒绝装饰。',ms:'Tiada hiasan.',ja:'飾りはいらない。',ko:'장식은 없다.'},
+    'Everything useful.':{'zh-Hant':'只留有用。','zh-Hans':'只留有用。',ms:'Semua berguna.',ja:'すべてを実用に。',ko:'모두 쓸모 있게.'},
+    'Clarity over cleverness':{'zh-Hant':'清晰勝過花巧','zh-Hans':'清晰胜过花巧',ms:'Kejelasan mengatasi kepintaran',ja:'巧妙さより明快さ',ko:'영리함보다 명확함'},
+    'If a visitor can\'t repeat your offer in one line after ten seconds, the page has failed — no matter how good it looks.':{'zh-Hant':'如果訪客看了十秒後無法用一句話複述你的服務，這個頁面就已經失敗——無論它多好看。','zh-Hans':'如果访客看了十秒后无法用一句话复述你的服务，这个页面就已经失败——无论它多好看。',ms:'Jika pelawat tidak boleh mengulang tawaran anda dalam satu ayat selepas sepuluh saat, halaman itu telah gagal — walau secantik mana pun.',ja:'10秒見ても訪問者があなたの提供価値を一言で言えなければ、そのページは失敗です——どれだけ美しくても。',ko:'방문자가 10초 후에도 당신의 제안을 한 줄로 말하지 못한다면, 그 페이지는 실패한 겁니다 — 아무리 예뻐도.'},
+    'Honesty over hype':{'zh-Hant':'誠實勝過吹噓','zh-Hans':'诚实胜过吹嘘',ms:'Kejujuran mengatasi gembar-gembur',ja:'誇張より誠実さ',ko:'과장보다 정직'},
+    'We listen first, clarify the goal, and tell you honestly if we\'re the right fit. No sales pitch, no inflated scope.':{'zh-Hant':'我們先聆聽、釐清目標，並誠實告訴你我們是否合適。沒有推銷話術，不誇大範圍。','zh-Hans':'我们先聆听、厘清目标，并诚实告诉你我们是否合适。没有推销话术，不夸大范围。',ms:'Kami dengar dahulu, jelaskan matlamat, dan beritahu dengan jujur jika kami sesuai. Tiada pujukan jualan, tiada skop yang dibesar-besarkan.',ja:'まず聞き、ゴールを明確にし、私たちが適任かどうかを正直にお伝えします。売り込みも、水増しした提案もありません。',ko:'먼저 듣고, 목표를 명확히 하고, 우리가 적합한지 솔직하게 말씀드립니다. 영업 멘트도, 부풀린 범위도 없습니다.'},
+    'Proof over promises':{'zh-Hant':'證明勝過承諾','zh-Hans':'证明胜过承诺',ms:'Bukti mengatasi janji',ja:'約束より証明',ko:'약속보다 증명'},
+    'Refund-backed milestones, transparent pricing on the page, and no final payment until you\'ve approved the work.':{'zh-Hant':'里程碑退款保障、頁面上透明的定價，以及在你驗收之前不收尾款。','zh-Hans':'里程碑退款保障、页面上透明的定价，以及在你验收之前不收尾款。',ms:'Pencapaian dengan jaminan bayaran balik, harga telus di halaman, dan tiada bayaran akhir sehingga anda meluluskan kerja.',ja:'返金保証付きマイルストーン、ページ上の明朗な価格、そして承認まで最終支払いなし。',ko:'환불 보장 마일스톤, 페이지에 공개된 투명한 가격, 승인 전까지 잔금 없음.'},
+    'Systems over sites':{'zh-Hant':'系統勝過網站','zh-Hans':'系统胜过网站',ms:'Sistem mengatasi laman',ja:'サイトよりも仕組み',ko:'사이트보다 시스템'},
+    'A launch is the start. Lead structure, automation, and follow-up flows keep the site working long after we hand it over.':{'zh-Hant':'上線只是開始。潛在客戶結構、自動化和跟進流程，讓網站在交付後持續運作。','zh-Hans':'上线只是开始。潜在客户结构、自动化和跟进流程，让网站在交付后持续运作。',ms:'Pelancaran hanyalah permulaan. Struktur prospek, automasi dan aliran susulan memastikan laman terus berfungsi lama selepas diserahkan.',ja:'公開はスタートにすぎません。リード構造、自動化、フォローアップの流れが、納品後もサイトを働かせ続けます。',ko:'런칭은 시작일 뿐입니다. 리드 구조, 자동화, 후속 흐름이 인도 후에도 사이트를 계속 일하게 합니다.'},
+    'The team':{'zh-Hant':'團隊','zh-Hans':'团队',ms:'Pasukan',ja:'チーム',ko:'팀'},
+    'Two people.':{'zh-Hant':'兩個人。','zh-Hans':'两个人。',ms:'Dua orang.',ja:'ふたりで。',ko:'두 사람.'},
+    'Zero handoffs.':{'zh-Hant':'零轉手。','zh-Hans':'零转手。',ms:'Sifar serah tangan.',ja:'引き継ぎゼロ。',ko:'전달 과정 제로.'},
+    'Co-founder · Strategy & Build':{'zh-Hant':'聯合創辦人 · 策略與開發','zh-Hans':'联合创始人 · 策略与开发',ms:'Pengasas Bersama · Strategi & Pembinaan',ja:'共同創業者 · 戦略＆制作',ko:'공동창업자 · 전략 & 개발'},
+    'Co-founder · Clients & Growth':{'zh-Hant':'聯合創辦人 · 客戶與增長','zh-Hans':'联合创始人 · 客户与增长',ms:'Pengasas Bersama · Pelanggan & Pertumbuhan',ja:'共同創業者 · クライアント＆グロース',ko:'공동창업자 · 고객 & 성장'},
+    'Shapes the message, page journey, and build. VVins is the reason every LUMIO page earns its place — and the one who\'ll cut a section you paid for if it doesn\'t serve the enquiry.':{'zh-Hant':'負責訊息、頁面動線和開發。VVins 是每個 LUMIO 頁面都物有所值的原因——如果某個區塊無助於帶來查詢，即使你付了錢，他也會把它砍掉。','zh-Hans':'负责信息、页面动线和开发。VVins 是每个 LUMIO 页面都物有所值的原因——如果某个区块无助于带来咨询，即使你付了钱，他也会把它砍掉。',ms:'Membentuk mesej, aliran halaman dan pembinaan. VVins ialah sebab setiap halaman LUMIO berbaloi — dan orang yang akan memotong bahagian yang anda bayar jika ia tidak membantu pertanyaan.',ja:'メッセージ、ページ導線、制作を担当。LUMIOのすべてのページが意味を持つのはVVinsのおかげ——問い合わせにつながらないなら、費用をいただいたセクションでも削る人です。',ko:'메시지, 페이지 여정, 제작을 담당합니다. LUMIO의 모든 페이지가 제값을 하는 이유가 VVins입니다 — 문의에 도움이 안 되면 돈 낸 섹션도 잘라내는 사람이죠.'},
+    'Your first conversation and your ongoing contact. Charles turns what you say over coffee into a scope we can deliver on — and keeps you updated in plain language, not jargon.':{'zh-Hant':'你的第一次對話和長期聯絡人。Charles 會把你喝咖啡時說的話變成我們能兌現的範圍——並用大白話（而非行話）讓你隨時了解進度。','zh-Hans':'你的第一次对话和长期联系人。Charles 会把你喝咖啡时说的话变成我们能兑现的范围——并用大白话（而非行话）让你随时了解进度。',ms:'Perbualan pertama dan hubungan berterusan anda. Charles menukar apa yang anda katakan sambil minum kopi kepada skop yang boleh kami tunaikan — dan sentiasa maklumkan anda dalam bahasa mudah, bukan jargon.',ja:'最初の会話から継続的な窓口まで。Charlesはコーヒーを飲みながらの雑談を、実現可能なスコープに変えます——専門用語ではなく、わかりやすい言葉で進捗を共有します。',ko:'첫 대화부터 지속적인 소통 창구까지. Charles는 커피 한잔하며 나눈 이야기를 실현 가능한 범위로 바꿉니다 — 전문용어가 아닌 쉬운 말로 진행 상황을 알려드립니다.'},
+    'Let\'s make yours':{'zh-Hant':'讓你的網站','zh-Hans':'让你的网站',ms:'Jom jadikan milik anda',ja:'あなたのサイトも',ko:'당신의 웹사이트도'},
+    'Tell us the job your website needs to do. We listen first, clarify the goal, and tell you honestly if we\'re the right fit.':{'zh-Hant':'告訴我們你的網站需要完成什麼任務。我們先聆聽、釐清目標，並誠實告訴你我們是否合適。','zh-Hans':'告诉我们你的网站需要完成什么任务。我们先聆听、厘清目标，并诚实告诉你我们是否合适。',ms:'Beritahu kami tugas yang perlu dilakukan oleh laman web anda. Kami dengar dahulu, jelaskan matlamat, dan beritahu dengan jujur jika kami sesuai.',ja:'あなたのウェブサイトが果たすべき役割を教えてください。まず聞き、ゴールを明確にし、適任かどうか正直にお伝えします。',ko:'웹사이트가 해야 할 일을 알려주세요. 먼저 듣고, 목표를 명확히 하고, 우리가 적합한지 솔직하게 말씀드립니다.'},
+    'Home':{'zh-Hant':'首頁','zh-Hans':'首页',ms:'Laman Utama',ja:'ホーム',ko:'홈'},
+    'Work':{'zh-Hant':'作品','zh-Hans':'作品',ms:'Kerja',ja:'実績',ko:'작업'}
+  };
+
+  const textNodes = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      if(node.parentElement && ['SCRIPT','STYLE','SVG'].includes(node.parentElement.tagName)) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  while(walker.nextNode()){
+    const node = walker.currentNode;
+    const key = node.nodeValue.trim();
+    if(textCopy[key]) textNodes.push({node,key});
+  }
+
+  function translateText(key, lang){
+    if(lang === 'en') return key;
+    return (textCopy[key] && textCopy[key][lang]) || key;
+  }
+
+  function applyLanguage(lang){
+    const activeLang = supportedLanguages.includes(lang) ? lang : 'en';
+    document.documentElement.lang = activeLang;
+    textNodes.forEach(({node,key})=>{
+      const original = node.nodeValue;
+      const prefix = original.match(/^\s*/)[0];
+      const suffix = original.match(/\s*$/)[0];
+      node.nodeValue = `${prefix}${translateText(key, activeLang)}${suffix}`;
+    });
+    langOptions.forEach(option=>option.classList.toggle('is-active', option.dataset.lang === activeLang));
+    langCurrent.textContent = languageLabels[activeLang] || 'EN';
+    localStorage.setItem('lumio-language', activeLang);
+  }
+
+  langTrigger.addEventListener('click', e=>{
+    e.stopPropagation();
+    const open = langSwitcher.classList.toggle('open');
+    langTrigger.setAttribute('aria-expanded', open);
+  });
+  langOptions.forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      applyLanguage(opt.dataset.lang);
+      langSwitcher.classList.remove('open');
+      langTrigger.setAttribute('aria-expanded','false');
+    });
+  });
+  document.addEventListener('click', ()=>{
+    langSwitcher.classList.remove('open');
+    langTrigger.setAttribute('aria-expanded','false');
+  });
+  applyLanguage(localStorage.getItem('lumio-language') || 'en');
+}
 </script>
 </body>
 </html>
