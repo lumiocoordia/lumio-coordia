@@ -170,17 +170,38 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   .hero-surface{padding:40px 20px 100px}
 }
 
-/* ═══════════ MARQUEE ═══════════ */
-.marquee{
-  border-top:1px solid var(--black);border-bottom:1px solid var(--black);
-  overflow:hidden;padding:18px 0;white-space:nowrap;
+/* ═══════════ HERO CASE WALL ═══════════ */
+.hero-case-wall{
+  background:var(--ink-900);overflow:hidden;padding:28px 0 42px;white-space:nowrap;position:relative;
 }
-.marquee-track{display:inline-flex;gap:56px;animation:scroll 28s linear infinite}
-.marquee span{
-  font-size:.95rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  display:inline-flex;align-items:center;gap:56px;
+.hero-case-wall::before,.hero-case-wall::after{
+  content:'';position:absolute;top:0;bottom:0;width:min(15vw,160px);z-index:2;pointer-events:none;
 }
-.marquee span::after{content:'✦';font-size:.8rem}
+.hero-case-wall::before{left:0;background:linear-gradient(90deg,var(--ink-900),rgba(19,12,24,0))}
+.hero-case-wall::after{right:0;background:linear-gradient(270deg,var(--ink-900),rgba(19,12,24,0))}
+.hero-case-track{position:relative;z-index:1;display:inline-flex;gap:18px;padding:0 18px;animation:scroll 36s linear infinite}
+.hero-case-wall:hover .hero-case-track{animation-play-state:paused}
+.hero-case-card{
+  width:280px;height:100px;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr auto;
+  align-items:end;gap:6px;padding:18px 18px 16px;border-radius:16px;white-space:normal;cursor:pointer;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 8px 32px rgba(0,0,0,.2);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  color:#fff;transition:transform .2s var(--ease),border-color .2s,background .2s;
+}
+.hero-case-card:hover{transform:translateY(-4px);border-color:rgba(201,169,110,.55);background:rgba(255,255,255,.11)}
+.hero-case-no{grid-column:1/-1;align-self:start;color:var(--accent);font-size:.72rem;font-weight:500;letter-spacing:.14em}
+.hero-case-name{font-size:1.08rem;font-weight:800;line-height:1.1}
+.hero-case-result{font-size:.88rem;color:rgba(255,255,255,.62);text-align:right;line-height:1.25}
+.hero-case-arrow{grid-column:2;justify-self:end;color:var(--accent);font-size:1.2rem;transition:transform .2s var(--ease)}
+.hero-case-card:hover .hero-case-arrow{transform:translateX(4px)}
+@media(max-width:768px){
+  .hero-case-wall{padding:20px 0 30px}
+  .hero-case-wall::before,.hero-case-wall::after{width:40px}
+  .hero-case-track{gap:14px;animation-duration:34s}
+  .hero-case-card{width:220px;height:96px;padding:16px}
+  .hero-case-name{font-size:.98rem}.hero-case-result{font-size:.78rem}
+  .hero-case-card:active{transform:translateY(-2px)}
+}
 @keyframes scroll{to{transform:translateX(-50%)}}
 
 /* ═══════════ SHARED ═══════════ */
@@ -263,7 +284,8 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .who-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-top:56px;max-width:1000px}
 .who-cols p{font-size:1rem;line-height:1.7;color:#555}
 .who-foot{margin-top:64px;display:flex;gap:64px;flex-wrap:wrap;border-top:1px solid var(--grey-lt);padding-top:48px}
-.who-stat .num{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:clamp(2.4rem,4.5vw,4rem);font-weight:900;letter-spacing:-.03em}
+.who-stat .num{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:clamp(2.7rem,5vw,4.4rem);font-weight:900;letter-spacing:-.03em;color:var(--accent);display:flex;align-items:baseline;gap:.08em}
+.who-stat .stat-suffix{font-size:.46em;color:#777;letter-spacing:0}
 .who-stat .lbl{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);margin-top:6px}
 
 /* ═══════════ TESTIMONIALS ═══════════ */
@@ -286,28 +308,54 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .rating .rating-num{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:clamp(2.4rem,4vw,3.6rem);font-weight:900;line-height:1}
 .rating .rating-lbl{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);margin-top:6px}
 .trusted{margin-top:80px;border-top:1px solid var(--grey-lt);padding-top:28px;overflow:hidden;white-space:nowrap}
-.trusted .marquee-track{animation-duration:22s}
-.trusted span{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:1.3rem;font-weight:800;text-transform:uppercase;letter-spacing:.02em;color:#c9c9c9;display:inline-flex;align-items:center;gap:56px}
-.trusted span::after{content:'✦';font-size:.7rem;color:#c9c9c9}
+.trusted .marquee-track{display:inline-flex;align-items:center;gap:0;animation:scroll 34s linear infinite}
+.trusted:hover .marquee-track{animation-play-state:paused}
+.trusted span{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:1.08rem;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:#b8b8b8;display:inline-flex;align-items:center;padding:0 24px}
+.trusted span::after{content:'•';font-family:'Archivo',sans-serif;font-size:.75rem;color:rgba(120,120,120,.5);padding-left:48px}
 
-/* ═══════════ FRAMEWORK ═══════════ */
-.frame-steps{margin-top:24px;border-top:1px solid var(--grey-lt)}
-.step{
-  display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,6vw,90px);
-  padding:52px 0;border-bottom:1px solid var(--grey-lt);align-items:baseline;
+/* ═══════════ PROCESS TIMELINE ═══════════ */
+.frame-steps{margin-top:24px}
+.process-timeline{position:relative;display:flex;flex-direction:column;gap:34px;margin-left:clamp(0px,10vw,150px);padding-left:64px}
+.timeline-line{
+  position:absolute;left:7px;top:16px;bottom:16px;width:2px;border-radius:999px;
+  background:linear-gradient(180deg,#d4a574,var(--accent));transform-origin:top;transition:transform 1.2s var(--ease);
 }
-.step .big-n{
-  font-family:'Archivo Expanded','Archivo',sans-serif;
-  font-size:clamp(3rem,7vw,6rem);font-weight:900;line-height:1;
-  color:transparent;-webkit-text-stroke:1.5px var(--black);
-  transition:color .4s;
+.timeline-step{
+  position:relative;display:grid;grid-template-columns:1fr;gap:10px;padding:8px 0 28px;border-bottom:1px solid var(--grey-lt);
+  transition:opacity .4s var(--ease),transform .4s var(--ease);
 }
-.step:hover .big-n{color:var(--black)}
-.step h3{
-  font-family:'Archivo Expanded','Archivo',sans-serif;
-  font-size:clamp(1.4rem,3vw,2.2rem);text-transform:uppercase;font-weight:800;margin-bottom:12px;
+.timeline-step::before{
+  content:'';position:absolute;left:-64px;top:16px;width:16px;height:16px;border-radius:50%;
+  background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 4px rgba(201,169,110,.18);
+  transition:transform .38s var(--ease),opacity .38s var(--ease);
 }
-.step p{max-width:560px;line-height:1.65;color:#555}
+.timeline-step .big-n{font-size:.86rem;font-weight:700;line-height:1;color:var(--accent);letter-spacing:.16em}
+.timeline-step h3{
+  font-family:'Archivo Expanded','Archivo',sans-serif;font-size:clamp(1.35rem,2.6vw,2rem);
+  text-transform:uppercase;font-weight:800;margin-bottom:10px;
+}
+.timeline-step p{max-width:560px;line-height:1.65;color:#555;font-size:.95rem}
+.process-timeline.timeline-ready .timeline-line{transform:scaleY(0)}
+.process-timeline.timeline-ready .timeline-step{opacity:0;transform:translateY(10px)}
+.process-timeline.timeline-ready .timeline-step::before{opacity:0;transform:scale(0)}
+.process-timeline.in .timeline-line{transform:scaleY(1)}
+.process-timeline.in .timeline-step{opacity:1;transform:none}
+.process-timeline.in .timeline-step::before{opacity:1;transform:scale(1)}
+.process-timeline.in .timeline-step:nth-child(2){transition-delay:.25s}
+.process-timeline.in .timeline-step:nth-child(3){transition-delay:.55s}
+.process-timeline.in .timeline-step:nth-child(4){transition-delay:.85s}
+.process-timeline.in .timeline-step:nth-child(2)::before{transition-delay:.25s}
+.process-timeline.in .timeline-step:nth-child(3)::before{transition-delay:.55s}
+.process-timeline.in .timeline-step:nth-child(4)::before{transition-delay:.85s}
+@media(max-width:768px){
+  .process-timeline{margin-left:0;padding-left:48px;gap:26px}
+  .timeline-step::before{left:-48px}
+  .timeline-step h3{font-size:1.25rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-case-track,.trusted .marquee-track{animation:none}
+  .process-timeline.timeline-ready .timeline-line,.process-timeline.timeline-ready .timeline-step,.process-timeline.timeline-ready .timeline-step::before{transform:none;opacity:1}
+}
 
 /* ═══════════ PRICING TEASER ═══════════ */
 .pricing-teaser{text-align:left}
@@ -447,11 +495,45 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>Refund-backed milestones</span><span>Available in 6 languages</span><span>Built for small businesses</span>
-    <span>Refund-backed milestones</span><span>Available in 6 languages</span><span>Built for small businesses</span>
+<!-- HERO CASE WALL -->
+<div class="hero-case-wall" aria-label="Selected client outcomes">
+  <div class="hero-case-track">
+    <a class="hero-case-card" href="#portfolio-card-1">
+      <span class="hero-case-no">01</span>
+      <span class="hero-case-name">Long Ieng</span>
+      <span class="hero-case-result">100+ businesses served</span>
+      <span class="hero-case-arrow">→</span>
+    </a>
+    <a class="hero-case-card" href="#portfolio-card-2">
+      <span class="hero-case-no">02</span>
+      <span class="hero-case-name">Macau World Travel</span>
+      <span class="hero-case-result">More enquiries</span>
+      <span class="hero-case-arrow">→</span>
+    </a>
+    <a class="hero-case-card" href="#portfolio-card-3">
+      <span class="hero-case-no">03</span>
+      <span class="hero-case-name">Stayflow Homestay</span>
+      <span class="hero-case-result">Direct bookings</span>
+      <span class="hero-case-arrow">→</span>
+    </a>
+    <a class="hero-case-card" href="#portfolio-card-1" aria-hidden="true" tabindex="-1">
+      <span class="hero-case-no">01</span>
+      <span class="hero-case-name">Long Ieng</span>
+      <span class="hero-case-result">100+ businesses served</span>
+      <span class="hero-case-arrow">→</span>
+    </a>
+    <a class="hero-case-card" href="#portfolio-card-2" aria-hidden="true" tabindex="-1">
+      <span class="hero-case-no">02</span>
+      <span class="hero-case-name">Macau World Travel</span>
+      <span class="hero-case-result">More enquiries</span>
+      <span class="hero-case-arrow">→</span>
+    </a>
+    <a class="hero-case-card" href="#portfolio-card-3" aria-hidden="true" tabindex="-1">
+      <span class="hero-case-no">03</span>
+      <span class="hero-case-name">Stayflow Homestay</span>
+      <span class="hero-case-result">Direct bookings</span>
+      <span class="hero-case-arrow">→</span>
+    </a>
   </div>
 </div>
 
@@ -621,9 +703,9 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
     <p>Trusted by 20+ businesses across Hong Kong, Macau, Malaysia, and Singapore. A good website should pay for itself in 6 months.</p>
   </div>
   <div class="who-foot reveal reveal-d3">
-    <div class="who-stat"><div class="num" data-count="20" data-suffix="+">0</div><div class="lbl">Businesses</div></div>
-    <div class="who-stat"><div class="num" data-count="4">0</div><div class="lbl">Regions</div></div>
-    <div class="who-stat"><div class="num" data-count="6" data-suffix=" mo."></div><div class="lbl">Payback mindset</div></div>
+    <div class="who-stat"><div class="num" data-count="20" data-suffix="+"><span class="stat-value">20</span><span class="stat-suffix">+</span></div><div class="lbl">Businesses</div></div>
+    <div class="who-stat"><div class="num" data-count="4"><span class="stat-value">4</span></div><div class="lbl">Regions</div></div>
+    <div class="who-stat"><div class="num" data-count="6" data-suffix=" mo."><span class="stat-value">6</span><span class="stat-suffix">mo.</span></div><div class="lbl">Payback mindset</div></div>
   </div>
 </section>
 
@@ -655,10 +737,10 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
       <div class="by"><span class="av">AR</span><div><div class="nm">Aisyah Rahman</div><div class="rl">Owner, Stayflow Homestay</div></div></div>
     </div>
   </div>
-  <div class="trusted reveal" aria-hidden="true">
+  <div class="trusted reveal" aria-label="Client and portfolio brands">
     <div class="marquee-track">
-      <span>Long Ieng</span><span>Macau World Travel</span><span>Stayflow Homestay</span><span>StayFix Dispatch</span><span>Paybit Tech</span>
-      <span>Long Ieng</span><span>Macau World Travel</span><span>Stayflow Homestay</span><span>StayFix Dispatch</span><span>Paybit Tech</span>
+      <span>Long Ieng</span><span>Macau World Travel</span><span>Stayflow Homestay</span><span>StayFix Dispatch</span><span>Paybit Tech</span><span>Bunnytales</span>
+      <span>Long Ieng</span><span>Macau World Travel</span><span>Stayflow Homestay</span><span>StayFix Dispatch</span><span>Paybit Tech</span><span>Bunnytales</span>
     </div>
   </div>
 </section>
@@ -668,16 +750,17 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
   <p class="sec-label reveal">Process</p>
   <h2 class="big-h reveal reveal-d1">Simple from<br>the client side.</h2>
   <p class="reveal reveal-d2" style="margin-top:20px;color:var(--grey);font-size:1.05rem">You bring the need. We handle the rest.</p>
-  <div class="frame-steps" style="margin-top:56px">
-    <div class="step reveal">
+  <div class="frame-steps process-timeline" style="margin-top:56px">
+    <span class="timeline-line" aria-hidden="true"></span>
+    <div class="step timeline-step">
       <span class="big-n">01</span>
       <div><h3>Tell us what you need</h3><p>No formal brief. One conversation is enough.</p></div>
     </div>
-    <div class="step reveal">
+    <div class="step timeline-step">
       <span class="big-n">02</span>
       <div><h3>Confirm the direction</h3><p>We agree the direction before design starts.</p></div>
     </div>
-    <div class="step reveal">
+    <div class="step timeline-step">
       <span class="big-n">03</span>
       <div><h3>We handle execution</h3><p>Design, build, test, and launch — start to finish.</p></div>
     </div>
@@ -790,25 +873,41 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const cio = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(!e.isIntersecting) return;
-    const el=e.target, end=+el.dataset.count, suffix=el.dataset.suffix||'', t0=performance.now();
+    const el=e.target, valueEl=el.querySelector('.stat-value') || el, end=+el.dataset.count, suffixEl=el.querySelector('.stat-suffix'), t0=performance.now();
+    valueEl.textContent = '0';
+    if(suffixEl) suffixEl.style.opacity = suffixEl.textContent.trim() === '+' ? '0' : '1';
     (function tick(t){
-      const p=Math.min((t-t0)/1200,1);
-      el.textContent=Math.round(end*(1-Math.pow(1-p,3)))+suffix;
+      const p=Math.min((t-t0)/2000,1);
+      const eased = 1-Math.pow(1-p,3);
+      valueEl.textContent=Math.round(end*eased);
+      if(suffixEl && suffixEl.textContent.trim() === '+' && p > .72) suffixEl.style.opacity = String((p-.72)/.28);
+      if(suffixEl && p >= 1) suffixEl.style.opacity = '1';
       if(p<1) requestAnimationFrame(tick);
     })(t0);
     cio.unobserve(el);
   });
-},{threshold:.6});
+},{threshold:.5});
 document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
 
-/* ── Contact form — write to Supabase, then open WhatsApp ── */
+const processTimeline = document.querySelector('.process-timeline');
+if(processTimeline && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  processTimeline.classList.add('timeline-ready');
+  const tio = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      processTimeline.classList.add('in');
+      tio.unobserve(processTimeline);
+    });
+  },{threshold:.5});
+  tio.observe(processTimeline);
+}
+
+/* ── Contact form — WhatsApp deep link ── */
 const contactForm = document.getElementById('contact-form');
 const formSuccess = document.getElementById('form-success');
 const LUMIO_WHATSAPP_NUMBER = '60177209159';
-const SUPABASE_URL = 'https://kzglqjridvhckhlqyloc.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_Ff6_46rAYg_d7LMV2zzqgQ_1yaX3S-p';
 if(contactForm){
-  contactForm.addEventListener('submit', async (e)=>{
+  contactForm.addEventListener('submit', (e)=>{
     e.preventDefault();
     if(!contactForm.checkValidity()){ contactForm.reportValidity(); return; }
     const gotcha = contactForm.querySelector('[name="_gotcha"]');
@@ -817,30 +916,8 @@ if(contactForm){
     const btn = contactForm.querySelector('.btn-submit');
     const originalText = btn.textContent;
     const data = Object.fromEntries(new FormData(contactForm).entries());
-    btn.textContent = 'Sending…';
+    btn.textContent = 'Opening WhatsApp...';
     btn.disabled = true;
-
-    try{
-      await fetch(`${SUPABASE_URL}/rest/v1/lumio_contact_submissions`, {
-        method:'POST',
-        headers:{
-          'Content-Type':'application/json',
-          apikey: SUPABASE_ANON_KEY,
-          Authorization:`Bearer ${SUPABASE_ANON_KEY}`,
-          Prefer:'return=minimal'
-        },
-        body: JSON.stringify([{
-          name: data.name,
-          email: data.email,
-          budget: data.budget || null,
-          project_type: null,
-          message: data.message || null,
-          source: 'website'
-        }])
-      });
-    }catch(err){
-      console.error('Supabase submission failed, continuing to WhatsApp', err);
-    }
 
     const whatsappMessage = [
       'Hi LUMIO Team,', '',
@@ -850,12 +927,11 @@ if(contactForm){
     ].join('\n');
     const whatsappUrl = `https://wa.me/${LUMIO_WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
 
-    contactForm.style.display = 'none';
     if(formSuccess) formSuccess.style.display = 'block';
     const opened = window.open(whatsappUrl, '_blank', 'noopener');
     if(!opened) window.location.href = whatsappUrl;
 
-    window.setTimeout(()=>{ btn.textContent = originalText; btn.disabled = false; }, 2200);
+    window.setTimeout(()=>{ btn.textContent = originalText; btn.disabled = false; }, 2400);
   });
 }
 
@@ -972,6 +1048,7 @@ if(langSwitcher){
     'Send message →':{'zh-Hant':'發送訊息 →','zh-Hans':'发送信息 →',ms:'Hantar mesej →',ja:'送信する →',ko:'메시지 보내기 →'},
     'WhatsApp us instead':{'zh-Hant':'改用 WhatsApp 聯絡','zh-Hans':'改用 WhatsApp 联系',ms:'WhatsApp kami',ja:'WhatsAppで連絡',ko:'WhatsApp으로 문의'},
     'Email us instead':{'zh-Hant':'改用電郵聯絡','zh-Hans':'改用邮箱联系',ms:'E-mel kami',ja:'メールで連絡',ko:'이메일로 문의'},
+    "Opening WhatsApp... We'll get back to you within 24 hours.":{'zh-Hant':'正在開啟 WhatsApp……我們會在 24 小時內回覆。','zh-Hans':'正在打开 WhatsApp……我们会在 24 小时内回复。',ms:'Membuka WhatsApp... Kami akan balas dalam 24 jam.',ja:'WhatsAppを開いています... 24時間以内に返信します。',ko:'WhatsApp을 여는 중... 24시간 내에 답변드립니다.'},
     'Opening WhatsApp... We’ll get back to you within 24 hours.':{'zh-Hant':'正在開啟 WhatsApp……我們會在 24 小時內回覆。','zh-Hans':'正在打开 WhatsApp……我们会在 24 小时内回复。',ms:'Membuka WhatsApp... Kami akan balas dalam 24 jam.',ja:'WhatsAppを開いています... 24時間以内に返信します。',ko:'WhatsApp을 여는 중... 24시간 내에 답변드립니다.'},
     'Your message has been saved and prepared in WhatsApp.':{'zh-Hant':'你的訊息已準備好並開啟至 WhatsApp。','zh-Hans':'你的信息已准备好并打开至 WhatsApp。',ms:'Mesej anda telah disediakan dalam WhatsApp.',ja:'メッセージはWhatsApp用に準備されました。',ko:'메시지가 WhatsApp에 준비되었습니다.'},
     'Clear websites for service businesses.':{'zh-Hant':'為服務型企業建立清楚網站。','zh-Hans':'为服务型企业建立清楚网站。',ms:'Laman web jelas untuk perniagaan servis.',ja:'サービス業のための明快なウェブサイト。',ko:'서비스 비즈니스를 위한 명확한 웹사이트.'},

@@ -47,6 +47,8 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   --grey-lt:#e8e8e8;
   --pad:clamp(20px,5vw,72px);
   --ease:cubic-bezier(.22,1,.36,1);
+  --accent:#c9a96e;
+  --accent-dk:#a9854c;
 }
 
 /* NAV */
@@ -70,6 +72,32 @@ nav{
 }
 .nav-cta:hover{background:#fff;color:#000}
 @media(max-width:820px){.nav-links{display:none}}
+.language-switcher{z-index:120;position:fixed;top:74px;right:var(--pad)}
+.lang-trigger{
+  display:flex;align-items:center;gap:6px;background:rgba(10,10,10,.82);
+  border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 15px;color:#fff;
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;cursor:pointer;backdrop-filter:blur(12px);
+  transition:background .2s,border-color .2s;white-space:nowrap;
+}
+.lang-trigger:hover{background:#0a0a0a;border-color:rgba(201,169,110,.5)}
+.lang-trigger svg{transition:transform .25s var(--ease)}
+.language-switcher.open .lang-trigger svg{transform:rotate(180deg)}
+.lang-dropdown{
+  position:absolute;z-index:121;top:calc(100% + 8px);right:0;background:rgba(10,10,10,.94);
+  border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:6px;display:flex;flex-direction:column;
+  gap:2px;min-width:150px;backdrop-filter:blur(20px);opacity:0;transform:translateY(-6px);
+  pointer-events:none;transition:opacity .2s var(--ease),transform .2s var(--ease);
+}
+.language-switcher.open .lang-dropdown{opacity:1;transform:translateY(0);pointer-events:auto}
+.lang-option{
+  display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;
+  font-size:.78rem;font-weight:500;color:rgba(255,255,255,.65);cursor:pointer;transition:background .15s,color .15s;
+  border:none;background:transparent;width:100%;text-align:left;letter-spacing:.02em;
+}
+.lang-option:hover{background:rgba(255,255,255,.08);color:#fff}
+.lang-option.is-active{color:#fff;background:rgba(255,255,255,.06)}
+.lang-option.is-active::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0}
+@media(max-width:820px){.language-switcher{top:70px;right:16px}}
 
 /* SHARED */
 section{padding:clamp(80px,12vw,160px) var(--pad)}
@@ -102,13 +130,19 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .hero-kicker::before{content:'';width:44px;height:1px;background:var(--black)}
 .hero h1{
   font-family:'Archivo Expanded','Archivo',sans-serif;
-  font-size:clamp(2.6rem,8vw,7rem);
+  font-size:clamp(2.6rem,7.2vw,6.4rem);
   line-height:.94;letter-spacing:-.02em;
-  text-transform:uppercase;font-weight:900;
+  text-transform:uppercase;font-weight:900;max-width:none;
 }
 .hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line.keep-together{white-space:nowrap}
 .hero h1 .word{display:inline-block;transform:translateY(110%);animation:rise 1s var(--ease) forwards}
 .hero h1 .line:nth-child(2) .word{animation-delay:.12s}
+@media(max-width:560px){
+  .hero h1 .line{overflow:visible}
+  .hero h1 .line.keep-together{white-space:normal}
+  .hero h1 .word{display:block;white-space:normal}
+}
 @keyframes rise{to{transform:translateY(0)}}
 .hero-sub{
   max-width:560px;margin-top:40px;font-size:1.05rem;line-height:1.65;color:#3a3a3a;
@@ -117,12 +151,18 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
 /* PLANS */
-.plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--black);border:1px solid var(--black);margin-top:64px}
+.plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;background:transparent;border:0;margin-top:64px;align-items:stretch}
 @media(max-width:900px){.plans-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.plans-grid{grid-template-columns:1fr}}
-.plan{background:#fff;padding:44px 32px;display:flex;flex-direction:column;gap:8px}
-.plan.pop{background:var(--black);color:#fff}
+.plan{background:#fff;padding:44px 32px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--black);position:relative}
+.plan.pop{background:#15110a;color:#fff;border:2px solid var(--accent);box-shadow:0 10px 30px rgba(201,169,110,.2);transform:translateY(-8px);z-index:2}
+.popular-badge{
+  position:absolute;top:-16px;right:24px;background:var(--accent);color:#fff;border-radius:999px;
+  padding:8px 14px;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:0 10px 22px rgba(201,169,110,.24);
+}
 .plan .tier{font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
+.plan.pop .tier{color:var(--accent)}
 .plan .price{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;margin:12px 0 4px}
 .plan .price sup{font-size:.45em;font-weight:700}
 .plan p{font-size:.9rem;line-height:1.6;color:#666;margin-bottom:16px}
@@ -135,7 +175,9 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
   transition:background .3s,color .3s;
 }
 .plan .go-plan:hover{background:var(--black);color:#fff}
-.plan.pop .go-plan:hover{background:#fff;color:var(--black)}
+.plan.pop .go-plan{background:var(--accent);border-color:var(--accent);color:#fff}
+.plan.pop .go-plan:hover{background:var(--accent-dk);border-color:var(--accent-dk);color:#fff}
+@media(max-width:560px){.plan.pop{transform:none}.popular-badge{top:14px;right:16px;font-size:.66rem;padding:7px 11px}}
 .refund-line{margin-top:40px;font-size:.92rem;color:var(--grey);display:flex;align-items:center;gap:12px}
 .refund-line b{color:var(--black)}
 
@@ -198,13 +240,26 @@ footer a:hover{color:#fff}
   </div>
   <a class="nav-cta" href="https://wa.me/60177209159">Let's talk</a>
 </nav>
+<div class="language-switcher" aria-label="Language selector">
+  <button class="lang-trigger" type="button" aria-expanded="false" aria-haspopup="listbox">
+    <span class="lang-current">EN</span>
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="rgba(255,255,255,0.6)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="lang-dropdown" role="listbox">
+    <button class="lang-option is-active" type="button" data-lang="en">English</button>
+    <button class="lang-option" type="button" data-lang="zh-Hant">繁體中文</button>
+    <button class="lang-option" type="button" data-lang="zh-Hans">简体中文</button>
+    <button class="lang-option" type="button" data-lang="ms">Bahasa Malaysia</button>
+    <button class="lang-option" type="button" data-lang="ja">日本語</button>
+    <button class="lang-option" type="button" data-lang="ko">한국어</button>
+  </div>
+</div>
 
 <!-- HERO -->
 <header class="hero">
   <p class="hero-kicker">Pricing</p>
   <h1>
-    <span class="line"><span class="word">Choose your</span></span>
-    <span class="line"><span class="word outline">level.</span></span>
+    <span class="line keep-together"><span class="word">Choose your level.</span></span>
   </h1>
   <p class="hero-sub">From a clear first impression to a complete sales path — pick the level that matches the job your website needs to do.</p>
 </header>
@@ -220,7 +275,8 @@ footer a:hover{color:#fff}
       <a class="go-plan" href="https://wa.me/60177209159">Get started</a>
     </div>
     <div class="plan pop reveal reveal-d1">
-      <span class="tier" style="color:#bbb">Growth — Most popular</span>
+      <span class="popular-badge">Most popular</span>
+      <span class="tier">Growth</span>
       <div class="price">RM 4,000<sup>+</sup></div>
       <p>Clearer lead structure, basic automation.</p>
       <ul><li>Custom pages</li><li>Lead structure</li><li>Basic automation</li></ul>
@@ -305,6 +361,120 @@ const io = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
 },{threshold:.15});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const langSwitcher = document.querySelector('.language-switcher');
+if(langSwitcher){
+  const langTrigger = langSwitcher.querySelector('.lang-trigger');
+  const langCurrent = langSwitcher.querySelector('.lang-current');
+  const langOptions = langSwitcher.querySelectorAll('.lang-option');
+  const languageLabels = {en:'EN','zh-Hant':'繁中','zh-Hans':'简中',ms:'BM',ja:'日本語',ko:'한국어'};
+  const supportedLanguages = Object.keys(languageLabels);
+  const textCopy = {
+    'Story':{'zh-Hant':'故事','zh-Hans':'故事',ms:'Cerita',ja:'ストーリー',ko:'스토리'},
+    'Portfolio':{'zh-Hant':'作品集','zh-Hans':'作品集',ms:'Portfolio',ja:'実績',ko:'포트폴리오'},
+    'Process':{'zh-Hant':'流程','zh-Hans':'流程',ms:'Proses',ja:'流れ',ko:'프로세스'},
+    'About':{'zh-Hant':'關於','zh-Hans':'关于',ms:'Tentang',ja:'会社情報',ko:'소개'},
+    'Pricing':{'zh-Hant':'方案','zh-Hans':'方案',ms:'Harga',ja:'料金',ko:'가격'},
+    "Let's talk":{'zh-Hant':'立即諮詢','zh-Hans':'立即咨询',ms:'Jom berbincang',ja:'相談する',ko:'상담하기'},
+    'Choose your level.':{'zh-Hant':'選擇適合你的方案。','zh-Hans':'选择适合你的方案。',ms:'Pilih tahap anda.',ja:'適切なレベルを選ぶ。',ko:'알맞은 단계를 선택하세요.'},
+    'From a clear first impression to a complete sales path — pick the level that matches the job your website needs to do.':{'zh-Hant':'從清楚第一印象到完整銷售路徑，選擇符合網站任務的方案。','zh-Hans':'从清楚第一印象到完整销售路径，选择符合网站任务的方案。',ms:'Daripada kesan pertama yang jelas hingga laluan jualan lengkap — pilih tahap yang sesuai dengan tugas laman web anda.',ja:'明確な第一印象から完全な販売導線まで、サイトが担う役割に合うレベルを選びます。',ko:'명확한 첫인상부터 완성된 판매 흐름까지, 웹사이트가 해야 할 일에 맞는 단계를 선택하세요.'},
+    'Starter':{'zh-Hant':'Starter','zh-Hans':'Starter',ms:'Starter',ja:'Starter',ko:'Starter'},
+    'Growth':{'zh-Hant':'Growth','zh-Hans':'Growth',ms:'Growth',ja:'Growth',ko:'Growth'},
+    'Most popular':{'zh-Hant':'最受歡迎','zh-Hans':'最受欢迎',ms:'Paling popular',ja:'一番人気',ko:'가장 인기'},
+    'Premium':{'zh-Hant':'Premium','zh-Hans':'Premium',ms:'Premium',ja:'Premium',ko:'Premium'},
+    'Custom':{'zh-Hant':'Custom','zh-Hans':'Custom',ms:'Custom',ja:'Custom',ko:'Custom'},
+    'Quote':{'zh-Hant':'報價','zh-Hans':'报价',ms:'Sebut harga',ja:'見積り',ko:'견적'},
+    'Launch, credibility, a clear contact path.':{'zh-Hant':'上線、建立信任、清楚聯絡路徑。','zh-Hans':'上线、建立信任、清楚联系路径。',ms:'Pelancaran, kredibiliti, dan laluan hubungan yang jelas.',ja:'公開、信頼性、明確な問い合わせ導線。',ko:'출시, 신뢰도, 명확한 문의 경로.'},
+    'Clearer lead structure, basic automation.':{'zh-Hant':'更清楚的線索結構和基本自動化。','zh-Hans':'更清楚的线索结构和基本自动化。',ms:'Struktur lead yang lebih jelas dan automasi asas.',ja:'より明確なリード構造と基本自動化。',ko:'더 명확한 리드 구조와 기본 자동화.'},
+    'Better UX, connected systems.':{'zh-Hant':'更好的 UX 和系統連接。','zh-Hans':'更好的 UX 和系统连接。',ms:'UX lebih baik dan sistem bersambung.',ja:'より良いUXと連携システム。',ko:'더 나은 UX와 연결된 시스템.'},
+    'Complex scopes, ongoing support.':{'zh-Hant':'複雜範圍和持續支援。','zh-Hans':'复杂范围和持续支持。',ms:'Skop kompleks dan sokongan berterusan.',ja:'複雑な範囲と継続サポート。',ko:'복잡한 범위와 지속 지원.'},
+    'Simple website':{'zh-Hant':'簡單網站','zh-Hans':'简单网站',ms:'Laman web ringkas',ja:'シンプルなサイト',ko:'간단한 웹사이트'},
+    'Mobile ready':{'zh-Hant':'手機端適配','zh-Hans':'手机端适配',ms:'Sedia mudah alih',ja:'モバイル対応',ko:'모바일 대응'},
+    'Clear contact path':{'zh-Hant':'清楚聯絡路徑','zh-Hans':'清楚联系路径',ms:'Laluan hubungan jelas',ja:'明確な問い合わせ導線',ko:'명확한 문의 경로'},
+    'Custom pages':{'zh-Hant':'自訂頁面','zh-Hans':'自定义页面',ms:'Halaman khusus',ja:'カスタムページ',ko:'맞춤 페이지'},
+    'Lead structure':{'zh-Hant':'查詢線索結構','zh-Hans':'咨询线索结构',ms:'Struktur lead',ja:'リード構造',ko:'리드 구조'},
+    'Basic automation':{'zh-Hant':'基本自動化','zh-Hans':'基本自动化',ms:'Automasi asas',ja:'基本自動化',ko:'기본 자동화'},
+    'Custom UX':{'zh-Hant':'自訂 UX','zh-Hans':'自定义 UX',ms:'UX khusus',ja:'カスタムUX',ko:'맞춤 UX'},
+    'Advanced build':{'zh-Hant':'進階製作','zh-Hans':'进阶制作',ms:'Binaan lanjutan',ja:'高度な構築',ko:'고급 제작'},
+    'System connection':{'zh-Hant':'系統連接','zh-Hans':'系统连接',ms:'Sambungan sistem',ja:'システム連携',ko:'시스템 연결'},
+    'Complex scope':{'zh-Hant':'複雜範圍','zh-Hans':'复杂范围',ms:'Skop kompleks',ja:'複雑な範囲',ko:'복잡한 범위'},
+    'Business systems':{'zh-Hant':'業務系統','zh-Hans':'业务系统',ms:'Sistem bisnes',ja:'業務システム',ko:'비즈니스 시스템'},
+    'Ongoing support':{'zh-Hant':'持續支援','zh-Hans':'持续支持',ms:'Sokongan berterusan',ja:'継続サポート',ko:'지속 지원'},
+    'Get started':{'zh-Hant':'開始諮詢','zh-Hans':'开始咨询',ms:'Mula sekarang',ja:'開始する',ko:'시작하기'},
+    'Refund-backed':{'zh-Hant':'退款保障','zh-Hans':'退款保障',ms:'Jaminan bayaran balik',ja:'返金保証',ko:'환불 보장'},
+    '— cancel before kickoff for a full refund.':{'zh-Hant':'— 開始前取消可全額退款。','zh-Hans':'— 开始前取消可全额退款。',ms:'— batal sebelum mula untuk bayaran balik penuh.',ja:'— 開始前のキャンセルは全額返金。',ko:'— 시작 전 취소 시 전액 환불.'},
+    'Compare what is included':{'zh-Hant':'比較包含內容','zh-Hans':'比较包含内容',ms:'Bandingkan kandungan',ja:'含まれる内容を比較',ko:'포함 항목 비교'},
+    'Feature':{'zh-Hant':'功能','zh-Hans':'功能',ms:'Ciri',ja:'機能',ko:'기능'},
+    'Pages':{'zh-Hant':'頁面','zh-Hans':'页面',ms:'Halaman',ja:'ページ',ko:'페이지'},
+    'Mobile responsive':{'zh-Hant':'手機自適應','zh-Hans':'手机自适应',ms:'Responsif mudah alih',ja:'モバイル対応',ko:'모바일 반응형'},
+    'Contact form':{'zh-Hant':'聯絡表單','zh-Hans':'联系表单',ms:'Borang hubungan',ja:'問い合わせフォーム',ko:'문의 양식'},
+    'Basic SEO setup':{'zh-Hant':'基本 SEO 設定','zh-Hans':'基本 SEO 设置',ms:'Tetapan SEO asas',ja:'基本SEO設定',ko:'기본 SEO 설정'},
+    'Automation flow':{'zh-Hant':'自動化流程','zh-Hans':'自动化流程',ms:'Aliran automasi',ja:'自動化フロー',ko:'자동화 흐름'},
+    'Multilingual setup':{'zh-Hant':'多語言設定','zh-Hans':'多语言设置',ms:'Tetapan pelbagai bahasa',ja:'多言語設定',ko:'다국어 설정'},
+    'Custom UX design':{'zh-Hant':'自訂 UX 設計','zh-Hans':'自定义 UX 设计',ms:'Reka bentuk UX khusus',ja:'カスタムUXデザイン',ko:'맞춤 UX 디자인'},
+    'System integration':{'zh-Hant':'系統整合','zh-Hans':'系统整合',ms:'Integrasi sistem',ja:'システム統合',ko:'시스템 통합'},
+    'Yes':{'zh-Hant':'有','zh-Hans':'有',ms:'Ya',ja:'あり',ko:'예'},
+    'No':{'zh-Hant':'沒有','zh-Hans':'没有',ms:'Tidak',ja:'なし',ko:'아니오'},
+    'Deposit protected.':{'zh-Hant':'訂金受保障。','zh-Hans':'订金受保障。',ms:'Deposit dilindungi.',ja:'デポジット保護。',ko:'보증금 보호.'},
+    'No lock-in, no surprises.':{'zh-Hant':'不綁長約，不會有意外收費。','zh-Hans':'不绑长约，不会有意外收费。',ms:'Tiada ikatan, tiada kejutan.',ja:'長期縛りなし、想定外なし。',ko:'장기 약정 없음, 예상 밖 비용 없음.'},
+    'Read the refund policy →':{'zh-Hant':'查看退款政策 →','zh-Hans':'查看退款政策 →',ms:'Baca polisi bayaran balik →',ja:'返金ポリシーを見る →',ko:'환불 정책 보기 →'},
+    'How payment works':{'zh-Hant':'付款方式','zh-Hans':'付款方式',ms:'Cara pembayaran',ja:'支払い方法',ko:'결제 방식'},
+    "50% deposit before work starts, 50% before launch. No final payment until you've approved the finished work.":{'zh-Hant':'開始前支付 50% 訂金，上線前支付 50%。你確認完成品前，不需要支付尾款。','zh-Hans':'开始前支付 50% 订金，上线前支付 50%。你确认完成品前，不需要支付尾款。',ms:'Deposit 50% sebelum kerja bermula, 50% sebelum pelancaran. Bayaran akhir hanya selepas anda meluluskan hasil siap.',ja:'作業開始前に50%、公開前に50%。完成物を承認するまで最終支払いはありません。',ko:'작업 전 50%, 공개 전 50%. 완성본 승인 전에는 최종 결제가 없습니다.'},
+    'Not sure which level?':{'zh-Hant':'不確定選哪個方案？','zh-Hans':'不确定选哪个方案？',ms:'Tidak pasti tahap mana?',ja:'どのレベルか迷っていますか？',ko:'어떤 단계가 맞는지 모르겠나요?'},
+    "Tell us the job your website needs to do — we'll recommend the right starting point on a quick call.":{'zh-Hant':'告訴我們網站需要完成的任務，我們會在簡短通話中建議合適起點。','zh-Hans':'告诉我们网站需要完成的任务，我们会在简短通话中建议合适起点。',ms:'Beritahu tugas laman web anda — kami akan cadangkan titik mula yang sesuai dalam panggilan ringkas.',ja:'サイトが担う役割を教えてください。短い通話で適切な開始点を提案します。',ko:'웹사이트가 해야 할 일을 알려주시면 짧은 통화에서 알맞은 시작점을 추천합니다.'},
+    'Timeline':{'zh-Hant':'時間表','zh-Hans':'时间表',ms:'Garis masa',ja:'スケジュール',ko:'일정'},
+    'Starter sites typically launch in 3 weeks. Growth and Premium scopes are confirmed before kickoff.':{'zh-Hant':'Starter 通常 3 週上線。Growth 和 Premium 會在開始前確認範圍。','zh-Hans':'Starter 通常 3 周上线。Growth 和 Premium 会在开始前确认范围。',ms:'Laman Starter biasanya dilancar dalam 3 minggu. Skop Growth dan Premium disahkan sebelum mula.',ja:'Starterは通常3週間で公開。GrowthとPremiumは開始前に範囲を確認します。',ko:'Starter는 보통 3주 내 공개됩니다. Growth와 Premium 범위는 시작 전에 확정합니다.'},
+    'Ready to':{'zh-Hant':'準備好','zh-Hans':'准备好',ms:'Bersedia untuk',ja:'始める準備は',ko:'시작할 준비가'},
+    'get started?':{'zh-Hant':'開始了嗎？','zh-Hans':'开始了吗？',ms:'bermula?',ja:'できていますか？',ko:'되셨나요?'},
+    "No brief required. Tell us what you need and we'll get back to you within 24 hours.":{'zh-Hant':'不需要正式 brief。告訴我們你的需要，我們會在 24 小時內回覆。','zh-Hans':'不需要正式 brief。告诉我们你的需要，我们会在 24 小时内回复。',ms:'Tidak perlu brief rasmi. Beritahu keperluan anda dan kami akan balas dalam 24 jam.',ja:'正式なブリーフは不要です。必要なことを教えてください。24時間以内に返信します。',ko:'공식 브리프는 필요 없습니다. 필요한 것을 알려주시면 24시간 내에 답변드립니다.'},
+    'WhatsApp us':{'zh-Hant':'WhatsApp 聯絡我們','zh-Hans':'WhatsApp 联系我们',ms:'WhatsApp kami',ja:'WhatsAppで連絡',ko:'WhatsApp 문의'},
+    'Home':{'zh-Hant':'首頁','zh-Hans':'首页',ms:'Laman utama',ja:'ホーム',ko:'홈'},
+    'Work':{'zh-Hant':'作品','zh-Hans':'作品',ms:'Kerja',ja:'実績',ko:'작업'},
+    'Email':{'zh-Hant':'電郵','zh-Hans':'邮箱',ms:'E-mel',ja:'メール',ko:'이메일'}
+  };
+  const textNodes = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      if(node.parentElement && ['SCRIPT','STYLE','SVG'].includes(node.parentElement.tagName)) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  while(walker.nextNode()){
+    const node = walker.currentNode;
+    const key = node.nodeValue.trim();
+    if(textCopy[key]) textNodes.push({node,key});
+  }
+  function applyLanguage(lang){
+    const activeLang = supportedLanguages.includes(lang) ? lang : 'en';
+    document.documentElement.lang = activeLang;
+    textNodes.forEach(({node,key})=>{
+      const prefix = node.nodeValue.match(/^\s*/)[0];
+      const suffix = node.nodeValue.match(/\s*$/)[0];
+      node.nodeValue = `${prefix}${activeLang === 'en' ? key : (textCopy[key][activeLang] || key)}${suffix}`;
+    });
+    langOptions.forEach(option=>option.classList.toggle('is-active', option.dataset.lang === activeLang));
+    langCurrent.textContent = languageLabels[activeLang] || 'EN';
+    localStorage.setItem('lumio-language', activeLang);
+  }
+  langTrigger.addEventListener('click', e=>{
+    e.stopPropagation();
+    const open = langSwitcher.classList.toggle('open');
+    langTrigger.setAttribute('aria-expanded', open);
+  });
+  langOptions.forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      applyLanguage(opt.dataset.lang);
+      langSwitcher.classList.remove('open');
+      langTrigger.setAttribute('aria-expanded','false');
+    });
+  });
+  document.addEventListener('click', ()=>{
+    langSwitcher.classList.remove('open');
+    langTrigger.setAttribute('aria-expanded','false');
+  });
+  applyLanguage(localStorage.getItem('lumio-language') || 'en');
+}
 </script>
 </body>
 </html>
