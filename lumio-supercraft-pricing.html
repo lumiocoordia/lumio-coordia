@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — LUMIO Coordia Intelligence</title>
+<meta name="description" content="Website plans for Malaysian service businesses — Starter, Growth, Premium, and Custom. Refund-backed milestones, clear scope, no lock-in.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Expanded:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Archivo',system-ui,sans-serif;
+  background:#fff;color:#0a0a0a;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{cursor:pointer;background:none;border:none;font:inherit}
+::selection{background:#0a0a0a;color:#fff}
+
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --grey:#8a8a8a;
+  --grey-lt:#e8e8e8;
+  --pad:clamp(20px,5vw,72px);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px var(--pad);
+  mix-blend-mode:difference;color:#fff;
+}
+.nav-logo{font-weight:900;letter-spacing:.05em;font-size:1.05rem}
+.nav-logo span{font-weight:400}
+.nav-links{display:flex;gap:32px;font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.nav-links a{position:relative;opacity:.75;transition:opacity .3s}
+.nav-links a:hover{opacity:1}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;background:#fff;transition:width .35s var(--ease)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  border:1px solid #fff;padding:10px 22px;border-radius:999px;
+  font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .3s,color .3s;color:#fff;
+}
+.nav-cta:hover{background:#fff;color:#000}
+@media(max-width:820px){.nav-links{display:none}}
+
+/* SHARED */
+section{padding:clamp(80px,12vw,160px) var(--pad)}
+.sec-label{
+  font-size:.78rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--grey);margin-bottom:36px;
+  display:flex;align-items:center;gap:14px;
+}
+.sec-label::before{content:'';width:36px;height:1px;background:currentColor}
+.big-h{
+  font-family:'Archivo Expanded','Archivo',sans-serif;
+  font-size:clamp(2.2rem,6vw,5.2rem);
+  line-height:1;letter-spacing:-.02em;text-transform:uppercase;font-weight:900;
+}
+.outline{color:transparent;-webkit-text-stroke:2px var(--black)}
+.reveal{opacity:0;transform:translateY(48px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+
+/* HERO */
+.hero{
+  min-height:60svh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 var(--pad) 6vh;
+}
+.hero-kicker{
+  font-size:.8rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--grey);margin-bottom:28px;
+  display:flex;align-items:center;gap:14px;
+}
+.hero-kicker::before{content:'';width:44px;height:1px;background:var(--black)}
+.hero h1{
+  font-family:'Archivo Expanded','Archivo',sans-serif;
+  font-size:clamp(2.6rem,8vw,7rem);
+  line-height:.94;letter-spacing:-.02em;
+  text-transform:uppercase;font-weight:900;
+}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .word{display:inline-block;transform:translateY(110%);animation:rise 1s var(--ease) forwards}
+.hero h1 .line:nth-child(2) .word{animation-delay:.12s}
+@keyframes rise{to{transform:translateY(0)}}
+.hero-sub{
+  max-width:560px;margin-top:40px;font-size:1.05rem;line-height:1.65;color:#3a3a3a;
+  opacity:0;animation:fadeUp .9s var(--ease) .55s forwards;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* PLANS */
+.plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--black);border:1px solid var(--black);margin-top:64px}
+@media(max-width:900px){.plans-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.plans-grid{grid-template-columns:1fr}}
+.plan{background:#fff;padding:44px 32px;display:flex;flex-direction:column;gap:8px}
+.plan.pop{background:var(--black);color:#fff}
+.plan .tier{font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
+.plan .price{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;margin:12px 0 4px}
+.plan .price sup{font-size:.45em;font-weight:700}
+.plan p{font-size:.9rem;line-height:1.6;color:#666;margin-bottom:16px}
+.plan.pop p{color:#999}
+.plan ul{list-style:none;font-size:.88rem;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;flex:1}
+.plan li::before{content:'—  '}
+.plan .go-plan{
+  border:1px solid currentColor;border-radius:999px;padding:13px;text-align:center;
+  font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  transition:background .3s,color .3s;
+}
+.plan .go-plan:hover{background:var(--black);color:#fff}
+.plan.pop .go-plan:hover{background:#fff;color:var(--black)}
+.refund-line{margin-top:40px;font-size:.92rem;color:var(--grey);display:flex;align-items:center;gap:12px}
+.refund-line b{color:var(--black)}
+
+/* COMPARE TABLE */
+.compare-wrap{margin-top:96px;overflow-x:auto}
+.compare{width:100%;border-collapse:collapse;min-width:640px}
+.compare th,.compare td{padding:18px 20px;text-align:left;border-bottom:1px solid var(--grey-lt);font-size:.9rem}
+.compare thead th{
+  font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);font-weight:700;
+  border-bottom:2px solid var(--black);
+}
+.compare thead th:first-child{color:var(--black)}
+.compare tbody td:first-child{font-weight:700}
+.compare tbody tr:hover{background:#f7f7f5}
+.compare td.yes{color:var(--black);font-weight:700}
+.compare td.no{color:#c7c7c7}
+.compare thead th.pop-col{color:var(--black);position:relative}
+
+/* FAQ-ish note strip */
+.note-strip{background:#f4f4f2;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px}
+.note{background:#fff;padding:40px 36px}
+.note h3{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:1.1rem;text-transform:uppercase;font-weight:800;margin-bottom:12px}
+.note p{font-size:.9rem;line-height:1.65;color:#555}
+
+/* CTA / FOOTER */
+.btn-talk{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#fff;color:#000;
+  padding:18px 36px;border-radius:999px;
+  font-weight:700;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;
+  transition:transform .35s var(--ease),background .3s;
+}
+.btn-talk:hover{transform:scale(1.05);background:#e5e5e5}
+.btn-talk .arr{transition:transform .35s var(--ease)}
+.btn-talk:hover .arr{transform:translateX(5px)}
+.cta{background:var(--black);color:#fff;text-align:center;padding:clamp(110px,16vw,200px) var(--pad)}
+.cta .big-h{margin-bottom:20px}
+.cta .big-h .outline{-webkit-text-stroke:2px #fff;color:transparent}
+.cta p{color:#999;max-width:480px;margin:0 auto 48px;line-height:1.65}
+footer{
+  background:var(--black);color:#777;
+  padding:40px var(--pad);border-top:1px solid #222;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;
+  font-size:.82rem;letter-spacing:.06em;
+}
+footer .f-links{display:flex;gap:28px;text-transform:uppercase;font-weight:600;font-size:.75rem;letter-spacing:.14em}
+footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="lumio-supercraft-draft.html">LUMIO<span> Coordia</span></a>
+  <div class="nav-links">
+    <a href="lumio-supercraft-draft.html#who">Story</a>
+    <a href="lumio-supercraft-draft.html#work">Portfolio</a>
+    <a href="lumio-supercraft-draft.html#process">Process</a>
+    <a href="lumio-supercraft-about.html">About</a>
+    <a href="lumio-supercraft-pricing.html" style="opacity:1">Pricing</a>
+  </div>
+  <a class="nav-cta" href="https://wa.me/60177209159">Let's talk</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-kicker">Pricing</p>
+  <h1>
+    <span class="line"><span class="word">Choose your</span></span>
+    <span class="line"><span class="word outline">level.</span></span>
+  </h1>
+  <p class="hero-sub">From a clear first impression to a complete sales path — pick the level that matches the job your website needs to do.</p>
+</header>
+
+<!-- PLANS -->
+<section style="padding-top:0">
+  <div class="plans-grid">
+    <div class="plan reveal">
+      <span class="tier">Starter</span>
+      <div class="price">RM 1,500<sup>+</sup></div>
+      <p>Launch, credibility, a clear contact path.</p>
+      <ul><li>Simple website</li><li>Mobile ready</li><li>Clear contact path</li></ul>
+      <a class="go-plan" href="https://wa.me/60177209159">Get started</a>
+    </div>
+    <div class="plan pop reveal reveal-d1">
+      <span class="tier" style="color:#bbb">Growth — Most popular</span>
+      <div class="price">RM 4,000<sup>+</sup></div>
+      <p>Clearer lead structure, basic automation.</p>
+      <ul><li>Custom pages</li><li>Lead structure</li><li>Basic automation</li></ul>
+      <a class="go-plan" href="https://wa.me/60177209159">Get started</a>
+    </div>
+    <div class="plan reveal reveal-d2">
+      <span class="tier">Premium</span>
+      <div class="price">RM 8,000<sup>+</sup></div>
+      <p>Better UX, connected systems.</p>
+      <ul><li>Custom UX</li><li>Advanced build</li><li>System connection</li></ul>
+      <a class="go-plan" href="https://wa.me/60177209159">Get started</a>
+    </div>
+    <div class="plan reveal reveal-d3">
+      <span class="tier">Custom</span>
+      <div class="price">Quote</div>
+      <p>Complex scopes, ongoing support.</p>
+      <ul><li>Complex scope</li><li>Business systems</li><li>Ongoing support</li></ul>
+      <a class="go-plan" href="https://wa.me/60177209159">Get started</a>
+    </div>
+  </div>
+  <p class="refund-line reveal">✦ <span><b>Refund-backed</b> — cancel before kickoff for a full refund.</span></p>
+
+  <div class="compare-wrap reveal">
+    <p class="sec-label" style="margin-bottom:32px">Compare what is included</p>
+    <table class="compare">
+      <thead>
+        <tr><th>Feature</th><th>Starter</th><th class="pop-col">Growth</th><th>Premium</th><th>Custom</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Pages</td><td>1–3 pages</td><td>5–8 pages</td><td>10+ pages</td><td>Custom</td></tr>
+        <tr><td>Mobile responsive</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Contact form</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Basic SEO setup</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Automation flow</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Multilingual setup</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Custom UX design</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>System integration</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
+        <tr><td>Ongoing support</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="refund-line reveal" style="margin-top:56px">✦ <span><b>Deposit protected.</b> No lock-in, no surprises. <a href="#" style="text-decoration:underline">Read the refund policy →</a></span></p>
+</section>
+
+<!-- NOTES -->
+<div class="note-strip">
+  <div class="note reveal">
+    <h3>How payment works</h3>
+    <p>50% deposit before work starts, 50% before launch. No final payment until you've approved the finished work.</p>
+  </div>
+  <div class="note reveal reveal-d1">
+    <h3>Not sure which level?</h3>
+    <p>Tell us the job your website needs to do — we'll recommend the right starting point on a quick call.</p>
+  </div>
+  <div class="note reveal reveal-d2">
+    <h3>Timeline</h3>
+    <p>Starter sites typically launch in 3 weeks. Growth and Premium scopes are confirmed before kickoff.</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta">
+  <h2 class="big-h reveal">Ready to<br><span class="outline">get started?</span></h2>
+  <p class="reveal reveal-d1">No brief required. Tell us what you need and we'll get back to you within 24 hours.</p>
+  <a class="btn-talk reveal reveal-d2" href="https://wa.me/60177209159">WhatsApp us <span class="arr">→</span></a>
+</section>
+
+<footer>
+  <span>© 2026 LUMIO Coordia Intelligence</span>
+  <div class="f-links">
+    <a href="lumio-supercraft-draft.html">Home</a>
+    <a href="lumio-supercraft-draft.html#work">Work</a>
+    <a href="lumio-supercraft-about.html">About</a>
+    <a href="mailto:lumiocoordia@gmail.com">Email</a>
+    <a href="https://wa.me/60177209159">WhatsApp</a>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
