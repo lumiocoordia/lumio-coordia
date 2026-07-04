@@ -394,8 +394,8 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
       <a href="#who">Story</a>
       <a href="#work">Portfolio</a>
       <a href="#process">Process</a>
-      <a href="/about.html">About</a>
-      <a href="/pricing.html">Pricing</a>
+      <a href="/about">About</a>
+      <a href="/pricing">Pricing</a>
       <a href="#contact">Contact</a>
     </div>
     <a href="#pricing" class="nav-cta-pill">Get a website</a>
@@ -407,10 +407,12 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
       <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="rgba(255,255,255,0.6)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
     <div class="lang-dropdown" role="listbox">
-      <button class="lang-option is-active" type="button" data-lang="EN">English</button>
-      <button class="lang-option" type="button" data-lang="繁中">繁體中文</button>
-      <button class="lang-option" type="button" data-lang="BM">Bahasa Malaysia</button>
-      <button class="lang-option" type="button" data-lang="简中">简体中文</button>
+      <button class="lang-option is-active" type="button" data-lang="en">English</button>
+      <button class="lang-option" type="button" data-lang="zh-Hant">繁體中文</button>
+      <button class="lang-option" type="button" data-lang="zh-Hans">简体中文</button>
+      <button class="lang-option" type="button" data-lang="ms">Bahasa Malaysia</button>
+      <button class="lang-option" type="button" data-lang="ja">日本語</button>
+      <button class="lang-option" type="button" data-lang="ko">한국어</button>
     </div>
   </div>
 
@@ -424,7 +426,7 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
       <h1>Simple websites. <em>Serious results.</em></h1>
       <p>Clear, practical websites built around your offer, your proof, and your next enquiry.</p>
       <div class="hero-ctas">
-        <a class="outline-cta primary" href="/pricing.html">View website plans →</a>
+        <a class="outline-cta primary" href="/pricing">View website plans →</a>
         <a class="outline-cta" href="#work">View our work →</a>
       </div>
       <div class="hero-trust">
@@ -434,7 +436,7 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
         </a>
         <span class="trust-pill">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg>
-          <span class="trust-txt">Available in 4 languages</span>
+          <span class="trust-txt">Available in 6 languages</span>
         </span>
         <span class="trust-pill">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20V9l8-5 8 5v11" stroke-linejoin="round"/><path d="M9 20v-6h6v6" stroke-linejoin="round"/></svg>
@@ -448,8 +450,8 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
 <!-- MARQUEE -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>Refund-backed milestones</span><span>Available in 4 languages</span><span>Built for small businesses</span>
-    <span>Refund-backed milestones</span><span>Available in 4 languages</span><span>Built for small businesses</span>
+    <span>Refund-backed milestones</span><span>Available in 6 languages</span><span>Built for small businesses</span>
+    <span>Refund-backed milestones</span><span>Available in 6 languages</span><span>Built for small businesses</span>
   </div>
 </div>
 
@@ -687,7 +689,7 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
   <p class="sec-label reveal">Pricing</p>
   <h2 class="big-h reveal reveal-d1">Four levels.<br><span class="outline">One clear scope.</span></h2>
   <p class="reveal reveal-d2" style="margin-top:20px;max-width:520px;color:#555;font-size:1.02rem;line-height:1.6">Starter, Growth, Premium, and Custom — from RM 1,500. Refund-backed, no lock-in.</p>
-  <a class="btn-talk reveal reveal-d3" href="/pricing.html" style="margin-top:36px;background:var(--black);color:#fff">See plans &amp; pricing <span class="arr">→</span></a>
+  <a class="btn-talk reveal reveal-d3" href="/pricing" style="margin-top:36px;background:var(--black);color:#fff">See plans &amp; pricing <span class="arr">→</span></a>
 </section>
 
 <!-- CTA / CONTACT -->
@@ -758,8 +760,8 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
       <a href="#top">Home</a>
       <a href="#work">Work</a>
       <a href="#process">Process</a>
-      <a href="/about.html">About</a>
-      <a href="/pricing.html">Pricing</a>
+      <a href="/about">About</a>
+      <a href="/pricing">Pricing</a>
       <a href="#contact">Contact</a>
     </div>
     <div class="foot-col">
@@ -857,21 +859,181 @@ if(contactForm){
   });
 }
 
-/* ── Language switcher dropdown (visual only) ── */
+/* ── Language switcher — English primary, multilingual support ── */
 const langSwitcher = document.querySelector('.language-switcher');
 if(langSwitcher){
   const langTrigger = langSwitcher.querySelector('.lang-trigger');
   const langCurrent = langSwitcher.querySelector('.lang-current');
+  const langOptions = langSwitcher.querySelectorAll('.lang-option');
+  const languageLabels = {
+    en:'EN',
+    'zh-Hant':'繁中',
+    'zh-Hans':'简中',
+    ms:'BM',
+    ja:'日本語',
+    ko:'한국어'
+  };
+  const supportedLanguages = Object.keys(languageLabels);
+  const textCopy = {
+    'Story':{'zh-Hant':'故事','zh-Hans':'故事',ms:'Cerita',ja:'ストーリー',ko:'스토리'},
+    'Portfolio':{'zh-Hant':'作品集','zh-Hans':'作品集',ms:'Portfolio',ja:'実績',ko:'포트폴리오'},
+    'Process':{'zh-Hant':'流程','zh-Hans':'流程',ms:'Proses',ja:'流れ',ko:'프로세스'},
+    'About':{'zh-Hant':'關於','zh-Hans':'关于',ms:'Tentang',ja:'会社情報',ko:'소개'},
+    'Pricing':{'zh-Hant':'方案','zh-Hans':'方案',ms:'Harga',ja:'料金',ko:'가격'},
+    'Contact':{'zh-Hant':'聯絡','zh-Hans':'联系',ms:'Hubungi',ja:'お問い合わせ',ko:'문의'},
+    'Get a website':{'zh-Hant':'立即建站','zh-Hans':'立即建站',ms:'Bina laman web',ja:'サイトを依頼',ko:'웹사이트 의뢰'},
+    'Digital growth for small businesses':{'zh-Hant':'為小型企業帶來數碼增長','zh-Hans':'为小型企业带来数字增长',ms:'Pertumbuhan digital untuk perniagaan kecil',ja:'小規模ビジネスのためのデジタル成長',ko:'소기업을 위한 디지털 성장'},
+    'Simple websites.':{'zh-Hant':'簡單清楚的網站。','zh-Hans':'简单清楚的网站。',ms:'Laman web yang jelas.',ja:'わかりやすいウェブサイト。',ko:'쉽고 명확한 웹사이트.'},
+    'Serious results.':{'zh-Hant':'帶來實際成效。','zh-Hans':'带来实际成效。',ms:'Hasil yang serius.',ja:'確かな成果へ。',ko:'확실한 결과.'},
+    'Clear, practical websites built around your offer, your proof, and your next enquiry.':{'zh-Hant':'清楚、實用的網站，圍繞你的服務、信任證明和下一個查詢而建立。','zh-Hans':'清楚、实用的网站，围绕你的服务、信任证明和下一个咨询而建立。',ms:'Laman web yang jelas dan praktikal, dibina sekitar tawaran, bukti, dan pertanyaan seterusnya.',ja:'提供内容、信頼材料、次の問い合わせまでを整理した、明快で実用的なウェブサイト。',ko:'제안, 신뢰 자료, 다음 문의 흐름을 중심으로 만든 명확하고 실용적인 웹사이트.'},
+    'View website plans':{'zh-Hant':'查看網站方案','zh-Hans':'查看网站方案',ms:'Lihat pelan laman web',ja:'プランを見る',ko:'웹사이트 플랜 보기'},
+    'View our work':{'zh-Hant':'瀏覽作品','zh-Hans':'浏览作品',ms:'Lihat hasil kerja',ja:'実績を見る',ko:'작업 보기'},
+    'Refund-backed milestones':{'zh-Hant':'按里程碑退款保障','zh-Hans':'按里程碑退款保障',ms:'Pencapaian dengan jaminan bayaran balik',ja:'返金保証付きマイルストーン',ko:'환불 보장 마일스톤'},
+    'Available in 6 languages':{'zh-Hant':'支援 6 種語言','zh-Hans':'支持 6 种语言',ms:'Tersedia dalam 6 bahasa',ja:'6言語に対応',ko:'6개 언어 지원'},
+    'Built for small businesses':{'zh-Hant':'專為小型企業打造','zh-Hans':'专为小型企业打造',ms:'Dibina untuk perniagaan kecil',ja:'小規模ビジネス向け',ko:'소기업을 위해 제작'},
+    'Work that':{'zh-Hant':'真正有用的','zh-Hans':'真正有用的',ms:'Kerja yang',ja:'成果につながる',ko:'성과를 내는'},
+    'pulls its weight.':{'zh-Hant':'網站作品。','zh-Hans':'网站作品。',ms:'membawa hasil.',ja:'ウェブ制作。',ko:'웹사이트.'},
+    'Accounting Consultancy':{'zh-Hant':'會計顧問','zh-Hans':'会计顾问',ms:'Perundingan perakaunan',ja:'会計コンサルティング',ko:'회계 컨설팅'},
+    '100+ businesses served':{'zh-Hant':'服務 100+ 企業','zh-Hans':'服务 100+ 企业',ms:'100+ perniagaan dibantu',ja:'100社以上を支援',ko:'100개 이상 기업 지원'},
+    'Travel Agency':{'zh-Hant':'旅行社','zh-Hans':'旅行社',ms:'Agensi pelancongan',ja:'旅行会社',ko:'여행사'},
+    'More enquiries, less noise':{'zh-Hant':'更多有效查詢，更少雜訊','zh-Hans':'更多有效咨询，更少噪音',ms:'Lebih banyak pertanyaan, kurang kekeliruan',ja:'問い合わせを増やし、迷いを減らす',ko:'문의는 늘리고 혼란은 줄임'},
+    'Airbnb Operations':{'zh-Hant':'Airbnb 營運','zh-Hans':'Airbnb 运营',ms:'Operasi Airbnb',ja:'Airbnb運営',ko:'Airbnb 운영'},
+    'More direct bookings':{'zh-Hant':'更多直接預訂','zh-Hans':'更多直接预订',ms:'Lebih banyak tempahan langsung',ja:'直接予約を増やす',ko:'직접 예약 증가'},
+    'Finance Software':{'zh-Hant':'金融軟件','zh-Hans':'金融软件',ms:'Perisian kewangan',ja:'金融ソフトウェア',ko:'금융 소프트웨어'},
+    'Clear product messaging':{'zh-Hant':'清楚產品訊息','zh-Hans':'清楚产品信息',ms:'Mesej produk yang jelas',ja:'製品メッセージを明確化',ko:'명확한 제품 메시지'},
+    'Repair Dispatch':{'zh-Hant':'維修派單','zh-Hans':'维修派单',ms:'Pengurusan pembaikan',ja:'修理手配',ko:'수리 배정'},
+    'Streamlined dispatch':{'zh-Hant':'更順暢派單流程','zh-Hans':'更顺畅派单流程',ms:'Aliran tugasan lebih lancar',ja:'手配フローを効率化',ko:'배정 흐름 간소화'},
+    'Early Childhood Education':{'zh-Hant':'幼兒教育','zh-Hans':'幼儿教育',ms:'Pendidikan awal kanak-kanak',ja:'幼児教育',ko:'유아 교육'},
+    'Bilingual brand, clear trial bookings':{'zh-Hant':'雙語品牌，清楚試堂預約','zh-Hans':'双语品牌，清楚试听预约',ms:'Jenama dwibahasa, tempahan percubaan jelas',ja:'二言語ブランドと明確な体験予約',ko:'이중언어 브랜드와 명확한 체험 예약'},
+    'Sound familiar?':{'zh-Hant':'情況熟悉嗎？','zh-Hans':'情况熟悉吗？',ms:'Pernah alami ini?',ja:'思い当たりますか？',ko:'익숙한 상황인가요?'},
+    'If this is you,':{'zh-Hant':'如果這就是你，','zh-Hans':'如果这就是你，',ms:'Jika ini situasi anda,',ja:'もし当てはまるなら、',ko:'이런 상황이라면,'},
+    'we can help.':{'zh-Hant':'我們可以幫你。','zh-Hans':'我们可以帮你。',ms:'kami boleh bantu.',ja:'私たちが支援できます。',ko:'우리가 도울 수 있습니다.'},
+    'Homestay or Airbnb':{'zh-Hant':'民宿或 Airbnb','zh-Hans':'民宿或 Airbnb',ms:'Homestay atau Airbnb',ja:'民泊・Airbnb',ko:'홈스테이 또는 Airbnb'},
+    'Your listing gets 200 views a week but only 2 bookings.':{'zh-Hant':'你的房源每週有 200 次瀏覽，卻只有 2 個預訂。','zh-Hans':'你的房源每周有 200 次浏览，却只有 2 个预订。',ms:'Senarai anda dilihat 200 kali seminggu tetapi hanya mendapat 2 tempahan.',ja:'掲載は週200回見られているのに、予約は2件だけ。',ko:'숙소는 주 200회 조회되지만 예약은 2건뿐입니다.'},
+    'Consultancy or agency':{'zh-Hant':'顧問或代理服務','zh-Hans':'顾问或代理服务',ms:'Perundingan atau agensi',ja:'コンサル・代理店',ko:'컨설팅 또는 에이전시'},
+    'Clients ask you to explain what you do, even after seeing your site.':{'zh-Hant':'客戶看完網站後，仍然要你再解釋你做甚麼。','zh-Hans':'客户看完网站后，仍然要你再解释你做什么。',ms:'Klien masih meminta anda jelaskan perkhidmatan walaupun selepas melihat laman web.',ja:'サイトを見た後でも、顧客に「何をしているのか」を説明する必要がある。',ko:'고객이 사이트를 본 뒤에도 무엇을 하는지 다시 설명해 달라고 합니다.'},
+    'Local service business':{'zh-Hant':'本地服務生意','zh-Hans':'本地服务生意',ms:'Perniagaan servis tempatan',ja:'地域サービス業',ko:'지역 서비스 비즈니스'},
+    "You're on Google Maps, but nobody finds you online.":{'zh-Hant':'你在 Google Maps 上，但客戶仍然在網上找不到你。','zh-Hans':'你在 Google Maps 上，但客户仍然在网上找不到你。',ms:'Anda ada di Google Maps, tetapi orang masih tidak menemui anda secara online.',ja:'Google Mapsにはあるのに、オンラインでは見つけてもらえない。',ko:'Google Maps에는 있지만 온라인에서 고객이 찾지 못합니다.'},
+    'If this is you':{'zh-Hant':'如果這就是你','zh-Hans':'如果这就是你',ms:'Jika ini anda',ja:'この状況なら',ko:'이런 상황이라면'},
+    'Your site looks fine — but no one enquires.':{'zh-Hant':'你的網站看起來不差，但沒有人查詢。','zh-Hans':'你的网站看起来不差，但没有人咨询。',ms:'Laman web nampak baik, tetapi tiada pertanyaan.',ja:'サイトの見た目は悪くないのに、問い合わせが来ない。',ko:'사이트는 괜찮아 보이지만 문의가 없습니다.'},
+    "You can't say what makes you different in one line.":{'zh-Hant':'你無法用一句話說清楚自己的不同。','zh-Hans':'你无法用一句话说清楚自己的不同。',ms:'Anda sukar jelaskan perbezaan anda dalam satu ayat.',ja:'自社の違いを一文で言えない。',ko:'한 문장으로 차별점을 말하기 어렵습니다.'},
+    'Visitors leave before they ever reach your offer.':{'zh-Hant':'訪客還沒看到你的服務就離開。','zh-Hans':'访客还没看到你的服务就离开。',ms:'Pelawat keluar sebelum sampai ke tawaran anda.',ja:'訪問者がオファーを見る前に離脱する。',ko:'방문자가 제안을 보기 전에 떠납니다.'},
+    "Here's the fix":{'zh-Hant':'我們會這樣解決','zh-Hans':'我们会这样解决',ms:'Cara membaikinya',ja:'解決方法',ko:'해결 방법'},
+    'A site built to turn visitors into enquiries.':{'zh-Hant':'建立一個能把訪客變成查詢的網站。','zh-Hans':'建立一个能把访客变成咨询的网站。',ms:'Laman web yang menukar pelawat menjadi pertanyaan.',ja:'訪問者を問い合わせにつなげるサイトを作る。',ko:'방문자를 문의로 전환하는 사이트를 만듭니다.'},
+    'A clear message that lands in seconds.':{'zh-Hant':'幾秒內讓人明白的訊息。','zh-Hans':'几秒内让人明白的信息。',ms:'Mesej jelas yang difahami dalam beberapa saat.',ja:'数秒で伝わる明確なメッセージ。',ko:'몇 초 안에 전달되는 명확한 메시지.'},
+    'A page journey that leads straight to your offer.':{'zh-Hant':'頁面路徑直接帶到你的服務。','zh-Hans':'页面路径直接带到你的服务。',ms:'Perjalanan halaman yang terus menuju tawaran anda.',ja:'オファーへまっすぐ導くページ導線。',ko:'제안으로 바로 이어지는 페이지 흐름.'},
+    'Your website should make the next step obvious.':{'zh-Hant':'你的網站應該讓下一步變得很清楚。','zh-Hans':'你的网站应该让下一步变得很清楚。',ms:'Laman web anda patut menjadikan langkah seterusnya jelas.',ja:'ウェブサイトは次の行動を明確にするべきです。',ko:'웹사이트는 다음 행동을 명확하게 보여줘야 합니다.'},
+    'Visitors need to understand the offer, trust the business, and know how to enquire.':{'zh-Hant':'訪客需要明白你的服務、信任你的公司，並知道如何查詢。','zh-Hans':'访客需要明白你的服务、信任你的公司，并知道如何咨询。',ms:'Pelawat perlu faham tawaran anda, percaya kepada bisnes anda, dan tahu cara bertanya.',ja:'訪問者は提供内容を理解し、信頼し、問い合わせ方法を知る必要があります。',ko:'방문자는 제안을 이해하고 비즈니스를 신뢰하며 문의 방법을 알아야 합니다.'},
+    'We shape the message, journey, pricing, and proof before building — so the finished site feels useful, not decorative.':{'zh-Hant':'我們先整理訊息、路徑、價格和信任證明，再開始製作；所以網站不是裝飾，而是有用。','zh-Hans':'我们先整理信息、路径、价格和信任证明，再开始制作；所以网站不是装饰，而是有用。',ms:'Kami susun mesej, perjalanan, harga dan bukti sebelum bina — supaya laman siap benar-benar berguna, bukan sekadar hiasan.',ja:'制作前にメッセージ、導線、価格、信頼材料を整理するため、完成したサイトは装飾ではなく実用的です。',ko:'제작 전에 메시지, 여정, 가격, 신뢰 자료를 정리해 완성된 사이트가 장식이 아닌 실용적인 도구가 되게 합니다.'},
+    'Trusted by 20+ businesses across Hong Kong, Macau, Malaysia, and Singapore. A good website should pay for itself in 6 months.':{'zh-Hant':'已獲香港、澳門、馬來西亞和新加坡 20+ 企業信任。一個好的網站，應該在 6 個月內看見回報方向。','zh-Hans':'已获香港、澳门、马来西亚和新加坡 20+ 企业信任。一个好的网站，应该在 6 个月内看见回报方向。',ms:'Dipercayai oleh 20+ perniagaan di Hong Kong, Macau, Malaysia dan Singapura. Laman web yang baik sepatutnya membayar balik nilainya dalam 6 bulan.',ja:'香港、マカオ、マレーシア、シンガポールの20社以上に信頼されています。良いウェブサイトは6か月で価値を返し始めるべきです。',ko:'홍콩, 마카오, 말레이시아, 싱가포르의 20개 이상 비즈니스가 신뢰했습니다. 좋은 웹사이트는 6개월 안에 가치를 보여줘야 합니다.'},
+    'Businesses':{'zh-Hant':'企業','zh-Hans':'企业',ms:'Perniagaan',ja:'企業',ko:'비즈니스'},
+    'Regions':{'zh-Hant':'地區','zh-Hans':'地区',ms:'Rantau',ja:'地域',ko:'지역'},
+    'Payback mindset':{'zh-Hant':'回報思維','zh-Hans':'回报思维',ms:'Fokus pulangan',ja:'回収意識',ko:'회수 관점'},
+    'Client words':{'zh-Hant':'客戶評價','zh-Hans':'客户评价',ms:'Kata pelanggan',ja:'お客様の声',ko:'고객의 말'},
+    "What it's like":{'zh-Hant':'合作起來','zh-Hans':'合作起来',ms:'Bagaimana rasanya',ja:'一緒に仕事をすると',ko:'함께 일하면'},
+    'to work with us.':{'zh-Hant':'是怎樣的。','zh-Hans':'是怎样的。',ms:'bekerja dengan kami.',ja:'どんな感じか。',ko:'어떤 경험인지.'},
+    'Average client rating':{'zh-Hant':'平均客戶評分','zh-Hans':'平均客户评分',ms:'Purata penilaian pelanggan',ja:'平均顧客評価',ko:'평균 고객 평점'},
+    'Live in 3 weeks':{'zh-Hant':'3 週上線','zh-Hans':'3 周上线',ms:'Dilancarkan dalam 3 minggu',ja:'3週間で公開',ko:'3주 내 공개'},
+    '"I expected a tidy template. What we got was a site that actually explains what we do — clients stopped asking me to spell it out."':{'zh-Hant':'「我本來以為只是整齊模板，結果網站真的說清楚我們做甚麼，客戶不再一直要我解釋。」','zh-Hans':'“我本来以为只是整齐模板，结果网站真的说清楚我们做什么，客户不再一直要我解释。”',ms:'"Saya sangka hanya akan dapat templat yang kemas. Rupanya laman ini benar-benar menerangkan apa yang kami buat — pelanggan tidak lagi meminta kami jelaskan semula."',ja:'「きれいなテンプレート程度だと思っていました。実際には私たちの仕事をきちんと説明するサイトになり、顧客に何度も説明する必要がなくなりました。」',ko:'"깔끔한 템플릿 정도를 기대했는데, 실제로는 우리가 하는 일을 설명해 주는 사이트가 나왔습니다. 고객이 더 이상 다시 설명해 달라고 하지 않습니다."'},
+    'More enquiries':{'zh-Hant':'更多查詢','zh-Hans':'更多咨询',ms:'Lebih banyak pertanyaan',ja:'問い合わせ増加',ko:'문의 증가'},
+    '"The old site looked busy but nobody used it. This one is quieter, and somehow people actually get in touch now."':{'zh-Hant':'「舊網站看起來很多東西，但沒有人用。現在這個更安靜，反而真的有人聯絡我們。」','zh-Hans':'“旧网站看起来很多东西，但没有人用。现在这个更安静，反而真的有人联系我们。”',ms:'"Laman lama nampak sibuk tetapi tiada siapa guna. Laman ini lebih tenang, dan orang benar-benar mula menghubungi kami."',ja:'「以前のサイトは情報が多く見えましたが使われませんでした。今のサイトは落ち着いていて、実際に問い合わせが来るようになりました。」',ko:'"이전 사이트는 복잡해 보였지만 아무도 쓰지 않았습니다. 지금 사이트는 더 차분하고 실제로 사람들이 연락합니다."'},
+    'Direct bookings':{'zh-Hant':'直接預訂','zh-Hans':'直接预订',ms:'Tempahan langsung',ja:'直接予約',ko:'직접 예약'},
+    '"Guests book us directly now instead of going through the apps. That on its own paid for the whole thing."':{'zh-Hant':'「客人現在會直接向我們預訂，不再全部經平台。單是這點已經值得。」','zh-Hans':'“客人现在会直接向我们预订，不再全部经平台。单是这点已经值得。”',ms:'"Tetamu kini menempah terus dengan kami, bukan hanya melalui aplikasi. Itu sahaja sudah membayar kosnya."',ja:'「ゲストがアプリ経由ではなく直接予約するようになりました。それだけで十分に元が取れました。」',ko:'"게스트가 이제 앱을 거치지 않고 직접 예약합니다. 그것만으로도 비용을 회수했습니다."'},
+    'Simple from':{'zh-Hant':'從客戶角度','zh-Hans':'从客户角度',ms:'Mudah dari',ja:'お客様側では',ko:'고객 입장에서는'},
+    'the client side.':{'zh-Hant':'很簡單。','zh-Hans':'很简单。',ms:'sisi pelanggan.',ja:'シンプルに。',ko:'간단하게.'},
+    'You bring the need. We handle the rest.':{'zh-Hant':'你提出需求，其餘由我們處理。','zh-Hans':'你提出需求，其余由我们处理。',ms:'Anda bawa keperluan. Kami uruskan selebihnya.',ja:'必要なことを伝えてください。あとは私たちが進めます。',ko:'필요한 것을 말해 주세요. 나머지는 우리가 처리합니다.'},
+    'Tell us what you need':{'zh-Hant':'告訴我們你需要甚麼','zh-Hans':'告诉我们你需要什么',ms:'Beritahu apa yang anda perlukan',ja:'必要なことを伝える',ko:'필요한 것을 알려주세요'},
+    'No formal brief. One conversation is enough.':{'zh-Hant':'不需要正式 brief，一次對話已經足夠。','zh-Hans':'不需要正式 brief，一次对话已经足够。',ms:'Tidak perlu brief rasmi. Satu perbualan sudah cukup.',ja:'正式なブリーフは不要です。一度の会話で十分です。',ko:'공식 브리프가 없어도 됩니다. 한 번의 대화면 충분합니다.'},
+    'Confirm the direction':{'zh-Hant':'確認方向','zh-Hans':'确认方向',ms:'Sahkan arah',ja:'方向性を確認',ko:'방향 확인'},
+    'We agree the direction before design starts.':{'zh-Hant':'設計開始前，先確認方向。','zh-Hans':'设计开始前，先确认方向。',ms:'Kami sahkan arah sebelum reka bentuk bermula.',ja:'デザイン開始前に方向性を合意します。',ko:'디자인 시작 전에 방향을 합의합니다.'},
+    'We handle execution':{'zh-Hant':'由我們執行','zh-Hans':'由我们执行',ms:'Kami laksanakan',ja:'実行は私たちが担当',ko:'실행은 우리가 담당'},
+    'Design, build, test, and launch — start to finish.':{'zh-Hant':'設計、開發、測試、上線，由開始到完成。','zh-Hans':'设计、开发、测试、上线，由开始到完成。',ms:'Reka, bina, uji dan lancar — dari awal hingga akhir.',ja:'設計、構築、テスト、公開まで一貫して対応します。',ko:'디자인, 제작, 테스트, 공개까지 처음부터 끝까지 진행합니다.'},
+    'Four levels.':{'zh-Hant':'四個級別。','zh-Hans':'四个级别。',ms:'Empat tahap.',ja:'4つのレベル。',ko:'네 가지 단계.'},
+    'One clear scope.':{'zh-Hant':'一個清楚範圍。','zh-Hans':'一个清楚范围。',ms:'Satu skop yang jelas.',ja:'明確なスコープ。',ko:'명확한 범위.'},
+    'Starter, Growth, Premium, and Custom — from RM 1,500. Refund-backed, no lock-in.':{'zh-Hant':'Starter、Growth、Premium 和 Custom，RM 1,500 起。按里程碑退款保障，不綁長約。','zh-Hans':'Starter、Growth、Premium 和 Custom，RM 1,500 起。按里程碑退款保障，不绑长约。',ms:'Starter, Growth, Premium dan Custom — bermula RM 1,500. Jaminan bayaran balik, tanpa ikatan.',ja:'Starter、Growth、Premium、Custom。RM 1,500から。返金保証付き、長期契約なし。',ko:'Starter, Growth, Premium, Custom — RM 1,500부터. 환불 보장, 장기 약정 없음.'},
+    'See plans & pricing':{'zh-Hant':'查看方案與價格','zh-Hans':'查看方案与价格',ms:'Lihat pelan & harga',ja:'プランと料金を見る',ko:'플랜 및 가격 보기'},
+    'Start a project.':{'zh-Hant':'開始一個項目。','zh-Hans':'开始一个项目。',ms:'Mulakan projek.',ja:'プロジェクトを始める。',ko:'프로젝트 시작.'},
+    'Tell us what you need.':{'zh-Hant':'告訴我們你需要甚麼。','zh-Hans':'告诉我们你需要什么。',ms:'Beritahu apa yang anda perlukan.',ja:'必要なことを教えてください。',ko:'필요한 것을 알려주세요.'},
+    "No brief required — just tell us what you need, and we'll get back to you within 24 hours.":{'zh-Hant':'不需要正式 brief，只要告訴我們你的需要，我們會在 24 小時內回覆。','zh-Hans':'不需要正式 brief，只要告诉我们你的需要，我们会在 24 小时内回复。',ms:'Tidak perlu brief rasmi — beritahu sahaja keperluan anda, kami akan balas dalam 24 jam.',ja:'正式なブリーフは不要です。必要なことを教えてください。24時間以内に返信します。',ko:'공식 브리프는 필요 없습니다. 필요한 것을 알려주시면 24시간 내에 답변드립니다.'},
+    'Name':{'zh-Hant':'姓名','zh-Hans':'姓名',ms:'Nama',ja:'名前',ko:'이름'},
+    'Email':{'zh-Hant':'電郵','zh-Hans':'邮箱',ms:'E-mel',ja:'メール',ko:'이메일'},
+    'What do you need?':{'zh-Hant':'你需要甚麼？','zh-Hans':'你需要什么？',ms:'Apa yang anda perlukan?',ja:'何が必要ですか？',ko:'무엇이 필요하신가요?'},
+    'Budget range':{'zh-Hant':'預算範圍','zh-Hans':'预算范围',ms:'Julat bajet',ja:'予算範囲',ko:'예산 범위'},
+    'Not selected':{'zh-Hant':'未選擇','zh-Hans':'未选择',ms:'Belum dipilih',ja:'未選択',ko:'선택 안 함'},
+    'Under RM 2,000':{'zh-Hant':'RM 2,000 以下','zh-Hans':'RM 2,000 以下',ms:'Bawah RM 2,000',ja:'RM 2,000未満',ko:'RM 2,000 미만'},
+    'RM 2,000 - RM 5,000':{'zh-Hant':'RM 2,000 - RM 5,000','zh-Hans':'RM 2,000 - RM 5,000',ms:'RM 2,000 - RM 5,000',ja:'RM 2,000 - RM 5,000',ko:'RM 2,000 - RM 5,000'},
+    'RM 5,000 - RM 10,000':{'zh-Hant':'RM 5,000 - RM 10,000','zh-Hans':'RM 5,000 - RM 10,000',ms:'RM 5,000 - RM 10,000',ja:'RM 5,000 - RM 10,000',ko:'RM 5,000 - RM 10,000'},
+    'Above RM 10,000':{'zh-Hant':'RM 10,000 以上','zh-Hans':'RM 10,000 以上',ms:'Lebih RM 10,000',ja:'RM 10,000以上',ko:'RM 10,000 이상'},
+    'Not sure yet':{'zh-Hant':'暫時未確定','zh-Hans':'暂时未确定',ms:'Belum pasti',ja:'まだ未定',ko:'아직 미정'},
+    'Send message':{'zh-Hant':'發送訊息','zh-Hans':'发送信息',ms:'Hantar mesej',ja:'送信する',ko:'메시지 보내기'},
+    'WhatsApp us instead':{'zh-Hant':'改用 WhatsApp 聯絡','zh-Hans':'改用 WhatsApp 联系',ms:'WhatsApp kami',ja:'WhatsAppで連絡',ko:'WhatsApp으로 문의'},
+    'Email us instead':{'zh-Hant':'改用電郵聯絡','zh-Hans':'改用邮箱联系',ms:'E-mel kami',ja:'メールで連絡',ko:'이메일로 문의'},
+    'Opening WhatsApp... We’ll get back to you within 24 hours.':{'zh-Hant':'正在開啟 WhatsApp……我們會在 24 小時內回覆。','zh-Hans':'正在打开 WhatsApp……我们会在 24 小时内回复。',ms:'Membuka WhatsApp... Kami akan balas dalam 24 jam.',ja:'WhatsAppを開いています... 24時間以内に返信します。',ko:'WhatsApp을 여는 중... 24시간 내에 답변드립니다.'},
+    'Your message has been saved and prepared in WhatsApp.':{'zh-Hant':'你的訊息已準備好並開啟至 WhatsApp。','zh-Hans':'你的信息已准备好并打开至 WhatsApp。',ms:'Mesej anda telah disediakan dalam WhatsApp.',ja:'メッセージはWhatsApp用に準備されました。',ko:'메시지가 WhatsApp에 준비되었습니다.'},
+    'Clear websites for service businesses.':{'zh-Hant':'為服務型企業建立清楚網站。','zh-Hans':'为服务型企业建立清楚网站。',ms:'Laman web jelas untuk perniagaan servis.',ja:'サービス業のための明快なウェブサイト。',ko:'서비스 비즈니스를 위한 명확한 웹사이트.'},
+    'Navigation':{'zh-Hant':'導覽','zh-Hans':'导航',ms:'Navigasi',ja:'ナビゲーション',ko:'탐색'},
+    'Home':{'zh-Hant':'首頁','zh-Hans':'首页',ms:'Laman utama',ja:'ホーム',ko:'홈'},
+    'Work':{'zh-Hant':'作品','zh-Hans':'作品',ms:'Kerja',ja:'実績',ko:'작업'},
+    '© 2026 LUMIO Coordia Intelligence. All rights reserved.':{'zh-Hant':'© 2026 LUMIO Coordia Intelligence. 版權所有。','zh-Hans':'© 2026 LUMIO Coordia Intelligence. 版权所有。',ms:'© 2026 LUMIO Coordia Intelligence. Hak cipta terpelihara.',ja:'© 2026 LUMIO Coordia Intelligence. All rights reserved.',ko:'© 2026 LUMIO Coordia Intelligence. All rights reserved.'},
+    'Privacy Policy':{'zh-Hant':'私隱政策','zh-Hans':'隐私政策',ms:'Dasar Privasi',ja:'プライバシーポリシー',ko:'개인정보 처리방침'},
+    'Refund Policy':{'zh-Hant':'退款政策','zh-Hans':'退款政策',ms:'Polisi Bayaran Balik',ja:'返金ポリシー',ko:'환불 정책'},
+    'Terms of Service':{'zh-Hant':'服務條款','zh-Hans':'服务条款',ms:'Terma Perkhidmatan',ja:'利用規約',ko:'서비스 약관'}
+  };
+  const placeholderCopy = {
+    'Your name':{'zh-Hant':'你的姓名','zh-Hans':'你的姓名',ms:'Nama anda',ja:'お名前',ko:'이름'},
+    'your@email.com':{'zh-Hant':'your@email.com','zh-Hans':'your@email.com',ms:'your@email.com',ja:'your@email.com',ko:'your@email.com'},
+    'Tell us about your project — what do you want to improve, launch, or simplify?':{'zh-Hant':'告訴我們你的項目：你想改善、推出或簡化甚麼？','zh-Hans':'告诉我们你的项目：你想改善、推出或简化什么？',ms:'Ceritakan projek anda — apa yang mahu diperbaiki, dilancar, atau dipermudahkan?',ja:'プロジェクトについて教えてください。何を改善、公開、簡素化したいですか？',ko:'프로젝트에 대해 알려주세요. 무엇을 개선, 출시 또는 단순화하고 싶으신가요?'}
+  };
+  const textNodes = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      if(node.parentElement && ['SCRIPT','STYLE','SVG'].includes(node.parentElement.tagName)) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  while(walker.nextNode()){
+    const node = walker.currentNode;
+    const key = node.nodeValue.trim();
+    if(textCopy[key]) textNodes.push({node,key});
+  }
+  const placeholderNodes = Array.from(document.querySelectorAll('[placeholder]'))
+    .map(el=>({el,key:el.getAttribute('placeholder')}))
+    .filter(item=>placeholderCopy[item.key]);
+
+  function translateText(key, lang){
+    if(lang === 'en') return key;
+    return (textCopy[key] && textCopy[key][lang]) || key;
+  }
+
+  function translatePlaceholder(key, lang){
+    if(lang === 'en') return key;
+    return (placeholderCopy[key] && placeholderCopy[key][lang]) || key;
+  }
+
+  function applyLanguage(lang){
+    const activeLang = supportedLanguages.includes(lang) ? lang : 'en';
+    document.documentElement.lang = activeLang;
+    textNodes.forEach(({node,key})=>{
+      const original = node.nodeValue;
+      const prefix = original.match(/^\s*/)[0];
+      const suffix = original.match(/\s*$/)[0];
+      node.nodeValue = `${prefix}${translateText(key, activeLang)}${suffix}`;
+    });
+    placeholderNodes.forEach(({el,key})=>el.setAttribute('placeholder', translatePlaceholder(key, activeLang)));
+    langOptions.forEach(option=>option.classList.toggle('is-active', option.dataset.lang === activeLang));
+    langCurrent.textContent = languageLabels[activeLang] || 'EN';
+    localStorage.setItem('lumio-language', activeLang);
+  }
+
   langTrigger.addEventListener('click', e=>{
     e.stopPropagation();
     const open = langSwitcher.classList.toggle('open');
     langTrigger.setAttribute('aria-expanded', open);
   });
-  langSwitcher.querySelectorAll('.lang-option').forEach(opt=>{
+  langOptions.forEach(opt=>{
     opt.addEventListener('click', ()=>{
-      langSwitcher.querySelectorAll('.lang-option').forEach(o=>o.classList.remove('is-active'));
-      opt.classList.add('is-active');
-      langCurrent.textContent = opt.dataset.lang;
+      applyLanguage(opt.dataset.lang);
       langSwitcher.classList.remove('open');
       langTrigger.setAttribute('aria-expanded','false');
     });
@@ -880,6 +1042,7 @@ if(langSwitcher){
     langSwitcher.classList.remove('open');
     langTrigger.setAttribute('aria-expanded','false');
   });
+  applyLanguage(localStorage.getItem('lumio-language') || 'en');
 }
 </script>
 
