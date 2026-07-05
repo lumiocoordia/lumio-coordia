@@ -69,6 +69,7 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   box-shadow:0 12px 28px rgba(0,0,0,.16);white-space:nowrap;
 }
 .brand-logo img{width:112px;height:auto;max-height:42px;object-fit:contain}
+.mobile-menu-toggle{display:none;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:10px 14px;color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
 .nav-pill{
   background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;
   align-items:center;gap:30px;padding:16px 26px;display:flex;backdrop-filter:blur(12px);
@@ -80,7 +81,15 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   white-space:nowrap;flex-shrink:0;transition:background .2s;color:#241a12!important;
 }
 .nav-cta-pill:hover{background:var(--accent-dk)}
-@media(max-width:900px){.nav-pill{display:none}}
+.mobile-menu-panel{display:none}
+@media(max-width:900px){
+  .nav-pill{display:none}
+  .mobile-menu-toggle{display:inline-flex}
+  .mobile-menu-panel{position:fixed;z-index:999;top:74px;left:16px;right:16px;display:grid;gap:8px;padding:14px;background:rgba(10,10,10,.92);border:1px solid rgba(255,255,255,.12);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.32);backdrop-filter:blur(18px);opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .2s var(--ease),transform .2s var(--ease)}
+  .mobile-menu-panel.open{opacity:1;transform:translateY(0);pointer-events:auto}
+  .mobile-menu-panel a{padding:12px 14px;border-radius:12px;color:#fff;font-weight:700}
+  .mobile-menu-panel a:hover{background:rgba(255,255,255,.08)}
+}
 .language-switcher{z-index:1200;position:fixed;top:22px;right:24px}
 .lang-trigger{
   display:flex;align-items:center;gap:6px;border:1px solid #fff;border-radius:999px;padding:9px 15px;
@@ -110,7 +119,7 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   .brand-logo{width:108px;height:44px;padding:6px 10px;border-radius:12px}
   .brand-logo img{width:88px;max-height:34px}
   .nav-cta-pill{display:none}
-  .language-switcher{top:16px;right:14px}
+  .language-switcher{top:16px;right:88px}
 }
 
 /* SHARED */
@@ -180,9 +189,9 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .plan:nth-child(3)::before{content:'P'}
 .plan:nth-child(4)::before{content:'C'}
 .plan.pop{
-  background:linear-gradient(145deg,#171208,#080807);color:#fff;border:2px solid var(--accent);
-  box-shadow:0 18px 52px rgba(201,169,110,.28),0 0 0 1px rgba(201,169,110,.22) inset;
-  transform:translateY(-10px);z-index:2;overflow:visible;
+  background:linear-gradient(145deg,#171208,#080807);color:#fff;border:6px solid var(--accent);
+  box-shadow:0 28px 86px rgba(201,169,110,.36),0 0 0 1px rgba(201,169,110,.22) inset;
+  transform:translateY(-14px);z-index:2;overflow:visible;padding-top:52px;
 }
 .plan.pop::before{
   content:'';position:absolute;inset:-8px;border-radius:2px;pointer-events:none;
@@ -193,7 +202,7 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
   font-size:.62rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
 }
 .popular-badge{
-  position:absolute;top:-18px;right:24px;background:linear-gradient(135deg,var(--accent),#f2d99f);color:#241a12;border-radius:999px;
+  position:absolute;top:-20px;right:24px;background:var(--accent-dk);color:#fff;border-radius:999px;
   padding:8px 14px;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
   box-shadow:0 12px 26px rgba(201,169,110,.34);
 }
@@ -215,6 +224,11 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .plan .go-plan:hover{background:var(--black);color:#fff}
 .plan.pop .go-plan{background:var(--accent);border-color:var(--accent);color:#241a12;box-shadow:0 12px 26px rgba(201,169,110,.22)}
 .plan.pop .go-plan:hover{background:#f2d99f;border-color:#f2d99f;color:#241a12}
+.plan.custom-plan{background:#0d0d0d;color:#f5f0e8;border-color:#0d0d0d;box-shadow:0 18px 50px rgba(0,0,0,.18)}
+.plan.custom-plan .tier,.plan.custom-plan p,.plan.custom-plan .fit{color:rgba(255,255,255,.72)}
+.plan.custom-plan .go-plan{border-color:rgba(255,255,255,.8);color:#fff}
+.plan.custom-plan .go-plan:hover{background:#fff;color:#0d0d0d}
+.plan.is-recommended{outline:4px solid rgba(201,169,110,.5);outline-offset:6px}
 @media(max-width:560px){.plan.pop{transform:none}.popular-badge{top:14px;right:16px;font-size:.66rem;padding:7px 11px}}
 .refund-line{margin-top:40px;font-size:.92rem;color:var(--grey);display:flex;align-items:center;gap:12px}
 .refund-line b{color:var(--black)}
@@ -277,6 +291,16 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .cta .big-h{margin-bottom:20px}
 .cta .big-h .outline{-webkit-text-stroke:2px #fff;color:transparent}
 .cta p{color:#999;max-width:480px;margin:0 auto 48px;line-height:1.65}
+.pricing-contact{max-width:760px;margin:0 auto 34px;display:grid;gap:14px;text-align:left}
+.pricing-contact .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pricing-contact label{display:block;color:#aaa;font-size:.76rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.pricing-contact input,.pricing-contact textarea{width:100%;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);border-radius:14px;padding:14px 16px;color:#fff;font:inherit}
+.pricing-contact textarea{resize:vertical;min-height:112px}
+.pricing-contact button{justify-self:start;background:var(--accent);color:#241a12;border-radius:999px;padding:14px 24px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.pricing-contact .pc-success{display:none;color:#d9c394;font-size:.9rem}
+.pricing-contact .pc-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.pricing-contact .pc-actions a{color:#d9c394;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:620px){.pricing-contact .form-row{grid-template-columns:1fr}}
 footer{
   background:var(--black);color:#777;
   padding:40px var(--pad);border-top:1px solid #222;
@@ -291,6 +315,7 @@ footer a:hover{color:#fff}
 
 <nav class="hero-nav" aria-label="Primary navigation">
   <a href="/" class="brand-logo" aria-label="LUMIO Coordia Intelligence home"><img src="/assets/lumio-logo-lockup.png" alt="LUMIO Coordia Intelligence"></a>
+  <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
   <div class="nav-pill">
     <a href="/#who">Story</a>
     <a href="/work">Portfolio</a>
@@ -299,8 +324,16 @@ footer a:hover{color:#fff}
     <a class="active" href="/pricing">Pricing</a>
     <a href="/#contact">Contact</a>
   </div>
-  <a href="/#contact" class="nav-cta-pill">Get a website</a>
+  <a href="/#contact" class="nav-cta-pill">Start a project</a>
 </nav>
+<div class="mobile-menu-panel" id="mobile-menu">
+  <a href="/#who">Story</a>
+  <a href="/work">Portfolio</a>
+  <a href="/#process">Process</a>
+  <a href="/about">About</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/#contact">Contact</a>
+</div>
 <div class="language-switcher" aria-label="Language selector">
   <button class="lang-trigger" type="button" aria-expanded="false" aria-haspopup="listbox">
     <span class="lang-current">EN</span>
@@ -334,7 +367,7 @@ footer a:hover{color:#fff}
       <p>Launch fast with a clear contact path.</p>
       <p class="fit">Best for a credible first presence.</p>
       <ul><li>1–3 pages written for your business</li><li>Looks right on every phone</li><li>WhatsApp &amp; enquiry form built in</li></ul>
-      <a class="go-plan" data-plan="Starter" href="https://wa.me/60177209159">Get started</a>
+      <a class="go-plan" data-plan="Starter" href="https://wa.me/60177209159">Launch in 3 weeks</a>
     </div>
     <div class="plan pop reveal reveal-d1">
       <span class="popular-badge">Most popular</span>
@@ -343,7 +376,7 @@ footer a:hover{color:#fff}
       <p>Better lead structure and enquiry flow.</p>
       <p class="fit">Best when visitors do not enquire.</p>
       <ul><li>Up to 8 pages written for your services</li><li>Enquiry form that sends straight to your WhatsApp</li><li>Automatic reply so no enquiry sits unanswered overnight</li></ul>
-      <a class="go-plan" data-plan="Growth" href="https://wa.me/60177209159">Get started</a>
+      <a class="go-plan" data-plan="Growth" href="https://wa.me/60177209159">Get more enquiries</a>
     </div>
     <div class="plan reveal reveal-d2">
       <span class="tier">Premium</span>
@@ -351,18 +384,18 @@ footer a:hover{color:#fff}
       <p>Richer UX and connected systems.</p>
       <p class="fit">Best when the site supports sales.</p>
       <ul><li>Design tailored to how your customers buy</li><li>10+ pages, faster loading, richer content</li><li>Connected to your booking, payment, or CRM tools</li></ul>
-      <a class="go-plan" data-plan="Premium" href="https://wa.me/60177209159">Get started</a>
+      <a class="go-plan" data-plan="Premium" href="https://wa.me/60177209159">Talk about design</a>
     </div>
-    <div class="plan reveal reveal-d3">
+    <div class="plan custom-plan reveal reveal-d3">
       <span class="tier">Custom</span>
       <div class="price">Quote</div>
       <p>Complex scope and ongoing support.</p>
       <p class="fit">Best when you need a partner.</p>
       <ul><li>Whatever your business actually needs</li><li>Internal tools, portals, and dashboards</li><li>We stay on after launch — updates, monitoring, monthly reports</li></ul>
-      <a class="go-plan" data-plan="Custom" href="https://wa.me/60177209159">Get started</a>
+      <a class="go-plan" data-plan="Custom" href="https://wa.me/60177209159">Let's discuss</a>
     </div>
   </div>
-  <p class="refund-line reveal">✦ <span><b>Refund-backed</b> — cancel before kickoff for a full refund.</span></p>
+  <p class="refund-line reveal">✦ <span><b>100% refund before kickoff</b> — no questions asked.</span></p>
   <p class="refund-line reveal" style="margin-top:14px">✧ <span>Optional add-ons are quoted before deposit. No surprise changes after kickoff.</span></p>
 
 
@@ -446,7 +479,29 @@ footer a:hover{color:#fff}
 <section class="cta">
   <h2 class="big-h reveal">Ready to<br><span class="outline">get started?</span></h2>
   <p class="reveal reveal-d1">No brief needed. Tell us what you need; we reply within 24 hours.</p>
-  <a class="btn-talk reveal reveal-d2" href="https://wa.me/60177209159">WhatsApp us <span class="arr">→</span></a>
+  <form class="pricing-contact reveal reveal-d2" id="pricing-contact-form">
+    <div class="form-row">
+      <div>
+        <label for="pricing-name">Name</label>
+        <input id="pricing-name" name="name" type="text" placeholder="Your name" required>
+      </div>
+      <div>
+        <label for="pricing-email">Email</label>
+        <input id="pricing-email" name="email" type="email" placeholder="your@email.com" required>
+      </div>
+    </div>
+    <div>
+      <label for="pricing-message">What do you need?</label>
+      <textarea id="pricing-message" name="message" placeholder="Tell us what your website needs to do." required></textarea>
+    </div>
+    <div class="pc-actions">
+      <button type="submit">Send enquiry</button>
+      <a href="mailto:lumiocoordia@gmail.com?subject=Book%20a%2015-min%20website%20diagnosis">Book a 15-min call</a>
+      <a href="https://wa.me/60177209159">WhatsApp us</a>
+    </div>
+    <p class="pc-success" id="pricing-contact-success">Opening your email app. We will reply within 24 hours.</p>
+  </form>
+  <a class="btn-talk reveal reveal-d3" href="mailto:lumiocoordia@gmail.com?subject=Book%20a%2015-min%20website%20diagnosis">Book a 15-min diagnosis <span class="arr">→</span></a>
 </section>
 
 <footer>
@@ -465,6 +520,42 @@ const io = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
 },{threshold:.15});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+if(mobileMenuToggle && mobileMenu){
+  mobileMenuToggle.addEventListener('click', e=>{
+    e.stopPropagation();
+    const open = mobileMenu.classList.toggle('open');
+    mobileMenuToggle.setAttribute('aria-expanded', String(open));
+  });
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{
+    mobileMenu.classList.remove('open');
+    mobileMenuToggle.setAttribute('aria-expanded','false');
+  }));
+  document.addEventListener('click', ()=>{
+    mobileMenu.classList.remove('open');
+    mobileMenuToggle.setAttribute('aria-expanded','false');
+  });
+}
+
+const pricingContactForm = document.getElementById('pricing-contact-form');
+if(pricingContactForm){
+  pricingContactForm.addEventListener('submit', e=>{
+    e.preventDefault();
+    if(!pricingContactForm.checkValidity()){ pricingContactForm.reportValidity(); return; }
+    const data = Object.fromEntries(new FormData(pricingContactForm).entries());
+    const body = [
+      'Hi LUMIO Team,', '',
+      `Name: ${data.name}`,
+      `Email: ${data.email}`, '',
+      data.message
+    ].join('\n');
+    const success = document.getElementById('pricing-contact-success');
+    if(success) success.style.display = 'block';
+    window.location.href = `mailto:lumiocoordia@gmail.com?subject=${encodeURIComponent('Website pricing enquiry from '+data.name)}&body=${encodeURIComponent(body)}`;
+  });
+}
 
 </script>
 
@@ -503,6 +594,8 @@ if(pricingLangSwitcher){
     'Pricing':{'zh-Hant':'方案','zh-Hans':'方案',ms:'Harga',ja:'料金',ko:'가격'},
     'Contact':{'zh-Hant':'聯絡','zh-Hans':'联系',ms:'Hubungi',ja:'連絡',ko:'문의'},
     'Get a website':{'zh-Hant':'開始網站項目','zh-Hans':'开始网站项目',ms:'Bina laman web',ja:'サイトを始める',ko:'웹사이트 시작'},
+    'Start a project':{'zh-Hant':'開始項目','zh-Hans':'开始项目',ms:'Mulakan projek',ja:'プロジェクト開始',ko:'프로젝트 시작'},
+    'Menu':{'zh-Hant':'選單','zh-Hans':'菜单',ms:'Menu',ja:'メニュー',ko:'메뉴'},
     'Not sure which level fits?':{'zh-Hant':'不確定哪個級別適合你？','zh-Hans':'不确定哪个级别适合你？',ms:'Tak pasti tahap mana sesuai?',ja:'どのレベルが合うか迷ったら？',ko:'어떤 레벨이 맞을지 고민된다면?'},
     'Answer three quick questions — no email needed.':{'zh-Hant':'回答三個小問題——不需要留下電郵。','zh-Hans':'回答三个小问题——不需要留下邮箱。',ms:'Jawab tiga soalan ringkas — tiada emel diperlukan.',ja:'3つの質問に答えるだけ——メール登録は不要です。',ko:'짧은 질문 3개면 됩니다 — 이메일은 필요 없어요.'},
     'Where are you today?':{'zh-Hant':'你目前的狀況是？','zh-Hans':'你目前的状况是？',ms:'Di mana anda sekarang?',ja:'現在の状況は？',ko:'현재 상황은 어떤가요?'},
@@ -564,6 +657,8 @@ if(pricingLangSwitcher){
     'Quote':{'zh-Hant':'報價','zh-Hans':'报价',ms:'Sebut harga',ja:'見積もり',ko:'견적'},
     'Refund-backed':{'zh-Hant':'退款保障','zh-Hans':'退款保障',ms:'Jaminan bayaran balik',ja:'返金保証つき',ko:'환불 보장'},
     '— cancel before kickoff for a full refund.':{'zh-Hant':'——開工前取消可全額退款。','zh-Hans':'——开工前取消可全额退款。',ms:'— batal sebelum mula untuk bayaran balik penuh.',ja:'——キックオフ前のキャンセルは全額返金。',ko:'— 킥오프 전 취소 시 전액 환불.'},
+    '100% refund before kickoff':{'zh-Hant':'開工前 100% 退款','zh-Hans':'开工前 100% 退款',ms:'100% bayaran balik sebelum mula',ja:'キックオフ前は100%返金',ko:'킥오프 전 100% 환불'},
+    '— no questions asked.':{'zh-Hant':'——不追問原因。','zh-Hans':'——不追问原因。',ms:'— tanpa banyak soal.',ja:'——理由は問いません。',ko:'— 이유를 묻지 않습니다.'},
     'Compare what is included':{'zh-Hant':'比較各級別包含內容','zh-Hans':'比较各级别包含内容',ms:'Bandingkan kandungan setiap tahap',ja:'含まれる内容を比較',ko:'포함 내용 비교'},
     'Feature':{'zh-Hant':'功能','zh-Hans':'功能',ms:'Ciri',ja:'機能',ko:'기능'},
     'Mobile responsive':{'zh-Hant':'響應式手機支援','zh-Hans':'响应式手机支持',ms:'Responsif mudah alih',ja:'モバイル対応',ko:'모바일 반응형'},
@@ -587,6 +682,15 @@ if(pricingLangSwitcher){
     'get started?':{'zh-Hant':'開始了嗎？','zh-Hans':'开始了吗？',ms:'bermula?',ja:'はじめよう。',ko:'시작해볼까요?'},
     'No brief required. Tell us what you need and we\'ll get back to you within 24 hours.':{'zh-Hant':'無需正式簡報。告訴我們你的需求，我們會在 24 小時內回覆。','zh-Hans':'无需正式简报。告诉我们你的需求，我们会在 24 小时内回复。',ms:'Tiada taklimat diperlukan. Beritahu keperluan anda dan kami akan balas dalam 24 jam.',ja:'資料は不要です。ご要望をお聞かせいただければ、24時間以内にご連絡します。',ko:'브리핑은 필요 없습니다. 필요한 것을 알려주시면 24시간 안에 연락드립니다.'},
     'WhatsApp us':{'zh-Hant':'WhatsApp 聯絡我們','zh-Hans':'WhatsApp 联系我们',ms:'WhatsApp kami',ja:'WhatsAppで相談',ko:'WhatsApp 문의'},
+    'Launch in 3 weeks':{'zh-Hant':'3 週內上線','zh-Hans':'3 周内上线',ms:'Lancar dalam 3 minggu',ja:'3週間で公開',ko:'3주 안에 런칭'},
+    'Get more enquiries':{'zh-Hant':'取得更多查詢','zh-Hans':'获得更多咨询',ms:'Dapatkan lebih banyak pertanyaan',ja:'問い合わせを増やす',ko:'문의 늘리기'},
+    'Talk about design':{'zh-Hant':'討論設計','zh-Hans':'讨论设计',ms:'Bincang reka bentuk',ja:'デザインを相談',ko:'디자인 상담'},
+    "Let's discuss":{'zh-Hant':'一起討論','zh-Hans':'一起讨论',ms:'Mari bincang',ja:'相談する',ko:'상담하기'},
+    'Send enquiry':{'zh-Hant':'發送查詢','zh-Hans':'发送咨询',ms:'Hantar pertanyaan',ja:'問い合わせを送信',ko:'문의 보내기'},
+    'Book a 15-min call':{'zh-Hant':'預約 15 分鐘通話','zh-Hans':'预约 15 分钟通话',ms:'Tempah panggilan 15 minit',ja:'15分診断を予約',ko:'15분 상담 예약'},
+    'Book a 15-min diagnosis':{'zh-Hant':'預約 15 分鐘診斷','zh-Hans':'预约 15 分钟诊断',ms:'Tempah diagnosis 15 minit',ja:'15分診断を予約',ko:'15분 진단 예약'},
+    'What do you need?':{'zh-Hant':'你需要甚麼？','zh-Hans':'你需要什么？',ms:'Apa yang anda perlukan?',ja:'何が必要ですか？',ko:'무엇이 필요하신가요?'},
+    'Opening your email app. We will reply within 24 hours.':{'zh-Hant':'正在開啟你的電郵 App。我們會在 24 小時內回覆。','zh-Hans':'正在打开你的邮箱 App。我们会在 24 小时内回复。',ms:'Membuka aplikasi emel anda. Kami akan balas dalam 24 jam.',ja:'メールアプリを開いています。24時間以内に返信します。',ko:'이메일 앱을 여는 중입니다. 24시간 내 답변드립니다.'},
     'Home':{'zh-Hant':'首頁','zh-Hans':'首页',ms:'Laman Utama',ja:'ホーム',ko:'홈'},
     'Work':{'zh-Hant':'作品','zh-Hans':'作品',ms:'Kerja',ja:'実績',ko:'작업'}
   };
@@ -682,11 +786,17 @@ if(pricingLangSwitcher){
   let currentPlan=null;
   function lang(){ return localStorage.getItem('lumio-language')||'en'; }
   function recommend(){
-    const sum=answers[1]+answers[2]+answers[3];
-    if(answers[3]===2) return sum>=5?'Custom':'Premium';
-    if(sum<=1) return 'Starter';
-    if(sum<=3) return 'Growth';
-    return 'Premium';
+    const votes = [];
+    if(answers[1]===0) votes.push('Starter');
+    if(answers[1]===1) votes.push('Growth');
+    if(answers[1]===2) votes.push('Premium');
+    if(answers[2]===0) votes.push('Starter');
+    if(answers[2]===1) votes.push('Growth');
+    if(answers[2]===2) votes.push('Premium');
+    if(answers[3]===2) votes.push('Premium');
+    if(!votes.length) return 'Growth';
+    const score = votes.reduce((acc,plan)=>{acc[plan]=(acc[plan]||0)+1;return acc;},{});
+    return ['Growth','Premium','Starter'].sort((a,b)=>(score[b]||0)-(score[a]||0))[0];
   }
   function render(l){
     if(currentPlan===null) return;
@@ -698,6 +808,7 @@ if(pricingLangSwitcher){
     go.dataset.plan=currentPlan;
     if(window.lumioWaHref) go.href=window.lumioWaHref(currentPlan,l);
     document.getElementById('fq-result').classList.add('show');
+    document.querySelectorAll('.plan').forEach(plan=>plan.classList.toggle('is-recommended', plan.querySelector('.tier') && plan.querySelector('.tier').textContent.trim()===currentPlan));
   }
   window.lumioQuizRefresh=function(l){ render(l); };
   quiz.querySelectorAll('.fq-q').forEach(q=>{
