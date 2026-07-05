@@ -77,25 +77,24 @@ button{cursor:pointer;background:none;border:none;font:inherit}
 @media(max-width:900px){.nav-pill{display:none}}
 .language-switcher{z-index:1200;position:fixed;top:22px;right:24px}
 .lang-trigger{
-  display:flex;align-items:center;gap:6px;background:rgba(10,10,10,.82);
-  border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 15px;color:#fff;
-  font-size:.72rem;font-weight:700;letter-spacing:.1em;cursor:pointer;backdrop-filter:blur(12px);
-  transition:background .2s,border-color .2s;white-space:nowrap;
+  display:flex;align-items:center;gap:6px;border:1px solid #fff;border-radius:999px;padding:9px 15px;
+  color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.1em;white-space:nowrap;
+  transition:opacity .2s;
 }
-.lang-trigger:hover{background:#0a0a0a;border-color:rgba(201,169,110,.5)}
+.lang-trigger:hover{opacity:.75}
 .lang-trigger svg{transition:transform .25s var(--ease)}
 .language-switcher.open .lang-trigger svg{transform:rotate(180deg)}
 .lang-dropdown{
-  position:absolute;z-index:121;top:calc(100% + 8px);right:0;background:rgba(10,10,10,.94);
-  border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:6px;display:flex;flex-direction:column;
-  gap:2px;min-width:150px;backdrop-filter:blur(20px);opacity:0;transform:translateY(-6px);
+  position:absolute;z-index:1201;top:calc(100% + 8px);right:0;background:#0a0e14;
+  border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:6px;display:flex;flex-direction:column;
+  gap:2px;min-width:160px;opacity:0;transform:translateY(-6px);
   pointer-events:none;transition:opacity .2s var(--ease),transform .2s var(--ease);
 }
 .language-switcher.open .lang-dropdown{opacity:1;transform:translateY(0);pointer-events:auto}
 .lang-option{
   display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;
-  font-size:.78rem;font-weight:500;color:rgba(255,255,255,.65);cursor:pointer;transition:background .15s,color .15s;
-  border:none;background:transparent;width:100%;text-align:left;letter-spacing:.02em;
+  font-size:.78rem;font-weight:500;color:rgba(255,255,255,.65);transition:background .15s,color .15s;
+  width:100%;text-align:left;letter-spacing:.02em;
 }
 .lang-option:hover{background:rgba(255,255,255,.08);color:#fff}
 .lang-option.is-active{color:#fff;background:rgba(255,255,255,.06)}
@@ -175,6 +174,8 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .plan .price sup{font-size:.45em;font-weight:700}
 .plan p{font-size:.9rem;line-height:1.6;color:#666;margin-bottom:16px}
 .plan.pop p{color:#999}
+.plan .fit{font-size:.8rem;line-height:1.55;color:#8a8a8a;margin:-8px 0 16px;font-style:italic}
+.plan.pop .fit{color:#b8a37f}
 .plan ul{list-style:none;font-size:.88rem;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;flex:1}
 .plan li::before{content:'—  '}
 .plan .go-plan{
@@ -188,6 +189,28 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 @media(max-width:560px){.plan.pop{transform:none}.popular-badge{top:14px;right:16px;font-size:.66rem;padding:7px 11px}}
 .refund-line{margin-top:40px;font-size:.92rem;color:var(--grey);display:flex;align-items:center;gap:12px}
 .refund-line b{color:var(--black)}
+
+/* FIT QUIZ */
+.fit-quiz{margin-top:72px;border:1px solid var(--black);padding:40px clamp(24px,4vw,48px)}
+.fit-quiz h3{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:1.3rem;text-transform:uppercase;font-weight:800;margin-bottom:6px}
+.fit-quiz .fq-sub{color:var(--grey);font-size:.92rem;margin-bottom:28px}
+.fq-q{margin-bottom:22px}
+.fq-q>p{font-weight:700;font-size:.95rem;margin-bottom:10px}
+.fq-opts{display:flex;flex-wrap:wrap;gap:10px}
+.fq-opt{border:1px solid var(--grey-lt);border-radius:999px;padding:10px 18px;font-size:.85rem;cursor:pointer;transition:border-color .2s,background .2s,color .2s;background:#fff}
+.fq-opt:hover{border-color:var(--black)}
+.fq-opt.sel{background:var(--black);color:#fff;border-color:var(--black)}
+.fq-result{display:none;margin-top:26px;padding-top:24px;border-top:1px solid var(--grey-lt);align-items:center;gap:18px;flex-wrap:wrap}
+.fq-result.show{display:flex}
+.fq-result .fq-reco{font-size:1.05rem}
+.fq-result .fq-reco b{font-family:'Archivo Expanded','Archivo',sans-serif;text-transform:uppercase}
+.fq-go{background:#25D366;color:#fff;border-radius:999px;padding:13px 24px;font-size:.85rem;font-weight:700;letter-spacing:.06em;display:inline-flex;align-items:center;gap:8px}
+.fq-go:hover{background:#1fb457}
+
+/* WHATSAPP FAB (mobile) */
+.wa-fab{position:fixed;right:18px;bottom:18px;z-index:1300;width:56px;height:56px;border-radius:50%;background:#25D366;display:none;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.wa-fab svg{width:30px;height:30px;fill:#fff}
+@media(max-width:820px){.wa-fab{display:flex}}
 
 /* COMPARE TABLE */
 .compare-wrap{margin-top:96px;overflow-x:auto}
@@ -282,33 +305,72 @@ footer a:hover{color:#fff}
       <span class="tier">Starter</span>
       <div class="price">RM 1,500<sup>+</sup></div>
       <p>Launch, credibility, a clear contact path.</p>
-      <ul><li>Simple website</li><li>Mobile ready</li><li>Clear contact path</li></ul>
-      <a class="go-plan" href="https://wa.me/60177209159">Get started</a>
+      <p class="fit">Best if you just need a credible online presence, fast.</p>
+      <ul><li>1–3 pages written for your business</li><li>Looks right on every phone</li><li>WhatsApp &amp; enquiry form built in</li></ul>
+      <a class="go-plan" data-plan="Starter" href="https://wa.me/60177209159">Get started</a>
     </div>
     <div class="plan pop reveal reveal-d1">
       <span class="popular-badge">Most popular</span>
       <span class="tier">Growth</span>
       <div class="price">RM 4,000<sup>+</sup></div>
       <p>Clearer lead structure, basic automation.</p>
-      <ul><li>Custom pages</li><li>Lead structure</li><li>Basic automation</li></ul>
-      <a class="go-plan" href="https://wa.me/60177209159">Get started</a>
+      <p class="fit">Best if your site gets visitors but no enquiries.</p>
+      <ul><li>Up to 8 pages written for your services</li><li>Enquiry form that sends straight to your WhatsApp</li><li>Automatic reply so no enquiry sits unanswered overnight</li></ul>
+      <a class="go-plan" data-plan="Growth" href="https://wa.me/60177209159">Get started</a>
     </div>
     <div class="plan reveal reveal-d2">
       <span class="tier">Premium</span>
       <div class="price">RM 8,000<sup>+</sup></div>
       <p>Better UX, connected systems.</p>
-      <ul><li>Custom UX</li><li>Advanced build</li><li>System connection</li></ul>
-      <a class="go-plan" href="https://wa.me/60177209159">Get started</a>
+      <p class="fit">Best if the website is a core part of how you sell.</p>
+      <ul><li>Design tailored to how your customers buy</li><li>10+ pages, faster loading, richer content</li><li>Connected to your booking, payment, or CRM tools</li></ul>
+      <a class="go-plan" data-plan="Premium" href="https://wa.me/60177209159">Get started</a>
     </div>
     <div class="plan reveal reveal-d3">
       <span class="tier">Custom</span>
       <div class="price">Quote</div>
       <p>Complex scopes, ongoing support.</p>
-      <ul><li>Complex scope</li><li>Business systems</li><li>Ongoing support</li></ul>
-      <a class="go-plan" href="https://wa.me/60177209159">Get started</a>
+      <p class="fit">Best if you need a partner, not just a website.</p>
+      <ul><li>Whatever your business actually needs</li><li>Internal tools, portals, and dashboards</li><li>We stay on after launch — updates, monitoring, monthly reports</li></ul>
+      <a class="go-plan" data-plan="Custom" href="https://wa.me/60177209159">Get started</a>
     </div>
   </div>
   <p class="refund-line reveal">✦ <span><b>Refund-backed</b> — cancel before kickoff for a full refund.</span></p>
+  <p class="refund-line reveal" style="margin-top:14px">✧ <span>The "+" covers optional add-ons like extra pages or languages. You get a fixed written quote before any deposit — and it never changes after kickoff.</span></p>
+
+
+  <div class="fit-quiz reveal" id="fit-quiz">
+    <h3>Not sure which level fits?</h3>
+    <p class="fq-sub">Answer three quick questions — no email needed.</p>
+    <div class="fq-q" data-q="1">
+      <p>Where are you today?</p>
+      <div class="fq-opts">
+        <button class="fq-opt" data-v="0" type="button">I don't have a website yet</button>
+        <button class="fq-opt" data-v="1" type="button">My site gets visitors but no enquiries</button>
+        <button class="fq-opt" data-v="2" type="button">My website is central to how I sell</button>
+      </div>
+    </div>
+    <div class="fq-q" data-q="2">
+      <p>How much content do you need?</p>
+      <div class="fq-opts">
+        <button class="fq-opt" data-v="0" type="button">Just the basics (1–3 pages)</button>
+        <button class="fq-opt" data-v="1" type="button">Several services (5–8 pages)</button>
+        <button class="fq-opt" data-v="2" type="button">A lot — or not sure yet</button>
+      </div>
+    </div>
+    <div class="fq-q" data-q="3">
+      <p>Connect to other tools (booking, payment, CRM)?</p>
+      <div class="fq-opts">
+        <button class="fq-opt" data-v="0" type="button">No, keep it simple</button>
+        <button class="fq-opt" data-v="1" type="button">Maybe later</button>
+        <button class="fq-opt" data-v="2" type="button">Yes, definitely</button>
+      </div>
+    </div>
+    <div class="fq-result" id="fq-result">
+      <span class="fq-reco" id="fq-reco"></span>
+      <a class="fq-go" id="fq-go" href="https://wa.me/60177209159" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
 
   <div class="compare-wrap reveal">
     <p class="sec-label" style="margin-bottom:32px">Compare what is included</p>
@@ -317,20 +379,20 @@ footer a:hover{color:#fff}
         <tr><th>Feature</th><th>Starter</th><th class="pop-col">Growth</th><th>Premium</th><th>Custom</th></tr>
       </thead>
       <tbody>
-        <tr><td>Pages</td><td>1–3 pages</td><td>5–8 pages</td><td>10+ pages</td><td>Custom</td></tr>
+        <tr><td>Pages included</td><td>1–3 pages</td><td>5–8 pages</td><td>10+ pages</td><td>Custom</td></tr>
         <tr><td>Mobile responsive</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
         <tr><td>Contact form</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-        <tr><td>Basic SEO setup</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-        <tr><td>Automation flow</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-        <tr><td>Multilingual setup</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-        <tr><td>Custom UX design</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-        <tr><td>System integration</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
-        <tr><td>Ongoing support</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
+        <tr><td>Basic SEO setup (get found on Google)</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Automation flow (auto-replies to enquiries)</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Multilingual setup (serve customers in their language)</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Custom UX design (designed around your buyers)</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>System integration (booking, payment, CRM)</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
+        <tr><td>Ongoing support (updates &amp; monthly reports)</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p class="refund-line reveal" style="margin-top:56px">✦ <span><b>Deposit protected.</b> No lock-in, no surprises. <a href="#" style="text-decoration:underline">Read the refund policy →</a></span></p>
+  <p class="refund-line reveal" style="margin-top:56px">✦ <span><b>Deposit protected.</b> No lock-in, no surprises. <a href="/refund" style="text-decoration:underline">Read the refund policy →</a></span></p>
 </section>
 
 <!-- NOTES -->
@@ -346,6 +408,10 @@ footer a:hover{color:#fff}
   <div class="note reveal reveal-d2">
     <h3>Timeline</h3>
     <p>Starter sites typically launch in 3 weeks. Growth and Premium scopes are confirmed before kickoff.</p>
+  </div>
+  <div class="note reveal reveal-d3">
+    <h3>Ongoing support</h3>
+    <p>Every launch includes a post-launch check-in and fixes for anything not working as agreed. Custom plans add ongoing support: updates, monitoring, and an AI-assisted monthly site health report — speed, SEO, and broken links, reviewed by us.</p>
   </div>
 </div>
 
@@ -373,78 +439,120 @@ const io = new IntersectionObserver(entries=>{
 },{threshold:.15});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-const langSwitcher = document.querySelector('.language-switcher');
-if(langSwitcher){
-  const langTrigger = langSwitcher.querySelector('.lang-trigger');
-  const langCurrent = langSwitcher.querySelector('.lang-current');
-  const langOptions = langSwitcher.querySelectorAll('.lang-option');
-  const languageLabels = {en:'EN','zh-Hant':'繁中','zh-Hans':'简中',ms:'BM',ja:'日本語',ko:'한국어'};
+</script>
+
+<!-- ═══ LANGUAGE SWITCHER + TRANSLATIONS ═══ -->
+<script>
+const pricingLangSwitcher = document.querySelector('.language-switcher');
+if(pricingLangSwitcher){
+  const langTrigger = pricingLangSwitcher.querySelector('.lang-trigger');
+  const langCurrent = pricingLangSwitcher.querySelector('.lang-current');
+  const langOptions = pricingLangSwitcher.querySelectorAll('.lang-option');
+  const languageLabels = {
+    en:'EN',
+    'zh-Hant':'繁中',
+    'zh-Hans':'简中',
+    ms:'BM',
+    ja:'日本語',
+    ko:'한국어'
+  };
   const supportedLanguages = Object.keys(languageLabels);
   const textCopy = {
     'Story':{'zh-Hant':'故事','zh-Hans':'故事',ms:'Cerita',ja:'ストーリー',ko:'스토리'},
-    'Portfolio':{'zh-Hant':'作品集','zh-Hans':'作品集',ms:'Portfolio',ja:'実績',ko:'포트폴리오'},
+    'Portfolio':{'zh-Hant':'作品集','zh-Hans':'作品集',ms:'Portfolio',ja:'実績',ko:'포트폴리オ'},
     'Process':{'zh-Hant':'流程','zh-Hans':'流程',ms:'Proses',ja:'流れ',ko:'프로세스'},
     'About':{'zh-Hant':'關於','zh-Hans':'关于',ms:'Tentang',ja:'会社情報',ko:'소개'},
     'Pricing':{'zh-Hant':'方案','zh-Hans':'方案',ms:'Harga',ja:'料金',ko:'가격'},
     'Contact':{'zh-Hant':'聯絡','zh-Hans':'联系',ms:'Hubungi',ja:'連絡',ko:'문의'},
     'Get a website':{'zh-Hant':'開始網站項目','zh-Hans':'开始网站项目',ms:'Bina laman web',ja:'サイトを始める',ko:'웹사이트 시작'},
-    "Let's talk":{'zh-Hant':'立即諮詢','zh-Hans':'立即咨询',ms:'Jom berbincang',ja:'相談する',ko:'상담하기'},
+    'Not sure which level fits?':{'zh-Hant':'不確定哪個級別適合你？','zh-Hans':'不确定哪个级别适合你？',ms:'Tak pasti tahap mana sesuai?',ja:'どのレベルが合うか迷ったら？',ko:'어떤 레벨이 맞을지 고민된다면?'},
+    'Answer three quick questions — no email needed.':{'zh-Hant':'回答三個小問題——不需要留下電郵。','zh-Hans':'回答三个小问题——不需要留下邮箱。',ms:'Jawab tiga soalan ringkas — tiada emel diperlukan.',ja:'3つの質問に答えるだけ——メール登録は不要です。',ko:'짧은 질문 3개면 됩니다 — 이메일은 필요 없어요.'},
+    'Where are you today?':{'zh-Hant':'你目前的狀況是？','zh-Hans':'你目前的状况是？',ms:'Di mana anda sekarang?',ja:'現在の状況は？',ko:'현재 상황은 어떤가요?'},
+    'I don\'t have a website yet':{'zh-Hant':'我還沒有網站','zh-Hans':'我还没有网站',ms:'Saya belum ada laman web',ja:'まだサイトを持っていない',ko:'아직 웹사이트가 없어요'},
+    'My site gets visitors but no enquiries':{'zh-Hant':'網站有訪客，但沒有查詢','zh-Hans':'网站有访客，但没有咨询',ms:'Laman saya ada pelawat tetapi tiada pertanyaan',ja:'訪問者はいるが問い合わせが来ない',ko:'방문자는 있는데 문의가 없어요'},
+    'My website is central to how I sell':{'zh-Hant':'網站是我銷售的核心','zh-Hans':'网站是我销售的核心',ms:'Laman web ialah teras jualan saya',ja:'サイトが営業の中心だ',ko:'웹사이트가 영업의 핵심이에요'},
+    'How much content do you need?':{'zh-Hant':'你需要多少內容？','zh-Hans':'你需要多少内容？',ms:'Berapa banyak kandungan anda perlukan?',ja:'どのくらいのページ数が必要？',ko:'콘텐츠가 얼마나 필요한가요?'},
+    'Just the basics (1–3 pages)':{'zh-Hant':'基本就好（1–3 頁）','zh-Hans':'基本就好（1–3 页）',ms:'Asas sahaja (1–3 halaman)',ja:'基本だけ（1〜3ページ）',ko:'기본만 (1–3페이지)'},
+    'Several services (5–8 pages)':{'zh-Hant':'多項服務（5–8 頁）','zh-Hans':'多项服务（5–8 页）',ms:'Beberapa perkhidmatan (5–8 halaman)',ja:'複数サービス（5〜8ページ）',ko:'여러 서비스 (5–8페이지)'},
+    'A lot — or not sure yet':{'zh-Hant':'很多——或還不確定','zh-Hans':'很多——或还不确定',ms:'Banyak — atau belum pasti',ja:'多い——またはまだ不明',ko:'많이 — 아직 확실하지 않아요'},
+    'Connect to other tools (booking, payment, CRM)?':{'zh-Hant':'需要串接其他工具嗎（預約、付款、CRM）？','zh-Hans':'需要对接其他工具吗（预约、付款、CRM）？',ms:'Sambung ke alat lain (tempahan, bayaran, CRM)?',ja:'他のツールと連携（予約・決済・CRM）？',ko:'다른 도구 연동이 필요한가요 (예약·결제·CRM)?'},
+    'No, keep it simple':{'zh-Hant':'不用，簡單就好','zh-Hans':'不用，简单就好',ms:'Tidak, biar ringkas',ja:'いいえ、シンプルでいい',ko:'아니요, 간단하게'},
+    'Maybe later':{'zh-Hant':'之後再說','zh-Hans':'之后再说',ms:'Mungkin kemudian',ja:'後で検討',ko:'나중에요'},
+    'Yes, definitely':{'zh-Hant':'需要','zh-Hans':'需要',ms:'Ya, semestinya',ja:'はい、必要',ko:'네, 필요해요'},
+    '1–3 pages written for your business':{'zh-Hant':'為你的業務撰寫 1–3 頁','zh-Hans':'为你的业务撰写 1–3 页',ms:'1–3 halaman ditulis untuk perniagaan anda',ja:'ビジネスに合わせた1〜3ページを執筆',ko:'비즈니스에 맞춰 작성한 1–3페이지'},
+    'Looks right on every phone':{'zh-Hant':'任何手機上都清晰美觀','zh-Hans':'任何手机上都清晰美观',ms:'Kemas pada setiap telefon',ja:'どのスマホでも綺麗に表示',ko:'어떤 폰에서도 보기 좋게'},
+    'WhatsApp & enquiry form built in':{'zh-Hant':'內建 WhatsApp 和查詢表單','zh-Hans':'内置 WhatsApp 和咨询表单',ms:'WhatsApp & borang pertanyaan terbina',ja:'WhatsAppと問い合わせフォームを標準装備',ko:'WhatsApp & 문의 폼 기본 탑재'},
+    'Best if you just need a credible online presence, fast.':{'zh-Hant':'適合：想快速擁有一個可信的線上門面。','zh-Hans':'适合：想快速拥有一个可信的线上门面。',ms:'Sesuai jika anda perlukan kehadiran online yang boleh dipercayai, dengan cepat.',ja:'こんな方に：信頼できるオンラインの顔を早く持ちたい。',ko:'추천: 신뢰감 있는 온라인 얼굴이 빨리 필요할 때.'},
+    'Up to 8 pages written for your services':{'zh-Hant':'為你的服務撰寫最多 8 頁','zh-Hans':'为你的服务撰写最多 8 页',ms:'Sehingga 8 halaman ditulis untuk perkhidmatan anda',ja:'サービスに合わせた最大8ページを執筆',ko:'서비스에 맞춰 작성한 최대 8페이지'},
+    'Enquiry form that sends straight to your WhatsApp':{'zh-Hant':'查詢直接送進你的 WhatsApp','zh-Hans':'咨询直接送进你的 WhatsApp',ms:'Borang pertanyaan terus ke WhatsApp anda',ja:'問い合わせがあなたのWhatsAppへ直接届く',ko:'문의가 당신의 WhatsApp으로 바로 전달'},
+    'Automatic reply so no enquiry sits unanswered overnight':{'zh-Hant':'自動回覆，查詢不過夜','zh-Hans':'自动回复，咨询不过夜',ms:'Balasan automatik supaya tiada pertanyaan tertunggak',ja:'自動返信で問い合わせを一晩も放置しない',ko:'자동 응답으로 문의가 밤새 방치되지 않게'},
+    'Best if your site gets visitors but no enquiries.':{'zh-Hant':'適合：網站有訪客，卻沒有查詢。','zh-Hans':'适合：网站有访客，却没有咨询。',ms:'Sesuai jika laman anda ada pelawat tetapi tiada pertanyaan.',ja:'こんな方に：訪問者はいるのに問い合わせが来ない。',ko:'추천: 방문자는 있는데 문의가 없을 때.'},
+    'Design tailored to how your customers buy':{'zh-Hant':'依照你客戶的購買方式量身設計','zh-Hans':'按照你客户的购买方式量身设计',ms:'Reka bentuk mengikut cara pelanggan anda membeli',ja:'顧客の買い方に合わせた設計',ko:'고객의 구매 방식에 맞춘 디자인'},
+    '10+ pages, faster loading, richer content':{'zh-Hant':'10 頁以上、更快載入、更豐富內容','zh-Hans':'10 页以上、更快加载、更丰富内容',ms:'10+ halaman, lebih pantas, kandungan lebih kaya',ja:'10ページ以上・高速表示・充実したコンテンツ',ko:'10페이지 이상, 더 빠른 로딩, 더 풍부한 콘텐츠'},
+    'Connected to your booking, payment, or CRM tools':{'zh-Hant':'串接你的預約、付款或 CRM 工具','zh-Hans':'对接你的预约、付款或 CRM 工具',ms:'Disambung ke sistem tempahan, bayaran atau CRM anda',ja:'予約・決済・CRMツールと連携',ko:'예약·결제·CRM 도구와 연동'},
+    'Best if the website is a core part of how you sell.':{'zh-Hant':'適合：網站是你銷售流程的核心。','zh-Hans':'适合：网站是你销售流程的核心。',ms:'Sesuai jika laman web ialah teras jualan anda.',ja:'こんな方に：ウェブサイトが営業の中核である。',ko:'추천: 웹사이트가 영업의 핵심일 때.'},
+    'Whatever your business actually needs':{'zh-Hant':'你的業務真正需要什麼，就做什麼','zh-Hans':'你的业务真正需要什么，就做什么',ms:'Apa sahaja yang perniagaan anda benar-benar perlukan',ja:'ビジネスに本当に必要なものを',ko:'비즈니스에 정말 필요한 것이라면'},
+    'Internal tools, portals, and dashboards':{'zh-Hant':'內部工具、入口網站和儀表板','zh-Hans':'内部工具、门户和仪表板',ms:'Alat dalaman, portal dan papan pemuka',ja:'社内ツール・ポータル・ダッシュボード',ko:'내부 도구, 포털, 대시보드'},
+    'We stay on after launch — updates, monitoring, monthly reports':{'zh-Hant':'上線後我們持續在場——更新、監測、每月報告','zh-Hans':'上线后我们持续在场——更新、监测、每月报告',ms:'Kami kekal selepas pelancaran — kemas kini, pemantauan, laporan bulanan',ja:'公開後も伴走——更新・監視・月次レポート',ko:'런칭 후에도 함께합니다 — 업데이트, 모니터링, 월간 리포트'},
+    'Best if you need a partner, not just a website.':{'zh-Hant':'適合：你需要的是夥伴，不只是網站。','zh-Hans':'适合：你需要的是伙伴，不只是网站。',ms:'Sesuai jika anda perlukan rakan kongsi, bukan sekadar laman web.',ja:'こんな方に：サイトではなくパートナーが必要。',ko:'추천: 웹사이트가 아니라 파트너가 필요할 때.'},
+    'The "+" covers optional add-ons like extra pages or languages. You get a fixed written quote before any deposit — and it never changes after kickoff.':{'zh-Hant':'「+」代表可選加購，例如加頁或加語言。付訂金前你會拿到固定的書面報價——開工後絕不變動。','zh-Hans':'「+」代表可选加购，例如加页或加语言。付订金前你会拿到固定的书面报价——开工后绝不变动。',ms:'Tanda "+" merangkumi tambahan pilihan seperti halaman atau bahasa tambahan. Anda terima sebut harga bertulis yang tetap sebelum sebarang deposit — dan ia tidak berubah selepas kickoff.',ja:'「+」は追加ページや追加言語などのオプションを指します。デポジット前に固定の書面見積もりをお渡しし、開始後に変わることはありません。',ko:'"+"는 페이지 추가나 언어 추가 같은 선택 옵션을 뜻합니다. 보증금 전에 고정된 서면 견적을 받으며, 시작 후 절대 바뀌지 않습니다.'},
+    'Pages included':{'zh-Hant':'包含頁數','zh-Hans':'包含页数',ms:'Halaman termasuk',ja:'ページ数',ko:'포함 페이지'},
+    'Basic SEO setup (get found on Google)':{'zh-Hant':'基礎 SEO 設定（讓 Google 找到你）','zh-Hans':'基础 SEO 设置（让 Google 找到你）',ms:'Persediaan SEO asas (ditemui di Google)',ja:'基本SEO設定（Googleで見つかる）',ko:'기본 SEO 설정 (구글에서 검색되게)'},
+    'Automation flow (auto-replies to enquiries)':{'zh-Hant':'自動化流程（自動回覆查詢）','zh-Hans':'自动化流程（自动回复咨询）',ms:'Aliran automasi (balasan automatik)',ja:'自動化フロー（問い合わせに自動返信）',ko:'자동화 플로우 (문의 자동 응답)'},
+    'Multilingual setup (serve customers in their language)':{'zh-Hant':'多語言設定（用客戶的語言服務他們）','zh-Hans':'多语言设置（用客户的语言服务他们）',ms:'Persediaan berbilang bahasa (layan pelanggan dalam bahasa mereka)',ja:'多言語対応（顧客の言語で対応）',ko:'다국어 설정 (고객의 언어로 응대)'},
+    'Custom UX design (designed around your buyers)':{'zh-Hant':'定製 UX 設計（圍繞你的買家設計）','zh-Hans':'定制 UX 设计（围绕你的买家设计）',ms:'Reka bentuk UX tersuai (mengikut pembeli anda)',ja:'カスタムUXデザイン（買い手に合わせた設計）',ko:'맞춤 UX 디자인 (구매자 중심 설계)'},
+    'System integration (booking, payment, CRM)':{'zh-Hant':'系統整合（預約、付款、CRM）','zh-Hans':'系统整合（预约、付款、CRM）',ms:'Integrasi sistem (tempahan, bayaran, CRM)',ja:'システム統合（予約・決済・CRM）',ko:'시스템 통합 (예약·결제·CRM)'},
+    'Ongoing support (updates & monthly reports)':{'zh-Hant':'持續支援（更新與每月報告）','zh-Hans':'持续支持（更新与每月报告）',ms:'Sokongan berterusan (kemas kini & laporan bulanan)',ja:'継続サポート（更新と月次レポート）',ko:'지속 지원 (업데이트 & 월간 리포트)'},
     'Choose your level.':{'zh-Hant':'選擇適合你的方案。','zh-Hans':'选择适合你的方案。',ms:'Pilih tahap anda.',ja:'適切なレベルを選ぶ。',ko:'알맞은 단계를 선택하세요.'},
-    'From a clear first impression to a complete sales path — pick the level that matches the job your website needs to do.':{'zh-Hant':'從清楚第一印象到完整銷售路徑，選擇符合網站任務的方案。','zh-Hans':'从清楚第一印象到完整销售路径，选择符合网站任务的方案。',ms:'Daripada kesan pertama yang jelas hingga laluan jualan lengkap — pilih tahap yang sesuai dengan tugas laman web anda.',ja:'明確な第一印象から完全な販売導線まで、サイトが担う役割に合うレベルを選びます。',ko:'명확한 첫인상부터 완성된 판매 흐름까지, 웹사이트가 해야 할 일에 맞는 단계를 선택하세요.'},
     'Starter':{'zh-Hant':'Starter','zh-Hans':'Starter',ms:'Starter',ja:'Starter',ko:'Starter'},
     'Growth':{'zh-Hant':'Growth','zh-Hans':'Growth',ms:'Growth',ja:'Growth',ko:'Growth'},
     'Most popular':{'zh-Hant':'最受歡迎','zh-Hans':'最受欢迎',ms:'Paling popular',ja:'一番人気',ko:'가장 인기'},
     'Premium':{'zh-Hant':'Premium','zh-Hans':'Premium',ms:'Premium',ja:'Premium',ko:'Premium'},
     'Custom':{'zh-Hant':'Custom','zh-Hans':'Custom',ms:'Custom',ja:'Custom',ko:'Custom'},
-    'Quote':{'zh-Hant':'報價','zh-Hans':'报价',ms:'Sebut harga',ja:'見積り',ko:'견적'},
-    'Launch, credibility, a clear contact path.':{'zh-Hant':'上線、建立信任、清楚聯絡路徑。','zh-Hans':'上线、建立信任、清楚联系路径。',ms:'Pelancaran, kredibiliti, dan laluan hubungan yang jelas.',ja:'公開、信頼性、明確な問い合わせ導線。',ko:'출시, 신뢰도, 명확한 문의 경로.'},
-    'Clearer lead structure, basic automation.':{'zh-Hant':'更清楚的線索結構和基本自動化。','zh-Hans':'更清楚的线索结构和基本自动化。',ms:'Struktur lead yang lebih jelas dan automasi asas.',ja:'より明確なリード構造と基本自動化。',ko:'더 명확한 리드 구조와 기본 자동화.'},
-    'Better UX, connected systems.':{'zh-Hant':'更好的 UX 和系統連接。','zh-Hans':'更好的 UX 和系统连接。',ms:'UX lebih baik dan sistem bersambung.',ja:'より良いUXと連携システム。',ko:'더 나은 UX와 연결된 시스템.'},
-    'Complex scopes, ongoing support.':{'zh-Hant':'複雜範圍和持續支援。','zh-Hans':'复杂范围和持续支持。',ms:'Skop kompleks dan sokongan berterusan.',ja:'複雑な範囲と継続サポート。',ko:'복잡한 범위와 지속 지원.'},
-    'Simple website':{'zh-Hant':'簡單網站','zh-Hans':'简单网站',ms:'Laman web ringkas',ja:'シンプルなサイト',ko:'간단한 웹사이트'},
-    'Mobile ready':{'zh-Hant':'手機端適配','zh-Hans':'手机端适配',ms:'Sedia mudah alih',ja:'モバイル対応',ko:'모바일 대응'},
-    'Clear contact path':{'zh-Hant':'清楚聯絡路徑','zh-Hans':'清楚联系路径',ms:'Laluan hubungan jelas',ja:'明確な問い合わせ導線',ko:'명확한 문의 경로'},
-    'Custom pages':{'zh-Hant':'自訂頁面','zh-Hans':'自定义页面',ms:'Halaman khusus',ja:'カスタムページ',ko:'맞춤 페이지'},
-    'Lead structure':{'zh-Hant':'查詢線索結構','zh-Hans':'咨询线索结构',ms:'Struktur lead',ja:'リード構造',ko:'리드 구조'},
-    'Basic automation':{'zh-Hant':'基本自動化','zh-Hans':'基本自动化',ms:'Automasi asas',ja:'基本自動化',ko:'기본 자동화'},
-    'Custom UX':{'zh-Hant':'自訂 UX','zh-Hans':'自定义 UX',ms:'UX khusus',ja:'カスタムUX',ko:'맞춤 UX'},
-    'Advanced build':{'zh-Hant':'進階製作','zh-Hans':'进阶制作',ms:'Binaan lanjutan',ja:'高度な構築',ko:'고급 제작'},
-    'System connection':{'zh-Hant':'系統連接','zh-Hans':'系统连接',ms:'Sambungan sistem',ja:'システム連携',ko:'시스템 연결'},
-    'Complex scope':{'zh-Hant':'複雜範圍','zh-Hans':'复杂范围',ms:'Skop kompleks',ja:'複雑な範囲',ko:'복잡한 범위'},
-    'Business systems':{'zh-Hant':'業務系統','zh-Hans':'业务系统',ms:'Sistem bisnes',ja:'業務システム',ko:'비즈니스 시스템'},
+    'Email':{'zh-Hant':'電郵','zh-Hans':'邮箱',ms:'E-mel',ja:'メール',ko:'이메일'},
+    'Story':{'zh-Hant':'故事','zh-Hans':'故事',ms:'Cerita',ja:'ストーリー',ko:'스토리'},
+    'Portfolio':{'zh-Hant':'作品集','zh-Hans':'作品集',ms:'Portfolio',ja:'実績',ko:'포트폴리오'},
+    'Process':{'zh-Hant':'流程','zh-Hans':'流程',ms:'Proses',ja:'流れ',ko:'프로세스'},
+    'About':{'zh-Hant':'關於','zh-Hans':'关于',ms:'Tentang',ja:'会社情報',ko:'소개'},
+    'Pricing':{'zh-Hant':'方案','zh-Hans':'方案',ms:'Harga',ja:'料金',ko:'가격'},
+    'Let\'s talk':{'zh-Hant':'聊一聊','zh-Hans':'聊一聊',ms:'Jom bincang',ja:'相談する',ko:'문의하기'},
+    'From a clear first impression to a complete sales path — pick the level that matches the job your website needs to do.':{'zh-Hant':'從清晰的第一印象到完整的銷售路徑——選擇符合你網站任務的級別。','zh-Hans':'从清晰的第一印象到完整的销售路径——选择符合你网站任务的级别。',ms:'Daripada tanggapan pertama yang jelas hingga laluan jualan lengkap — pilih tahap yang sepadan dengan tugas laman web anda.',ja:'明快な第一印象から完全なセールス導線まで——サイトの役割に合ったレベルをお選びください。',ko:'명확한 첫인상부터 완전한 세일즈 경로까지 — 웹사이트가 할 일에 맞는 레벨을 고르세요.'},
+    'Launch, credibility, a clear contact path.':{'zh-Hant':'上線、可信度、清晰的聯絡路徑。','zh-Hans':'上线、可信度、清晰的联系路径。',ms:'Pelancaran, kredibiliti, laluan hubungan yang jelas.',ja:'公開、信頼性、明確な問い合わせ導線。',ko:'런칭, 신뢰도, 명확한 문의 경로.'},
+    'Get started':{'zh-Hant':'立即開始','zh-Hans':'立即开始',ms:'Mula sekarang',ja:'はじめる',ko:'시작하기'},
+    'Clearer lead structure, basic automation.':{'zh-Hant':'更清晰的潛客結構、基礎自動化。','zh-Hans':'更清晰的潜客结构、基础自动化。',ms:'Struktur prospek lebih jelas, automasi asas.',ja:'リード構造の明確化と基本の自動化。',ko:'더 명확한 리드 구조, 기본 자동화.'},
+    'Better UX, connected systems.':{'zh-Hant':'更好的 UX、系統互聯。','zh-Hans':'更好的 UX、系统互联。',ms:'UX lebih baik, sistem bersambung.',ja:'より良いUXとシステム連携。',ko:'더 나은 UX, 시스템 연동.'},
+    'Complex scopes, ongoing support.':{'zh-Hant':'複雜範圍、持續支援。','zh-Hans':'复杂范围、持续支持。',ms:'Skop kompleks, sokongan berterusan.',ja:'複雑なスコープと継続サポート。',ko:'복잡한 범위, 지속 지원.'},
     'Ongoing support':{'zh-Hant':'持續支援','zh-Hans':'持续支持',ms:'Sokongan berterusan',ja:'継続サポート',ko:'지속 지원'},
-    'Get started':{'zh-Hant':'開始諮詢','zh-Hans':'开始咨询',ms:'Mula sekarang',ja:'開始する',ko:'시작하기'},
-    'Refund-backed':{'zh-Hant':'退款保障','zh-Hans':'退款保障',ms:'Jaminan bayaran balik',ja:'返金保証',ko:'환불 보장'},
-    '— cancel before kickoff for a full refund.':{'zh-Hant':'— 開始前取消可全額退款。','zh-Hans':'— 开始前取消可全额退款。',ms:'— batal sebelum mula untuk bayaran balik penuh.',ja:'— 開始前のキャンセルは全額返金。',ko:'— 시작 전 취소 시 전액 환불.'},
-    'Compare what is included':{'zh-Hant':'比較包含內容','zh-Hans':'比较包含内容',ms:'Bandingkan kandungan',ja:'含まれる内容を比較',ko:'포함 항목 비교'},
+    'Quote':{'zh-Hant':'報價','zh-Hans':'报价',ms:'Sebut harga',ja:'見積もり',ko:'견적'},
+    'Refund-backed':{'zh-Hant':'退款保障','zh-Hans':'退款保障',ms:'Jaminan bayaran balik',ja:'返金保証つき',ko:'환불 보장'},
+    '— cancel before kickoff for a full refund.':{'zh-Hant':'——開工前取消可全額退款。','zh-Hans':'——开工前取消可全额退款。',ms:'— batal sebelum mula untuk bayaran balik penuh.',ja:'——キックオフ前のキャンセルは全額返金。',ko:'— 킥오프 전 취소 시 전액 환불.'},
+    'Compare what is included':{'zh-Hant':'比較各級別包含內容','zh-Hans':'比较各级别包含内容',ms:'Bandingkan kandungan setiap tahap',ja:'含まれる内容を比較',ko:'포함 내용 비교'},
     'Feature':{'zh-Hant':'功能','zh-Hans':'功能',ms:'Ciri',ja:'機能',ko:'기능'},
-    'Pages':{'zh-Hant':'頁面','zh-Hans':'页面',ms:'Halaman',ja:'ページ',ko:'페이지'},
-    'Mobile responsive':{'zh-Hant':'手機自適應','zh-Hans':'手机自适应',ms:'Responsif mudah alih',ja:'モバイル対応',ko:'모바일 반응형'},
-    'Contact form':{'zh-Hant':'聯絡表單','zh-Hans':'联系表单',ms:'Borang hubungan',ja:'問い合わせフォーム',ko:'문의 양식'},
-    'Basic SEO setup':{'zh-Hant':'基本 SEO 設定','zh-Hans':'基本 SEO 设置',ms:'Tetapan SEO asas',ja:'基本SEO設定',ko:'기본 SEO 설정'},
-    'Automation flow':{'zh-Hant':'自動化流程','zh-Hans':'自动化流程',ms:'Aliran automasi',ja:'自動化フロー',ko:'자동화 흐름'},
-    'Multilingual setup':{'zh-Hant':'多語言設定','zh-Hans':'多语言设置',ms:'Tetapan pelbagai bahasa',ja:'多言語設定',ko:'다국어 설정'},
-    'Custom UX design':{'zh-Hant':'自訂 UX 設計','zh-Hans':'自定义 UX 设计',ms:'Reka bentuk UX khusus',ja:'カスタムUXデザイン',ko:'맞춤 UX 디자인'},
-    'System integration':{'zh-Hant':'系統整合','zh-Hans':'系统整合',ms:'Integrasi sistem',ja:'システム統合',ko:'시스템 통합'},
-    'Yes':{'zh-Hant':'有','zh-Hans':'有',ms:'Ya',ja:'あり',ko:'예'},
-    'No':{'zh-Hant':'沒有','zh-Hans':'没有',ms:'Tidak',ja:'なし',ko:'아니오'},
+    'Mobile responsive':{'zh-Hant':'響應式手機支援','zh-Hans':'响应式手机支持',ms:'Responsif mudah alih',ja:'モバイル対応',ko:'모바일 반응형'},
+    'Contact form':{'zh-Hant':'聯絡表單','zh-Hans':'联系表单',ms:'Borang hubungan',ja:'お問い合わせフォーム',ko:'문의 폼'},
+    'Yes':{'zh-Hant':'有','zh-Hans':'有',ms:'Ya',ja:'あり',ko:'포함'},
+    'No':{'zh-Hant':'無','zh-Hans':'无',ms:'Tiada',ja:'なし',ko:'미포함'},
+    '1–3 pages':{'zh-Hant':'1–3 頁','zh-Hans':'1–3 页',ms:'1–3 halaman',ja:'1〜3ページ',ko:'1–3페이지'},
+    '5–8 pages':{'zh-Hant':'5–8 頁','zh-Hans':'5–8 页',ms:'5–8 halaman',ja:'5〜8ページ',ko:'5–8페이지'},
+    '10+ pages':{'zh-Hant':'10 頁以上','zh-Hans':'10 页以上',ms:'10+ halaman',ja:'10ページ以上',ko:'10페이지 이상'},
     'Deposit protected.':{'zh-Hant':'訂金受保障。','zh-Hans':'订金受保障。',ms:'Deposit dilindungi.',ja:'デポジット保護。',ko:'보증금 보호.'},
-    'No lock-in, no surprises.':{'zh-Hant':'不綁長約，不會有意外收費。','zh-Hans':'不绑长约，不会有意外收费。',ms:'Tiada ikatan, tiada kejutan.',ja:'長期縛りなし、想定外なし。',ko:'장기 약정 없음, 예상 밖 비용 없음.'},
-    'Read the refund policy →':{'zh-Hant':'查看退款政策 →','zh-Hans':'查看退款政策 →',ms:'Baca polisi bayaran balik →',ja:'返金ポリシーを見る →',ko:'환불 정책 보기 →'},
-    'How payment works':{'zh-Hant':'付款方式','zh-Hans':'付款方式',ms:'Cara pembayaran',ja:'支払い方法',ko:'결제 방식'},
-    "50% deposit before work starts, 50% before launch. No final payment until you've approved the finished work.":{'zh-Hant':'開始前支付 50% 訂金，上線前支付 50%。你確認完成品前，不需要支付尾款。','zh-Hans':'开始前支付 50% 订金，上线前支付 50%。你确认完成品前，不需要支付尾款。',ms:'Deposit 50% sebelum kerja bermula, 50% sebelum pelancaran. Bayaran akhir hanya selepas anda meluluskan hasil siap.',ja:'作業開始前に50%、公開前に50%。完成物を承認するまで最終支払いはありません。',ko:'작업 전 50%, 공개 전 50%. 완성본 승인 전에는 최종 결제가 없습니다.'},
-    'Not sure which level?':{'zh-Hant':'不確定選哪個方案？','zh-Hans':'不确定选哪个方案？',ms:'Tidak pasti tahap mana?',ja:'どのレベルか迷っていますか？',ko:'어떤 단계가 맞는지 모르겠나요?'},
-    "Tell us the job your website needs to do — we'll recommend the right starting point on a quick call.":{'zh-Hant':'告訴我們網站需要完成的任務，我們會在簡短通話中建議合適起點。','zh-Hans':'告诉我们网站需要完成的任务，我们会在简短通话中建议合适起点。',ms:'Beritahu tugas laman web anda — kami akan cadangkan titik mula yang sesuai dalam panggilan ringkas.',ja:'サイトが担う役割を教えてください。短い通話で適切な開始点を提案します。',ko:'웹사이트가 해야 할 일을 알려주시면 짧은 통화에서 알맞은 시작점을 추천합니다.'},
-    'Timeline':{'zh-Hant':'時間表','zh-Hans':'时间表',ms:'Garis masa',ja:'スケジュール',ko:'일정'},
-    'Starter sites typically launch in 3 weeks. Growth and Premium scopes are confirmed before kickoff.':{'zh-Hant':'Starter 通常 3 週上線。Growth 和 Premium 會在開始前確認範圍。','zh-Hans':'Starter 通常 3 周上线。Growth 和 Premium 会在开始前确认范围。',ms:'Laman Starter biasanya dilancar dalam 3 minggu. Skop Growth dan Premium disahkan sebelum mula.',ja:'Starterは通常3週間で公開。GrowthとPremiumは開始前に範囲を確認します。',ko:'Starter는 보통 3주 내 공개됩니다. Growth와 Premium 범위는 시작 전에 확정합니다.'},
-    'Ready to':{'zh-Hant':'準備好','zh-Hans':'准备好',ms:'Bersedia untuk',ja:'始める準備は',ko:'시작할 준비가'},
-    'get started?':{'zh-Hant':'開始了嗎？','zh-Hans':'开始了吗？',ms:'bermula?',ja:'できていますか？',ko:'되셨나요?'},
-    "No brief required. Tell us what you need and we'll get back to you within 24 hours.":{'zh-Hant':'不需要正式 brief。告訴我們你的需要，我們會在 24 小時內回覆。','zh-Hans':'不需要正式 brief。告诉我们你的需要，我们会在 24 小时内回复。',ms:'Tidak perlu brief rasmi. Beritahu keperluan anda dan kami akan balas dalam 24 jam.',ja:'正式なブリーフは不要です。必要なことを教えてください。24時間以内に返信します。',ko:'공식 브리프는 필요 없습니다. 필요한 것을 알려주시면 24시간 내에 답변드립니다.'},
-    'WhatsApp us':{'zh-Hant':'WhatsApp 聯絡我們','zh-Hans':'WhatsApp 联系我们',ms:'WhatsApp kami',ja:'WhatsAppで連絡',ko:'WhatsApp 문의'},
-    'Home':{'zh-Hant':'首頁','zh-Hans':'首页',ms:'Laman utama',ja:'ホーム',ko:'홈'},
-    'Work':{'zh-Hant':'作品','zh-Hans':'作品',ms:'Kerja',ja:'実績',ko:'작업'},
-    'Email':{'zh-Hant':'電郵','zh-Hans':'邮箱',ms:'E-mel',ja:'メール',ko:'이메일'}
+    'No lock-in, no surprises.':{'zh-Hant':'不綁約，沒有意外。','zh-Hans':'不绑约，没有意外。',ms:'Tiada ikatan, tiada kejutan.',ja:'縛りなし、不意打ちなし。',ko:'약정 없음, 돌발 비용 없음.'},
+    'Read the refund policy →':{'zh-Hant':'閱讀退款政策 →','zh-Hans':'阅读退款政策 →',ms:'Baca polisi bayaran balik →',ja:'返金ポリシーを読む →',ko:'환불 정책 보기 →'},
+    'How payment works':{'zh-Hant':'付款方式','zh-Hans':'付款方式',ms:'Cara pembayaran',ja:'お支払いの流れ',ko:'결제 방식'},
+    '50% deposit before work starts, 50% before launch. No final payment until you\'ve approved the finished work.':{'zh-Hant':'開工前支付 50% 訂金，上線前支付餘下 50%。在你驗收完成品之前不收尾款。','zh-Hans':'开工前支付 50% 订金，上线前支付余下 50%。在你验收成品之前不收尾款。',ms:'Deposit 50% sebelum kerja bermula, 50% sebelum pelancaran. Tiada bayaran akhir sehingga anda meluluskan hasil kerja.',ja:'着手前に50%、公開前に残り50%。完成品をご承認いただくまで最終支払いはありません。',ko:'작업 시작 전 50%, 런칭 전 50%. 완성작 승인 전까지 잔금은 받지 않습니다.'},
+    'Not sure which level?':{'zh-Hant':'不確定選哪個級別？','zh-Hans':'不确定选哪个级别？',ms:'Tak pasti tahap mana?',ja:'どのレベルか迷ったら？',ko:'어떤 레벨일지 고민된다면?'},
+    'Tell us the job your website needs to do — we\'ll recommend the right starting point on a quick call.':{'zh-Hant':'告訴我們你的網站需要完成什麼任務——我們會在一次簡短通話中推薦合適的起點。','zh-Hans':'告诉我们你的网站需要完成什么任务——我们会在一次简短通话中推荐合适的起点。',ms:'Beritahu kami tugas laman web anda — kami akan cadangkan titik permulaan yang sesuai dalam panggilan ringkas.',ja:'サイトが果たすべき役割を教えてください——短い通話で最適なスタート地点をご提案します。',ko:'웹사이트가 해야 할 일을 알려주세요 — 짧은 통화로 알맞은 시작점을 추천해드립니다.'},
+    'Timeline':{'zh-Hant':'時程','zh-Hans':'时间线',ms:'Garis masa',ja:'スケジュール',ko:'일정'},
+    'Starter sites typically launch in 3 weeks. Growth and Premium scopes are confirmed before kickoff.':{'zh-Hant':'Starter 網站通常 3 週內上線。Growth 和 Premium 的範圍會在開工前確認。','zh-Hans':'Starter 网站通常 3 周内上线。Growth 和 Premium 的范围会在开工前确认。',ms:'Laman Starter biasanya dilancarkan dalam 3 minggu. Skop Growth dan Premium disahkan sebelum bermula.',ja:'Starterサイトは通常3週間で公開。GrowthとPremiumのスコープはキックオフ前に確定します。',ko:'Starter 사이트는 보통 3주 안에 런칭됩니다. Growth와 Premium 범위는 킥오프 전에 확정됩니다.'},
+    'Every launch includes a post-launch check-in and fixes for anything not working as agreed. Custom plans add ongoing support: updates, monitoring, and an AI-assisted monthly site health report — speed, SEO, and broken links, reviewed by us.':{'zh-Hant':'每次上線都包含上線後檢查，任何與約定不符之處我們都會修正。Custom 方案提供持續支援：內容更新、監測，以及 AI 輔助的每月網站健康報告——速度、SEO 和失效連結，由我們人工覆核。','zh-Hans':'每次上线都包含上线后检查，任何与约定不符之处我们都会修正。Custom 方案提供持续支持：内容更新、监测，以及 AI 辅助的每月网站健康报告——速度、SEO 和失效链接，由我们人工复核。',ms:'Setiap pelancaran termasuk semakan selepas pelancaran dan pembetulan untuk apa-apa yang tidak berfungsi seperti dipersetujui. Pelan Custom menambah sokongan berterusan: kemas kini, pemantauan, dan laporan kesihatan laman bulanan berbantukan AI — kelajuan, SEO dan pautan rosak, disemak oleh kami.',ja:'すべての公開に、公開後チェックと合意どおり動作しない箇所の修正が含まれます。Customプランは継続サポートを追加：更新、モニタリング、AIを活用した月次サイトヘルスレポート——速度・SEO・リンク切れを私たちが確認してお届けします。',ko:'모든 런칭에는 런칭 후 점검과 합의와 다르게 작동하는 부분의 수정이 포함됩니다. Custom 플랜은 지속 지원을 더합니다: 업데이트, 모니터링, AI 기반 월간 사이트 헬스 리포트 — 속도, SEO, 깨진 링크를 저희가 직접 검수합니다.'},
+    'Ready to':{'zh-Hant':'準備好','zh-Hans':'准备好',ms:'Sedia untuk',ja:'さあ、',ko:'이제'},
+    'get started?':{'zh-Hant':'開始了嗎？','zh-Hans':'开始了吗？',ms:'bermula?',ja:'はじめよう。',ko:'시작해볼까요?'},
+    'No brief required. Tell us what you need and we\'ll get back to you within 24 hours.':{'zh-Hant':'無需正式簡報。告訴我們你的需求，我們會在 24 小時內回覆。','zh-Hans':'无需正式简报。告诉我们你的需求，我们会在 24 小时内回复。',ms:'Tiada taklimat diperlukan. Beritahu keperluan anda dan kami akan balas dalam 24 jam.',ja:'資料は不要です。ご要望をお聞かせいただければ、24時間以内にご連絡します。',ko:'브리핑은 필요 없습니다. 필요한 것을 알려주시면 24시간 안에 연락드립니다.'},
+    'WhatsApp us':{'zh-Hant':'WhatsApp 聯絡我們','zh-Hans':'WhatsApp 联系我们',ms:'WhatsApp kami',ja:'WhatsAppで相談',ko:'WhatsApp 문의'},
+    'Home':{'zh-Hant':'首頁','zh-Hans':'首页',ms:'Laman Utama',ja:'ホーム',ko:'홈'},
+    'Work':{'zh-Hant':'作品','zh-Hans':'作品',ms:'Kerja',ja:'実績',ko:'작업'}
   };
+
   const textNodes = [];
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
     acceptNode(node){
@@ -458,36 +566,117 @@ if(langSwitcher){
     const key = node.nodeValue.trim();
     if(textCopy[key]) textNodes.push({node,key});
   }
+
+  function translateText(key, lang){
+    if(lang === 'en') return key;
+    return (textCopy[key] && textCopy[key][lang]) || key;
+  }
+
   function applyLanguage(lang){
     const activeLang = supportedLanguages.includes(lang) ? lang : 'en';
     document.documentElement.lang = activeLang;
     textNodes.forEach(({node,key})=>{
-      const prefix = node.nodeValue.match(/^\s*/)[0];
-      const suffix = node.nodeValue.match(/\s*$/)[0];
-      node.nodeValue = `${prefix}${activeLang === 'en' ? key : (textCopy[key][activeLang] || key)}${suffix}`;
+      const original = node.nodeValue;
+      const prefix = original.match(/^\s*/)[0];
+      const suffix = original.match(/\s*$/)[0];
+      node.nodeValue = `${prefix}${translateText(key, activeLang)}${suffix}`;
     });
     langOptions.forEach(option=>option.classList.toggle('is-active', option.dataset.lang === activeLang));
     langCurrent.textContent = languageLabels[activeLang] || 'EN';
     localStorage.setItem('lumio-language', activeLang);
+    updateWaLinks(activeLang);
+    if(window.lumioQuizRefresh) window.lumioQuizRefresh(activeLang);
   }
+
+
+  const WA_NUMBER='60177209159';
+  const waMessages={
+    generic:{en:"Hi LUMIO! I saw your website and would like to ask about a project.",'zh-Hant':'你好 LUMIO！我看了你們的網站，想詢問一個項目。','zh-Hans':'你好 LUMIO！我看了你们的网站，想咨询一个项目。',ms:'Hai LUMIO! Saya melihat laman web anda dan ingin bertanya tentang satu projek.',ja:'LUMIOさん、こんにちは！ウェブサイトを拝見し、プロジェクトについて相談したいです。',ko:'안녕하세요 LUMIO! 웹사이트를 보고 프로젝트 문의드립니다.'},
+    Starter:{en:"Hi LUMIO! I'm interested in the Starter plan (RM 1,500+). What would it include for my business?",'zh-Hant':'你好 LUMIO！我對 Starter 方案（RM 1,500+）有興趣，想了解它能為我的業務包含哪些內容？','zh-Hans':'你好 LUMIO！我对 Starter 方案（RM 1,500+）有兴趣，想了解它能为我的业务包含哪些内容？',ms:'Hai LUMIO! Saya berminat dengan pelan Starter (RM 1,500+). Apa yang termasuk untuk perniagaan saya?',ja:'LUMIOさん、こんにちは！Starterプラン（RM 1,500+）に興味があります。私のビジネスの場合、何が含まれますか？',ko:'안녕하세요 LUMIO! Starter 플랜(RM 1,500+)에 관심 있습니다. 제 비즈니스에는 어떤 것이 포함되나요?'},
+    Growth:{en:"Hi LUMIO! I'm interested in the Growth plan (RM 4,000+). My site gets visitors but few enquiries — what would you suggest?",'zh-Hant':'你好 LUMIO！我對 Growth 方案（RM 4,000+）有興趣。我的網站有訪客但查詢很少——你們會怎麼建議？','zh-Hans':'你好 LUMIO！我对 Growth 方案（RM 4,000+）有兴趣。我的网站有访客但咨询很少——你们会怎么建议？',ms:'Hai LUMIO! Saya berminat dengan pelan Growth (RM 4,000+). Laman saya ada pelawat tetapi kurang pertanyaan — apa cadangan anda?',ja:'LUMIOさん、こんにちは！Growthプラン（RM 4,000+）に興味があります。訪問者はいるのに問い合わせが少ないのですが、どうすればよいですか？',ko:'안녕하세요 LUMIO! Growth 플랜(RM 4,000+)에 관심 있습니다. 방문자는 있는데 문의가 적어요 — 어떤 방법이 있을까요?'},
+    Premium:{en:"Hi LUMIO! I'm interested in the Premium plan (RM 8,000+). I need custom design and connections to my other tools.",'zh-Hant':'你好 LUMIO！我對 Premium 方案（RM 8,000+）有興趣。我需要定製設計，並串接我現有的工具。','zh-Hans':'你好 LUMIO！我对 Premium 方案（RM 8,000+）有兴趣。我需要定制设计，并对接我现有的工具。',ms:'Hai LUMIO! Saya berminat dengan pelan Premium (RM 8,000+). Saya perlukan reka bentuk tersuai dan sambungan ke sistem saya.',ja:'LUMIOさん、こんにちは！Premiumプラン（RM 8,000+）に興味があります。カスタムデザインと既存ツールとの連携が必要です。',ko:'안녕하세요 LUMIO! Premium 플랜(RM 8,000+)에 관심 있습니다. 맞춤 디자인과 기존 도구 연동이 필요합니다.'},
+    Custom:{en:'Hi LUMIO! I have a bigger or ongoing scope in mind. Can we talk about a Custom plan?','zh-Hant':'你好 LUMIO！我在考慮較大或長期的需求，可以聊聊 Custom 方案嗎？','zh-Hans':'你好 LUMIO！我在考虑较大或长期的需求，可以聊聊 Custom 方案吗？',ms:'Hai LUMIO! Saya ada skop yang lebih besar atau berterusan. Boleh kita bincang tentang pelan Custom?',ja:'LUMIOさん、こんにちは！大きめ・継続的な依頼を考えています。Customプランについて相談できますか？',ko:'안녕하세요 LUMIO! 규모가 크거나 지속적인 작업을 생각 중입니다. Custom 플랜 상담 가능할까요?'}
+  };
+  function waHref(plan,lang){
+    const m=waMessages[plan]||waMessages.generic;
+    return 'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(m[lang]||m.en);
+  }
+  window.lumioWaHref=waHref;
+  function updateWaLinks(lang){
+    document.querySelectorAll('.go-plan[data-plan]').forEach(a=>{a.href=waHref(a.dataset.plan,lang);});
+    const fab=document.getElementById('wa-fab'); if(fab) fab.href=waHref('generic',lang);
+    const go=document.getElementById('fq-go'); if(go&&go.dataset.plan) go.href=waHref(go.dataset.plan,lang);
+  }
+
   langTrigger.addEventListener('click', e=>{
     e.stopPropagation();
-    const open = langSwitcher.classList.toggle('open');
+    const open = pricingLangSwitcher.classList.toggle('open');
     langTrigger.setAttribute('aria-expanded', open);
   });
   langOptions.forEach(opt=>{
     opt.addEventListener('click', ()=>{
       applyLanguage(opt.dataset.lang);
-      langSwitcher.classList.remove('open');
+      pricingLangSwitcher.classList.remove('open');
       langTrigger.setAttribute('aria-expanded','false');
     });
   });
   document.addEventListener('click', ()=>{
-    langSwitcher.classList.remove('open');
+    pricingLangSwitcher.classList.remove('open');
     langTrigger.setAttribute('aria-expanded','false');
   });
   applyLanguage(localStorage.getItem('lumio-language') || 'en');
 }
+</script>
+
+<a class="wa-fab" id="wa-fab" href="https://wa.me/60177209159" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.6 1.4 5.6 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-4.9 1 1-4.7-.3-.4c-1-1.6-1.6-3.4-1.6-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10.2-9.8 10.2zm5.5-7.5c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
+</a>
+
+<!-- ═══ LEVEL-FIT QUIZ ═══ -->
+<script>
+(function(){
+  const quiz=document.getElementById('fit-quiz');
+  if(!quiz) return;
+  const answers={};
+  const tierPrices={Starter:'RM 1,500+',Growth:'RM 4,000+',Premium:'RM 8,000+',Custom:''};
+  const recoLabel={en:'Our recommendation:','zh-Hant':'我們的建議：','zh-Hans':'我们的建议：',ms:'Cadangan kami:',ja:'おすすめ：',ko:'추천 플랜:'};
+  const askLabel={en:'Ask about {plan} on WhatsApp','zh-Hant':'在 WhatsApp 詢問 {plan}','zh-Hans':'在 WhatsApp 咨询 {plan}',ms:'Tanya tentang {plan} di WhatsApp',ja:'WhatsAppで{plan}について相談',ko:'WhatsApp으로 {plan} 문의'};
+  let currentPlan=null;
+  function lang(){ return localStorage.getItem('lumio-language')||'en'; }
+  function recommend(){
+    const sum=answers[1]+answers[2]+answers[3];
+    if(answers[3]===2) return sum>=5?'Custom':'Premium';
+    if(sum<=1) return 'Starter';
+    if(sum<=3) return 'Growth';
+    return 'Premium';
+  }
+  function render(l){
+    if(currentPlan===null) return;
+    const reco=document.getElementById('fq-reco');
+    const go=document.getElementById('fq-go');
+    const price=tierPrices[currentPlan];
+    reco.innerHTML=(recoLabel[l]||recoLabel.en)+' <b>'+currentPlan+'</b>'+(price?' — '+price:'');
+    go.textContent=(askLabel[l]||askLabel.en).replace('{plan}',currentPlan);
+    go.dataset.plan=currentPlan;
+    if(window.lumioWaHref) go.href=window.lumioWaHref(currentPlan,l);
+    document.getElementById('fq-result').classList.add('show');
+  }
+  window.lumioQuizRefresh=function(l){ render(l); };
+  quiz.querySelectorAll('.fq-q').forEach(q=>{
+    const n=+q.dataset.q;
+    q.querySelectorAll('.fq-opt').forEach(opt=>{
+      opt.addEventListener('click',()=>{
+        q.querySelectorAll('.fq-opt').forEach(o=>o.classList.remove('sel'));
+        opt.classList.add('sel');
+        answers[n]=+opt.dataset.v;
+        if([1,2,3].every(k=>answers[k]!==undefined)){
+          currentPlan=recommend();
+          render(lang());
+        }
+      });
+    });
+  });
+})();
 </script>
 </body>
 </html>
