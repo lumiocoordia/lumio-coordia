@@ -162,11 +162,23 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 @media(max-width:900px){.plans-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.plans-grid{grid-template-columns:1fr}}
 .plan{background:#fff;padding:44px 32px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--black);position:relative}
-.plan.pop{background:#15110a;color:#fff;border:2px solid var(--accent);box-shadow:0 10px 30px rgba(201,169,110,.2);transform:translateY(-8px);z-index:2}
+.plan.pop{
+  background:linear-gradient(145deg,#171208,#080807);color:#fff;border:2px solid var(--accent);
+  box-shadow:0 18px 52px rgba(201,169,110,.28),0 0 0 1px rgba(201,169,110,.22) inset;
+  transform:translateY(-10px);z-index:2;overflow:visible;
+}
+.plan.pop::before{
+  content:'';position:absolute;inset:-8px;border-radius:2px;pointer-events:none;
+  border:1px solid rgba(201,169,110,.24);box-shadow:0 0 42px rgba(201,169,110,.22);
+}
+.plan.pop::after{
+  content:'Recommended';position:absolute;top:18px;left:22px;color:rgba(201,169,110,.92);
+  font-size:.62rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+}
 .popular-badge{
-  position:absolute;top:-16px;right:24px;background:var(--accent);color:#fff;border-radius:999px;
+  position:absolute;top:-18px;right:24px;background:linear-gradient(135deg,var(--accent),#f2d99f);color:#241a12;border-radius:999px;
   padding:8px 14px;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-  box-shadow:0 10px 22px rgba(201,169,110,.24);
+  box-shadow:0 12px 26px rgba(201,169,110,.34);
 }
 .plan .tier{font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
 .plan.pop .tier{color:var(--accent)}
@@ -184,8 +196,8 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
   transition:background .3s,color .3s;
 }
 .plan .go-plan:hover{background:var(--black);color:#fff}
-.plan.pop .go-plan{background:var(--accent);border-color:var(--accent);color:#fff}
-.plan.pop .go-plan:hover{background:var(--accent-dk);border-color:var(--accent-dk);color:#fff}
+.plan.pop .go-plan{background:var(--accent);border-color:var(--accent);color:#241a12;box-shadow:0 12px 26px rgba(201,169,110,.22)}
+.plan.pop .go-plan:hover{background:#f2d99f;border-color:#f2d99f;color:#241a12}
 @media(max-width:560px){.plan.pop{transform:none}.popular-badge{top:14px;right:16px;font-size:.66rem;padding:7px 11px}}
 .refund-line{margin-top:40px;font-size:.92rem;color:var(--grey);display:flex;align-items:center;gap:12px}
 .refund-line b{color:var(--black)}
