@@ -180,8 +180,8 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .plan:nth-child(3)::before{content:'P'}
 .plan:nth-child(4)::before{content:'C'}
 .plan.pop{
-  background:linear-gradient(145deg,#171208,#080807);color:#fff;border:2px solid var(--accent);
-  box-shadow:0 18px 52px rgba(201,169,110,.28),0 0 0 1px rgba(201,169,110,.22) inset;
+  background:#fff;color:var(--black);border:6px solid var(--accent);
+  box-shadow:0 24px 70px rgba(201,169,110,.34),0 0 0 1px rgba(201,169,110,.16) inset;
   transform:translateY(-10px);z-index:2;overflow:visible;
 }
 .plan.pop::before{
@@ -189,11 +189,11 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
   border:1px solid rgba(201,169,110,.24);box-shadow:0 0 42px rgba(201,169,110,.22);
 }
 .plan.pop::after{
-  content:'Recommended';position:absolute;top:18px;left:22px;color:rgba(201,169,110,.92);
+  content:'Recommended';position:absolute;top:18px;left:22px;color:rgba(122,93,46,.92);
   font-size:.62rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
 }
 .popular-badge{
-  position:absolute;top:-18px;right:24px;background:linear-gradient(135deg,var(--accent),#f2d99f);color:#241a12;border-radius:999px;
+  position:absolute;top:-18px;right:24px;background:var(--accent);color:#fff;border-radius:999px;
   padding:8px 14px;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
   box-shadow:0 12px 26px rgba(201,169,110,.34);
 }
@@ -202,9 +202,9 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .plan .price{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;margin:12px 0 4px}
 .plan .price sup{font-size:.45em;font-weight:700}
 .plan p{font-size:var(--type-small);line-height:1.55;color:#666;margin-bottom:14px}
-.plan.pop p{color:#999}
+.plan.pop p{color:#555}
 .plan .fit{font-size:.8rem;line-height:1.55;color:#8a8a8a;margin:-8px 0 16px;font-style:italic}
-.plan.pop .fit{color:#b8a37f}
+.plan.pop .fit{color:#7a5d2e}
 .plan ul{list-style:none;font-size:var(--type-small);display:flex;flex-direction:column;gap:10px;margin-bottom:28px;flex:1}
 .plan li::before{content:'—  '}
 .plan .go-plan{
@@ -215,6 +215,12 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .plan .go-plan:hover{background:var(--black);color:#fff}
 .plan.pop .go-plan{background:var(--accent);border-color:var(--accent);color:#241a12;box-shadow:0 12px 26px rgba(201,169,110,.22)}
 .plan.pop .go-plan:hover{background:#f2d99f;border-color:#f2d99f;color:#241a12}
+.plan.custom-plan{background:#101010;color:#fff;border-color:#101010;box-shadow:0 18px 52px rgba(0,0,0,.24)}
+.plan.custom-plan .tier,.plan.custom-plan p,.plan.custom-plan .fit{color:#aaa}
+.plan.custom-plan .go-plan{border-color:#fff;color:#fff}
+.plan.custom-plan .go-plan:hover{background:#fff;color:#111}
+.plan.is-recommended{animation:recommendPulse 1.1s ease-out 1;box-shadow:0 0 0 6px rgba(216,185,133,.22),0 24px 70px rgba(201,169,110,.25)}
+@keyframes recommendPulse{0%{transform:translateY(-4px) scale(1)}45%{transform:translateY(-10px) scale(1.025)}100%{transform:translateY(-4px) scale(1)}}
 @media(max-width:560px){.plan.pop{transform:none}.popular-badge{top:14px;right:16px;font-size:.66rem;padding:7px 11px}}
 .refund-line{margin-top:40px;font-size:.92rem;color:var(--grey);display:flex;align-items:center;gap:12px}
 .refund-line b{color:var(--black)}
@@ -235,6 +241,19 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .fq-result .fq-reco b{font-family:'Archivo Expanded','Archivo',sans-serif;text-transform:uppercase}
 .fq-go{background:#25D366;color:#fff;border-radius:999px;padding:13px 24px;font-size:.85rem;font-weight:700;letter-spacing:.06em;display:inline-flex;align-items:center;gap:8px}
 .fq-go:hover{background:#1fb457}
+
+.pricing-contact{margin-top:80px;border:1px solid var(--black);padding:36px clamp(24px,4vw,48px);display:grid;grid-template-columns:.8fr 1.2fr;gap:32px;align-items:start}
+.pricing-contact h3{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:1.25rem;text-transform:uppercase;margin-bottom:10px}
+.pricing-contact p{color:#666;line-height:1.6}
+.pricing-form{display:grid;gap:14px}
+.pricing-form input,.pricing-form textarea{border:1px solid var(--grey-lt);border-radius:10px;padding:14px 16px;font:inherit}
+.pricing-form textarea{min-height:110px;resize:vertical}
+.pricing-form button{justify-self:start;background:var(--black);color:#fff;border-radius:999px;padding:14px 24px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.pricing-form .pc-success{display:none;color:#555;font-size:.9rem}
+.pricing-form.sent .pc-success{display:block}
+.pricing-contact-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px}
+.pricing-contact-actions a{border:1px solid var(--grey-lt);border-radius:999px;padding:10px 16px;font-weight:700;font-size:.82rem}
+@media(max-width:760px){.pricing-contact{grid-template-columns:1fr}}
 
 /* WHATSAPP FAB (mobile) */
 .wa-fab{position:fixed;right:18px;bottom:18px;z-index:1300;width:56px;height:56px;border-radius:50%;background:#25D366;display:none;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.25)}
@@ -285,6 +304,9 @@ footer{
 }
 footer .f-links{display:flex;gap:28px;text-transform:uppercase;font-weight:600;font-size:.75rem;letter-spacing:.14em}
 footer a:hover{color:#fff}
+.footer-meta{display:flex;flex-direction:column;gap:8px}
+.footer-social{display:flex;gap:12px}
+.footer-social a{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.14);display:grid;place-items:center}
 </style>
 </head>
 <body>
@@ -299,7 +321,7 @@ footer a:hover{color:#fff}
     <a class="active" href="/pricing">Pricing</a>
     <a href="/#contact">Contact</a>
   </div>
-  <a href="/#contact" class="nav-cta-pill">Get a website</a>
+  <a href="/#contact" class="nav-cta-pill">Start a project</a>
 </nav>
 <div class="language-switcher" aria-label="Language selector">
   <button class="lang-trigger" type="button" aria-expanded="false" aria-haspopup="listbox">
@@ -334,7 +356,7 @@ footer a:hover{color:#fff}
       <p>Launch fast with a clear contact path.</p>
       <p class="fit">Best for a credible first presence.</p>
       <ul><li>1–3 pages written for your business</li><li>Looks right on every phone</li><li>WhatsApp &amp; enquiry form built in</li></ul>
-      <a class="go-plan" data-plan="Starter" href="https://wa.me/60177209159">Get started</a>
+      <a class="go-plan" data-plan="Starter" href="https://wa.me/60177209159">Launch in 3 weeks</a>
     </div>
     <div class="plan pop reveal reveal-d1">
       <span class="popular-badge">Most popular</span>
@@ -343,7 +365,7 @@ footer a:hover{color:#fff}
       <p>Better lead structure and enquiry flow.</p>
       <p class="fit">Best when visitors do not enquire.</p>
       <ul><li>Up to 8 pages written for your services</li><li>Enquiry form that sends straight to your WhatsApp</li><li>Automatic reply so no enquiry sits unanswered overnight</li></ul>
-      <a class="go-plan" data-plan="Growth" href="https://wa.me/60177209159">Get started</a>
+      <a class="go-plan" data-plan="Growth" href="https://wa.me/60177209159">Get more enquiries</a>
     </div>
     <div class="plan reveal reveal-d2">
       <span class="tier">Premium</span>
@@ -351,18 +373,18 @@ footer a:hover{color:#fff}
       <p>Richer UX and connected systems.</p>
       <p class="fit">Best when the site supports sales.</p>
       <ul><li>Design tailored to how your customers buy</li><li>10+ pages, faster loading, richer content</li><li>Connected to your booking, payment, or CRM tools</li></ul>
-      <a class="go-plan" data-plan="Premium" href="https://wa.me/60177209159">Get started</a>
+      <a class="go-plan" data-plan="Premium" href="https://wa.me/60177209159">Talk about design</a>
     </div>
-    <div class="plan reveal reveal-d3">
+    <div class="plan custom-plan reveal reveal-d3">
       <span class="tier">Custom</span>
       <div class="price">Quote</div>
       <p>Complex scope and ongoing support.</p>
       <p class="fit">Best when you need a partner.</p>
       <ul><li>Whatever your business actually needs</li><li>Internal tools, portals, and dashboards</li><li>We stay on after launch — updates, monitoring, monthly reports</li></ul>
-      <a class="go-plan" data-plan="Custom" href="https://wa.me/60177209159">Get started</a>
+      <a class="go-plan" data-plan="Custom" href="https://wa.me/60177209159">Let's discuss</a>
     </div>
   </div>
-  <p class="refund-line reveal">✦ <span><b>Refund-backed</b> — cancel before kickoff for a full refund.</span></p>
+  <p class="refund-line reveal">✦ <span><b>Refund-backed</b> — 100% refund before kickoff — no questions asked.</span></p>
   <p class="refund-line reveal" style="margin-top:14px">✧ <span>Optional add-ons are quoted before deposit. No surprise changes after kickoff.</span></p>
 
 
@@ -372,25 +394,25 @@ footer a:hover{color:#fff}
     <div class="fq-q" data-q="1">
       <p>Where are you today?</p>
       <div class="fq-opts">
-        <button class="fq-opt" data-v="0" type="button">I don't have a website yet</button>
-        <button class="fq-opt" data-v="1" type="button">My site gets visitors but no enquiries</button>
-        <button class="fq-opt" data-v="2" type="button">My website is central to how I sell</button>
+        <button class="fq-opt" data-plan="Starter" type="button">I don't have a website yet</button>
+        <button class="fq-opt" data-plan="Growth" type="button">My site gets visitors but no enquiries</button>
+        <button class="fq-opt" data-plan="Premium" type="button">My website is central to how I sell</button>
       </div>
     </div>
     <div class="fq-q" data-q="2">
       <p>How much content do you need?</p>
       <div class="fq-opts">
-        <button class="fq-opt" data-v="0" type="button">Just the basics (1–3 pages)</button>
-        <button class="fq-opt" data-v="1" type="button">Several services (5–8 pages)</button>
-        <button class="fq-opt" data-v="2" type="button">A lot — or not sure yet</button>
+        <button class="fq-opt" data-plan="Starter" type="button">Just the basics (1–3 pages)</button>
+        <button class="fq-opt" data-plan="Growth" type="button">Several services (5–8 pages)</button>
+        <button class="fq-opt" data-plan="Premium" type="button">A lot — or not sure yet</button>
       </div>
     </div>
     <div class="fq-q" data-q="3">
       <p>Connect to other tools (booking, payment, CRM)?</p>
       <div class="fq-opts">
-        <button class="fq-opt" data-v="0" type="button">No, keep it simple</button>
-        <button class="fq-opt" data-v="1" type="button">Maybe later</button>
-        <button class="fq-opt" data-v="2" type="button">Yes, definitely</button>
+        <button class="fq-opt" data-plan="" type="button">No, keep it simple</button>
+        <button class="fq-opt" data-plan="" type="button">Maybe later</button>
+        <button class="fq-opt" data-plan="Premium" type="button">Yes, definitely</button>
       </div>
     </div>
     <div class="fq-result" id="fq-result">
@@ -420,6 +442,24 @@ footer a:hover{color:#fff}
   </div>
 
   <p class="refund-line reveal" style="margin-top:56px">✦ <span><b>Deposit protected.</b> No lock-in, no surprises. <a href="/refund" style="text-decoration:underline">Read the refund policy →</a></span></p>
+
+  <div class="pricing-contact reveal" id="pricing-contact">
+    <div>
+      <h3>Start with one enquiry</h3>
+      <p>Tell us what you need. We will reply within 24 hours with the next practical step.</p>
+      <div class="pricing-contact-actions">
+        <a href="https://wa.me/60177209159" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="#book-call">Book a 15-min call</a>
+      </div>
+    </div>
+    <form class="pricing-form" id="pricing-contact-form">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <textarea name="message" placeholder="What do you need?" required></textarea>
+      <button type="submit">Send enquiry</button>
+      <p class="pc-success">Thanks — we'll get back to you within 24 hours.</p>
+    </form>
+  </div>
 </section>
 
 <!-- NOTES -->
@@ -450,11 +490,14 @@ footer a:hover{color:#fff}
 </section>
 
 <footer>
-  <span>© 2026 LUMIO Coordia Intelligence</span>
+  <div class="footer-meta"><span>© 2026 LUMIO Coordia Intelligence. All rights reserved.</span><span>SSM: [to be confirmed]</span><div class="footer-social"><a href="#" aria-label="LinkedIn">in</a><a href="#" aria-label="Instagram">ig</a><a href="#" aria-label="Facebook">fb</a></div></div>
   <div class="f-links">
     <a href="/">Home</a>
     <a href="/work">Work</a>
     <a href="/about">About</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+    <a href="/refund">Refund Policy</a>
     <a href="mailto:lumiocoordia@gmail.com">Email</a>
     <a href="https://wa.me/60177209159">WhatsApp</a>
   </div>
@@ -556,13 +599,18 @@ if(pricingLangSwitcher){
     'Let\'s talk':{'zh-Hant':'聊一聊','zh-Hans':'聊一聊',ms:'Jom bincang',ja:'相談する',ko:'문의하기'},
     'From a clear first impression to a complete sales path — pick the level that matches the job your website needs to do.':{'zh-Hant':'從清晰的第一印象到完整的銷售路徑——選擇符合你網站任務的級別。','zh-Hans':'从清晰的第一印象到完整的销售路径——选择符合你网站任务的级别。',ms:'Daripada tanggapan pertama yang jelas hingga laluan jualan lengkap — pilih tahap yang sepadan dengan tugas laman web anda.',ja:'明快な第一印象から完全なセールス導線まで——サイトの役割に合ったレベルをお選びください。',ko:'명확한 첫인상부터 완전한 세일즈 경로까지 — 웹사이트가 할 일에 맞는 레벨을 고르세요.'},
     'Launch, credibility, a clear contact path.':{'zh-Hant':'上線、可信度、清晰的聯絡路徑。','zh-Hans':'上线、可信度、清晰的联系路径。',ms:'Pelancaran, kredibiliti, laluan hubungan yang jelas.',ja:'公開、信頼性、明確な問い合わせ導線。',ko:'런칭, 신뢰도, 명확한 문의 경로.'},
-    'Get started':{'zh-Hant':'立即開始','zh-Hans':'立即开始',ms:'Mula sekarang',ja:'はじめる',ko:'시작하기'},
+    'Launch in 3 weeks':{'zh-Hant':'3 週內上線','zh-Hans':'3 周内上线',ms:'Lancar dalam 3 minggu',ja:'3週間で公開',ko:'3주 내 런칭'},
+    'Get more enquiries':{'zh-Hant':'獲得更多查詢','zh-Hans':'获得更多咨询',ms:'Dapatkan lebih banyak pertanyaan',ja:'問い合わせを増やす',ko:'문의 늘리기'},
+    'Talk about design':{'zh-Hant':'討論設計方向','zh-Hans':'讨论设计方向',ms:'Bincang reka bentuk',ja:'デザインを相談',ko:'디자인 상담'},
+    "Let's discuss":{'zh-Hant':'一起討論','zh-Hans':'一起讨论',ms:'Mari bincang',ja:'相談する',ko:'상담하기'},
+    'Start a project':{'zh-Hant':'開始項目','zh-Hans':'开始项目',ms:'Mulakan projek',ja:'プロジェクト開始',ko:'프로젝트 시작'},
     'Clearer lead structure, basic automation.':{'zh-Hant':'更清晰的潛客結構、基礎自動化。','zh-Hans':'更清晰的潜客结构、基础自动化。',ms:'Struktur prospek lebih jelas, automasi asas.',ja:'リード構造の明確化と基本の自動化。',ko:'더 명확한 리드 구조, 기본 자동화.'},
     'Better UX, connected systems.':{'zh-Hant':'更好的 UX、系統互聯。','zh-Hans':'更好的 UX、系统互联。',ms:'UX lebih baik, sistem bersambung.',ja:'より良いUXとシステム連携。',ko:'더 나은 UX, 시스템 연동.'},
     'Complex scopes, ongoing support.':{'zh-Hant':'複雜範圍、持續支援。','zh-Hans':'复杂范围、持续支持。',ms:'Skop kompleks, sokongan berterusan.',ja:'複雑なスコープと継続サポート。',ko:'복잡한 범위, 지속 지원.'},
     'Ongoing support':{'zh-Hant':'持續支援','zh-Hans':'持续支持',ms:'Sokongan berterusan',ja:'継続サポート',ko:'지속 지원'},
     'Quote':{'zh-Hant':'報價','zh-Hans':'报价',ms:'Sebut harga',ja:'見積もり',ko:'견적'},
     'Refund-backed':{'zh-Hant':'退款保障','zh-Hans':'退款保障',ms:'Jaminan bayaran balik',ja:'返金保証つき',ko:'환불 보장'},
+    'Refund-backed — 100% refund before kickoff — no questions asked.':{'zh-Hant':'退款保障——開工前 100% 退款，不問原因。','zh-Hans':'退款保障——开工前 100% 退款，不问原因。',ms:'Jaminan bayaran balik — 100% sebelum kickoff, tanpa soalan.',ja:'返金保証——開始前は100%返金、理由は問いません。',ko:'환불 보장 — 시작 전 100% 환불, 이유 묻지 않음.'},
     '— cancel before kickoff for a full refund.':{'zh-Hant':'——開工前取消可全額退款。','zh-Hans':'——开工前取消可全额退款。',ms:'— batal sebelum mula untuk bayaran balik penuh.',ja:'——キックオフ前のキャンセルは全額返金。',ko:'— 킥오프 전 취소 시 전액 환불.'},
     'Compare what is included':{'zh-Hant':'比較各級別包含內容','zh-Hans':'比较各级别包含内容',ms:'Bandingkan kandungan setiap tahap',ja:'含まれる内容を比較',ko:'포함 내용 비교'},
     'Feature':{'zh-Hant':'功能','zh-Hans':'功能',ms:'Ciri',ja:'機能',ko:'기능'},
@@ -587,6 +635,15 @@ if(pricingLangSwitcher){
     'get started?':{'zh-Hant':'開始了嗎？','zh-Hans':'开始了吗？',ms:'bermula?',ja:'はじめよう。',ko:'시작해볼까요?'},
     'No brief required. Tell us what you need and we\'ll get back to you within 24 hours.':{'zh-Hant':'無需正式簡報。告訴我們你的需求，我們會在 24 小時內回覆。','zh-Hans':'无需正式简报。告诉我们你的需求，我们会在 24 小时内回复。',ms:'Tiada taklimat diperlukan. Beritahu keperluan anda dan kami akan balas dalam 24 jam.',ja:'資料は不要です。ご要望をお聞かせいただければ、24時間以内にご連絡します。',ko:'브리핑은 필요 없습니다. 필요한 것을 알려주시면 24시간 안에 연락드립니다.'},
     'WhatsApp us':{'zh-Hant':'WhatsApp 聯絡我們','zh-Hans':'WhatsApp 联系我们',ms:'WhatsApp kami',ja:'WhatsAppで相談',ko:'WhatsApp 문의'},
+    'Start with one enquiry':{'zh-Hant':'先從一個查詢開始','zh-Hans':'先从一个咨询开始',ms:'Mulakan dengan satu pertanyaan',ja:'まずは1件の問い合わせから',ko:'문의 하나부터 시작하세요'},
+    'Tell us what you need. We will prepare the next step by WhatsApp and email.':{'zh-Hant':'告訴我們你需要甚麼。我們會透過 WhatsApp 和 Email 安排下一步。','zh-Hans':'告诉我们你需要什么。我们会通过 WhatsApp 和 Email 安排下一步。',ms:'Beritahu apa yang anda perlukan. Kami akan sediakan langkah seterusnya melalui WhatsApp dan email.',ja:'必要なことを教えてください。WhatsAppとメールで次のステップをご案内します。',ko:'필요한 것을 알려주세요. WhatsApp과 이메일로 다음 단계를 준비하겠습니다.'},
+    'Book a 15-min call':{'zh-Hant':'預約 15 分鐘通話','zh-Hans':'预约 15 分钟通话',ms:'Tempah panggilan 15 minit',ja:'15分の相談を予約',ko:'15분 상담 예약'},
+    'Name':{'zh-Hant':'姓名','zh-Hans':'姓名',ms:'Nama',ja:'名前',ko:'이름'},
+    'Email':{'zh-Hant':'電郵','zh-Hans':'邮箱',ms:'E-mel',ja:'メール',ko:'이메일'},
+    'What do you need?':{'zh-Hant':'你需要甚麼？','zh-Hans':'你需要什么？',ms:'Apa yang anda perlukan?',ja:'何が必要ですか？',ko:'무엇이 필요하신가요?'},
+    'Send enquiry':{'zh-Hant':'發送查詢','zh-Hans':'发送咨询',ms:'Hantar pertanyaan',ja:'問い合わせを送信',ko:'문의 보내기'},
+    "Thanks — we'll get back to you within 24 hours.":{'zh-Hant':'謝謝——我們會在 24 小時內回覆。','zh-Hans':'谢谢——我们会在 24 小时内回复。',ms:'Terima kasih — kami akan balas dalam 24 jam.',ja:'ありがとうございます。24時間以内にご連絡します。',ko:'감사합니다 — 24시간 내에 답변드리겠습니다.'},
+    '— 100% refund before kickoff — no questions asked.':{'zh-Hant':'——開工前 100% 退款，不問原因。','zh-Hans':'——开工前 100% 退款，不问原因。',ms:'— 100% sebelum kickoff, tanpa soalan.',ja:'——開始前は100%返金、理由は問いません。',ko:'— 시작 전 100% 환불, 이유 묻지 않음.'},
     'Home':{'zh-Hant':'首頁','zh-Hans':'首页',ms:'Laman Utama',ja:'ホーム',ko:'홈'},
     'Work':{'zh-Hant':'作品','zh-Hans':'作品',ms:'Kerja',ja:'実績',ko:'작업'}
   };
@@ -677,27 +734,26 @@ if(pricingLangSwitcher){
   if(!quiz) return;
   const answers={};
   const tierPrices={Starter:'RM 1,500+',Growth:'RM 4,000+',Premium:'RM 8,000+',Custom:''};
-  const recoLabel={en:'Our recommendation:','zh-Hant':'我們的建議：','zh-Hans':'我们的建议：',ms:'Cadangan kami:',ja:'おすすめ：',ko:'추천 플랜:'};
+  const recoLabel={en:'We recommend the {plan} plan for you.','zh-Hant':'我們建議你選擇 {plan} 方案。','zh-Hans':'我们建议你选择 {plan} 方案。',ms:'Kami cadangkan pelan {plan} untuk anda.',ja:'{plan}プランをおすすめします。',ko:'{plan} 플랜을 추천합니다.'};
   const askLabel={en:'Ask about {plan} on WhatsApp','zh-Hant':'在 WhatsApp 詢問 {plan}','zh-Hans':'在 WhatsApp 咨询 {plan}',ms:'Tanya tentang {plan} di WhatsApp',ja:'WhatsAppで{plan}について相談',ko:'WhatsApp으로 {plan} 문의'};
   let currentPlan=null;
   function lang(){ return localStorage.getItem('lumio-language')||'en'; }
   function recommend(){
-    const sum=answers[1]+answers[2]+answers[3];
-    if(answers[3]===2) return sum>=5?'Custom':'Premium';
-    if(sum<=1) return 'Starter';
-    if(sum<=3) return 'Growth';
-    return 'Premium';
+    const scores={Starter:0,Growth:0,Premium:0};
+    Object.values(answers).forEach(plan=>{ if(scores[plan] !== undefined) scores[plan] += 1; });
+    return Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
   }
   function render(l){
     if(currentPlan===null) return;
     const reco=document.getElementById('fq-reco');
     const go=document.getElementById('fq-go');
     const price=tierPrices[currentPlan];
-    reco.innerHTML=(recoLabel[l]||recoLabel.en)+' <b>'+currentPlan+'</b>'+(price?' — '+price:'');
+    reco.innerHTML=(recoLabel[l]||recoLabel.en).replace('{plan}','<b>'+currentPlan+'</b>')+(price?' — '+price:'');
     go.textContent=(askLabel[l]||askLabel.en).replace('{plan}',currentPlan);
     go.dataset.plan=currentPlan;
     if(window.lumioWaHref) go.href=window.lumioWaHref(currentPlan,l);
     document.getElementById('fq-result').classList.add('show');
+    document.querySelectorAll('.plan').forEach(plan=>plan.classList.toggle('is-recommended', plan.querySelector('.tier')?.textContent.trim() === currentPlan));
   }
   window.lumioQuizRefresh=function(l){ render(l); };
   quiz.querySelectorAll('.fq-q').forEach(q=>{
@@ -706,13 +762,30 @@ if(pricingLangSwitcher){
       opt.addEventListener('click',()=>{
         q.querySelectorAll('.fq-opt').forEach(o=>o.classList.remove('sel'));
         opt.classList.add('sel');
-        answers[n]=+opt.dataset.v;
+        answers[n]=opt.dataset.plan || '';
         if([1,2,3].every(k=>answers[k]!==undefined)){
           currentPlan=recommend();
           render(lang());
         }
       });
     });
+  });
+})();
+
+(function(){
+  const form=document.getElementById('pricing-contact-form');
+  if(!form) return;
+  const WA_NUMBER='60177209159';
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    const data=Object.fromEntries(new FormData(form).entries());
+    const line=`New enquiry from ${data.name} (${data.email}): ${data.message}`;
+    const wa=`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(line)}`;
+    const mail=`mailto:lumiocoordia@gmail.com?subject=${encodeURIComponent('New LUMIO pricing enquiry from '+data.name)}&body=${encodeURIComponent(line)}`;
+    form.classList.add('sent');
+    window.open(wa,'_blank','noopener');
+    window.setTimeout(()=>{ window.location.href=mail; },650);
   });
 })();
 </script>
