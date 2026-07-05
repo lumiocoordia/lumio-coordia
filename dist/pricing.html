@@ -57,12 +57,11 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   justify-content:center;align-items:center;gap:10px;padding:14px 24px;display:flex;
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(0,0,0,.35);
 }
-.logo-pill{
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;
-  flex-shrink:0;align-items:center;justify-content:center;height:64px;padding:6px 18px;display:flex;
-  backdrop-filter:blur(12px);
+.brand-logo{
+  flex-shrink:0;display:flex;align-items:center;font-size:1.15rem;font-weight:900;
+  letter-spacing:.05em;color:#fff;white-space:nowrap;
 }
-.logo-pill img{height:50px;width:auto;min-width:154px;object-fit:contain}
+.brand-logo span{font-weight:400}
 .nav-pill{
   background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;
   align-items:center;gap:30px;padding:16px 26px;display:flex;backdrop-filter:blur(12px);
@@ -101,7 +100,7 @@ button{cursor:pointer;background:none;border:none;font:inherit}
 .lang-option.is-active::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0}
 @media(max-width:768px){
   .hero-nav{padding:14px 16px 0;gap:6px;justify-content:space-between}
-  .logo-pill{height:auto;padding:10px 14px;background:none;border:none;backdrop-filter:none}
+  .brand-logo{font-size:.9rem}
   .nav-cta-pill{display:none}
   .language-switcher{top:16px;right:14px}
 }
@@ -273,9 +272,7 @@ footer a:hover{color:#fff}
 <body>
 
 <nav class="hero-nav" aria-label="Primary navigation">
-  <a href="/" class="logo-pill" aria-label="LUMIO Coordia Intelligence home">
-    <img src="/assets/lumio-logo-lockup.png" alt="LUMIO Coordia Intelligence">
-  </a>
+  <a href="/" class="brand-logo" aria-label="LUMIO Coordia Intelligence home">LUMIO<span> Coordia</span></a>
   <div class="nav-pill">
     <a href="/#who">Story</a>
     <a href="/work">Portfolio</a>
