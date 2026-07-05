@@ -49,6 +49,11 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   --ease:cubic-bezier(.22,1,.36,1);
   --accent:#c9a96e;
   --accent-dk:#a9854c;
+  --type-h1:clamp(3rem,7vw,6.2rem);
+  --type-h2:clamp(2.35rem,5.8vw,5.4rem);
+  --type-h3:clamp(1.35rem,2.35vw,2.05rem);
+  --type-body:clamp(1rem,1.1vw,1.12rem);
+  --type-small:.86rem;
 }
 
 /* NAV */
@@ -58,10 +63,12 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(0,0,0,.35);
 }
 .brand-logo{
-  flex-shrink:0;display:flex;align-items:center;font-size:1.15rem;font-weight:900;
-  letter-spacing:.05em;color:#fff;white-space:nowrap;
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  width:138px;height:56px;padding:8px 14px;border-radius:14px;
+  background:rgba(10,10,10,.88);border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 12px 28px rgba(0,0,0,.16);white-space:nowrap;
 }
-.brand-logo span{font-weight:400}
+.brand-logo img{width:112px;height:auto;max-height:42px;object-fit:contain}
 .nav-pill{
   background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;
   align-items:center;gap:30px;padding:16px 26px;display:flex;backdrop-filter:blur(12px);
@@ -100,7 +107,8 @@ button{cursor:pointer;background:none;border:none;font:inherit}
 .lang-option.is-active::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0}
 @media(max-width:768px){
   .hero-nav{padding:14px 16px 0;gap:6px;justify-content:space-between}
-  .brand-logo{font-size:.9rem}
+  .brand-logo{width:108px;height:44px;padding:6px 10px;border-radius:12px}
+  .brand-logo img{width:88px;max-height:34px}
   .nav-cta-pill{display:none}
   .language-switcher{top:16px;right:14px}
 }
@@ -115,7 +123,7 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .sec-label::before{content:'';width:36px;height:1px;background:currentColor}
 .big-h{
   font-family:'Archivo Expanded','Archivo',sans-serif;
-  font-size:clamp(2.2rem,6vw,5.2rem);
+  font-size:var(--type-h2);
   line-height:1;letter-spacing:-.02em;text-transform:uppercase;font-weight:900;
 }
 .outline{color:transparent;-webkit-text-stroke:2px var(--black)}
@@ -136,7 +144,7 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .hero-kicker::before{content:'';width:44px;height:1px;background:var(--black)}
 .hero h1{
   font-family:'Archivo Expanded','Archivo',sans-serif;
-  font-size:clamp(2.6rem,7.2vw,6.4rem);
+  font-size:var(--type-h1);
   line-height:.94;letter-spacing:-.02em;
   text-transform:uppercase;font-weight:900;max-width:none;
 }
@@ -151,7 +159,7 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 }
 @keyframes rise{to{transform:translateY(0)}}
 .hero-sub{
-  max-width:560px;margin-top:40px;font-size:1.05rem;line-height:1.65;color:#3a3a3a;
+  max-width:560px;margin-top:40px;font-size:var(--type-body);line-height:1.58;color:#3a3a3a;
   opacity:0;animation:fadeUp .9s var(--ease) .55s forwards;
 }
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
@@ -161,6 +169,16 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 @media(max-width:900px){.plans-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.plans-grid{grid-template-columns:1fr}}
 .plan{background:#fff;padding:44px 32px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--black);position:relative}
+.plan::before{
+  content:'';
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:#f3eee5;border:1px solid rgba(201,169,110,.38);color:#7a5d2e;
+  font-size:.86rem;font-weight:900;margin-bottom:12px;
+}
+.plan:nth-child(1)::before{content:'S'}
+.plan:nth-child(2)::before{content:'G'}
+.plan:nth-child(3)::before{content:'P'}
+.plan:nth-child(4)::before{content:'C'}
 .plan.pop{
   background:linear-gradient(145deg,#171208,#080807);color:#fff;border:2px solid var(--accent);
   box-shadow:0 18px 52px rgba(201,169,110,.28),0 0 0 1px rgba(201,169,110,.22) inset;
@@ -183,11 +201,11 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .plan.pop .tier{color:var(--accent)}
 .plan .price{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;margin:12px 0 4px}
 .plan .price sup{font-size:.45em;font-weight:700}
-.plan p{font-size:.9rem;line-height:1.6;color:#666;margin-bottom:16px}
+.plan p{font-size:var(--type-small);line-height:1.55;color:#666;margin-bottom:14px}
 .plan.pop p{color:#999}
 .plan .fit{font-size:.8rem;line-height:1.55;color:#8a8a8a;margin:-8px 0 16px;font-style:italic}
 .plan.pop .fit{color:#b8a37f}
-.plan ul{list-style:none;font-size:.88rem;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;flex:1}
+.plan ul{list-style:none;font-size:var(--type-small);display:flex;flex-direction:column;gap:10px;margin-bottom:28px;flex:1}
 .plan li::before{content:'—  '}
 .plan .go-plan{
   border:1px solid currentColor;border-radius:999px;padding:13px;text-align:center;
@@ -272,7 +290,7 @@ footer a:hover{color:#fff}
 <body>
 
 <nav class="hero-nav" aria-label="Primary navigation">
-  <a href="/" class="brand-logo" aria-label="LUMIO Coordia Intelligence home">LUMIO<span> Coordia</span></a>
+  <a href="/" class="brand-logo" aria-label="LUMIO Coordia Intelligence home"><img src="/assets/lumio-logo-lockup.png" alt="LUMIO Coordia Intelligence"></a>
   <div class="nav-pill">
     <a href="/#who">Story</a>
     <a href="/work">Portfolio</a>
@@ -304,7 +322,7 @@ footer a:hover{color:#fff}
   <h1>
     <span class="line keep-together"><span class="word">Choose your level.</span></span>
   </h1>
-  <p class="hero-sub">From a clear first impression to a complete sales path — pick the level that matches the job your website needs to do.</p>
+  <p class="hero-sub">Pick the level that matches the job your website needs to do.</p>
 </header>
 
 <!-- PLANS -->
@@ -313,8 +331,8 @@ footer a:hover{color:#fff}
     <div class="plan reveal">
       <span class="tier">Starter</span>
       <div class="price">RM 1,500<sup>+</sup></div>
-      <p>Launch, credibility, a clear contact path.</p>
-      <p class="fit">Best if you just need a credible online presence, fast.</p>
+      <p>Launch fast with a clear contact path.</p>
+      <p class="fit">Best for a credible first presence.</p>
       <ul><li>1–3 pages written for your business</li><li>Looks right on every phone</li><li>WhatsApp &amp; enquiry form built in</li></ul>
       <a class="go-plan" data-plan="Starter" href="https://wa.me/60177209159">Get started</a>
     </div>
@@ -322,30 +340,30 @@ footer a:hover{color:#fff}
       <span class="popular-badge">Most popular</span>
       <span class="tier">Growth</span>
       <div class="price">RM 4,000<sup>+</sup></div>
-      <p>Clearer lead structure, basic automation.</p>
-      <p class="fit">Best if your site gets visitors but no enquiries.</p>
+      <p>Better lead structure and enquiry flow.</p>
+      <p class="fit">Best when visitors do not enquire.</p>
       <ul><li>Up to 8 pages written for your services</li><li>Enquiry form that sends straight to your WhatsApp</li><li>Automatic reply so no enquiry sits unanswered overnight</li></ul>
       <a class="go-plan" data-plan="Growth" href="https://wa.me/60177209159">Get started</a>
     </div>
     <div class="plan reveal reveal-d2">
       <span class="tier">Premium</span>
       <div class="price">RM 8,000<sup>+</sup></div>
-      <p>Better UX, connected systems.</p>
-      <p class="fit">Best if the website is a core part of how you sell.</p>
+      <p>Richer UX and connected systems.</p>
+      <p class="fit">Best when the site supports sales.</p>
       <ul><li>Design tailored to how your customers buy</li><li>10+ pages, faster loading, richer content</li><li>Connected to your booking, payment, or CRM tools</li></ul>
       <a class="go-plan" data-plan="Premium" href="https://wa.me/60177209159">Get started</a>
     </div>
     <div class="plan reveal reveal-d3">
       <span class="tier">Custom</span>
       <div class="price">Quote</div>
-      <p>Complex scopes, ongoing support.</p>
-      <p class="fit">Best if you need a partner, not just a website.</p>
+      <p>Complex scope and ongoing support.</p>
+      <p class="fit">Best when you need a partner.</p>
       <ul><li>Whatever your business actually needs</li><li>Internal tools, portals, and dashboards</li><li>We stay on after launch — updates, monitoring, monthly reports</li></ul>
       <a class="go-plan" data-plan="Custom" href="https://wa.me/60177209159">Get started</a>
     </div>
   </div>
   <p class="refund-line reveal">✦ <span><b>Refund-backed</b> — cancel before kickoff for a full refund.</span></p>
-  <p class="refund-line reveal" style="margin-top:14px">✧ <span>The "+" covers optional add-ons like extra pages or languages. You get a fixed written quote before any deposit — and it never changes after kickoff.</span></p>
+  <p class="refund-line reveal" style="margin-top:14px">✧ <span>Optional add-ons are quoted before deposit. No surprise changes after kickoff.</span></p>
 
 
   <div class="fit-quiz reveal" id="fit-quiz">
@@ -427,7 +445,7 @@ footer a:hover{color:#fff}
 <!-- CTA -->
 <section class="cta">
   <h2 class="big-h reveal">Ready to<br><span class="outline">get started?</span></h2>
-  <p class="reveal reveal-d1">No brief required. Tell us what you need and we'll get back to you within 24 hours.</p>
+  <p class="reveal reveal-d1">No brief needed. Tell us what you need; we reply within 24 hours.</p>
   <a class="btn-talk reveal reveal-d2" href="https://wa.me/60177209159">WhatsApp us <span class="arr">→</span></a>
 </section>
 
@@ -467,6 +485,17 @@ if(pricingLangSwitcher){
   };
   const supportedLanguages = Object.keys(languageLabels);
   const textCopy = {
+    'Pick the level that matches the job your website needs to do.':{'zh-Hant':'按你網站需要完成的任務選擇級別。','zh-Hans':'按你网站需要完成的任务选择级别。',ms:'Pilih tahap yang sepadan dengan tugas laman web anda.',ja:'サイトが担う仕事に合ったレベルを選んでください。',ko:'웹사이트가 해야 할 일에 맞는 단계를 고르세요.'},
+    'Launch fast with a clear contact path.':{'zh-Hant':'快速上線，聯絡路徑清楚。','zh-Hans':'快速上线，联系路径清楚。',ms:'Lancar cepat dengan laluan hubungan yang jelas.',ja:'明確な問い合わせ導線で素早く公開。',ko:'명확한 문의 경로로 빠르게 런칭.'},
+    'Best for a credible first presence.':{'zh-Hant':'適合建立可信的第一個線上門面。','zh-Hans':'适合建立可信的第一个线上门面。',ms:'Sesuai untuk kehadiran pertama yang dipercayai.',ja:'信頼できる最初のオンライン拠点に最適。',ko:'신뢰감 있는 첫 온라인 존재감에 적합.'},
+    'Better lead structure and enquiry flow.':{'zh-Hant':'更好的潛客結構和查詢流程。','zh-Hans':'更好的潜客结构和咨询流程。',ms:'Struktur prospek dan aliran pertanyaan yang lebih baik.',ja:'より良いリード構造と問い合わせ導線。',ko:'더 나은 리드 구조와 문의 흐름.'},
+    'Best when visitors do not enquire.':{'zh-Hant':'適合有訪客但少查詢的情況。','zh-Hans':'适合有访客但少咨询的情况。',ms:'Sesuai apabila pelawat tidak membuat pertanyaan.',ja:'訪問者がいても問い合わせが少ない時に最適。',ko:'방문자는 있지만 문의가 없을 때 적합.'},
+    'Richer UX and connected systems.':{'zh-Hant':'更完整的 UX 和系統串接。','zh-Hans':'更完整的 UX 和系统对接。',ms:'UX lebih kaya dan sistem bersambung.',ja:'より豊かなUXとシステム連携。',ko:'더 풍부한 UX와 시스템 연동.'},
+    'Best when the site supports sales.':{'zh-Hant':'適合網站需要支援銷售時。','zh-Hans':'适合网站需要支持销售时。',ms:'Sesuai apabila laman web menyokong jualan.',ja:'サイトが営業を支える場合に最適。',ko:'사이트가 판매를 지원해야 할 때 적합.'},
+    'Complex scope and ongoing support.':{'zh-Hant':'複雜範圍和持續支援。','zh-Hans':'复杂范围和持续支持。',ms:'Skop kompleks dan sokongan berterusan.',ja:'複雑なスコープと継続サポート。',ko:'복잡한 범위와 지속 지원.'},
+    'Best when you need a partner.':{'zh-Hant':'適合需要長期夥伴時。','zh-Hans':'适合需要长期伙伴时。',ms:'Sesuai apabila anda perlukan rakan kongsi.',ja:'パートナーが必要な場合に最適。',ko:'파트너가 필요할 때 적합.'},
+    'Optional add-ons are quoted before deposit. No surprise changes after kickoff.':{'zh-Hant':'可選加購會在訂金前報價。開工後不會突然改價。','zh-Hans':'可选加购会在订金前报价。开工后不会突然改价。',ms:'Tambahan pilihan disebut harga sebelum deposit. Tiada perubahan mengejut selepas kickoff.',ja:'オプションはデポジット前に見積もります。開始後の予期しない変更はありません。',ko:'선택 추가 항목은 보증금 전에 견적됩니다. 시작 후 갑작스러운 변경은 없습니다.'},
+    'No brief needed. Tell us what you need; we reply within 24 hours.':{'zh-Hant':'不需要 brief。告訴我們需要甚麼，我們 24 小時內回覆。','zh-Hans':'不需要 brief。告诉我们需要什么，我们 24 小时内回复。',ms:'Tidak perlu brief. Beritahu keperluan anda; kami balas dalam 24 jam.',ja:'ブリーフ不要。必要なことを教えてください。24時間以内に返信します。',ko:'브리프는 필요 없습니다. 필요한 것을 알려주시면 24시간 내 답변드립니다.'},
     'Story':{'zh-Hant':'故事','zh-Hans':'故事',ms:'Cerita',ja:'ストーリー',ko:'스토리'},
     'Portfolio':{'zh-Hant':'作品集','zh-Hans':'作品集',ms:'Portfolio',ja:'実績',ko:'포트폴리オ'},
     'Process':{'zh-Hant':'流程','zh-Hans':'流程',ms:'Proses',ja:'流れ',ko:'프로세스'},
