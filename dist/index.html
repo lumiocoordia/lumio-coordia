@@ -78,12 +78,10 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(255,255,255,.6);
 }
 .brand-logo{
-  flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  width:138px;height:56px;padding:8px 14px;border-radius:14px;
-  background:rgba(10,10,10,.88);border:1px solid rgba(255,255,255,.16);
-  box-shadow:0 12px 28px rgba(0,0,0,.12);white-space:nowrap;
+  flex-shrink:0;display:flex;align-items:center;font-size:1.15rem;font-weight:900;
+  letter-spacing:.05em;color:var(--black);white-space:nowrap;
 }
-.brand-logo img{width:112px;height:auto;max-height:42px;object-fit:contain}
+.brand-logo span{font-weight:400}
 .nav-pill{
   background:rgba(10,10,10,.05);border:1px solid rgba(10,10,10,.1);border-radius:14px;
   align-items:center;gap:30px;padding:16px 26px;display:flex;backdrop-filter:blur(12px);
@@ -170,8 +168,7 @@ button{cursor:pointer;background:none;border:none;font:inherit}
 @media(max-width:768px){
   .template-hero{padding-top:64px}
   .hero-nav{padding:14px 16px 0;gap:6px;justify-content:space-between}
-  .brand-logo{width:108px;height:44px;padding:6px 10px;border-radius:12px}
-  .brand-logo img{width:88px;max-height:34px}
+  .brand-logo{font-size:.9rem}
   .nav-cta-pill{display:none}
   .language-switcher{top:16px;right:14px}
   .hero-copy h1{font-size:clamp(2.1rem,9vw,3rem)}
@@ -469,8 +466,8 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 @media(max-width:820px){.contact-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
 footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-top:1px solid #222}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:48px}
-.footer-logo{display:inline-flex;align-items:center;justify-content:center;width:150px;height:58px;padding:8px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
-.footer-logo img{width:124px;height:auto;max-height:44px;object-fit:contain}
+.footer-logo{display:inline-flex;align-items:center;font-size:1.3rem;font-weight:900;letter-spacing:.05em;color:#fff}
+.footer-logo span{font-weight:400}
 .foot-brand p{margin-top:16px;font-size:.9rem;color:#777;max-width:280px;line-height:1.6}
 .foot-col h4{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:#666;margin-bottom:20px}
 .foot-col a,.foot-col p{display:block;font-size:.88rem;color:#aaa;margin-bottom:12px;transition:color .3s}
@@ -489,7 +486,7 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
 
 <section class="template-hero" id="top">
   <nav class="hero-nav" aria-label="Primary navigation">
-    <a href="#top" class="brand-logo" aria-label="LUMIO Coordia Intelligence home"><img src="/assets/lumio-logo-lockup.png" alt="LUMIO Coordia Intelligence"></a>
+    <a href="#top" class="brand-logo" aria-label="LUMIO Coordia Intelligence home">LUMIO<span> Coordia</span></a>
     <div class="nav-pill">
       <a href="#who">Story</a>
       <a href="/work">Portfolio</a>
@@ -816,7 +813,7 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
 <footer>
   <div class="foot-grid">
     <div class="foot-brand">
-      <a class="footer-logo" href="#top" aria-label="LUMIO Coordia Intelligence home"><img src="/assets/lumio-logo-lockup.png" alt="LUMIO Coordia Intelligence"></a>
+      <a class="footer-logo" href="#top" aria-label="LUMIO Coordia Intelligence home">LUMIO<span> Coordia</span></a>
       <p>Clear websites for service businesses.</p>
       <p class="foot-meta">SSM: [to be confirmed]</p>
       <div class="foot-social" aria-label="Social links to be confirmed"><span aria-label="LinkedIn to be confirmed">in</span><span aria-label="Instagram to be confirmed">ig</span><span aria-label="Facebook to be confirmed">fb</span></div>
