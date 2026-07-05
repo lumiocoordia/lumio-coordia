@@ -28,12 +28,10 @@ a{color:inherit;text-decoration:none}img{display:block;max-width:100%}button{cur
 .hero-nav{position:fixed;top:0;left:0;right:0;z-index:1000;justify-content:center;align-items:center;gap:10px;padding:14px 24px;display:flex;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(0,0,0,.35)}
 .brand-logo{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:138px;height:56px;padding:8px 14px;border-radius:14px;background:rgba(10,10,10,.88);border:1px solid rgba(255,255,255,.16);box-shadow:0 12px 28px rgba(0,0,0,.16);white-space:nowrap}
 .brand-logo img{width:112px;height:auto;max-height:42px;object-fit:contain}
-.mobile-menu-toggle{display:none;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:10px 14px;color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
 .nav-pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;align-items:center;gap:30px;padding:16px 26px;display:flex;backdrop-filter:blur(12px)}
 .nav-pill a{color:rgba(255,255,255,.7);font-size:.92rem;font-weight:500;transition:color .2s}.nav-pill a:hover,.nav-pill a.active{color:#fff}
 .nav-cta-pill{background:var(--accent);border-radius:999px;padding:12px 24px;font-size:.85rem;font-weight:700;white-space:nowrap;flex-shrink:0;transition:background .2s;color:#241a12!important}.nav-cta-pill:hover{background:var(--accent-dk)}
-.mobile-menu-panel{display:none}
-@media(max-width:900px){.nav-pill{display:none}.mobile-menu-toggle{display:inline-flex}.mobile-menu-panel{position:fixed;z-index:999;top:74px;left:16px;right:16px;display:grid;gap:8px;padding:14px;background:rgba(10,10,10,.92);border:1px solid rgba(255,255,255,.12);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.32);backdrop-filter:blur(18px);opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .2s var(--ease),transform .2s var(--ease)}.mobile-menu-panel.open{opacity:1;transform:translateY(0);pointer-events:auto}.mobile-menu-panel a{padding:12px 14px;border-radius:12px;color:#fff;font-weight:700}.mobile-menu-panel a:hover{background:rgba(255,255,255,.08)}}
+@media(max-width:900px){.nav-pill{display:none}}
 .language-switcher{z-index:1200;position:fixed;top:22px;right:24px}
 .lang-trigger{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 15px;color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.1em;cursor:pointer;backdrop-filter:blur(12px);transition:background .2s,border-color .2s;white-space:nowrap}
 .lang-trigger:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.22)}
@@ -42,7 +40,7 @@ a{color:inherit;text-decoration:none}img{display:block;max-width:100%}button{cur
 .language-switcher.open .lang-dropdown{opacity:1;transform:translateY(0);pointer-events:auto}
 .lang-option{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.6);cursor:pointer;transition:background .15s,color .15s;border:none;background:transparent;width:100%;text-align:left;letter-spacing:.02em}
 .lang-option:hover{background:rgba(255,255,255,.08);color:#fff}.lang-option.is-active{color:#fff;background:rgba(255,255,255,.06)}.lang-option.is-active::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0}
-@media(max-width:768px){.hero-nav{padding:14px 16px 0;gap:6px;justify-content:space-between}.brand-logo{width:108px;height:44px;padding:6px 10px;border-radius:12px}.brand-logo img{width:88px;max-height:34px}.nav-cta-pill{display:none}.language-switcher{top:16px;right:88px}}
+@media(max-width:768px){.hero-nav{padding:14px 16px 0;gap:6px;justify-content:space-between}.brand-logo{width:108px;height:44px;padding:6px 10px;border-radius:12px}.brand-logo img{width:88px;max-height:34px}.nav-cta-pill{display:none}.language-switcher{top:16px;right:14px}}
 .work-hero{min-height:78svh;background:var(--ink-900);color:#fff;display:flex;align-items:flex-end;padding:150px var(--pad) 80px;position:relative;overflow:hidden}
 .work-hero::before{content:'';position:absolute;inset:-20%;background:radial-gradient(circle at 30% 20%,rgba(216,185,133,.2),transparent 34%),radial-gradient(circle at 78% 12%,rgba(155,107,214,.18),transparent 30%);pointer-events:none}
 .work-hero-inner{position:relative;z-index:1;max-width:1080px}.sec-label{font-size:.78rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:30px;display:flex;align-items:center;gap:14px}.sec-label::before{content:'';width:36px;height:1px;background:currentColor}
@@ -55,7 +53,7 @@ main{max-width:1320px;margin:0 auto;padding:0 var(--pad)}
 .case-num{align-self:flex-start;font-family:'Archivo Expanded','Archivo',sans-serif;font-size:.85rem;line-height:1;color:#fff;background:var(--black);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800}
 .case-body{display:contents}.case-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}.case-title h2{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:clamp(1.3rem,2.4vw,1.7rem);line-height:1.05;text-transform:uppercase;font-weight:900}.case-meta{margin-top:8px;color:#777;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}.case-result{border:1px solid var(--black);border-radius:999px;padding:8px 14px;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
 .case-media{border-radius:18px;overflow:hidden;background:#0b0b0b;box-shadow:0 14px 34px rgba(0,0,0,.16);aspect-ratio:4/3}.case-media video,.case-media img{width:100%;height:100%;object-fit:cover;display:block}.case-media img.contain{object-fit:contain;background:#fbf4e8;padding:24px}
-.case-copy{display:grid;gap:14px}.case-copy p{font-size:var(--type-body);line-height:1.58;color:#555}.case-copy h3{font-family:'Archivo Expanded','Archivo',sans-serif;text-transform:uppercase;font-size:var(--type-small);letter-spacing:.08em;margin-bottom:10px}.case-copy ul{list-style:none;display:grid;gap:8px}.case-copy li{color:#444;line-height:1.5;font-size:var(--type-small)}.case-copy li::before{content:'— ';color:var(--accent);font-weight:800}.case-results{border:1px solid rgba(216,185,133,.48);background:#fbf7ee;border-radius:18px;padding:16px 18px;display:grid;gap:8px}.case-results h3{margin:0;color:#8a642d}.case-results p{margin:0;color:#2d261e}.result-note{display:inline-flex;width:max-content;border:1px solid rgba(10,10,10,.18);border-radius:999px;padding:5px 10px;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:#6f5a35}.case-quote{border-left:3px solid var(--accent);padding-left:14px;color:#555;font-size:.92rem;line-height:1.55}.visit{justify-self:start;background:var(--black);color:#fff;border-radius:999px;padding:14px 24px;font-weight:800;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;transition:transform .28s var(--ease),background .28s}.visit:hover{transform:translateY(-2px);background:#222}
+.case-copy{display:grid;gap:14px}.case-copy p{font-size:var(--type-body);line-height:1.58;color:#555}.case-copy h3{font-family:'Archivo Expanded','Archivo',sans-serif;text-transform:uppercase;font-size:var(--type-small);letter-spacing:.08em;margin-bottom:10px}.case-copy ul{list-style:none;display:grid;gap:8px}.case-copy li{color:#444;line-height:1.5;font-size:var(--type-small)}.case-copy li::before{content:'— ';color:var(--accent);font-weight:800}.visit{justify-self:start;background:var(--black);color:#fff;border-radius:999px;padding:14px 24px;font-weight:800;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;transition:transform .28s var(--ease),background .28s}.visit:hover{transform:translateY(-2px);background:#222}
 .cta{background:var(--black);color:#fff;text-align:center;padding:clamp(110px,16vw,190px) var(--pad)}.cta .big-h{margin-bottom:24px}.cta p{color:#999;max-width:520px;margin:0 auto 40px;line-height:1.7}.cta-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
 footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-top:1px solid #222}.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:48px}.footer-logo{display:inline-flex;align-items:center;justify-content:center;width:150px;height:58px;padding:8px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}.footer-logo img{width:124px;height:auto;max-height:44px;object-fit:contain}.foot-brand p{margin-top:16px;font-size:.9rem;color:#777;max-width:280px;line-height:1.6}.foot-col h4{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:#666;margin-bottom:20px}.foot-col a,.foot-col p{display:block;font-size:.88rem;color:#aaa;margin-bottom:12px;transition:color .3s}.foot-col a:hover{color:#fff}.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-top:32px;border-top:1px solid #222;font-size:.8rem}.foot-legal{display:flex;gap:24px}.foot-legal a:hover{color:#fff}
 .reveal{opacity:0;transform:translateY(42px);transition:opacity .85s var(--ease),transform .85s var(--ease)}.reveal.in{opacity:1;transform:none}
@@ -65,8 +63,7 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
 </head>
 <body>
 <nav class="hero-nav" aria-label="Primary navigation">
-  <a href="/" class="brand-logo" aria-label="LUMIO Coordia Intelligence home"><img src="/assets/lumio-logo-lockup.png" alt="LUMIO Coordia Intelligence logo"></a>
-  <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
+  <a href="/" class="brand-logo" aria-label="LUMIO Coordia Intelligence home"><img src="/assets/lumio-logo-lockup.png" alt="LUMIO Coordia Intelligence"></a>
   <div class="nav-pill">
     <a href="/#who">Story</a>
     <a class="active" href="/work">Portfolio</a>
@@ -75,16 +72,8 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
     <a href="/pricing">Pricing</a>
     <a href="/#contact">Contact</a>
   </div>
-  <a href="/#contact" class="nav-cta-pill">Start a project</a>
+  <a href="/#contact" class="nav-cta-pill">Get a website</a>
 </nav>
-<div class="mobile-menu-panel" id="mobile-menu">
-  <a href="/#who">Story</a>
-  <a href="/work">Portfolio</a>
-  <a href="/#process">Process</a>
-  <a href="/about">About</a>
-  <a href="/pricing">Pricing</a>
-  <a href="/#contact">Contact</a>
-</div>
 <div class="language-switcher" aria-label="Language selector">
   <button class="lang-trigger" type="button" aria-expanded="false" aria-haspopup="listbox"><span class="lang-current">EN</span><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="rgba(255,255,255,0.6)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <div class="lang-dropdown" role="listbox">
@@ -114,8 +103,8 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
     <div class="case-num">01</div>
     <div class="case-body">
       <div class="case-head"><div class="case-title"><h2>Long Ieng</h2><div class="case-meta">Hong Kong / Accounting Consultancy</div></div><div class="case-result">100+ businesses served</div></div>
-      <div class="case-media"><video src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4" muted loop playsinline preload="none" aria-label="Long Ieng accounting consultancy website hero video preview"></video></div>
-      <div class="case-copy"><p>Long Ieng needed a calmer digital presence for clients looking at overseas expansion support. The page had to make a technical advisory service feel structured, trustworthy, and easy to enquire about.</p><div class="case-results"><span class="result-note">Placeholder metric</span><h3>Results</h3><p>Client enquiries up 35% in first 2 months.</p></div><blockquote class="case-quote">"The website explains our advisory service before the first call."</blockquote><div><h3>What we shaped</h3><ul><li>Clear advisory positioning</li><li>Hong Kong-focused credibility path</li><li>Direct enquiry structure</li></ul></div></div>
+      <div class="case-media"><video src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Long Ieng hero preview"></video></div>
+      <div class="case-copy"><p>Long Ieng needed a calmer digital presence for clients looking at overseas expansion support. The page had to make a technical advisory service feel structured, trustworthy, and easy to enquire about.</p><div><h3>What we shaped</h3><ul><li>Clear advisory positioning</li><li>Hong Kong-focused credibility path</li><li>Direct enquiry structure</li></ul></div></div>
       <a class="visit" href="https://longiengma.pages.dev/" target="_blank" rel="noopener">Visit website →</a>
     </div>
   </article>
@@ -123,8 +112,8 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
     <div class="case-num">02</div>
     <div class="case-body">
       <div class="case-head"><div class="case-title"><h2>Macau World Travel</h2><div class="case-meta">Macau / Travel Agency</div></div><div class="case-result">More enquiries, less noise</div></div>
-      <div class="case-media"><video src="https://videos.pexels.com/video-files/36837386/15607551_1920_1080_30fps.mp4" muted loop playsinline preload="none" aria-label="Macau World Travel travel agency website hero video preview"></video></div>
-      <div class="case-copy"><p>The travel agency needed a focused page that turned scattered service information into a clearer enquiry route. The result is calmer, more direct, and easier for customers to act on.</p><div class="case-results"><span class="result-note">Placeholder metric</span><h3>Results</h3><p>Enquiry form submissions doubled after launch.</p></div><blockquote class="case-quote">"Customers understand the trip options faster now."</blockquote><div><h3>What we shaped</h3><ul><li>Service-led page journey</li><li>Macau travel visual direction</li><li>Lower-friction contact path</li></ul></div></div>
+      <div class="case-media"><video src="https://videos.pexels.com/video-files/36837386/15607551_1920_1080_30fps.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Macau World Travel hero preview"></video></div>
+      <div class="case-copy"><p>The travel agency needed a focused page that turned scattered service information into a clearer enquiry route. The result is calmer, more direct, and easier for customers to act on.</p><div><h3>What we shaped</h3><ul><li>Service-led page journey</li><li>Macau travel visual direction</li><li>Lower-friction contact path</li></ul></div></div>
       <a class="visit" href="https://macau-world-travel-agency.pages.dev/" target="_blank" rel="noopener">Visit website →</a>
     </div>
   </article>
@@ -132,8 +121,8 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
     <div class="case-num">03</div>
     <div class="case-body">
       <div class="case-head"><div class="case-title"><h2>Stayflow Homestay</h2><div class="case-meta">Malaysia / Airbnb Operations</div></div><div class="case-result">More direct bookings</div></div>
-      <div class="case-media"><video src="https://stayflow-homestay-landing.pages.dev/public/assets/stayflow/hero-video.mp4" muted loop playsinline preload="none" aria-label="Stayflow Homestay Airbnb operations website hero video preview"></video></div>
-      <div class="case-copy"><p>Stayflow needed to move from platform-only dependence to direct booking confidence. The site presents the property experience, check-in clarity, and contact route in a way guests can quickly trust.</p><div class="case-results"><span class="result-note">Placeholder metric</span><h3>Results</h3><p>30% of bookings now come direct through the site.</p></div><blockquote class="case-quote">"Direct enquiries feel more confident and prepared."</blockquote><div><h3>What we shaped</h3><ul><li>Booking confidence narrative</li><li>Hospitality-first hero video presentation</li><li>Guest enquiry pathway</li></ul></div></div>
+      <div class="case-media"><video src="https://stayflow-homestay-landing.pages.dev/public/assets/stayflow/hero-video.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Stayflow Homestay hero preview"></video></div>
+      <div class="case-copy"><p>Stayflow needed to move from platform-only dependence to direct booking confidence. The site presents the property experience, check-in clarity, and contact route in a way guests can quickly trust.</p><div><h3>What we shaped</h3><ul><li>Booking confidence narrative</li><li>Hospitality-first hero video presentation</li><li>Guest enquiry pathway</li></ul></div></div>
       <a class="visit" href="https://stayflow-homestay-landing.pages.dev/" target="_blank" rel="noopener">Visit website →</a>
     </div>
   </article>
@@ -141,8 +130,8 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
     <div class="case-num">04</div>
     <div class="case-body">
       <div class="case-head"><div class="case-title"><h2>Paybit Tech</h2><div class="case-meta">Singapore / Finance Software</div></div><div class="case-result">Clear product messaging</div></div>
-      <div class="case-media"><video src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260423_161253_c72b1869-400f-45ed-ac0c-52f68c2ed5bd.mp4" muted loop playsinline preload="none" aria-label="Paybit Tech finance software website hero video preview"></video></div>
-      <div class="case-copy"><p>Paybit Tech needed a sharper way to explain a finance product without overwhelming visitors. The page simplifies the product story and makes the main value easier to understand at first glance.</p><div class="case-results"><span class="result-note">Placeholder metric</span><h3>Results</h3><p>Product demo requests up 50%.</p></div><blockquote class="case-quote">"The product page gives sales calls a clearer starting point."</blockquote><div><h3>What we shaped</h3><ul><li>Product message hierarchy</li><li>Singapore market presentation</li><li>Sharper conversion copy</li></ul></div></div>
+      <div class="case-media"><video src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260423_161253_c72b1869-400f-45ed-ac0c-52f68c2ed5bd.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Paybit Tech hero preview"></video></div>
+      <div class="case-copy"><p>Paybit Tech needed a sharper way to explain a finance product without overwhelming visitors. The page simplifies the product story and makes the main value easier to understand at first glance.</p><div><h3>What we shaped</h3><ul><li>Product message hierarchy</li><li>Singapore market presentation</li><li>Sharper conversion copy</li></ul></div></div>
       <a class="visit" href="https://paybittech.pages.dev" target="_blank" rel="noopener">Visit website →</a>
     </div>
   </article>
@@ -150,8 +139,8 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
     <div class="case-num">05</div>
     <div class="case-body">
       <div class="case-head"><div class="case-title"><h2>StayFix Dispatch</h2><div class="case-meta">Malaysia / Repair Dispatch</div></div><div class="case-result">Streamlined dispatch</div></div>
-      <div class="case-media"><img src="/assets/portfolio/stayfix.png" alt="StayFix Dispatch repair dispatch website homepage screenshot" loading="lazy"></div>
-      <div class="case-copy"><p>StayFix needed an intake flow that made repair requests easier to receive and route. The site turns messy customer details into a cleaner dispatch starting point.</p><div class="case-results"><span class="result-note">Placeholder metric</span><h3>Results</h3><p>Repair request processing time cut by 40%.</p></div><blockquote class="case-quote">"We spend less time clarifying repair details before dispatch."</blockquote><div><h3>What we shaped</h3><ul><li>Repair request intake path</li><li>Mobile-first customer form</li><li>Cleaner follow-up structure</li></ul></div></div>
+      <div class="case-media"><img src="/assets/portfolio/stayfix.png" alt="StayFix Dispatch website preview" loading="lazy"></div>
+      <div class="case-copy"><p>StayFix needed an intake flow that made repair requests easier to receive and route. The site turns messy customer details into a cleaner dispatch starting point.</p><div><h3>What we shaped</h3><ul><li>Repair request intake path</li><li>Mobile-first customer form</li><li>Cleaner follow-up structure</li></ul></div></div>
       <a class="visit" href="https://stayfix-dispatch-intake.pages.dev/" target="_blank" rel="noopener">Visit website →</a>
     </div>
   </article>
@@ -159,8 +148,8 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
     <div class="case-num">06</div>
     <div class="case-body">
       <div class="case-head"><div class="case-title"><h2>Bunnytales</h2><div class="case-meta">Malaysia / Early Childhood Education</div></div><div class="case-result">Bilingual brand, clear trial bookings</div></div>
-      <div class="case-media"><img class="contain" src="https://bunnytales.vercel.app/hero-bunny.png" alt="Bunnytales early childhood education website homepage artwork" loading="lazy"></div>
-      <div class="case-copy"><p>Bunnytales needed to feel gentle, premium, and easy for parents to understand. The page supports a bilingual brand story and helps families move naturally toward a trial booking.</p><div class="case-results"><span class="result-note">Placeholder metric</span><h3>Results</h3><p>Trial booking enquiries up 60% in first month.</p></div><blockquote class="case-quote">"Parents can understand the offer without asking for a long explanation."</blockquote><div><h3>What we shaped</h3><ul><li>Parent-friendly brand language</li><li>Bilingual service presentation</li><li>Trial booking call-to-action</li></ul></div></div>
+      <div class="case-media"><img class="contain" src="https://bunnytales.vercel.app/hero-bunny.png" alt="Bunnytales illustrated hero preview" loading="lazy"></div>
+      <div class="case-copy"><p>Bunnytales needed to feel gentle, premium, and easy for parents to understand. The page supports a bilingual brand story and helps families move naturally toward a trial booking.</p><div><h3>What we shaped</h3><ul><li>Parent-friendly brand language</li><li>Bilingual service presentation</li><li>Trial booking call-to-action</li></ul></div></div>
       <a class="visit" href="https://bunnytales.vercel.app/" target="_blank" rel="noopener">Visit website →</a>
     </div>
   </article>
@@ -186,8 +175,6 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
 
 <script>
 const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-const mobileMenuToggle=document.querySelector('.mobile-menu-toggle'),mobileMenu=document.getElementById('mobile-menu');
-if(mobileMenuToggle&&mobileMenu){mobileMenuToggle.addEventListener('click',e=>{e.stopPropagation();const open=mobileMenu.classList.toggle('open');mobileMenuToggle.setAttribute('aria-expanded',String(open))});mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('open');mobileMenuToggle.setAttribute('aria-expanded','false')}));document.addEventListener('click',()=>{mobileMenu.classList.remove('open');mobileMenuToggle.setAttribute('aria-expanded','false')})}
 const workLangSwitcher=document.querySelector('.language-switcher');
 if(workLangSwitcher){
   const langTrigger=workLangSwitcher.querySelector('.lang-trigger'),langCurrent=workLangSwitcher.querySelector('.lang-current'),langOptions=workLangSwitcher.querySelectorAll('.lang-option');
@@ -236,24 +223,6 @@ if(workLangSwitcher){
       ja:'Bunnytalesには、やさしく上質で、保護者に分かりやすい印象が必要でした。ページは二言語のブランドストーリーを支え、家族が自然に体験予約へ進めるようにしています。',
       ko:'Bunnytales는 부드럽고 프리미엄한 느낌이면서 부모가 쉽게 이해할 수 있어야 했습니다. 이 페이지는 이중언어 브랜드 스토리를 지원하고 가족이 자연스럽게 체험 예약으로 이동하도록 돕습니다.'
     }
-  });
-  Object.assign(generic,{
-    'Start a project':{'zh-Hant':'開始項目','zh-Hans':'开始项目',ms:'Mulakan projek',ja:'プロジェクト開始',ko:'프로젝트 시작'},
-    'Menu':{'zh-Hant':'選單','zh-Hans':'菜单',ms:'Menu',ja:'メニュー',ko:'메뉴'},
-    'Placeholder metric':{'zh-Hant':'待核實數據','zh-Hans':'待核实数据',ms:'Metrik sementara',ja:'確認待ち指標',ko:'확인 예정 지표'},
-    'Results':{'zh-Hant':'成果','zh-Hans':'成果',ms:'Hasil',ja:'成果',ko:'결과'},
-    'Client enquiries up 35% in first 2 months.':{'zh-Hant':'首 2 個月客戶查詢增加 35%。','zh-Hans':'首 2 个月客户咨询增加 35%。',ms:'Pertanyaan pelanggan meningkat 35% dalam 2 bulan pertama.',ja:'最初の2か月で顧客問い合わせが35%増加。',ko:'첫 2개월 고객 문의 35% 증가.'},
-    'Enquiry form submissions doubled after launch.':{'zh-Hant':'上線後表單提交量翻倍。','zh-Hans':'上线后表单提交量翻倍。',ms:'Penghantaran borang pertanyaan meningkat dua kali selepas pelancaran.',ja:'公開後、問い合わせフォーム送信数が倍増。',ko:'런칭 후 문의 폼 제출이 두 배 증가.'},
-    '30% of bookings now come direct through the site.':{'zh-Hant':'目前 30% 預訂直接來自網站。','zh-Hans':'目前 30% 预订直接来自网站。',ms:'30% tempahan kini datang terus melalui laman web.',ja:'現在、予約の30%がサイト経由で直接発生。',ko:'현재 예약의 30%가 사이트에서 직접 발생.'},
-    'Product demo requests up 50%.':{'zh-Hant':'產品 demo 請求增加 50%。','zh-Hans':'产品 demo 请求增加 50%。',ms:'Permintaan demo produk meningkat 50%.',ja:'製品デモ依頼が50%増加。',ko:'제품 데모 요청 50% 증가.'},
-    'Repair request processing time cut by 40%.':{'zh-Hant':'維修請求處理時間減少 40%。','zh-Hans':'维修请求处理时间减少 40%。',ms:'Masa pemprosesan permintaan pembaikan berkurang 40%.',ja:'修理依頼の処理時間を40%削減。',ko:'수리 요청 처리 시간 40% 단축.'},
-    'Trial booking enquiries up 60% in first month.':{'zh-Hant':'首月試堂預約查詢增加 60%。','zh-Hans':'首月试听预约咨询增加 60%。',ms:'Pertanyaan tempahan percubaan meningkat 60% pada bulan pertama.',ja:'初月の体験予約問い合わせが60%増加。',ko:'첫 달 체험 예약 문의 60% 증가.'},
-    '"The website explains our advisory service before the first call."':{'zh-Hant':'「網站在第一次通話前，已經先說清楚我們的顧問服務。」','zh-Hans':'“网站在第一次通话前，已经先说清楚我们的顾问服务。”',ms:'"Laman web menerangkan servis nasihat kami sebelum panggilan pertama."',ja:'「初回通話の前に、サイトが私たちのアドバイザリーサービスを説明してくれます。」',ko:'"첫 통화 전에 웹사이트가 우리의 자문 서비스를 설명해 줍니다."'},
-    '"Customers understand the trip options faster now."':{'zh-Hant':'「客戶現在更快明白旅遊選項。」','zh-Hans':'“客户现在更快明白旅游选项。”',ms:'"Pelanggan kini lebih cepat faham pilihan perjalanan."',ja:'「顧客が旅行オプションをより早く理解できるようになりました。」',ko:'"고객이 여행 옵션을 더 빨리 이해합니다."'},
-    '"Direct enquiries feel more confident and prepared."':{'zh-Hant':'「直接查詢的客戶更有信心，也更準備好。」','zh-Hans':'“直接咨询的客户更有信心，也更准备好。”',ms:'"Pertanyaan langsung terasa lebih yakin dan lebih bersedia."',ja:'「直接問い合わせの顧客は、より安心して準備できています。」',ko:'"직접 문의 고객이 더 자신 있고 준비되어 있습니다."'},
-    '"The product page gives sales calls a clearer starting point."':{'zh-Hant':'「產品頁讓銷售通話有更清楚的起點。」','zh-Hans':'“产品页让销售通话有更清楚的起点。”',ms:'"Halaman produk memberi titik mula yang lebih jelas untuk panggilan jualan."',ja:'「製品ページが営業通話の出発点を明確にしてくれます。」',ko:'"제품 페이지가 영업 통화의 출발점을 더 명확하게 만듭니다."'},
-    '"We spend less time clarifying repair details before dispatch."':{'zh-Hant':'「派單前，我們少花了很多時間追問維修細節。」','zh-Hans':'“派单前，我们少花了很多时间追问维修细节。”',ms:'"Kami kurang masa menjelaskan butiran pembaikan sebelum tugasan dihantar."',ja:'「手配前に修理内容を確認する時間が減りました。」',ko:'"배정 전에 수리 세부 사항을 확인하는 시간이 줄었습니다."'},
-    '"Parents can understand the offer without asking for a long explanation."':{'zh-Hant':'「家長不用長篇解釋，也能明白服務內容。」','zh-Hans':'“家长不用长篇解释，也能明白服务内容。”',ms:'"Ibu bapa boleh faham tawaran tanpa penerangan panjang."',ja:'「保護者が長い説明なしで内容を理解できます。」',ko:'"부모가 긴 설명 없이도 제안을 이해할 수 있습니다."'}
   });
   const textNodes=[];const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode(node){if(!node.nodeValue.trim())return NodeFilter.FILTER_REJECT;if(node.parentElement&&['SCRIPT','STYLE','SVG'].includes(node.parentElement.tagName))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT}});
   while(walker.nextNode()){const node=walker.currentNode,key=node.nodeValue.trim();if(generic[key])textNodes.push({node,key})}
