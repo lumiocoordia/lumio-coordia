@@ -62,6 +62,11 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   --paper-300:#5c5c5c;
   --accent:#d8b985;
   --accent-dk:#b8925a;
+  --type-h1:clamp(3rem,7vw,6.2rem);
+  --type-h2:clamp(2.35rem,5.8vw,5.4rem);
+  --type-h3:clamp(1.35rem,2.35vw,2.05rem);
+  --type-body:clamp(1rem,1.1vw,1.12rem);
+  --type-small:.86rem;
 }
 
 /* ═══════════ HERO (ported animation, recolored) ═══════════ */
@@ -75,10 +80,12 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(255,255,255,.6);
 }
 .brand-logo{
-  flex-shrink:0;display:flex;align-items:center;font-size:1.15rem;font-weight:900;
-  letter-spacing:.05em;color:var(--black);white-space:nowrap;
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  width:138px;height:56px;padding:8px 14px;border-radius:14px;
+  background:rgba(10,10,10,.88);border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 12px 28px rgba(0,0,0,.12);white-space:nowrap;
 }
-.brand-logo span{font-weight:400}
+.brand-logo img{width:112px;height:auto;max-height:42px;object-fit:contain}
 .nav-pill{
   background:rgba(10,10,10,.05);border:1px solid rgba(10,10,10,.1);border-radius:14px;
   align-items:center;gap:30px;padding:16px 26px;display:flex;backdrop-filter:blur(12px);
@@ -165,7 +172,8 @@ button{cursor:pointer;background:none;border:none;font:inherit}
 @media(max-width:768px){
   .template-hero{padding-top:64px}
   .hero-nav{padding:14px 16px 0;gap:6px;justify-content:space-between}
-  .brand-logo{font-size:.9rem}
+  .brand-logo{width:108px;height:44px;padding:6px 10px;border-radius:12px}
+  .brand-logo img{width:88px;max-height:34px}
   .nav-cta-pill{display:none}
   .language-switcher{top:16px;right:14px}
   .hero-copy h1{font-size:clamp(2.1rem,9vw,3rem)}
@@ -185,10 +193,10 @@ button{cursor:pointer;background:none;border:none;font:inherit}
 }
 .hero-case-wall::before{left:0;background:linear-gradient(90deg,var(--ink-900),rgba(19,12,24,0))}
 .hero-case-wall::after{right:0;background:linear-gradient(270deg,var(--ink-900),rgba(19,12,24,0))}
-.hero-case-track{position:relative;z-index:1;display:inline-flex;gap:18px;padding:0 18px;animation:scroll 48s linear infinite}
+.hero-case-track{position:relative;z-index:1;display:inline-flex;gap:24px;padding:0 24px;animation:scroll 68s linear infinite}
 .hero-case-wall:hover .hero-case-track{animation-play-state:paused}
 .hero-case-card{
-  width:320px;height:200px;display:flex;flex-direction:column;border-radius:20px;white-space:normal;cursor:pointer;
+  width:410px;height:260px;display:flex;flex-direction:column;border-radius:22px;white-space:normal;cursor:pointer;
   background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.035));
   border:1px solid rgba(255,255,255,.18);overflow:hidden;
   box-shadow:0 12px 38px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.18);
@@ -196,22 +204,22 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   color:#fff;transition:transform .25s var(--ease),border-color .25s,background .25s,box-shadow .25s;
 }
 .hero-case-card:hover{transform:translateY(-6px);border-color:rgba(201,169,110,.72);background:rgba(255,255,255,.08);box-shadow:0 16px 42px rgba(0,0,0,.34)}
-.hero-case-media{height:60%;background:#08080a;overflow:hidden}
+.hero-case-media{height:72%;background:#08080a;overflow:hidden}
 .hero-case-media video,.hero-case-media img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02)}
 .hero-case-media img.contain{object-fit:contain;background:#fbf4e8;padding:12px}
-.hero-case-info{height:40%;display:grid;grid-template-columns:1fr auto;align-items:end;gap:14px;padding:16px 18px 18px}
+.hero-case-info{height:28%;display:grid;grid-template-columns:1fr auto;align-items:end;gap:14px;padding:14px 20px 16px}
 .hero-case-no{color:var(--accent);font-size:.72rem;font-weight:700;letter-spacing:.14em;margin-right:8px}
-.hero-case-name{font-size:1rem;font-weight:800;line-height:1.1}
-.hero-case-industry{display:block;color:rgba(255,255,255,.58);font-size:.82rem;line-height:1.25;margin-top:6px}
+.hero-case-name{font-size:1.12rem;font-weight:800;line-height:1.1}
+.hero-case-industry{display:block;color:rgba(255,255,255,.58);font-size:.84rem;line-height:1.25;margin-top:5px}
 .hero-case-arrow{grid-column:2;grid-row:1/3;align-self:center;color:var(--accent);font-size:1.35rem;transition:transform .25s var(--ease)}
 .hero-case-card:hover .hero-case-arrow{transform:translateX(4px)}
 @media(max-width:768px){
   .hero-case-wall{padding:20px 0 30px}
   .hero-case-wall::before,.hero-case-wall::after{width:40px}
-  .hero-case-track{gap:14px;animation-duration:38s}
-  .hero-case-card{width:260px;height:170px}
-  .hero-case-info{padding:14px 16px 16px}
-  .hero-case-name{font-size:.94rem}.hero-case-industry{font-size:.78rem}
+  .hero-case-track{gap:16px;animation-duration:58s}
+  .hero-case-card{width:330px;height:220px}
+  .hero-case-info{padding:12px 16px 14px}
+  .hero-case-name{font-size:1rem}.hero-case-industry{font-size:.78rem}
   .hero-case-card:active{transform:scale(.98)}
 }
 @keyframes scroll{to{transform:translateX(-50%)}}
@@ -226,7 +234,7 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .sec-label::before{content:'';width:36px;height:1px;background:currentColor}
 .big-h{
   font-family:'Archivo Expanded','Archivo',sans-serif;
-  font-size:clamp(2.2rem,6vw,5.2rem);
+  font-size:var(--type-h2);
   line-height:1;letter-spacing:-.02em;text-transform:uppercase;font-weight:900;
 }
 .outline{color:transparent;-webkit-text-stroke:2px var(--black)}
@@ -278,12 +286,21 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 /* ═══════════ PAIN / FIX ═══════════ */
 .pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--grey-lt);border:1px solid var(--grey-lt);margin-top:64px}
 .pain{background:#fff;padding:44px 36px}
+.pain::before{
+  content:'';
+  width:38px;height:38px;border-radius:50%;display:block;margin-bottom:26px;
+  background:linear-gradient(135deg,var(--black),#3a3228);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 14px 28px rgba(0,0,0,.08);
+}
+.pain:nth-child(1)::before{content:'01';color:#fff;display:grid;place-items:center;font-size:.72rem;font-weight:800;letter-spacing:.08em}
+.pain:nth-child(2)::before{content:'02';color:#fff;display:grid;place-items:center;font-size:.72rem;font-weight:800;letter-spacing:.08em}
+.pain:nth-child(3)::before{content:'03';color:#fff;display:grid;place-items:center;font-size:.72rem;font-weight:800;letter-spacing:.08em}
 .pain .p-tag{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-bottom:20px}
-.pain p{font-size:1.15rem;line-height:1.5;font-weight:600}
+.pain p{font-size:var(--type-body);line-height:1.5;font-weight:600}
 .fix-row{margin-top:64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px;padding-top:56px;border-top:1px solid var(--grey-lt)}
 #pain{padding-bottom:clamp(30px,5vw,64px)}
 .fix-row .fix-lbl{font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin-bottom:18px}
-.fix-row .fix-h{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:1.7rem;text-transform:uppercase;font-weight:800;margin-bottom:44px;max-width:420px;line-height:1.15}
+.fix-row .fix-h{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:var(--type-h3);text-transform:uppercase;font-weight:800;margin-bottom:34px;max-width:420px;line-height:1.15}
 .fix-item{display:flex;gap:16px;align-items:flex-start;font-size:1rem;line-height:1.6;color:#3a3a3a;margin-bottom:20px}
 .fix-item::before{content:'✓';flex:none;width:26px;height:26px;border-radius:50%;background:var(--black);color:#fff;display:grid;place-items:center;font-size:.75rem;font-weight:800}
 
@@ -295,7 +312,7 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .who p.statement strong{font-weight:800}
 .who p.statement .dim{color:#b5b5b5}
 .who-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-top:56px;max-width:1000px}
-.who-cols p{font-size:1rem;line-height:1.7;color:#555}
+.who-cols p{font-size:var(--type-body);line-height:1.6;color:#555}
 .who-foot{margin-top:64px;display:flex;gap:64px;flex-wrap:wrap;border-top:1px solid var(--grey-lt);padding-top:48px}
 .who-stat .num{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:clamp(2.7rem,5vw,4.4rem);font-weight:900;letter-spacing:-.03em;color:var(--accent);display:flex;align-items:baseline;gap:.08em}
 .who-stat .stat-suffix{font-size:.46em;color:#777;letter-spacing:0}
@@ -343,11 +360,16 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
   transition:transform .38s var(--ease),opacity .38s var(--ease);
 }
 .timeline-step .big-n{font-size:.86rem;font-weight:700;line-height:1;color:var(--accent);letter-spacing:.16em}
+.step-icon{
+  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(216,185,133,.16);border:1px solid rgba(216,185,133,.36);
+  color:#7a5c2f;font-size:1.05rem;margin-bottom:6px;
+}
 .timeline-step h3{
-  font-family:'Archivo Expanded','Archivo',sans-serif;font-size:clamp(1.35rem,2.6vw,2rem);
+  font-family:'Archivo Expanded','Archivo',sans-serif;font-size:var(--type-h3);
   text-transform:uppercase;font-weight:800;margin-bottom:10px;
 }
-.timeline-step p{max-width:560px;line-height:1.65;color:#555;font-size:.95rem}
+.timeline-step p{max-width:560px;line-height:1.58;color:#555;font-size:var(--type-body)}
 .process-timeline.timeline-ready .timeline-line{transform:scaleY(0)}
 .process-timeline.timeline-ready .timeline-step{opacity:0;transform:translateY(10px)}
 .process-timeline.timeline-ready .timeline-step::before{opacity:0;transform:scale(0)}
@@ -401,11 +423,15 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .contact-copy p{color:#999;line-height:1.65;max-width:400px;margin-bottom:36px}
 .contact-direct{display:flex;flex-direction:column;gap:14px}
 .contact-direct a{display:inline-flex;align-items:center;gap:10px;color:#ccc;font-size:.92rem;transition:color .3s}
+.contact-direct a::before{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);color:var(--accent);font-size:.82rem}
+.contact-direct a[href^="https://wa.me"]::before{content:'WA'}
+.contact-direct a[href^="mailto"]::before{content:'@'}
 .contact-direct a:hover{color:var(--accent)}
 .contact-form{display:flex;flex-direction:column;gap:20px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .form-group{display:flex;flex-direction:column;gap:8px}
-.form-group label{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:#999}
+.form-group label{font-size:var(--type-small);letter-spacing:.1em;text-transform:uppercase;color:#999;display:flex;align-items:center;gap:8px}
+.form-group label::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(216,185,133,.12)}
 .form-group input,.form-group textarea,.form-group select{
   background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:10px;
   padding:14px 16px;color:#fff;font:inherit;font-size:.95rem;transition:border-color .25s,background .25s;
@@ -434,8 +460,8 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 @media(max-width:820px){.contact-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
 footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-top:1px solid #222}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:48px}
-.footer-logo{display:inline-flex;align-items:center;font-size:1.3rem;font-weight:900;letter-spacing:.05em;color:#fff}
-.footer-logo span{font-weight:400}
+.footer-logo{display:inline-flex;align-items:center;justify-content:center;width:150px;height:58px;padding:8px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.footer-logo img{width:124px;height:auto;max-height:44px;object-fit:contain}
 .foot-brand p{margin-top:16px;font-size:.9rem;color:#777;max-width:280px;line-height:1.6}
 .foot-col h4{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:#666;margin-bottom:20px}
 .foot-col a,.foot-col p{display:block;font-size:.88rem;color:#aaa;margin-bottom:12px;transition:color .3s}
@@ -450,7 +476,7 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
 
 <section class="template-hero" id="top">
   <nav class="hero-nav" aria-label="Primary navigation">
-    <a href="#top" class="brand-logo" aria-label="LUMIO Coordia Intelligence home">LUMIO<span> Coordia</span></a>
+    <a href="#top" class="brand-logo" aria-label="LUMIO Coordia Intelligence home"><img src="/assets/lumio-logo-lockup.png" alt="LUMIO Coordia Intelligence"></a>
     <div class="nav-pill">
       <a href="#who">Story</a>
       <a href="/work">Portfolio</a>
@@ -483,7 +509,7 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
     <a class="badge-link" href="#who">Digital growth for small businesses <span class="arrow">→</span></a>
     <div class="hero-copy">
       <h1>Simple websites. <em>Serious results.</em></h1>
-      <p>Clear, practical websites built around your offer, your proof, and your next enquiry.</p>
+      <p>Clear websites built around your offer, proof, and next enquiry.</p>
       <div class="hero-ctas">
         <a class="outline-cta primary" href="/pricing">View website plans →</a>
         <a class="outline-cta" href="/work">View our work →</a>
@@ -567,29 +593,29 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
   <div class="pain-grid">
     <div class="pain reveal">
       <div class="p-tag">Homestay or Airbnb</div>
-      <p>Your listing gets 200 views a week but only 2 bookings.</p>
+      <p>200 views. Two bookings.</p>
     </div>
     <div class="pain reveal reveal-d1">
       <div class="p-tag">Consultancy or agency</div>
-      <p>Clients ask you to explain what you do, even after seeing your site.</p>
+      <p>Clients still ask what you actually do.</p>
     </div>
     <div class="pain reveal reveal-d2">
       <div class="p-tag">Local service business</div>
-      <p>You're on Google Maps, but nobody finds you online.</p>
+      <p>You are listed online, but not chosen.</p>
     </div>
   </div>
   <div class="fix-row">
     <div class="reveal">
       <div class="fix-lbl">If this is you</div>
-      <div class="fix-h">Your site looks fine — but no one enquires.</div>
-      <div class="fix-item">You can't say what makes you different in one line.</div>
-      <div class="fix-item">Visitors leave before they ever reach your offer.</div>
+      <div class="fix-h">Your site looks fine. No one enquires.</div>
+      <div class="fix-item">Your difference is hard to say.</div>
+      <div class="fix-item">Visitors leave before the offer.</div>
     </div>
     <div class="reveal reveal-d1">
       <div class="fix-lbl">Here's the fix</div>
-      <div class="fix-h">A site built to turn visitors into enquiries.</div>
-      <div class="fix-item">A clear message that lands in seconds.</div>
-      <div class="fix-item">A page journey that leads straight to your offer.</div>
+      <div class="fix-h">A site built for the next enquiry.</div>
+      <div class="fix-item">A message that lands in seconds.</div>
+      <div class="fix-item">A path that leads to action.</div>
     </div>
   </div>
 </section>
@@ -598,11 +624,11 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
 <section class="who" id="who">
   <p class="sec-label reveal">Story</p>
   <p class="statement reveal reveal-d1">
-    <strong>Your website should make the next step obvious.</strong> Visitors need to understand the offer, trust the business, and know how to enquire.
+    <strong>Your website should make the next step obvious.</strong> Visitors need the offer, proof, and enquiry path fast.
   </p>
   <div class="who-cols reveal reveal-d2">
-    <p>We shape the message, journey, pricing, and proof before building — so the finished site feels useful, not decorative.</p>
-    <p>Trusted by 20+ businesses across Hong Kong, Macau, Malaysia, and Singapore. A good website should pay for itself in 6 months.</p>
+    <p>We shape message, journey, pricing, and proof before build.</p>
+    <p>Trusted by 20+ businesses across 4 regions. Built with a 6-month payback mindset.</p>
   </div>
   <div class="who-foot reveal reveal-d3">
     <div class="who-stat"><div class="num" data-count="20" data-suffix="+"><span class="stat-value">20</span><span class="stat-suffix">+</span></div><div class="lbl">Businesses</div></div>
@@ -651,24 +677,28 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
 <section id="process">
   <p class="sec-label reveal">Process</p>
   <h2 class="big-h reveal reveal-d1">Simple from<br>the client side.</h2>
-  <p class="reveal reveal-d2" style="margin-top:20px;color:var(--grey);font-size:1.05rem">You bring the need. We handle the rest.</p>
+  <p class="reveal reveal-d2" style="margin-top:20px;color:var(--grey);font-size:var(--type-body)">You bring the need. We handle the rest.</p>
   <div class="frame-steps process-timeline" style="margin-top:56px">
     <span class="timeline-line" aria-hidden="true"></span>
     <div class="step timeline-step">
+      <span class="step-icon" aria-hidden="true">01</span>
       <span class="big-n">01</span>
       <div><h3>Tell us what you need</h3><p>No formal brief. One conversation is enough.</p></div>
     </div>
     <div class="step timeline-step">
+      <span class="step-icon" aria-hidden="true">02</span>
       <span class="big-n">02</span>
-      <div><h3>Confirm the direction</h3><p>We agree the direction before design starts.</p></div>
+      <div><h3>Confirm the direction</h3><p>We agree the direction before design.</p></div>
     </div>
     <div class="step timeline-step">
+      <span class="step-icon" aria-hidden="true">03</span>
       <span class="big-n">03</span>
-      <div><h3>We handle execution</h3><p>Design, build, test, and launch — start to finish.</p></div>
+      <div><h3>We handle execution</h3><p>Design, build, test, and launch.</p></div>
     </div>
     <div class="step timeline-step">
+      <span class="step-icon" aria-hidden="true">04</span>
       <span class="big-n">04</span>
-      <div><h3>Your enquiry flow, automated</h3><p>This site runs it live: every form message is saved to a database and opens WhatsApp pre-filled. We build the same flow for you.</p></div>
+      <div><h3>Your enquiry flow</h3><p>Forms open WhatsApp pre-filled, ready to send.</p></div>
     </div>
   </div>
 </section>
@@ -677,7 +707,7 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
 <section id="pricing" class="pricing-teaser">
   <p class="sec-label reveal">Pricing</p>
   <h2 class="big-h reveal reveal-d1">Four levels.<br><span class="outline">One clear scope.</span></h2>
-  <p class="reveal reveal-d2" style="margin-top:20px;max-width:520px;color:#555;font-size:1.02rem;line-height:1.6">Starter, Growth, Premium, and Custom — from RM 1,500. Refund-backed, no lock-in.</p>
+  <p class="reveal reveal-d2" style="margin-top:20px;max-width:520px;color:#555;font-size:var(--type-body);line-height:1.55">Four levels from RM 1,500. Refund-backed. No lock-in.</p>
   <a class="btn-talk reveal reveal-d3" href="/pricing" style="margin-top:36px;background:var(--black);color:#fff">See plans &amp; pricing <span class="arr">→</span></a>
 </section>
 
@@ -686,7 +716,7 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
   <div class="contact-grid">
     <div class="contact-copy">
       <h2 class="big-h reveal">Start a project.<br><span class="outline">Tell us what you need.</span></h2>
-      <p class="reveal reveal-d1">No brief required — just tell us what you need, and we'll get back to you within 24 hours.</p>
+      <p class="reveal reveal-d1">No brief needed. Tell us what you need; we reply within 24 hours.</p>
       <div class="contact-direct reveal reveal-d2">
         <a href="https://wa.me/60177209159">WhatsApp: +60 17 720 9159</a>
         <a href="mailto:lumiocoordia@gmail.com">Email: lumiocoordia@gmail.com</a>
@@ -739,7 +769,7 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
 <footer>
   <div class="foot-grid">
     <div class="foot-brand">
-      <a class="footer-logo" href="#top" aria-label="LUMIO Coordia Intelligence home">LUMIO<span> Coordia</span></a>
+      <a class="footer-logo" href="#top" aria-label="LUMIO Coordia Intelligence home"><img src="/assets/lumio-logo-lockup.png" alt="LUMIO Coordia Intelligence"></a>
       <p>Clear websites for service businesses.</p>
     </div>
     <div class="foot-col">
@@ -870,6 +900,7 @@ if(homeLangSwitcher){
     'View website plans →':{'zh-Hant':'查看網站方案 →','zh-Hans':'查看网站方案 →',ms:'Lihat pelan laman web →',ja:'プランを見る →',ko:'웹사이트 플랜 보기 →'},
     'View our work':{'zh-Hant':'瀏覽作品','zh-Hans':'浏览作品',ms:'Lihat hasil kerja',ja:'実績を見る',ko:'작업 보기'},
     'View our work →':{'zh-Hant':'瀏覽作品 →','zh-Hans':'浏览作品 →',ms:'Lihat hasil kerja →',ja:'実績を見る →',ko:'작업 보기 →'},
+    'Clear websites built around your offer, proof, and next enquiry.':{'zh-Hant':'圍繞你的服務、信任證明和下一個查詢建立清楚網站。','zh-Hans':'围绕你的服务、信任证明和下一个咨询建立清楚网站。',ms:'Laman web jelas yang dibina sekitar tawaran, bukti dan pertanyaan seterusnya.',ja:'提供内容、信頼材料、次の問い合わせを軸にした明快なウェブサイト。',ko:'제안, 신뢰 근거, 다음 문의를 중심으로 만든 명확한 웹사이트.'},
     'Refund-backed milestones':{'zh-Hant':'按里程碑退款保障','zh-Hans':'按里程碑退款保障',ms:'Pencapaian dengan jaminan bayaran balik',ja:'返金保証付きマイルストーン',ko:'환불 보장 마일스톤'},
     'Available in 6 languages':{'zh-Hant':'支援 6 種語言','zh-Hans':'支持 6 种语言',ms:'Tersedia dalam 6 bahasa',ja:'6言語に対応',ko:'6개 언어 지원'},
     'Built for small businesses':{'zh-Hant':'專為小型企業打造','zh-Hans':'专为小型企业打造',ms:'Dibina untuk perniagaan kecil',ja:'小規模ビジネス向け',ko:'소기업을 위해 제작'},
@@ -891,22 +922,34 @@ if(homeLangSwitcher){
     'If this is you,':{'zh-Hant':'如果這就是你，','zh-Hans':'如果这就是你，',ms:'Jika ini situasi anda,',ja:'もし当てはまるなら、',ko:'이런 상황이라면,'},
     'we can help.':{'zh-Hant':'我們可以幫你。','zh-Hans':'我们可以帮你。',ms:'kami boleh bantu.',ja:'私たちが支援できます。',ko:'우리가 도울 수 있습니다.'},
     'Homestay or Airbnb':{'zh-Hant':'民宿或 Airbnb','zh-Hans':'民宿或 Airbnb',ms:'Homestay atau Airbnb',ja:'民泊・Airbnb',ko:'홈스테이 또는 Airbnb'},
+    '200 views. Two bookings.':{'zh-Hant':'200 次瀏覽，只有 2 個預訂。','zh-Hans':'200 次浏览，只有 2 个预订。',ms:'200 tontonan. Dua tempahan.',ja:'200回見られて、予約は2件。',ko:'조회 200회, 예약 2건.'},
     'Your listing gets 200 views a week but only 2 bookings.':{'zh-Hant':'你的房源每週有 200 次瀏覽，卻只有 2 個預訂。','zh-Hans':'你的房源每周有 200 次浏览，却只有 2 个预订。',ms:'Senarai anda dilihat 200 kali seminggu tetapi hanya mendapat 2 tempahan.',ja:'掲載は週200回見られているのに、予約は2件だけ。',ko:'숙소는 주 200회 조회되지만 예약은 2건뿐입니다.'},
     'Consultancy or agency':{'zh-Hant':'顧問或代理服務','zh-Hans':'顾问或代理服务',ms:'Perundingan atau agensi',ja:'コンサル・代理店',ko:'컨설팅 또는 에이전시'},
+    'Clients still ask what you actually do.':{'zh-Hant':'客戶仍然問你到底做甚麼。','zh-Hans':'客户仍然问你到底做什么。',ms:'Klien masih bertanya apa sebenarnya anda buat.',ja:'顧客にまだ「何をしているのか」と聞かれる。',ko:'고객이 여전히 실제로 무엇을 하는지 묻습니다.'},
     'Clients ask you to explain what you do, even after seeing your site.':{'zh-Hant':'客戶看完網站後，仍然要你再解釋你做甚麼。','zh-Hans':'客户看完网站后，仍然要你再解释你做什么。',ms:'Klien masih meminta anda jelaskan perkhidmatan walaupun selepas melihat laman web.',ja:'サイトを見た後でも、顧客に「何をしているのか」を説明する必要がある。',ko:'고객이 사이트를 본 뒤에도 무엇을 하는지 다시 설명해 달라고 합니다.'},
     'Local service business':{'zh-Hant':'本地服務生意','zh-Hans':'本地服务生意',ms:'Perniagaan servis tempatan',ja:'地域サービス業',ko:'지역 서비스 비즈니스'},
+    'You are listed online, but not chosen.':{'zh-Hant':'你在網上存在，但沒有被選中。','zh-Hans':'你在网上存在，但没有被选中。',ms:'Anda ada online, tetapi tidak dipilih.',ja:'オンラインにはあるのに、選ばれていない。',ko:'온라인에는 있지만 선택받지 못합니다.'},
     "You're on Google Maps, but nobody finds you online.":{'zh-Hant':'你在 Google Maps 上，但客戶仍然在網上找不到你。','zh-Hans':'你在 Google Maps 上，但客户仍然在网上找不到你。',ms:'Anda ada di Google Maps, tetapi orang masih tidak menemui anda secara online.',ja:'Google Mapsにはあるのに、オンラインでは見つけてもらえない。',ko:'Google Maps에는 있지만 온라인에서 고객이 찾지 못합니다.'},
     'If this is you':{'zh-Hant':'如果這就是你','zh-Hans':'如果这就是你',ms:'Jika ini anda',ja:'この状況なら',ko:'이런 상황이라면'},
+    'Your site looks fine. No one enquires.':{'zh-Hant':'網站看起來可以，但沒有人查詢。','zh-Hans':'网站看起来可以，但没有人咨询。',ms:'Laman nampak baik. Tiada pertanyaan.',ja:'見た目は悪くない。でも問い合わせが来ない。',ko:'사이트는 괜찮아 보입니다. 문의는 없습니다.'},
     'Your site looks fine — but no one enquires.':{'zh-Hant':'你的網站看起來不差，但沒有人查詢。','zh-Hans':'你的网站看起来不差，但没有人咨询。',ms:'Laman web nampak baik, tetapi tiada pertanyaan.',ja:'サイトの見た目は悪くないのに、問い合わせが来ない。',ko:'사이트는 괜찮아 보이지만 문의가 없습니다.'},
+    'Your difference is hard to say.':{'zh-Hant':'你的差異很難一句說清。','zh-Hans':'你的差异很难一句说清。',ms:'Perbezaan anda sukar dijelaskan.',ja:'違いを一言で言いにくい。',ko:'차별점을 말하기 어렵습니다.'},
     "You can't say what makes you different in one line.":{'zh-Hant':'你無法用一句話說清楚自己的不同。','zh-Hans':'你无法用一句话说清楚自己的不同。',ms:'Anda sukar jelaskan perbezaan anda dalam satu ayat.',ja:'自社の違いを一文で言えない。',ko:'한 문장으로 차별점을 말하기 어렵습니다.'},
+    'Visitors leave before the offer.':{'zh-Hant':'訪客還沒看到服務就離開。','zh-Hans':'访客还没看到服务就离开。',ms:'Pelawat keluar sebelum melihat tawaran.',ja:'オファーを見る前に離脱される。',ko:'방문자가 제안을 보기 전에 떠납니다.'},
     'Visitors leave before they ever reach your offer.':{'zh-Hant':'訪客還沒看到你的服務就離開。','zh-Hans':'访客还没看到你的服务就离开。',ms:'Pelawat keluar sebelum sampai ke tawaran anda.',ja:'訪問者がオファーを見る前に離脱する。',ko:'방문자가 제안을 보기 전에 떠납니다.'},
     "Here's the fix":{'zh-Hant':'我們會這樣解決','zh-Hans':'我们会这样解决',ms:'Cara membaikinya',ja:'解決方法',ko:'해결 방법'},
+    'A site built for the next enquiry.':{'zh-Hant':'為下一個查詢而建的網站。','zh-Hans':'为下一个咨询而建的网站。',ms:'Laman web yang dibina untuk pertanyaan seterusnya.',ja:'次の問い合わせのために作るサイト。',ko:'다음 문의를 위해 만든 사이트.'},
     'A site built to turn visitors into enquiries.':{'zh-Hant':'建立一個能把訪客變成查詢的網站。','zh-Hans':'建立一个能把访客变成咨询的网站。',ms:'Laman web yang menukar pelawat menjadi pertanyaan.',ja:'訪問者を問い合わせにつなげるサイトを作る。',ko:'방문자를 문의로 전환하는 사이트를 만듭니다.'},
+    'A message that lands in seconds.':{'zh-Hant':'幾秒內說清楚的訊息。','zh-Hans':'几秒内说清楚的信息。',ms:'Mesej yang sampai dalam beberapa saat.',ja:'数秒で伝わるメッセージ。',ko:'몇 초 안에 전달되는 메시지.'},
     'A clear message that lands in seconds.':{'zh-Hant':'幾秒內讓人明白的訊息。','zh-Hans':'几秒内让人明白的信息。',ms:'Mesej jelas yang difahami dalam beberapa saat.',ja:'数秒で伝わる明確なメッセージ。',ko:'몇 초 안에 전달되는 명확한 메시지.'},
+    'A path that leads to action.':{'zh-Hant':'直接引向行動的路徑。','zh-Hans':'直接引向行动的路径。',ms:'Laluan yang membawa kepada tindakan.',ja:'行動につながる導線。',ko:'행동으로 이어지는 경로.'},
     'A page journey that leads straight to your offer.':{'zh-Hant':'頁面路徑直接帶到你的服務。','zh-Hans':'页面路径直接带到你的服务。',ms:'Perjalanan halaman yang terus menuju tawaran anda.',ja:'オファーへまっすぐ導くページ導線。',ko:'제안으로 바로 이어지는 페이지 흐름.'},
     'Your website should make the next step obvious.':{'zh-Hant':'你的網站應該讓下一步變得很清楚。','zh-Hans':'你的网站应该让下一步变得很清楚。',ms:'Laman web anda patut menjadikan langkah seterusnya jelas.',ja:'ウェブサイトは次の行動を明確にするべきです。',ko:'웹사이트는 다음 행동을 명확하게 보여줘야 합니다.'},
+    'Visitors need the offer, proof, and enquiry path fast.':{'zh-Hant':'訪客需要快速看到服務、證明和查詢路徑。','zh-Hans':'访客需要快速看到服务、证明和咨询路径。',ms:'Pelawat perlu cepat nampak tawaran, bukti dan laluan pertanyaan.',ja:'訪問者には、提供内容・信頼材料・問い合わせ導線がすぐ必要です。',ko:'방문자는 제안, 증거, 문의 경로를 빠르게 봐야 합니다.'},
     'Visitors need to understand the offer, trust the business, and know how to enquire.':{'zh-Hant':'訪客需要明白你的服務、信任你的公司，並知道如何查詢。','zh-Hans':'访客需要明白你的服务、信任你的公司，并知道如何咨询。',ms:'Pelawat perlu faham tawaran anda, percaya kepada bisnes anda, dan tahu cara bertanya.',ja:'訪問者は提供内容を理解し、信頼し、問い合わせ方法を知る必要があります。',ko:'방문자는 제안을 이해하고 비즈니스를 신뢰하며 문의 방법을 알아야 합니다.'},
+    'We shape message, journey, pricing, and proof before build.':{'zh-Hant':'製作前，先整理訊息、路徑、價格和證明。','zh-Hans':'制作前，先整理信息、路径、价格和证明。',ms:'Kami susun mesej, perjalanan, harga dan bukti sebelum bina.',ja:'制作前にメッセージ、導線、価格、信頼材料を整えます。',ko:'제작 전에 메시지, 여정, 가격, 증거를 정리합니다.'},
     'We shape the message, journey, pricing, and proof before building — so the finished site feels useful, not decorative.':{'zh-Hant':'我們先整理訊息、路徑、價格和信任證明，再開始製作；所以網站不是裝飾，而是有用。','zh-Hans':'我们先整理信息、路径、价格和信任证明，再开始制作；所以网站不是装饰，而是有用。',ms:'Kami susun mesej, perjalanan, harga dan bukti sebelum bina — supaya laman siap benar-benar berguna, bukan sekadar hiasan.',ja:'制作前にメッセージ、導線、価格、信頼材料を整理するため、完成したサイトは装飾ではなく実用的です。',ko:'제작 전에 메시지, 여정, 가격, 신뢰 자료를 정리해 완성된 사이트가 장식이 아닌 실용적인 도구가 되게 합니다.'},
+    'Trusted by 20+ businesses across 4 regions. Built with a 6-month payback mindset.':{'zh-Hant':'獲 4 個地區 20+ 企業信任。以 6 個月回報思維製作。','zh-Hans':'获 4 个地区 20+ 企业信任。以 6 个月回报思维制作。',ms:'Dipercayai 20+ perniagaan di 4 rantau. Dibina dengan fokus pulangan 6 bulan.',ja:'4地域20社以上に信頼されています。6か月回収の視点で設計。',ko:'4개 지역 20개 이상 비즈니스가 신뢰. 6개월 회수 관점으로 제작.'},
     'Trusted by 20+ businesses across Hong Kong, Macau, Malaysia, and Singapore. A good website should pay for itself in 6 months.':{'zh-Hant':'已獲香港、澳門、馬來西亞和新加坡 20+ 企業信任。一個好的網站，應該在 6 個月內看見回報方向。','zh-Hans':'已获香港、澳门、马来西亚和新加坡 20+ 企业信任。一个好的网站，应该在 6 个月内看见回报方向。',ms:'Dipercayai oleh 20+ perniagaan di Hong Kong, Macau, Malaysia dan Singapura. Laman web yang baik sepatutnya membayar balik nilainya dalam 6 bulan.',ja:'香港、マカオ、マレーシア、シンガポールの20社以上に信頼されています。良いウェブサイトは6か月で価値を返し始めるべきです。',ko:'홍콩, 마카오, 말레이시아, 싱가포르의 20개 이상 비즈니스가 신뢰했습니다. 좋은 웹사이트는 6개월 안에 가치를 보여줘야 합니다.'},
     'Businesses':{'zh-Hant':'企業','zh-Hans':'企业',ms:'Perniagaan',ja:'企業',ko:'비즈니스'},
     'Regions':{'zh-Hant':'地區','zh-Hans':'地区',ms:'Rantau',ja:'地域',ko:'지역'},
@@ -927,18 +970,24 @@ if(homeLangSwitcher){
     'Tell us what you need':{'zh-Hant':'告訴我們你需要甚麼','zh-Hans':'告诉我们你需要什么',ms:'Beritahu apa yang anda perlukan',ja:'必要なことを伝える',ko:'필요한 것을 알려주세요'},
     'No formal brief. One conversation is enough.':{'zh-Hant':'不需要正式 brief，一次對話已經足夠。','zh-Hans':'不需要正式 brief，一次对话已经足够。',ms:'Tidak perlu brief rasmi. Satu perbualan sudah cukup.',ja:'正式なブリーフは不要です。一度の会話で十分です。',ko:'공식 브리프가 없어도 됩니다. 한 번의 대화면 충분합니다.'},
     'Confirm the direction':{'zh-Hant':'確認方向','zh-Hans':'确认方向',ms:'Sahkan arah',ja:'方向性を確認',ko:'방향 확인'},
+    'We agree the direction before design.':{'zh-Hant':'設計前先確認方向。','zh-Hans':'设计前先确认方向。',ms:'Kami sahkan arah sebelum reka bentuk.',ja:'デザイン前に方向性を合意します。',ko:'디자인 전에 방향을 합의합니다.'},
     'We agree the direction before design starts.':{'zh-Hant':'設計開始前，先確認方向。','zh-Hans':'设计开始前，先确认方向。',ms:'Kami sahkan arah sebelum reka bentuk bermula.',ja:'デザイン開始前に方向性を合意します。',ko:'디자인 시작 전에 방향을 합의합니다.'},
     'We handle execution':{'zh-Hant':'由我們執行','zh-Hans':'由我们执行',ms:'Kami laksanakan',ja:'実行は私たちが担当',ko:'실행은 우리가 담당'},
+    'Design, build, test, and launch.':{'zh-Hant':'設計、製作、測試、上線。','zh-Hans':'设计、制作、测试、上线。',ms:'Reka, bina, uji dan lancar.',ja:'設計、構築、テスト、公開。',ko:'디자인, 제작, 테스트, 공개.'},
     'Design, build, test, and launch — start to finish.':{'zh-Hant':'設計、開發、測試、上線，由開始到完成。','zh-Hans':'设计、开发、测试、上线，由开始到完成。',ms:'Reka, bina, uji dan lancar — dari awal hingga akhir.',ja:'設計、構築、テスト、公開まで一貫して対応します。',ko:'디자인, 제작, 테스트, 공개까지 처음부터 끝까지 진행합니다.'},
+    'Your enquiry flow':{'zh-Hant':'你的查詢流程','zh-Hans':'你的咨询流程',ms:'Aliran pertanyaan anda',ja:'問い合わせフロー',ko:'문의 흐름'},
     'Your enquiry flow, automated':{'zh-Hant':'你的查詢流程，全自動','zh-Hans':'你的咨询流程，全自动',ms:'Aliran pertanyaan anda, diautomasikan',ja:'問い合わせフローも自動化',ko:'문의 흐름도 자동화'},
+    'Forms open WhatsApp pre-filled, ready to send.':{'zh-Hant':'表單會打開預填好的 WhatsApp，隨時可發送。','zh-Hans':'表单会打开预填好的 WhatsApp，随时可发送。',ms:'Borang membuka WhatsApp yang siap diisi, sedia dihantar.',ja:'フォームから入力済みWhatsAppが開き、そのまま送れます。',ko:'폼은 미리 채워진 WhatsApp을 열어 바로 보낼 수 있습니다.'},
     'This site runs it live: every form message is saved to a database and opens WhatsApp pre-filled. We build the same flow for you.':{'zh-Hant':'本網站正在實際運行：每條表單訊息都會存入資料庫，並自動打開預填好的 WhatsApp。我們也會為你搭建同樣的流程。','zh-Hans':'本网站正在实际运行：每条表单消息都会存入数据库，并自动打开预填好的 WhatsApp。我们也会为你搭建同样的流程。',ms:'Laman ini menjalankannya secara langsung: setiap mesej borang disimpan ke pangkalan data dan membuka WhatsApp yang telah diisi. Kami bina aliran yang sama untuk anda.',ja:'このサイトで実際に稼働中：フォームの送信は自動でデータベースに保存され、入力済みのWhatsAppが開きます。同じ仕組みをあなたにも。',ko:'이 사이트에서 실제로 작동 중입니다: 모든 폼 메시지는 데이터베이스에 저장되고, 미리 채워진 WhatsApp이 열립니다. 같은 흐름을 당신에게도 만들어드립니다.'},
     'Four levels.':{'zh-Hant':'四個級別。','zh-Hans':'四个级别。',ms:'Empat tahap.',ja:'4つのレベル。',ko:'네 가지 단계.'},
     'One clear scope.':{'zh-Hant':'一個清楚範圍。','zh-Hans':'一个清楚范围。',ms:'Satu skop yang jelas.',ja:'明確なスコープ。',ko:'명확한 범위.'},
+    'Four levels from RM 1,500. Refund-backed. No lock-in.':{'zh-Hant':'四個級別，RM 1,500 起。退款保障，不綁長約。','zh-Hans':'四个级别，RM 1,500 起。退款保障，不绑长约。',ms:'Empat tahap dari RM 1,500. Jaminan bayaran balik. Tanpa ikatan.',ja:'4段階、RM 1,500から。返金保証、縛りなし。',ko:'네 가지 단계, RM 1,500부터. 환불 보장, 장기 약정 없음.'},
     'Starter, Growth, Premium, and Custom — from RM 1,500. Refund-backed, no lock-in.':{'zh-Hant':'Starter、Growth、Premium 和 Custom，RM 1,500 起。按里程碑退款保障，不綁長約。','zh-Hans':'Starter、Growth、Premium 和 Custom，RM 1,500 起。按里程碑退款保障，不绑长约。',ms:'Starter, Growth, Premium dan Custom — bermula RM 1,500. Jaminan bayaran balik, tanpa ikatan.',ja:'Starter、Growth、Premium、Custom。RM 1,500から。返金保証付き、長期契約なし。',ko:'Starter, Growth, Premium, Custom — RM 1,500부터. 환불 보장, 장기 약정 없음.'},
     'See plans & pricing':{'zh-Hant':'查看方案與價格','zh-Hans':'查看方案与价格',ms:'Lihat pelan & harga',ja:'プランと料金を見る',ko:'플랜 및 가격 보기'},
     'See plans & pricing →':{'zh-Hant':'查看方案與價格 →','zh-Hans':'查看方案与价格 →',ms:'Lihat pelan & harga →',ja:'プランと料金を見る →',ko:'플랜 및 가격 보기 →'},
     'Start a project.':{'zh-Hant':'開始一個項目。','zh-Hans':'开始一个项目。',ms:'Mulakan projek.',ja:'プロジェクトを始める。',ko:'프로젝트 시작.'},
     'Tell us what you need.':{'zh-Hant':'告訴我們你需要甚麼。','zh-Hans':'告诉我们你需要什么。',ms:'Beritahu apa yang anda perlukan.',ja:'必要なことを教えてください。',ko:'필요한 것을 알려주세요.'},
+    'No brief needed. Tell us what you need; we reply within 24 hours.':{'zh-Hant':'不需要 brief。告訴我們需要甚麼，我們 24 小時內回覆。','zh-Hans':'不需要 brief。告诉我们需要什么，我们 24 小时内回复。',ms:'Tidak perlu brief. Beritahu keperluan anda; kami balas dalam 24 jam.',ja:'ブリーフ不要。必要なことを教えてください。24時間以内に返信します。',ko:'브리프는 필요 없습니다. 필요한 것을 알려주시면 24시간 내 답변드립니다.'},
     "No brief required — just tell us what you need, and we'll get back to you within 24 hours.":{'zh-Hant':'不需要正式 brief，只要告訴我們你的需要，我們會在 24 小時內回覆。','zh-Hans':'不需要正式 brief，只要告诉我们你的需要，我们会在 24 小时内回复。',ms:'Tidak perlu brief rasmi — beritahu sahaja keperluan anda, kami akan balas dalam 24 jam.',ja:'正式なブリーフは不要です。必要なことを教えてください。24時間以内に返信します。',ko:'공식 브리프는 필요 없습니다. 필요한 것을 알려주시면 24시간 내에 답변드립니다.'},
     'Name':{'zh-Hant':'姓名','zh-Hans':'姓名',ms:'Nama',ja:'名前',ko:'이름'},
     'Email':{'zh-Hant':'電郵','zh-Hans':'邮箱',ms:'E-mel',ja:'メール',ko:'이메일'},

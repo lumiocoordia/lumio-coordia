@@ -49,6 +49,11 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   --ease:cubic-bezier(.22,1,.36,1);
   --accent:#d8b985;
   --accent-dk:#b8925a;
+  --type-h1:clamp(3rem,7vw,6.2rem);
+  --type-h2:clamp(2.35rem,5.8vw,5.4rem);
+  --type-h3:clamp(1.35rem,2.35vw,2.05rem);
+  --type-body:clamp(1rem,1.1vw,1.12rem);
+  --type-small:.86rem;
 }
 
 /* NAV */
@@ -58,10 +63,12 @@ button{cursor:pointer;background:none;border:none;font:inherit}
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(0,0,0,.35);
 }
 .brand-logo{
-  flex-shrink:0;display:flex;align-items:center;font-size:1.15rem;font-weight:900;
-  letter-spacing:.05em;color:#fff;white-space:nowrap;
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  width:138px;height:56px;padding:8px 14px;border-radius:14px;
+  background:rgba(10,10,10,.88);border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 12px 28px rgba(0,0,0,.16);white-space:nowrap;
 }
-.brand-logo span{font-weight:400}
+.brand-logo img{width:112px;height:auto;max-height:42px;object-fit:contain}
 .nav-pill{
   background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;
   align-items:center;gap:30px;padding:16px 26px;display:flex;backdrop-filter:blur(12px);
@@ -82,7 +89,7 @@ button{cursor:pointer;background:none;border:none;font:inherit}
 .lang-option{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.6);cursor:pointer;transition:background .15s,color .15s;border:none;background:transparent;width:100%;text-align:left;letter-spacing:.02em}
 .lang-option:hover{background:rgba(255,255,255,.08);color:#fff}.lang-option.is-active{color:#fff;background:rgba(255,255,255,.06)}.lang-option.is-active::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0}
 @media(max-width:900px){.nav-pill{display:none}}
-@media(max-width:768px){.hero-nav{padding:14px 16px 0;gap:6px;justify-content:space-between}.brand-logo{font-size:.9rem}.nav-cta-pill{display:none}.language-switcher{top:16px;right:14px}}
+@media(max-width:768px){.hero-nav{padding:14px 16px 0;gap:6px;justify-content:space-between}.brand-logo{width:108px;height:44px;padding:6px 10px;border-radius:12px}.brand-logo img{width:88px;max-height:34px}.nav-cta-pill{display:none}.language-switcher{top:16px;right:14px}}
 
 /* SHARED */
 section{padding:clamp(80px,12vw,160px) var(--pad)}
@@ -94,7 +101,7 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .sec-label::before{content:'';width:36px;height:1px;background:currentColor}
 .big-h{
   font-family:'Archivo Expanded','Archivo',sans-serif;
-  font-size:clamp(2.2rem,6vw,5.2rem);
+  font-size:var(--type-h2);
   line-height:1;letter-spacing:-.02em;text-transform:uppercase;font-weight:900;
 }
 .outline{color:transparent;-webkit-text-stroke:2px var(--black)}
@@ -115,7 +122,7 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .hero-kicker::before{content:'';width:44px;height:1px;background:var(--black)}
 .hero h1{
   font-family:'Archivo Expanded','Archivo',sans-serif;
-  font-size:clamp(2.8rem,9.5vw,9rem);
+  font-size:var(--type-h1);
   line-height:.94;letter-spacing:-.02em;
   text-transform:uppercase;font-weight:900;
 }
@@ -126,7 +133,7 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .hero h1 .outline{-webkit-text-stroke:2px var(--black);color:transparent}
 @keyframes rise{to{transform:translateY(0)}}
 .hero-sub{
-  max-width:560px;margin-top:44px;font-size:1.05rem;line-height:1.65;color:#3a3a3a;
+  max-width:560px;margin-top:44px;font-size:var(--type-body);line-height:1.58;color:#3a3a3a;
   opacity:0;animation:fadeUp .9s var(--ease) .55s forwards;
 }
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
@@ -139,7 +146,7 @@ section{padding:clamp(80px,12vw,160px) var(--pad)}
 .story p.statement strong{font-weight:800}
 .story p.statement .dim{color:#b5b5b5}
 .story-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:48px;margin-top:72px}
-.story-cols p{line-height:1.75;color:#555;font-size:1rem}
+.story-cols p{line-height:1.6;color:#555;font-size:var(--type-body)}
 .story-cols p b{color:var(--black)}
 
 /* STATS BAND */
@@ -216,7 +223,7 @@ footer a:hover{color:#fff}
 <body>
 
 <nav class="hero-nav" aria-label="Primary navigation">
-  <a href="/" class="brand-logo" aria-label="LUMIO Coordia Intelligence home">LUMIO<span> Coordia</span></a>
+  <a href="/" class="brand-logo" aria-label="LUMIO Coordia Intelligence home"><img src="/assets/lumio-logo-lockup.png" alt="LUMIO Coordia Intelligence"></a>
   <div class="nav-pill">
     <a href="/#who">Story</a>
     <a href="/work">Portfolio</a>
@@ -250,7 +257,7 @@ footer a:hover{color:#fff}
     <span class="line"><span class="word outline">websites</span></span>
     <span class="line"><span class="word">unmistakable.</span></span>
   </h1>
-  <p class="hero-sub">A clarity-first web studio for service businesses in Malaysia, Hong Kong, and Macau. We don't sell decoration — we build the shortest honest path from "who are you?" to "how do I enquire?"</p>
+  <p class="hero-sub">A clarity-first web studio for service businesses in Malaysia, Hong Kong, and Macau. We turn "who are you?" into "how do I enquire?"</p>
 </header>
 
 <!-- STORY -->
@@ -393,6 +400,7 @@ if(aboutLangSwitcher){
     'We make':{'zh-Hant':'我們讓','zh-Hans':'我们让',ms:'Kami bina',ja:'私たちは',ko:'우리는'},
     'websites':{'zh-Hant':'網站','zh-Hans':'网站',ms:'laman web',ja:'ウェブサイトを',ko:'웹사이트를'},
     'unmistakable.':{'zh-Hant':'與眾不同。','zh-Hans':'与众不同。',ms:'yang tersendiri.',ja:'唯一無二に。',ko:'특별하게 만듭니다.'},
+    'A clarity-first web studio for service businesses in Malaysia, Hong Kong, and Macau. We turn "who are you?" into "how do I enquire?"':{'zh-Hant':'一間以清晰為先的網站工作室，服務馬來西亞、香港和澳門的服務型企業。我們把「你是誰？」變成「怎樣查詢？」','zh-Hans':'一家以清晰为先的网站工作室，服务马来西亚、香港和澳门的服务型企业。我们把“你是谁？”变成“怎么咨询？”',ms:'Studio web yang mengutamakan kejelasan untuk perniagaan servis di Malaysia, Hong Kong dan Macau. Kami menukar “siapa anda?” kepada “bagaimana nak bertanya?”',ja:'マレーシア・香港・マカオのサービス業向け、明快さ重視のウェブスタジオ。「誰？」を「どう問い合わせる？」に変えます。',ko:'말레이시아·홍콩·마카오 서비스 비즈니스를 위한 명확성 우선 웹 스튜디오. “누구지?”를 “어떻게 문의하지?”로 바꿉니다.'},
     'A clarity-first web studio for service businesses in Malaysia, Hong Kong, and Macau. We don\'t sell decoration — we build the shortest honest path from "who are you?" to "how do I enquire?"':{'zh-Hant':'一間以清晰為先的網站工作室，服務馬來西亞、香港和澳門的服務型企業。我們不賣裝飾——我們打造從「你是誰？」到「怎樣查詢？」之間最短、最誠實的路徑。','zh-Hans':'一家以清晰为先的网站工作室，服务马来西亚、香港和澳门的服务型企业。我们不卖装饰——我们打造从「你是谁？」到「怎么咨询？」之间最短、最诚实的路径。',ms:'Studio web yang mengutamakan kejelasan untuk perniagaan perkhidmatan di Malaysia, Hong Kong dan Macau. Kami tidak menjual hiasan — kami bina laluan paling jelas dari “siapa anda?” ke “bagaimana nak bertanya?”',ja:'マレーシア・香港・マカオのサービス業のための、わかりやすさ第一のウェブ制作スタジオ。装飾ではなく、「誰？」から「どう問い合わせる？」までの最短で誠実な導線をつくります。',ko:'말레이시아·홍콩·마카오의 서비스 기업을 위한 명확함 우선 웹 스튜디오. 우리는 장식을 팔지 않습니다 — “누구지?”에서 “어떻게 문의하지?”까지 가장 짧고 정직한 경로를 만듭니다.'},
     'Our story':{'zh-Hant':'我們的故事','zh-Hans':'我们的故事',ms:'Kisah kami',ja:'私たちのストーリー',ko:'우리의 이야기'},
     'Most small-business websites fail quietly. They look fine, cost real money, and':{'zh-Hant':'大多數小企業網站都在無聲地失敗。它們看起來不錯，花了真金白銀，卻','zh-Hans':'大多数小企业网站都在无声地失败。它们看起来不错，花了真金白银，却',ms:'Kebanyakan laman web perniagaan kecil gagal secara senyap. Nampak elok, kosnya nyata, tetapi',ja:'小さなビジネスのウェブサイトの多くは、静かに失敗しています。見た目は悪くなく、費用もかかっているのに、',ko:'대부분의 소기업 웹사이트는 조용히 실패합니다. 보기엔 괜찮고 돈도 들였지만,'},
