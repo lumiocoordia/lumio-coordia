@@ -43,6 +43,22 @@
 /terms.html
   Cache-Control: public, max-age=300
 
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=300
+
+/ai-search-source
+  Cache-Control: public, max-age=300
+
+/ai-search-source.html
+  Cache-Control: public, max-age=300
+
+/answers/*
+  Cache-Control: public, max-age=300
+
+/work/*
+  Cache-Control: public, max-age=300
+
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
