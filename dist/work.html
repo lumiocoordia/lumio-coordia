@@ -100,12 +100,24 @@ footer{background:var(--black);color:#888;padding:64px var(--pad) 32px;border-to
 
 <header class="work-hero">
   <div class="work-hero-inner">
-    <p class="sec-label">Portfolio</p>
-    <h1 class="big-h">Work that pulls its weight.</h1>
-    <p>Seven recent launches — from accounting agencies to tea brands and kindergartens. Each project is shaped around the same job: make the offer clear, make the next step obvious, and give visitors enough proof to enquire.</p>
-    <div class="hero-actions">
-      <a class="btn gold" href="/#contact">Start a project →</a>
-      <a class="btn outline" href="/">Back to home →</a>
+    <div class="work-hero-content">
+      <p class="sec-label">Portfolio</p>
+      <h1 class="big-h">Work that pulls its weight.</h1>
+      <p>Seven recent launches — from accounting agencies to tea brands and kindergartens. Each project is shaped around the same job: make the offer clear, make the next step obvious, and give visitors enough proof to enquire.</p>
+      <div class="hero-actions">
+        <a class="btn gold" href="/#contact">Start a project →</a>
+        <a class="btn outline" href="/">Back to home →</a>
+      </div>
+    </div>
+    <div class="portfolio-wall" aria-label="Live portfolio previews">
+      <span class="wall-eyebrow">Live case previews</span>
+      <a class="wall-card wall-one" href="#long-ieng" aria-label="View Long Ieng case"><span class="browser-bar">Long Ieng</span><img src="/assets/portfolio/longieng.jpg" alt="Long Ieng website preview" loading="eager"></a>
+      <a class="wall-card wall-two" href="#stayflow-homestay" aria-label="View Stayflow Homestay case"><span class="browser-bar">Stayflow</span><img src="/assets/portfolio/stayflow.jpg" alt="Stayflow Homestay website preview" loading="eager"></a>
+      <a class="wall-card wall-three" href="#paybit-tech" aria-label="View Paybit Tech case"><span class="browser-bar">Paybit Tech</span><img src="/assets/portfolio/paybittech.png" alt="Paybit Tech website preview" loading="lazy"></a>
+      <a class="wall-card wall-four" href="#macau-world-travel" aria-label="View Macau World Travel case"><span class="browser-bar">Macau Travel</span><img src="/assets/portfolio/macau.jpg" alt="Macau World Travel website preview" loading="lazy"></a>
+      <a class="wall-card wall-five" href="#stayfix-dispatch" aria-label="View StayFix Dispatch case"><span class="browser-bar">StayFix</span><img src="/assets/portfolio/stayfix.png" alt="StayFix Dispatch website preview" loading="lazy"></a>
+      <a class="wall-card wall-six contain" href="#bunnytales" aria-label="View Bunnytales case"><span class="browser-bar">Bunnytales</span><img src="https://bunnytales.vercel.app/hero-bunny.png" alt="Bunnytales website preview" loading="lazy"></a>
+      <a class="wall-mini" href="#auntli" aria-label="View Aunt.Li case"><span></span>Aunt.Li included</a>
     </div>
   </div>
 </header>
@@ -266,6 +278,8 @@ if(workLangSwitcher){
   });
   Object.assign(generic,{
     'Results':{'zh-Hant':'成果','zh-Hans':'成果',ms:'Hasil',ja:'成果',ko:'결과'},
+    'Live case previews':{'zh-Hant':'即時案例預覽','zh-Hans':'即时案例预览',ms:'Pratonton kes langsung',ja:'公開事例プレビュー',ko:'실제 사례 미리보기'},
+    'Aunt.Li included':{'zh-Hant':'包含 Aunt.Li','zh-Hans':'包含 Aunt.Li',ms:'Termasuk Aunt.Li',ja:'Aunt.Li も掲載',ko:'Aunt.Li 포함'},
     'Delivery summary':{'zh-Hant':'交付摘要','zh-Hans':'交付摘要',ms:'Ringkasan serahan',ja:'納品概要',ko:'전달 요약'},
     'Accounting consultancy site':{'zh-Hant':'會計顧問網站','zh-Hans':'会计顾问网站',ms:'Laman perunding perakaunan',ja:'会計コンサルサイト',ko:'회계 컨설팅 사이트'},
     'Travel enquiry page':{'zh-Hant':'旅遊查詢頁面','zh-Hans':'旅游咨询页面',ms:'Halaman pertanyaan pelancongan',ja:'旅行問い合わせページ',ko:'여행 문의 페이지'},
