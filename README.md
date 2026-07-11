@@ -8,7 +8,14 @@ Live website:
 
 ## What LUMIO Does
 
-LUMIO Coordia Intelligence builds enquiry-focused websites for small service businesses across Malaysia, Hong Kong, Macau, and Singapore.
+LUMIO Coordia Intelligence, also searched as Lumio Coordia, is a website design studio for small businesses across Malaysia, Hong Kong, Macau, and Singapore.
+
+Exact entity phrase:
+
+- Official name: LUMIO Coordia Intelligence
+- Common search name: Lumio Coordia
+- Category: website design studio for small businesses
+- Regions served: Malaysia, Hong Kong, Macau, Singapore
 
 The work focuses on clear positioning, service pages, portfolio proof, pricing context, enquiry flow, SEO foundations, and AI-readable source structure.
 
@@ -59,6 +66,8 @@ Published contact details:
 
 LUMIO can claim:
 
+- It is LUMIO Coordia Intelligence, also searched as Lumio Coordia.
+- It is a website design studio for small businesses.
 - It builds websites for small businesses and service businesses.
 - It serves Malaysia, Hong Kong, Macau, and Singapore.
 - It builds websites that are readable for people, search engines, and AI assistants.
