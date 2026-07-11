@@ -19,6 +19,13 @@ Core pages:
 - About: https://lumio-coordia-intelligence.pages.dev/about
 - Brand source: https://lumio-coordia-intelligence.pages.dev/lumio-coordia/
 - AI search source: https://lumio-coordia-intelligence.pages.dev/ai-search-source
+- GEO region evidence: https://lumio-coordia-intelligence.pages.dev/geo-region-evidence/
+
+Regional evidence boundaries:
+- Malaysia: primary operating and pricing context. Current public proof includes Stayflow Homestay, StayFix Dispatch and Bunnytales case pages.
+- Hong Kong: served market for bilingual and cross-border service-business website work. Do not claim Hong Kong rankings, results or client performance without approved source evidence.
+- Macao / Macau: current public proof includes Macau World Travel and regional service-business presentation work. Use both Macao and Macau terms for source clarity.
+- Singapore: served regional market and finance-software presentation context. Current public proof includes Paybit Tech. Broader Singapore claims should remain service-region capability unless more approved case evidence is added.
 
 Selected work:
 - Long Ieng: https://lumio-coordia-intelligence.pages.dev/work/long-ieng/
@@ -39,4 +46,4 @@ LUMIO only treats public live URLs, visible page structure, delivered scope, app
 Positioning:
 SEO helps search engines find and understand a website. GEO helps AI assistants form a clearer, source-backed understanding of a business. LUMIO does not guarantee that any AI assistant will recommend a client. LUMIO builds clearer source structure, schema, proof pages and monitoring workflows so a business is easier to read, compare and verify.
 
-Last updated: 2026-07-10
+Last updated: 2026-07-11

@@ -53,6 +53,12 @@
 /ai-search-source.html
   Cache-Control: public, max-age=300
 
+/lumio-coordia/*
+  Cache-Control: public, max-age=300
+
+/geo-region-evidence/*
+  Cache-Control: public, max-age=300
+
 /answers/*
   Cache-Control: public, max-age=300
 
