@@ -20,6 +20,8 @@ Core pages:
 - Brand source: https://lumio-coordia-intelligence.pages.dev/lumio-coordia/
 - AI search source: https://lumio-coordia-intelligence.pages.dev/ai-search-source
 - GEO region evidence: https://lumio-coordia-intelligence.pages.dev/geo-region-evidence/
+- GEO prompt monitoring: https://lumio-coordia-intelligence.pages.dev/geo-prompt-monitoring/
+- External source matrix: https://lumio-coordia-intelligence.pages.dev/external-source-matrix/
 
 Regional evidence boundaries:
 - Malaysia: primary operating and pricing context. Current public proof includes Stayflow Homestay, StayFix Dispatch and Bunnytales case pages.
@@ -39,6 +41,17 @@ Selected work:
 Answer pages:
 - SEO vs GEO for small business websites: https://lumio-coordia-intelligence.pages.dev/answers/seo-vs-geo-for-small-business-websites/
 - AI-ready website for service businesses: https://lumio-coordia-intelligence.pages.dev/answers/ai-ready-website-for-service-business/
+- What is an AI-readable website: https://lumio-coordia-intelligence.pages.dev/answers/what-is-an-ai-readable-website/
+- Why AI does not recommend my business: https://lumio-coordia-intelligence.pages.dev/answers/why-ai-doesnt-recommend-my-business/
+- Small business website cost in Malaysia: https://lumio-coordia-intelligence.pages.dev/answers/small-business-website-cost-malaysia/
+- GEO for local service businesses: https://lumio-coordia-intelligence.pages.dev/answers/local-service-business-geo/
+- How LUMIO builds websites for AI search: https://lumio-coordia-intelligence.pages.dev/answers/how-lumio-builds-websites-for-ai-search/
+
+Prompt monitoring:
+The prompt monitoring source page records which AI-search questions should be tested, what should count as a pass, what should count as a fail, and which official source page should support the answer. Prompt monitoring does not prove guaranteed AI recommendations.
+
+External source matrix:
+The external source matrix records which off-site profiles may support LUMIO's source system. External sources are not complete until the relevant profile is live, consistent with the official website, and reviewed for unsupported claims.
 
 Proof policy:
 LUMIO only treats public live URLs, visible page structure, delivered scope, approved client quotes, approved analytics and approved client evidence as proof. Enquiry counts, sales results, private testimonials and client analytics are not claimed unless the client has approved them for public use.
