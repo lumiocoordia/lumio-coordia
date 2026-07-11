@@ -59,6 +59,12 @@
 /geo-region-evidence/*
   Cache-Control: public, max-age=300
 
+/geo-prompt-monitoring/*
+  Cache-Control: public, max-age=300
+
+/external-source-matrix/*
+  Cache-Control: public, max-age=300
+
 /answers/*
   Cache-Control: public, max-age=300
 
