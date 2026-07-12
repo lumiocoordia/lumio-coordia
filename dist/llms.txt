@@ -23,6 +23,7 @@ Core pages:
 - GEO region evidence: https://lumio-coordia-intelligence.pages.dev/geo-region-evidence/
 - GEO prompt monitoring: https://lumio-coordia-intelligence.pages.dev/geo-prompt-monitoring/
 - External source matrix: https://lumio-coordia-intelligence.pages.dev/external-source-matrix/
+- GEO command center: https://lumio-coordia-intelligence.pages.dev/geo-command-center/
 
 Regional evidence boundaries:
 - Malaysia: primary operating and pricing context. Current public proof includes Stayflow Homestay, StayFix Dispatch and Bunnytales case pages.
@@ -53,6 +54,9 @@ The prompt monitoring source page records which AI-search questions should be te
 
 External source matrix:
 The external source matrix records which off-site profiles may support LUMIO's source system. External sources are not complete until the relevant profile is live, consistent with the official website, and reviewed for unsupported claims.
+
+GEO command center:
+The GEO command center is a public operating workbench that organizes adversarial AI prompts, source-system checks, content repair tasks, external-source backtests, and AI visibility metrics for LUMIO. It is not a ranking guarantee and does not replace manual prompt monitoring in ChatGPT, Gemini, Perplexity, Doubao, Yuanbao or other AI tools.
 
 Proof policy:
 LUMIO only treats public live URLs, visible page structure, delivered scope, approved client quotes, approved analytics and approved client evidence as proof. Enquiry counts, sales results, private testimonials and client analytics are not claimed unless the client has approved them for public use.
