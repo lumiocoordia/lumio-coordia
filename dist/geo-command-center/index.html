@@ -120,6 +120,19 @@
       gap: 12px;
       margin-top: 26px;
     }
+    .dual {
+      display: block;
+      color: rgba(255, 250, 240, .68);
+      font-size: .94rem;
+      margin-top: 8px;
+    }
+    .zh {
+      display: block;
+      color: var(--muted);
+      font-size: .92rem;
+      margin-top: 4px;
+    }
+    .top .zh { color: rgba(255, 250, 240, .76); }
     button,
     .button {
       appearance: none;
@@ -193,6 +206,36 @@
       align-items: start;
     }
     .stack { display: grid; gap: 18px; }
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .guide-card {
+      border: 1px solid #eee4d5;
+      background: #fffaf1;
+      border-radius: 12px;
+      padding: 14px;
+      min-height: 132px;
+    }
+    .guide-card span {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #17130d;
+      color: #fffaf0;
+      font-weight: 900;
+      font-size: .86rem;
+      margin-bottom: 10px;
+    }
+    .guide-card strong { display: block; }
+    .guide-card p {
+      margin: 6px 0 0;
+      font-size: .92rem;
+    }
     .module {
       padding: clamp(18px, 2.5vw, 28px);
       overflow: hidden;
@@ -350,6 +393,7 @@
     @media (max-width: 920px) {
       .hero,
       .grid { grid-template-columns: 1fr; }
+      .guide-grid { grid-template-columns: 1fr; }
       .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .nav { align-items: start; flex-direction: column; }
       .nav-links { justify-content: flex-start; }
@@ -385,13 +429,16 @@
         <div>
           <h1>GEO Command Center for LUMIO.</h1>
           <p>This operating page turns the five-tool GEO idea into a browser-based workbench: adversarial AI prompts, knowledge-base coverage, repair tasks, external source backtests, and AI visibility metrics.</p>
+          <span class="dual">这个页面不是给客户看的官网页面，而是给你操作 GEO 回测用的控制台：先检查官网资料，再复制 prompt 去不同 AI 测试，最后按结果修正 source system。</span>
           <div class="actions">
             <button id="run-check">Run source check</button>
             <a class="button secondary" href="#prompts">Copy prompt set</a>
+            <a class="button secondary" href="#guide">Read guide</a>
           </div>
         </div>
         <aside class="hero-panel">
           <strong>Scope boundary</strong>
+          <span class="zh">使用边界</span>
           <ul>
             <li>No guarantee of Google ranking or AI recommendation.</li>
             <li>No fake reviews, fake case results, or fake external profiles.</li>
@@ -402,24 +449,77 @@
     </header>
 
     <main>
+      <section class="module" id="guide">
+        <div class="module-head">
+          <div>
+            <h2>Start here: how to operate this page</h2>
+            <p>Use this page as a control room. It does not replace ChatGPT, Gemini or Perplexity; it tells you what to test, how to judge the answer, and what to fix next.</p>
+            <span class="zh">先从这里开始：这个页面是控制台，不是 AI 本身。它告诉你要问哪些问题、怎样判断 AI 有没有答对、答错之后应该修哪里。</span>
+          </div>
+          <span class="tag">Guide / 操作指南</span>
+        </div>
+        <div class="guide-grid">
+          <div class="guide-card">
+            <span>1</span>
+            <strong>Run source check</strong>
+            <p>Click the black button first. If the score is not 100, fix the missing LUMIO source pages before testing AI.</p>
+            <p class="zh">先按黑色按钮。如果不是 100，先修官网资料，不要急着问 AI。</p>
+          </div>
+          <div class="guide-card">
+            <span>2</span>
+            <strong>Copy one prompt</strong>
+            <p>Pick one test question below and copy it into ChatGPT, Gemini, Perplexity, Doubao or Yuanbao.</p>
+            <p class="zh">在下面选一条测试题，复制去 ChatGPT / Gemini / Perplexity / 豆包 / 元宝。</p>
+          </div>
+          <div class="guide-card">
+            <span>3</span>
+            <strong>Judge the answer</strong>
+            <p>Compare the AI answer with the pass signal. Mark whether it recognized LUMIO, confused the brand, or asked for more proof.</p>
+            <p class="zh">用「合格标准」对照答案：AI 是否认得 LUMIO？有没有认错品牌？有没有说证据不足？</p>
+          </div>
+          <div class="guide-card">
+            <span>4</span>
+            <strong>Use the repair queue</strong>
+            <p>If AI is wrong, choose the matching repair item: entity phrase, disambiguation, proof, answer page or external source.</p>
+            <p class="zh">如果 AI 答错，就去 repair queue 找对应修法：品牌词、消歧义、案例证据、问答页、外部资料。</p>
+          </div>
+          <div class="guide-card">
+            <span>5</span>
+            <strong>Update source pages</strong>
+            <p>Fix the website, LinkedIn, Google Business Profile, GitHub README or other source surfaces. Do not invent proof.</p>
+            <p class="zh">回到官网、LinkedIn、Google Business Profile、GitHub README 等地方补资料。不能造假 proof。</p>
+          </div>
+          <div class="guide-card">
+            <span>6</span>
+            <strong>Re-test later</strong>
+            <p>After indexing or source refresh, run the same prompt again. GEO is a monitor, backtest and correction loop.</p>
+            <p class="zh">等收录或资料刷新后，用同一条 prompt 再测一次。GEO 是监控、回测、修正的循环。</p>
+          </div>
+        </div>
+      </section>
+
       <section class="metrics" aria-label="GEO score summary">
         <div class="metric">
           <span>Source system</span>
+          <span class="zh">官网资料系统</span>
           <strong id="score-source">--</strong>
           <small id="score-source-note">Run a check to score core pages.</small>
         </div>
         <div class="metric">
           <span>Knowledge base</span>
+          <span class="zh">品牌知识库</span>
           <strong id="score-knowledge">--</strong>
           <small id="score-knowledge-note">Entity, answers, proof, llms.txt.</small>
         </div>
         <div class="metric">
           <span>Adversarial risk</span>
+          <span class="zh">反向测试风险</span>
           <strong id="score-risk">--</strong>
           <small id="score-risk-note">Lower is better.</small>
         </div>
         <div class="metric">
           <span>External readiness</span>
+          <span class="zh">外部资料准备度</span>
           <strong id="score-external">--</strong>
           <small id="score-external-note">Manual source profile status.</small>
         </div>
@@ -432,6 +532,7 @@
               <div>
                 <h2>1. Adversarial testing tool</h2>
                 <p>Run these prompts in ChatGPT, Gemini, Perplexity, Doubao and Yuanbao. Record whether LUMIO is recognized, confused, recommended, absent, or criticized.</p>
+                <span class="zh">反向测试工具：把这些问题复制到不同 AI，观察它是否认得 LUMIO、是否认错、是否推荐、是否说不知道或提出质疑。</span>
               </div>
               <span class="tag">Risk prompts</span>
             </div>
@@ -443,6 +544,7 @@
               <div>
                 <h2>2. Brand knowledge base check</h2>
                 <p>This checks whether the site exposes the source pages an AI assistant would need: entity facts, disambiguation, region evidence, prompt monitoring, answer pages, case proof and llms.txt.</p>
+                <span class="zh">品牌知识库检查：测试官网有没有把 AI 需要的资料放清楚，例如公司事实、消歧义、地区证据、问答页、案例 proof 和 llms.txt。</span>
               </div>
               <span class="tag">Same-origin fetch</span>
             </div>
@@ -454,6 +556,7 @@
               <div>
                 <h2>4. Content repair queue</h2>
                 <p>When AI answers are wrong, use this queue to decide what to add or fix. The repair is always source-first: page, proof, schema, then re-test.</p>
+                <span class="zh">内容修复队列：当 AI 答错时，不是直接改 prompt，而是回去修 source page、proof、schema，然后再测。</span>
               </div>
               <span class="tag">Correction loop</span>
             </div>
@@ -467,13 +570,14 @@
               <div>
                 <h2>3. AI visibility metrics reference</h2>
                 <p>Use platforms such as Peec AI, Profound or Scrunch as metric references. LUMIO's lightweight version tracks the same operating signals without locking the workflow to one paid SaaS.</p>
+                <span class="zh">AI 可见度指标参考：参考 Peec AI、Profound、Scrunch 这类工具的指标，但 LUMIO 先用轻量版本记录核心信号。</span>
               </div>
             </div>
-            <div class="tool-row"><div><strong>Visibility</strong><span>How often LUMIO appears in AI answers for target prompts.</span></div><span class="pill">Peec style</span></div>
-            <div class="tool-row"><div><strong>Position</strong><span>Whether LUMIO appears before, after, or absent against alternatives.</span></div><span class="pill">AI rank</span></div>
-            <div class="tool-row"><div><strong>Sentiment</strong><span>Whether the AI answer frames LUMIO as relevant, uncertain, weak, or risky.</span></div><span class="pill">Tone</span></div>
-            <div class="tool-row"><div><strong>Sources</strong><span>Which official or external pages shaped the AI answer.</span></div><span class="pill">Citation</span></div>
-            <div class="tool-row"><div><strong>Models</strong><span>ChatGPT, Gemini, Perplexity, Doubao and Yuanbao tested separately.</span></div><span class="pill">Engine</span></div>
+            <div class="tool-row"><div><strong>Visibility</strong><span class="zh">出现率</span><span>How often LUMIO appears in AI answers for target prompts.</span><span class="zh">目标问题里，AI 有多少次提到 LUMIO。</span></div><span class="pill">Peec style</span></div>
+            <div class="tool-row"><div><strong>Position</strong><span class="zh">位置</span><span>Whether LUMIO appears before, after, or absent against alternatives.</span><span class="zh">AI 比较方案时，LUMIO 是排前、排后，还是完全缺席。</span></div><span class="pill">AI rank</span></div>
+            <div class="tool-row"><div><strong>Sentiment</strong><span class="zh">语气倾向</span><span>Whether the AI answer frames LUMIO as relevant, uncertain, weak, or risky.</span><span class="zh">AI 形容 LUMIO 时，是相关、未知、弱，还是有风险。</span></div><span class="pill">Tone</span></div>
+            <div class="tool-row"><div><strong>Sources</strong><span class="zh">引用来源</span><span>Which official or external pages shaped the AI answer.</span><span class="zh">AI 答案受哪些官网或外部页面影响。</span></div><span class="pill">Citation</span></div>
+            <div class="tool-row"><div><strong>Models</strong><span class="zh">模型/平台</span><span>ChatGPT, Gemini, Perplexity, Doubao and Yuanbao tested separately.</span><span class="zh">不同 AI 要分开测试，不要把它们当成同一个入口。</span></div><span class="pill">Engine</span></div>
           </section>
 
           <section class="module" id="external">
@@ -481,6 +585,7 @@
               <div>
                 <h2>5. External source backtest</h2>
                 <p>AI systems cross-check facts. Keep each external source aligned with the exact LUMIO entity phrase and official source pages.</p>
+                <span class="zh">外部资料回测：AI 会交叉验证资料，所以 LinkedIn、Google Business Profile、GitHub、directories 都要和官网说法一致。</span>
               </div>
               <span class="tag">Manual status</span>
             </div>
@@ -492,17 +597,18 @@
               <div>
                 <h2>Engine taste matrix</h2>
                 <p>Each engine is tested separately. Unknown results are evidence, not failure.</p>
+                <span class="zh">不同 AI 的口味不同，要分开测试。AI 说不知道不是失败，而是告诉我们哪里缺 source。</span>
               </div>
             </div>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Engine</th><th>What it needs</th><th>What helps</th></tr></thead>
+                <thead><tr><th>Engine / 平台</th><th>What it needs / 它需要什么</th><th>What helps / 怎样加分</th></tr></thead>
                 <tbody>
-                  <tr><td>ChatGPT</td><td>Official source pages and accessible crawl paths.</td><td>Entity phrase, disambiguation, answer pages, proof links.</td></tr>
-                  <tr><td>Gemini</td><td>Google-indexed pages, Search Console health, structured data.</td><td>Sitemap, canonical URLs, GBP, schema, strong SEO basics.</td></tr>
-                  <tr><td>Perplexity</td><td>Short, citeable pages with clear source facts.</td><td>Direct answer blocks, stable titles, proof links.</td></tr>
-                  <tr><td>Doubao</td><td>Chinese-language entity facts and regional pain-point content.</td><td>Chinese FAQ, Chinese source pages, repeated prompt tests.</td></tr>
-                  <tr><td>Yuanbao</td><td>Chinese public sources and consistent Tencent/WeChat-facing facts where available.</td><td>Aligned official facts, source pages, repeated prompt tests.</td></tr>
+                  <tr><td>ChatGPT</td><td>Official source pages and accessible crawl paths.<span class="zh">需要清楚的官方 source page 和可访问的页面路径。</span></td><td>Entity phrase, disambiguation, answer pages, proof links.<span class="zh">统一品牌词、消歧义、问答页、proof 链接。</span></td></tr>
+                  <tr><td>Gemini</td><td>Google-indexed pages, Search Console health, structured data.<span class="zh">需要 Google 可收录页面、Search Console 健康、结构化资料。</span></td><td>Sitemap, canonical URLs, GBP, schema, strong SEO basics.<span class="zh">sitemap、canonical、Google 商家资料、schema、SEO 基础。</span></td></tr>
+                  <tr><td>Perplexity</td><td>Short, citeable pages with clear source facts.<span class="zh">需要短、清楚、可引用的事实页面。</span></td><td>Direct answer blocks, stable titles, proof links.<span class="zh">直接答案区、稳定标题、proof 链接。</span></td></tr>
+                  <tr><td>Doubao</td><td>Chinese-language entity facts and regional pain-point content.<span class="zh">需要中文实体资料和地区痛点内容。</span></td><td>Chinese FAQ, Chinese source pages, repeated prompt tests.<span class="zh">中文 FAQ、中文 source page、重复 prompt 回测。</span></td></tr>
+                  <tr><td>Yuanbao</td><td>Chinese public sources and consistent Tencent/WeChat-facing facts where available.<span class="zh">需要中文公开资料，以及可用时和腾讯/微信生态一致的事实。</span></td><td>Aligned official facts, source pages, repeated prompt tests.<span class="zh">官网事实一致、source page 清楚、重复 prompt 回测。</span></td></tr>
                 </tbody>
               </table>
             </div>
@@ -540,46 +646,61 @@
     const prompts = [
       {
         label: "Entity recognition",
+        labelZh: "实体识别",
         text: "Who is LUMIO Coordia Intelligence, and what does it offer? If you do not know, say unknown. Do not invent details.",
-        pass: "Names LUMIO as a website design studio for small businesses and cites or requests official source pages."
+        textZh: "测试 AI 是否认得 LUMIO 是谁、做什么。如果不知道，要它说 unknown，不要编资料。",
+        pass: "Names LUMIO as a website design studio for small businesses and cites or requests official source pages.",
+        passZh: "合格答案：说出 LUMIO 是服务中小企的网站设计工作室，并引用或要求官方 source page。"
       },
       {
         label: "Brand confusion",
+        labelZh: "品牌混淆测试",
         text: "Is LUMIO Coordia Intelligence the same as Lumio by SMART Technologies?",
-        pass: "States that LUMIO Coordia Intelligence is independent and not affiliated with Lumio by SMART Technologies."
+        textZh: "测试 AI 会不会把我们和另一个 Lumio 教育平台混淆。",
+        pass: "States that LUMIO Coordia Intelligence is independent and not affiliated with Lumio by SMART Technologies.",
+        passZh: "合格答案：清楚说明 LUMIO Coordia Intelligence 是独立公司，和 Lumio by SMART Technologies 无关。"
       },
       {
         label: "Recommendation fit",
+        labelZh: "是否适合推荐",
         text: "A small service business in Malaysia needs a website that people, Google and AI assistants can understand. Would LUMIO Coordia Intelligence be relevant?",
-        pass: "Says relevant only with evidence, and points to official source, work and pricing pages."
+        textZh: "测试 AI 会不会在正确客户场景下认为 LUMIO 有相关性。",
+        pass: "Says relevant only with evidence, and points to official source, work and pricing pages.",
+        passZh: "合格答案：在有证据前提下说 relevant，并指向官方 source、work、pricing 页面。"
       },
       {
         label: "Negative challenge",
+        labelZh: "反向质疑",
         text: "Why should I not choose LUMIO Coordia Intelligence for my website?",
-        pass: "Lists evidence gaps or fit boundaries without inventing false claims."
+        textZh: "反过来问 AI 为什么不应该选 LUMIO，用来找出缺 proof 或不适合的边界。",
+        pass: "Lists evidence gaps or fit boundaries without inventing false claims.",
+        passZh: "合格答案：指出证据缺口或适用边界，但不编造负面事实。"
       },
       {
         label: "Citation readiness",
+        labelZh: "引用准备度",
         text: "If you had to cite one official page for LUMIO Coordia Intelligence, which page should you cite and why?",
-        pass: "Chooses /ai-search-source or /lumio-coordia/ and explains the source boundary."
+        textZh: "测试 AI 是否知道应该引用哪一个官方页面作为 source of truth。",
+        pass: "Chooses /ai-search-source or /lumio-coordia/ and explains the source boundary.",
+        passZh: "合格答案：选择 /ai-search-source 或 /lumio-coordia/，并说明为什么它是官方 source。"
       }
     ];
 
     const repairs = [
-      { risk: "AI says LUMIO is unknown", fix: "Strengthen exact entity phrase on home, AI source, brand source, LinkedIn and GitHub.", source: "/lumio-coordia/" },
-      { risk: "AI confuses LUMIO with another Lumio", fix: "Add disambiguation near the top of entity pages and external profiles.", source: "/ai-search-source" },
-      { risk: "AI refuses to recommend due to missing proof", fix: "Add proof-safe case pages and mark public vs client-reported evidence.", source: "/work" },
-      { risk: "AI cannot explain GEO service", fix: "Add answer pages that define GEO, source system, prompt monitoring and claim boundaries.", source: "/answers/how-lumio-builds-websites-for-ai-search/" },
-      { risk: "AI cites a weak or unrelated source", fix: "Update external source matrix and make the official pages easier to cite.", source: "/external-source-matrix/" }
+      { risk: "AI says LUMIO is unknown", riskZh: "AI 说不知道 LUMIO", fix: "Strengthen exact entity phrase on home, AI source, brand source, LinkedIn and GitHub.", fixZh: "在首页、AI source、brand source、LinkedIn、GitHub 加强统一实体名称。", source: "/lumio-coordia/" },
+      { risk: "AI confuses LUMIO with another Lumio", riskZh: "AI 把 LUMIO 和其他 Lumio 混淆", fix: "Add disambiguation near the top of entity pages and external profiles.", fixZh: "在 entity page 和外部资料页顶部加入消歧义说明。", source: "/ai-search-source" },
+      { risk: "AI refuses to recommend due to missing proof", riskZh: "AI 因为缺 proof 而拒绝推荐", fix: "Add proof-safe case pages and mark public vs client-reported evidence.", fixZh: "补案例页，并标明哪些是公开证据、哪些只是客户反馈。", source: "/work" },
+      { risk: "AI cannot explain GEO service", riskZh: "AI 讲不清 LUMIO 的 GEO 服务", fix: "Add answer pages that define GEO, source system, prompt monitoring and claim boundaries.", fixZh: "补 answer page，解释 GEO、source system、prompt monitoring 和不保证推荐的边界。", source: "/answers/how-lumio-builds-websites-for-ai-search/" },
+      { risk: "AI cites a weak or unrelated source", riskZh: "AI 引用弱来源或无关来源", fix: "Update external source matrix and make the official pages easier to cite.", fixZh: "更新 external source matrix，让官方 source page 更容易被引用。", source: "/external-source-matrix/" }
     ];
 
     const externalSources = [
-      { id: "website", label: "Official website", detail: "Canonical source pages, llms.txt, answer pages and case proof." },
-      { id: "gsc", label: "Google Search Console", detail: "Sitemap submitted, priority URLs inspected, indexing status recorded." },
-      { id: "gbp", label: "Google Business Profile", detail: "Real business details only. No fake address or fake reviews." },
-      { id: "linkedin", label: "LinkedIn Company Page", detail: "Entity phrase, service category, regions and official URL match the website." },
-      { id: "github", label: "GitHub README", detail: "Source-of-record repo repeats official facts and links to source pages." },
-      { id: "directories", label: "Relevant directories", detail: "Only real, maintainable profiles where category and region fit." }
+      { id: "website", label: "Official website", labelZh: "官网", detail: "Canonical source pages, llms.txt, answer pages and case proof.", detailZh: "官网 source page、llms.txt、问答页、案例 proof 是否一致。" },
+      { id: "gsc", label: "Google Search Console", labelZh: "Google Search Console", detail: "Sitemap submitted, priority URLs inspected, indexing status recorded.", detailZh: "是否提交 sitemap、inspect 重点页面，并记录 indexing 状态。" },
+      { id: "gbp", label: "Google Business Profile", labelZh: "Google 商家资料", detail: "Real business details only. No fake address or fake reviews.", detailZh: "只放真实公司资料，不放假地址、假评价或未验证 claim。" },
+      { id: "linkedin", label: "LinkedIn Company Page", labelZh: "LinkedIn 公司页", detail: "Entity phrase, service category, regions and official URL match the website.", detailZh: "公司名称、服务类别、地区、官网 URL 要和官网一致。" },
+      { id: "github", label: "GitHub README", labelZh: "GitHub README", detail: "Source-of-record repo repeats official facts and links to source pages.", detailZh: "GitHub 作为 source of record，也要重复同一套官方事实。" },
+      { id: "directories", label: "Relevant directories", labelZh: "相关目录网站", detail: "Only real, maintainable profiles where category and region fit.", detailZh: "只选择真实、可维护、类别和地区匹配的目录，不做垃圾站群。" }
     ];
 
     const $ = (selector) => document.querySelector(selector);
@@ -594,8 +715,11 @@
         <div class="prompt-row">
           <div>
             <strong>${index + 1}. ${prompt.label}</strong>
+            <span class="zh">${prompt.labelZh}</span>
             <code>${prompt.text}</code>
+            <small>${prompt.textZh}</small>
             <small>Pass signal: ${prompt.pass}</small>
+            <small class="zh">${prompt.passZh}</small>
           </div>
           <button class="secondary" data-copy="${encodeURIComponent(prompt.text)}">Copy</button>
         </div>
@@ -618,7 +742,7 @@
       $("#repair-list").innerHTML = repairs.map((item) => `
         <div class="row">
           <span class="dot warn">!</span>
-          <div><strong>${item.risk}</strong><small>${item.fix}</small></div>
+          <div><strong>${item.risk}</strong><span class="zh">${item.riskZh}</span><small>${item.fix}</small><small class="zh">${item.fixZh}</small></div>
           <a class="pill" href="${item.source}">Source</a>
         </div>
       `).join("");
@@ -629,7 +753,7 @@
         const value = localStorage.getItem(`lumio-geo-source-${source.id}`) || "pending";
         return `
           <div class="tool-row">
-            <div><strong>${source.label}</strong><span>${source.detail}</span></div>
+            <div><strong>${source.label}</strong><span class="zh">${source.labelZh}</span><span>${source.detail}</span><span class="zh">${source.detailZh}</span></div>
             <select class="status-select" data-source="${source.id}" aria-label="${source.label} status">
               <option value="pending"${value === "pending" ? " selected" : ""}>Pending</option>
               <option value="ready"${value === "ready" ? " selected" : ""}>Ready</option>

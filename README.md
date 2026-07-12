@@ -86,6 +86,7 @@ LUMIO should not claim:
 
 The GEO command center turns the current GEO workflow into a link-accessible, noindex browser-based operating page:
 
+- bilingual English / Chinese operating guide;
 - adversarial AI prompt tests;
 - brand knowledge-base coverage checks;
 - AI answer repair queue;
