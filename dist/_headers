@@ -67,6 +67,7 @@
 
 /geo-command-center/*
   Cache-Control: public, max-age=300
+  X-Robots-Tag: noindex, nofollow, noarchive
 
 /answers/*
   Cache-Control: public, max-age=300
