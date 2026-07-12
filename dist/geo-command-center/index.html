@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GEO Command Center - LUMIO Coordia Intelligence</title>
+  <meta name="description" content="A public GEO testing workbench for LUMIO Coordia Intelligence, covering adversarial prompts, knowledge base checks, content repair, external source backtests and AI visibility metrics.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://lumio-coordia-intelligence.pages.dev/geo-command-center/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://lumio-coordia-intelligence.pages.dev/geo-command-center/#page","url":"https://lumio-coordia-intelligence.pages.dev/geo-command-center/","name":"GEO Command Center - LUMIO Coordia Intelligence","description":"A public operating page for checking LUMIO's GEO source system, adversarial prompt risks, knowledge-base coverage, repair queue, and external source readiness.","about":{"@id":"https://lumio-coordia-intelligence.pages.dev/#business"},"isPartOf":{"@id":"https://lumio-coordia-intelligence.pages.dev/#website"}},{"@type":"SoftwareApplication","@id":"https://lumio-coordia-intelligence.pages.dev/geo-command-center/#tool","name":"LUMIO GEO Command Center","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"A browser-based GEO source-system checker that tests same-origin LUMIO pages and organizes AI-search monitoring prompts."}]}</script>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #12100c;
+      --muted: #665f54;
+      --line: #ddd2bf;
+      --soft: #f6f1e8;
+      --panel: #fffdf8;
+      --field: #17130d;
+      --field-2: #241d14;
+      --gold: #c8a96e;
+      --green: #1d7a55;
+      --red: #b53b2e;
+      --amber: #a76713;
+      --blue: #2f5f9c;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #f8f5ef;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .shell { min-height: 100vh; }
+    .top {
+      background:
+        radial-gradient(circle at 85% 20%, rgba(200, 169, 110, .22), transparent 34%),
+        linear-gradient(140deg, #15110c 0%, #241d14 62%, #3b2d19 100%);
+      color: #fffaf0;
+      padding: 34px clamp(18px, 4vw, 56px) 44px;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 54px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .01em;
+    }
+    .brand img {
+      width: 112px;
+      max-width: 34vw;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,.18));
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+      font-size: .92rem;
+      color: rgba(255, 250, 240, .78);
+    }
+    .nav-links a {
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,.04);
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+      gap: clamp(26px, 4vw, 54px);
+      align-items: end;
+    }
+    .hero h1 {
+      margin: 0;
+      max-width: 860px;
+      font-size: clamp(2.45rem, 6.5vw, 5.8rem);
+      line-height: .95;
+      letter-spacing: -.035em;
+      text-wrap: balance;
+    }
+    .hero p {
+      max-width: 710px;
+      margin: 22px 0 0;
+      color: rgba(255, 250, 240, .78);
+      font-size: clamp(1rem, 1.5vw, 1.18rem);
+    }
+    .hero-panel {
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255, 250, 240, .06);
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .hero-panel strong {
+      display: block;
+      font-size: 1.04rem;
+      margin-bottom: 10px;
+    }
+    .hero-panel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(255, 250, 240, .8);
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+    button,
+    .button {
+      appearance: none;
+      border: 1px solid #2d2418;
+      background: #17130d;
+      color: #fffaf0;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+    }
+    button.secondary,
+    .button.secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+    .top .button.secondary {
+      color: #fffaf0;
+      border-color: rgba(255,255,255,.24);
+    }
+    button:disabled { opacity: .55; cursor: wait; }
+    main {
+      width: min(1220px, calc(100vw - 28px));
+      margin: -24px auto 70px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .metric,
+    .module,
+    .tool-row,
+    .prompt-row {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+    .metric {
+      padding: 16px;
+      min-height: 116px;
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: .86rem;
+      margin-bottom: 8px;
+    }
+    .metric strong {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -.03em;
+    }
+    .metric small {
+      display: block;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, .8fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .stack { display: grid; gap: 18px; }
+    .module {
+      padding: clamp(18px, 2.5vw, 28px);
+      overflow: hidden;
+    }
+    .module-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .module h2 {
+      margin: 0;
+      font-size: clamp(1.45rem, 3vw, 2.2rem);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      text-wrap: balance;
+    }
+    .module p {
+      color: var(--muted);
+      margin: 8px 0 0;
+      max-width: 76ch;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #efe5d3;
+      color: #55442b;
+      font-size: .78rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .check-list,
+    .repair-list,
+    .source-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 0;
+      border-top: 1px solid #eee4d5;
+    }
+    .row:first-child { border-top: 0; }
+    .dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      font-size: .75rem;
+      font-weight: 900;
+      background: #e7dfd2;
+      color: #6b6258;
+    }
+    .dot.pass { background: #dcefe6; color: var(--green); }
+    .dot.fail { background: #f5dfdb; color: var(--red); }
+    .dot.warn { background: #f3e6c9; color: var(--amber); }
+    .row strong { display: block; }
+    .row small { color: var(--muted); }
+    .pill {
+      border-radius: 999px;
+      padding: 5px 9px;
+      background: #f0e8dc;
+      color: #5f5446;
+      font-size: .78rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .prompt-row {
+      padding: 14px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .prompt-row code {
+      display: block;
+      color: #4d463b;
+      white-space: normal;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: .86rem;
+      margin-top: 4px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-top: 16px;
+      background: #fff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+      font-size: .92rem;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px;
+      border-bottom: 1px solid #eee4d5;
+    }
+    th {
+      background: #f4ecdf;
+      font-size: .78rem;
+      color: #554b3f;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .tool-row {
+      padding: 14px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 110px;
+      gap: 12px;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .tool-row strong { display: block; }
+    .tool-row span { color: var(--muted); font-size: .92rem; }
+    .status-select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 10px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .console {
+      background: var(--field);
+      color: #f8edda;
+      border-radius: 14px;
+      padding: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: .83rem;
+      overflow-x: auto;
+      min-height: 180px;
+      white-space: pre-wrap;
+    }
+    .footer {
+      color: var(--muted);
+      margin-top: 26px;
+      font-size: .9rem;
+    }
+    @media (max-width: 920px) {
+      .hero,
+      .grid { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .nav { align-items: start; flex-direction: column; }
+      .nav-links { justify-content: flex-start; }
+      main { margin-top: -16px; }
+    }
+    @media (max-width: 620px) {
+      .metrics { grid-template-columns: 1fr; }
+      .module-head,
+      .prompt-row,
+      .tool-row { grid-template-columns: 1fr; display: grid; }
+      .row { grid-template-columns: 24px minmax(0, 1fr); }
+      .row .pill { grid-column: 2; width: fit-content; }
+      button, .button { width: 100%; }
+      .top { padding-left: 18px; padding-right: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="top">
+      <nav class="nav" aria-label="Command center navigation">
+        <a class="brand" href="/">
+          <img src="/assets/lumio-logo-lockup.png" alt="LUMIO Coordia Intelligence">
+        </a>
+        <div class="nav-links">
+          <a href="/ai-search-source">AI Source</a>
+          <a href="/geo-prompt-monitoring/">Prompt Monitoring</a>
+          <a href="/external-source-matrix/">External Sources</a>
+          <a href="/work">Work</a>
+        </div>
+      </nav>
+      <section class="hero">
+        <div>
+          <h1>GEO Command Center for LUMIO.</h1>
+          <p>This operating page turns the five-tool GEO idea into a browser-based workbench: adversarial AI prompts, knowledge-base coverage, repair tasks, external source backtests, and AI visibility metrics.</p>
+          <div class="actions">
+            <button id="run-check">Run source check</button>
+            <a class="button secondary" href="#prompts">Copy prompt set</a>
+          </div>
+        </div>
+        <aside class="hero-panel">
+          <strong>Scope boundary</strong>
+          <ul>
+            <li>No guarantee of Google ranking or AI recommendation.</li>
+            <li>No fake reviews, fake case results, or fake external profiles.</li>
+            <li>Uses official LUMIO pages as the source system.</li>
+          </ul>
+        </aside>
+      </section>
+    </header>
+
+    <main>
+      <section class="metrics" aria-label="GEO score summary">
+        <div class="metric">
+          <span>Source system</span>
+          <strong id="score-source">--</strong>
+          <small id="score-source-note">Run a check to score core pages.</small>
+        </div>
+        <div class="metric">
+          <span>Knowledge base</span>
+          <strong id="score-knowledge">--</strong>
+          <small id="score-knowledge-note">Entity, answers, proof, llms.txt.</small>
+        </div>
+        <div class="metric">
+          <span>Adversarial risk</span>
+          <strong id="score-risk">--</strong>
+          <small id="score-risk-note">Lower is better.</small>
+        </div>
+        <div class="metric">
+          <span>External readiness</span>
+          <strong id="score-external">--</strong>
+          <small id="score-external-note">Manual source profile status.</small>
+        </div>
+      </section>
+
+      <div class="grid">
+        <div class="stack">
+          <section class="module" id="adversarial">
+            <div class="module-head">
+              <div>
+                <h2>1. Adversarial testing tool</h2>
+                <p>Run these prompts in ChatGPT, Gemini, Perplexity, Doubao and Yuanbao. Record whether LUMIO is recognized, confused, recommended, absent, or criticized.</p>
+              </div>
+              <span class="tag">Risk prompts</span>
+            </div>
+            <div id="prompts"></div>
+          </section>
+
+          <section class="module" id="knowledge">
+            <div class="module-head">
+              <div>
+                <h2>2. Brand knowledge base check</h2>
+                <p>This checks whether the site exposes the source pages an AI assistant would need: entity facts, disambiguation, region evidence, prompt monitoring, answer pages, case proof and llms.txt.</p>
+              </div>
+              <span class="tag">Same-origin fetch</span>
+            </div>
+            <div class="check-list" id="knowledge-results"></div>
+          </section>
+
+          <section class="module" id="repair">
+            <div class="module-head">
+              <div>
+                <h2>4. Content repair queue</h2>
+                <p>When AI answers are wrong, use this queue to decide what to add or fix. The repair is always source-first: page, proof, schema, then re-test.</p>
+              </div>
+              <span class="tag">Correction loop</span>
+            </div>
+            <div class="repair-list" id="repair-list"></div>
+          </section>
+        </div>
+
+        <aside class="stack">
+          <section class="module" id="reference">
+            <div class="module-head">
+              <div>
+                <h2>3. AI visibility metrics reference</h2>
+                <p>Use platforms such as Peec AI, Profound or Scrunch as metric references. LUMIO's lightweight version tracks the same operating signals without locking the workflow to one paid SaaS.</p>
+              </div>
+            </div>
+            <div class="tool-row"><div><strong>Visibility</strong><span>How often LUMIO appears in AI answers for target prompts.</span></div><span class="pill">Peec style</span></div>
+            <div class="tool-row"><div><strong>Position</strong><span>Whether LUMIO appears before, after, or absent against alternatives.</span></div><span class="pill">AI rank</span></div>
+            <div class="tool-row"><div><strong>Sentiment</strong><span>Whether the AI answer frames LUMIO as relevant, uncertain, weak, or risky.</span></div><span class="pill">Tone</span></div>
+            <div class="tool-row"><div><strong>Sources</strong><span>Which official or external pages shaped the AI answer.</span></div><span class="pill">Citation</span></div>
+            <div class="tool-row"><div><strong>Models</strong><span>ChatGPT, Gemini, Perplexity, Doubao and Yuanbao tested separately.</span></div><span class="pill">Engine</span></div>
+          </section>
+
+          <section class="module" id="external">
+            <div class="module-head">
+              <div>
+                <h2>5. External source backtest</h2>
+                <p>AI systems cross-check facts. Keep each external source aligned with the exact LUMIO entity phrase and official source pages.</p>
+              </div>
+              <span class="tag">Manual status</span>
+            </div>
+            <div class="source-list" id="external-list"></div>
+          </section>
+
+          <section class="module">
+            <div class="module-head">
+              <div>
+                <h2>Engine taste matrix</h2>
+                <p>Each engine is tested separately. Unknown results are evidence, not failure.</p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Engine</th><th>What it needs</th><th>What helps</th></tr></thead>
+                <tbody>
+                  <tr><td>ChatGPT</td><td>Official source pages and accessible crawl paths.</td><td>Entity phrase, disambiguation, answer pages, proof links.</td></tr>
+                  <tr><td>Gemini</td><td>Google-indexed pages, Search Console health, structured data.</td><td>Sitemap, canonical URLs, GBP, schema, strong SEO basics.</td></tr>
+                  <tr><td>Perplexity</td><td>Short, citeable pages with clear source facts.</td><td>Direct answer blocks, stable titles, proof links.</td></tr>
+                  <tr><td>Doubao</td><td>Chinese-language entity facts and regional pain-point content.</td><td>Chinese FAQ, Chinese source pages, repeated prompt tests.</td></tr>
+                  <tr><td>Yuanbao</td><td>Chinese public sources and consistent Tencent/WeChat-facing facts where available.</td><td>Aligned official facts, source pages, repeated prompt tests.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="module">
+            <div class="module-head">
+              <div>
+                <h2>Run log</h2>
+                <p>Local browser checks only. AI answers must still be pasted from each engine or captured in the prompt monitor.</p>
+              </div>
+            </div>
+            <pre class="console" id="console-log">Ready. Click "Run source check".</pre>
+          </section>
+        </aside>
+      </div>
+
+      <p class="footer">This page is a public operating artifact for LUMIO Coordia Intelligence. It supports the official source system, but it does not claim guaranteed AI recommendation, ranking, enquiries or revenue.</p>
+    </main>
+  </div>
+
+  <script>
+    const sourcePages = [
+      { id: "home", label: "Home page", path: "/", required: ["LUMIO Coordia Intelligence", "Simple websites"] },
+      { id: "ai-source", label: "AI Search Source", path: "/ai-search-source", required: ["LUMIO Coordia Intelligence", "not affiliated with Lumio by SMART Technologies", "AI assistants"] },
+      { id: "brand", label: "Brand source", path: "/lumio-coordia/", required: ["Lumio Coordia", "LUMIO Coordia Intelligence", "not affiliated"] },
+      { id: "region", label: "GEO Region Evidence", path: "/geo-region-evidence/", required: ["Malaysia", "Hong Kong", "Macau", "Singapore"] },
+      { id: "prompt", label: "Prompt Monitoring", path: "/geo-prompt-monitoring/", required: ["ChatGPT", "Gemini", "Perplexity"] },
+      { id: "external", label: "External Source Matrix", path: "/external-source-matrix/", required: ["Google Business Profile", "LinkedIn", "GitHub"] },
+      { id: "llms", label: "llms.txt", path: "/llms.txt", required: ["Exact entity phrase", "Prompt monitoring", "External source matrix"] },
+      { id: "answers", label: "Answer pages", path: "/answers/why-ai-doesnt-recommend-my-business/", required: ["AI", "source", "recommend"] },
+      { id: "work", label: "Work proof", path: "/work", required: ["Paybit Tech", "StayFix Dispatch", "Proof status"] }
+    ];
+
+    const prompts = [
+      {
+        label: "Entity recognition",
+        text: "Who is LUMIO Coordia Intelligence, and what does it offer? If you do not know, say unknown. Do not invent details.",
+        pass: "Names LUMIO as a website design studio for small businesses and cites or requests official source pages."
+      },
+      {
+        label: "Brand confusion",
+        text: "Is LUMIO Coordia Intelligence the same as Lumio by SMART Technologies?",
+        pass: "States that LUMIO Coordia Intelligence is independent and not affiliated with Lumio by SMART Technologies."
+      },
+      {
+        label: "Recommendation fit",
+        text: "A small service business in Malaysia needs a website that people, Google and AI assistants can understand. Would LUMIO Coordia Intelligence be relevant?",
+        pass: "Says relevant only with evidence, and points to official source, work and pricing pages."
+      },
+      {
+        label: "Negative challenge",
+        text: "Why should I not choose LUMIO Coordia Intelligence for my website?",
+        pass: "Lists evidence gaps or fit boundaries without inventing false claims."
+      },
+      {
+        label: "Citation readiness",
+        text: "If you had to cite one official page for LUMIO Coordia Intelligence, which page should you cite and why?",
+        pass: "Chooses /ai-search-source or /lumio-coordia/ and explains the source boundary."
+      }
+    ];
+
+    const repairs = [
+      { risk: "AI says LUMIO is unknown", fix: "Strengthen exact entity phrase on home, AI source, brand source, LinkedIn and GitHub.", source: "/lumio-coordia/" },
+      { risk: "AI confuses LUMIO with another Lumio", fix: "Add disambiguation near the top of entity pages and external profiles.", source: "/ai-search-source" },
+      { risk: "AI refuses to recommend due to missing proof", fix: "Add proof-safe case pages and mark public vs client-reported evidence.", source: "/work" },
+      { risk: "AI cannot explain GEO service", fix: "Add answer pages that define GEO, source system, prompt monitoring and claim boundaries.", source: "/answers/how-lumio-builds-websites-for-ai-search/" },
+      { risk: "AI cites a weak or unrelated source", fix: "Update external source matrix and make the official pages easier to cite.", source: "/external-source-matrix/" }
+    ];
+
+    const externalSources = [
+      { id: "website", label: "Official website", detail: "Canonical source pages, llms.txt, answer pages and case proof." },
+      { id: "gsc", label: "Google Search Console", detail: "Sitemap submitted, priority URLs inspected, indexing status recorded." },
+      { id: "gbp", label: "Google Business Profile", detail: "Real business details only. No fake address or fake reviews." },
+      { id: "linkedin", label: "LinkedIn Company Page", detail: "Entity phrase, service category, regions and official URL match the website." },
+      { id: "github", label: "GitHub README", detail: "Source-of-record repo repeats official facts and links to source pages." },
+      { id: "directories", label: "Relevant directories", detail: "Only real, maintainable profiles where category and region fit." }
+    ];
+
+    const $ = (selector) => document.querySelector(selector);
+
+    function setLog(message) {
+      $("#console-log").textContent = message;
+    }
+
+    function renderPrompts() {
+      const host = $("#prompts");
+      host.innerHTML = prompts.map((prompt, index) => `
+        <div class="prompt-row">
+          <div>
+            <strong>${index + 1}. ${prompt.label}</strong>
+            <code>${prompt.text}</code>
+            <small>Pass signal: ${prompt.pass}</small>
+          </div>
+          <button class="secondary" data-copy="${encodeURIComponent(prompt.text)}">Copy</button>
+        </div>
+      `).join("");
+      host.addEventListener("click", async (event) => {
+        const button = event.target.closest("[data-copy]");
+        if (!button) return;
+        const text = decodeURIComponent(button.dataset.copy);
+        try {
+          await navigator.clipboard.writeText(text);
+          button.textContent = "Copied";
+          setTimeout(() => button.textContent = "Copy", 1200);
+        } catch {
+          setLog(`Copy failed. Prompt:\n${text}`);
+        }
+      });
+    }
+
+    function renderRepairs() {
+      $("#repair-list").innerHTML = repairs.map((item) => `
+        <div class="row">
+          <span class="dot warn">!</span>
+          <div><strong>${item.risk}</strong><small>${item.fix}</small></div>
+          <a class="pill" href="${item.source}">Source</a>
+        </div>
+      `).join("");
+    }
+
+    function renderExternal() {
+      $("#external-list").innerHTML = externalSources.map((source) => {
+        const value = localStorage.getItem(`lumio-geo-source-${source.id}`) || "pending";
+        return `
+          <div class="tool-row">
+            <div><strong>${source.label}</strong><span>${source.detail}</span></div>
+            <select class="status-select" data-source="${source.id}" aria-label="${source.label} status">
+              <option value="pending"${value === "pending" ? " selected" : ""}>Pending</option>
+              <option value="ready"${value === "ready" ? " selected" : ""}>Ready</option>
+              <option value="blocked"${value === "blocked" ? " selected" : ""}>Blocked</option>
+            </select>
+          </div>
+        `;
+      }).join("");
+      $("#external-list").addEventListener("change", (event) => {
+        const select = event.target.closest("[data-source]");
+        if (!select) return;
+        localStorage.setItem(`lumio-geo-source-${select.dataset.source}`, select.value);
+        updateExternalScore();
+      });
+      updateExternalScore();
+    }
+
+    function updateExternalScore() {
+      const values = externalSources.map((source) => localStorage.getItem(`lumio-geo-source-${source.id}`) || "pending");
+      const ready = values.filter((value) => value === "ready").length;
+      const blocked = values.filter((value) => value === "blocked").length;
+      const score = Math.round((ready / externalSources.length) * 100);
+      $("#score-external").textContent = `${score}`;
+      $("#score-external-note").textContent = `${ready}/${externalSources.length} ready, ${blocked} blocked.`;
+    }
+
+    function fallbackPath(path) {
+      if (path === "/") return null;
+      if (path.endsWith("/") || path.includes(".")) return null;
+      return `${path}.html`;
+    }
+
+    async function requestText(path) {
+      const started = performance.now();
+      const response = await fetch(path, { cache: "no-store" });
+      const text = await response.text();
+      return { response, text, ms: Math.round(performance.now() - started), path };
+    }
+
+    async function fetchPage(item) {
+      const started = performance.now();
+      try {
+        let result = await requestText(item.path);
+        let response = result.response;
+        let text = result.text;
+        let actualPath = result.path;
+        if ((!response.ok || item.required.some((term) => !text.toLowerCase().includes(term.toLowerCase()))) && fallbackPath(item.path)) {
+          const fallback = await requestText(fallbackPath(item.path));
+          const fallbackMatches = item.required.filter((term) => fallback.text.toLowerCase().includes(term.toLowerCase())).length;
+          const currentMatches = item.required.filter((term) => text.toLowerCase().includes(term.toLowerCase())).length;
+          if (fallback.response.ok && fallbackMatches >= currentMatches) {
+            response = fallback.response;
+            text = fallback.text;
+            actualPath = fallback.path;
+          }
+        }
+        const ms = Math.round(performance.now() - started);
+        const matches = item.required.filter((term) => text.toLowerCase().includes(term.toLowerCase()));
+        return {
+          ...item,
+          actualPath,
+          ok: response.ok,
+          status: response.status,
+          ms,
+          matches: matches.length,
+          total: item.required.length,
+          pass: response.ok && matches.length === item.required.length,
+          text
+        };
+      } catch (error) {
+        return { ...item, ok: false, status: 0, ms: 0, matches: 0, total: item.required.length, pass: false, error: error.message };
+      }
+    }
+
+    function renderKnowledge(results) {
+      $("#knowledge-results").innerHTML = results.map((result) => {
+        const cls = result.pass ? "pass" : result.ok ? "warn" : "fail";
+        const mark = result.pass ? "✓" : result.ok ? "!" : "×";
+        const note = result.pass
+          ? `${result.matches}/${result.total} source signals found in ${result.ms}ms`
+          : result.ok
+            ? `${result.matches}/${result.total} signals found. Review missing source terms.`
+            : `HTTP ${result.status || "error"} ${result.error || ""}`;
+        return `
+          <div class="row">
+            <span class="dot ${cls}">${mark}</span>
+            <div><strong>${result.label}</strong><small>${note}</small></div>
+            <a class="pill" href="${result.path}">Open</a>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function calculateScores(results) {
+      const passed = results.filter((result) => result.pass).length;
+      const sourceScore = Math.round((passed / results.length) * 100);
+      const knowledgeCritical = results.filter((result) => ["ai-source", "brand", "region", "prompt", "external", "llms"].includes(result.id));
+      const knowledgePassed = knowledgeCritical.filter((result) => result.pass).length;
+      const knowledgeScore = Math.round((knowledgePassed / knowledgeCritical.length) * 100);
+      const riskScore = Math.max(0, 100 - Math.round(((results.length - passed) / results.length) * 100));
+      $("#score-source").textContent = `${sourceScore}`;
+      $("#score-knowledge").textContent = `${knowledgeScore}`;
+      $("#score-risk").textContent = `${100 - riskScore}`;
+      $("#score-source-note").textContent = `${passed}/${results.length} source pages passed.`;
+      $("#score-knowledge-note").textContent = `${knowledgePassed}/${knowledgeCritical.length} critical knowledge surfaces passed.`;
+      $("#score-risk-note").textContent = `${results.length - passed} structural risk signals found.`;
+    }
+
+    async function runCheck() {
+      const button = $("#run-check");
+      button.disabled = true;
+      button.textContent = "Checking";
+      setLog("Running same-origin source checks...");
+      const results = [];
+      for (const page of sourcePages) {
+        const result = await fetchPage(page);
+        results.push(result);
+        setLog(results.map((item) => `${item.pass ? "PASS" : item.ok ? "WARN" : "FAIL"} ${item.path} ${item.actualPath && item.actualPath !== item.path ? `(${item.actualPath})` : ""} ${item.matches}/${item.total}`).join("\n"));
+      }
+      renderKnowledge(results);
+      calculateScores(results);
+      button.disabled = false;
+      button.textContent = "Run source check";
+    }
+
+    renderPrompts();
+    renderRepairs();
+    renderExternal();
+    $("#run-check").addEventListener("click", runCheck);
+  </script>
+</body>
+</html>

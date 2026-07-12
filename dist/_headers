@@ -65,6 +65,9 @@
 /external-source-matrix/*
   Cache-Control: public, max-age=300
 
+/geo-command-center/*
+  Cache-Control: public, max-age=300
+
 /answers/*
   Cache-Control: public, max-age=300
 
