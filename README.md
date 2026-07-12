@@ -92,10 +92,19 @@ The GEO command center turns the current GEO workflow into a link-accessible, no
 - AI answer repair queue;
 - external source backtest status;
 - AI visibility metrics modeled after tools such as Peec AI, Profound, and Scrunch.
+- optional AI response backtest through a Cloudflare Pages Function.
 
 It does not guarantee rankings, AI recommendations, enquiries, or revenue.
 
 This page is intentionally not listed in `sitemap.xml` or `llms.txt`. It remains available by direct URL for internal testing, but it is not intended to be a public source page for search engines or AI crawlers.
+
+The AI response backtest uses server-side secrets only. Supported Cloudflare Pages secrets:
+
+- `OPENAI_API_KEY`, optional `OPENAI_MODEL`
+- `GEMINI_API_KEY`, optional `GEMINI_MODEL`
+- `PERPLEXITY_API_KEY`, optional `PERPLEXITY_MODEL`
+
+If a secret is not configured, the command center returns `not_configured` for that provider instead of pretending that a live model reply was received.
 
 ## Disambiguation
 

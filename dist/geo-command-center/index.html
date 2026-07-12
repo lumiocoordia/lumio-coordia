@@ -374,6 +374,93 @@
       color: var(--ink);
       font-weight: 700;
     }
+    .backtest-controls {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .field-row {
+      display: grid;
+      gap: 8px;
+    }
+    .field-row label {
+      font-weight: 800;
+      font-size: .9rem;
+    }
+    .field-row textarea,
+    .field-row select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--ink);
+      padding: 10px 12px;
+      font: inherit;
+    }
+    .field-row textarea {
+      min-height: 112px;
+      resize: vertical;
+    }
+    .provider-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .provider-row label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 11px;
+      background: #fffaf1;
+      font-weight: 800;
+      font-size: .9rem;
+    }
+    .result-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .ai-result {
+      border: 1px solid #eee4d5;
+      background: #fffaf1;
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .ai-result header {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .ai-result pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: .84rem;
+      background: #17130d;
+      color: #fffaf0;
+      border-radius: 10px;
+      padding: 12px;
+      max-height: 280px;
+      overflow: auto;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 8px 0;
+    }
+    .tag-list span {
+      border-radius: 999px;
+      background: #efe5d3;
+      color: #55442b;
+      padding: 5px 9px;
+      font-size: .78rem;
+      font-weight: 800;
+    }
     .console {
       background: var(--field);
       color: #f8edda;
@@ -537,6 +624,38 @@
               <span class="tag">Risk prompts</span>
             </div>
             <div id="prompts"></div>
+          </section>
+
+          <section class="module" id="ai-backtest">
+            <div class="module-head">
+              <div>
+                <h2>6. AI response backtest</h2>
+                <p>Choose one prompt, select the AI providers, then run a live API backtest. The page will show each AI reply, automatic labels, and the next repair suggestion.</p>
+                <span class="zh">AI 回复回测：选择一条 prompt 和要测试的平台，按一次按钮就会调用后端 API。页面会显示每个 AI 的回复、自动标签和下一步修正建议。</span>
+              </div>
+              <span class="tag">API proxy</span>
+            </div>
+            <div class="backtest-controls">
+              <div class="field-row">
+                <label for="backtest-prompt">Prompt / 测试题</label>
+                <select id="backtest-prompt"></select>
+              </div>
+              <div class="field-row">
+                <label for="backtest-text">Prompt text / 可编辑内容</label>
+                <textarea id="backtest-text"></textarea>
+              </div>
+              <div class="field-row">
+                <label>Providers / AI 平台</label>
+                <div class="provider-row">
+                  <label><input type="checkbox" name="provider" value="openai" checked> OpenAI</label>
+                  <label><input type="checkbox" name="provider" value="gemini" checked> Gemini</label>
+                  <label><input type="checkbox" name="provider" value="perplexity" checked> Perplexity</label>
+                </div>
+                <span class="zh">API key 只放在 Cloudflare secret，不会放进网页。如果某个平台未配置，结果会显示 not configured。</span>
+              </div>
+              <button id="run-ai-backtest" type="button">Run AI backtest</button>
+            </div>
+            <div class="result-grid" id="ai-results"></div>
           </section>
 
           <section class="module" id="knowledge">
@@ -738,6 +857,95 @@
       });
     }
 
+    function renderBacktestForm() {
+      const select = $("#backtest-prompt");
+      select.innerHTML = prompts.map((prompt, index) => `
+        <option value="${index}">${index + 1}. ${prompt.label} / ${prompt.labelZh}</option>
+      `).join("");
+      const textarea = $("#backtest-text");
+      const setPrompt = () => {
+        textarea.value = prompts[Number(select.value)]?.text || "";
+      };
+      select.addEventListener("change", setPrompt);
+      setPrompt();
+      $("#run-ai-backtest").addEventListener("click", runAiBacktest);
+    }
+
+    function selectedProviders() {
+      return Array.from(document.querySelectorAll("input[name='provider']:checked")).map((input) => input.value);
+    }
+
+    function renderAiResults(results) {
+      const host = $("#ai-results");
+      if (!results.length) {
+        host.innerHTML = `<div class="ai-result"><strong>No provider selected.</strong><span class="zh">未选择任何 AI 平台。</span></div>`;
+        return;
+      }
+      host.innerHTML = results.map((result) => {
+        const tags = result.tags || {};
+        const tagText = [
+          tags.recognized ? "recognized" : "not recognized",
+          tags.confused ? "confused" : "not confused",
+          tags.unknown ? "unknown" : "has answer",
+          tags.recommended ? "recommended" : "not recommended",
+          tags.needsProof ? "needs proof" : "proof not requested"
+        ];
+        const body = result.ok
+          ? result.text
+          : `${result.status || "error"}: ${result.error || "Provider is not configured or request failed."}`;
+        return `
+          <article class="ai-result">
+            <header>
+              <div>
+                <strong>${result.provider}</strong>
+                <span class="zh">${result.model || ""}</span>
+              </div>
+              <span class="pill">${result.ok ? "ok" : result.status || "error"}</span>
+            </header>
+            <div class="tag-list">${tagText.map((tag) => `<span>${tag}</span>`).join("")}</div>
+            <small>${result.repairSuggestion || ""}</small>
+            <pre>${escapeHtml(body)}</pre>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    async function runAiBacktest() {
+      const button = $("#run-ai-backtest");
+      const prompt = $("#backtest-text").value.trim();
+      const providers = selectedProviders();
+      if (!prompt) {
+        renderAiResults([{ provider: "system", ok: false, status: "missing_prompt", error: "Please enter a prompt first." }]);
+        return;
+      }
+      button.disabled = true;
+      button.textContent = "Running AI backtest";
+      $("#ai-results").innerHTML = `<div class="ai-result"><strong>Running...</strong><span class="zh">正在向后端发送测试请求。</span></div>`;
+      try {
+        const response = await fetch("/api/geo-backtest", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt, providers })
+        });
+        const data = await response.json();
+        renderAiResults(data.results || [{ provider: "system", ok: false, status: response.status, error: data.error || "Unknown response" }]);
+      } catch (error) {
+        renderAiResults([{ provider: "system", ok: false, status: "network_error", error: error.message }]);
+      } finally {
+        button.disabled = false;
+        button.textContent = "Run AI backtest";
+      }
+    }
+
     function renderRepairs() {
       $("#repair-list").innerHTML = repairs.map((item) => `
         <div class="row">
@@ -880,6 +1088,7 @@
     }
 
     renderPrompts();
+    renderBacktestForm();
     renderRepairs();
     renderExternal();
     $("#run-check").addEventListener("click", runCheck);
