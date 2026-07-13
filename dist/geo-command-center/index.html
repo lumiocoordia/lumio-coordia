@@ -171,7 +171,14 @@
       gap: 12px;
       margin-bottom: 22px;
     }
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 22px;
+    }
     .metric,
+    .dash-card,
     .module,
     .tool-row,
     .prompt-row {
@@ -199,6 +206,60 @@
       color: var(--muted);
       margin-top: 8px;
     }
+    .dash-card {
+      padding: 15px;
+      min-height: 116px;
+    }
+    .dash-card strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .dash-card .value {
+      display: block;
+      font-size: clamp(1.55rem, 3vw, 2.45rem);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -.025em;
+    }
+    .dash-card small {
+      display: block;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .health-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .health-card {
+      border: 1px solid #eee4d5;
+      background: #fffaf1;
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .health-card strong { display: block; }
+    .health-card small {
+      display: block;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+    .status-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: .76rem;
+      font-weight: 900;
+      margin-top: 10px;
+      background: #efe5d3;
+      color: #55442b;
+    }
+    .status-dot.ok { background: #dcefe6; color: var(--green); }
+    .status-dot.warn { background: #f3e6c9; color: var(--amber); }
+    .status-dot.fail { background: #f5dfdb; color: var(--red); }
     .grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(320px, .8fr);
@@ -422,6 +483,12 @@
       gap: 12px;
       margin-top: 16px;
     }
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
     .ai-result {
       border: 1px solid #eee4d5;
       background: #fffaf1;
@@ -461,6 +528,14 @@
       font-size: .78rem;
       font-weight: 800;
     }
+    .empty-state {
+      color: var(--muted);
+      border: 1px dashed #d8cbb8;
+      border-radius: 12px;
+      padding: 14px;
+      background: #fffaf1;
+      margin-top: 12px;
+    }
     .console {
       background: var(--field);
       color: #f8edda;
@@ -481,6 +556,8 @@
       .hero,
       .grid { grid-template-columns: 1fr; }
       .guide-grid { grid-template-columns: 1fr; }
+      .dashboard-grid,
+      .health-grid { grid-template-columns: 1fr; }
       .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .nav { align-items: start; flex-direction: column; }
       .nav-links { justify-content: flex-start; }
@@ -612,6 +689,57 @@
         </div>
       </section>
 
+      <section class="module" id="provider-health">
+        <div class="module-head">
+          <div>
+            <h2>Setup health</h2>
+            <p>Before judging GEO quality, confirm whether the AI providers are actually connected. `not_configured` is a setup gap, not an AI verdict.</p>
+            <span class="zh">先看设置健康度：如果 provider 是 not_configured，只代表 API key 未接通，不能当成 AI 不认识 LUMIO。</span>
+          </div>
+          <span class="tag">Provider status</span>
+        </div>
+        <div class="health-grid" id="provider-health-grid"></div>
+      </section>
+
+      <section class="dashboard-grid" aria-label="AI GEO dimension score summary">
+        <div class="dash-card">
+          <strong>Entity recognition</strong>
+          <span class="zh">实体识别</span>
+          <span class="value" id="metric-recognition">--</span>
+          <small id="metric-recognition-note">Run AI backtest to score.</small>
+        </div>
+        <div class="dash-card">
+          <strong>Brand confusion</strong>
+          <span class="zh">品牌混淆</span>
+          <span class="value" id="metric-confusion">--</span>
+          <small id="metric-confusion-note">Lower is better.</small>
+        </div>
+        <div class="dash-card">
+          <strong>Unknown rate</strong>
+          <span class="zh">Unknown 比例</span>
+          <span class="value" id="metric-unknown">--</span>
+          <small id="metric-unknown-note">Only counts real model replies.</small>
+        </div>
+        <div class="dash-card">
+          <strong>Recommendation fit</strong>
+          <span class="zh">推荐相关性</span>
+          <span class="value" id="metric-recommendation">--</span>
+          <small id="metric-recommendation-note">Relevant does not mean guaranteed.</small>
+        </div>
+        <div class="dash-card">
+          <strong>Proof pressure</strong>
+          <span class="zh">证据压力</span>
+          <span class="value" id="metric-proof">--</span>
+          <small id="metric-proof-note">How often AI asks for proof.</small>
+        </div>
+        <div class="dash-card">
+          <strong>Configured providers</strong>
+          <span class="zh">已接通平台</span>
+          <span class="value" id="metric-configured">--</span>
+          <small id="metric-configured-note">API setup status.</small>
+        </div>
+      </section>
+
       <div class="grid">
         <div class="stack">
           <section class="module" id="adversarial">
@@ -632,6 +760,7 @@
                 <h2>6. AI response backtest</h2>
                 <p>Choose one prompt, select the AI providers, then run a live API backtest. The page will show each AI reply, automatic labels, and the next repair suggestion.</p>
                 <span class="zh">AI 回复回测：选择一条 prompt 和要测试的平台，按一次按钮就会调用后端 API。页面会显示每个 AI 的回复、自动标签和下一步修正建议。</span>
+                <span class="zh">注意：not_configured 只代表 API key 未接通，不代表 AI 不认识 LUMIO。只有真实模型回复后，recognized / unknown 才有 GEO 判断意义。</span>
               </div>
               <span class="tag">API proxy</span>
             </div>
@@ -656,6 +785,24 @@
               <button id="run-ai-backtest" type="button">Run AI backtest</button>
             </div>
             <div class="result-grid" id="ai-results"></div>
+            <div class="result-actions">
+              <button class="secondary" id="export-markdown" type="button">Export Markdown</button>
+              <button class="secondary" id="export-csv" type="button">Export CSV</button>
+              <button class="secondary" id="clear-history" type="button">Clear history</button>
+            </div>
+            <div class="table-wrap" id="result-table-wrap">
+              <table>
+                <thead><tr><th>Provider</th><th>Status</th><th>Recognition</th><th>Risk</th><th>Repair</th></tr></thead>
+                <tbody id="ai-result-table"><tr><td colspan="5">Run AI backtest to populate the result table.</td></tr></tbody>
+              </table>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Risk</th><th>Cause</th><th>Provider</th><th>Repair action</th></tr></thead>
+                <tbody id="risk-matrix"><tr><td colspan="4">No risk matrix yet.</td></tr></tbody>
+              </table>
+            </div>
+            <div class="repair-list" id="dynamic-repair-list"></div>
           </section>
 
           <section class="module" id="knowledge">
@@ -752,12 +899,12 @@
   <script>
     const sourcePages = [
       { id: "home", label: "Home page", path: "/", required: ["LUMIO Coordia Intelligence", "Simple websites"] },
-      { id: "ai-source", label: "AI Search Source", path: "/ai-search-source", required: ["LUMIO Coordia Intelligence", "not affiliated with Lumio by SMART Technologies", "AI assistants"] },
-      { id: "brand", label: "Brand source", path: "/lumio-coordia/", required: ["Lumio Coordia", "LUMIO Coordia Intelligence", "not affiliated"] },
+      { id: "ai-source", label: "AI Search Source", path: "/ai-search-source", required: ["LUMIO Coordia Intelligence", "not affiliated with Lumio by SMART Technologies", "AI assistants", "external profiles are not yet verified"] },
+      { id: "brand", label: "Brand source", path: "/lumio-coordia/", required: ["Lumio Coordia", "LUMIO Coordia Intelligence", "not affiliated", "Google Business Profile"] },
       { id: "region", label: "GEO Region Evidence", path: "/geo-region-evidence/", required: ["Malaysia", "Hong Kong", "Macau", "Singapore"] },
       { id: "prompt", label: "Prompt Monitoring", path: "/geo-prompt-monitoring/", required: ["ChatGPT", "Gemini", "Perplexity"] },
-      { id: "external", label: "External Source Matrix", path: "/external-source-matrix/", required: ["Google Business Profile", "LinkedIn", "GitHub"] },
-      { id: "llms", label: "llms.txt", path: "/llms.txt", required: ["Exact entity phrase", "Prompt monitoring", "External source matrix"] },
+      { id: "external", label: "External Source Matrix", path: "/external-source-matrix/", required: ["Google Business Profile", "LinkedIn", "GitHub", "Pending external validation"] },
+      { id: "llms", label: "llms.txt", path: "/llms.txt", required: ["Exact entity phrase", "Prompt monitoring", "External source matrix", "Recommended citation order"] },
       { id: "answers", label: "Answer pages", path: "/answers/why-ai-doesnt-recommend-my-business/", required: ["AI", "source", "recommend"] },
       { id: "work", label: "Work proof", path: "/work", required: ["Paybit Tech", "StayFix Dispatch", "Proof status"] }
     ];
@@ -883,13 +1030,19 @@
       }
       host.innerHTML = results.map((result) => {
         const tags = result.tags || {};
-        const tagText = [
-          tags.recognized ? "recognized" : "not recognized",
-          tags.confused ? "confused" : "not confused",
-          tags.unknown ? "unknown" : "has answer",
-          tags.recommended ? "recommended" : "not recommended",
-          tags.needsProof ? "needs proof" : "proof not requested"
-        ];
+        const tagText = result.ok
+          ? [
+              tags.recognized ? "recognized" : "not recognized",
+              tags.confused ? "confused" : "not confused",
+              tags.unknown ? "unknown" : "has answer",
+              tags.recommended ? "recommended" : "not recommended",
+              tags.needsProof ? "needs proof" : "proof not requested"
+            ]
+          : [
+              result.status || "request failed",
+              "no AI answer yet",
+              "configuration first"
+            ];
         const body = result.ok
           ? result.text
           : `${result.status || "error"}: ${result.error || "Provider is not configured or request failed."}`;
