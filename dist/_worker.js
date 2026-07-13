@@ -31,12 +31,27 @@ const SYSTEM_PROMPT = [
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname === "/api/geo-health") {
+      return handleGeoHealth(env);
+    }
     if (url.pathname === "/api/geo-backtest") {
       return handleGeoBacktest(request, env);
     }
     return env.ASSETS.fetch(request);
   }
 };
+
+function handleGeoHealth(env) {
+  const providers = Object.entries(PROVIDERS).map(([id, config]) => ({
+    id,
+    provider: config.label,
+    model: env[config.modelEnv] || config.defaultModel,
+    configured: Boolean(env[config.secret]),
+    status: env[config.secret] ? "connected" : "not_configured",
+    secret: config.secret
+  }));
+  return json({ ok: true, providers });
+}
 
 async function handleGeoBacktest(request, env) {
   if (request.method !== "POST") {
@@ -205,6 +220,22 @@ function extractGeminiText(data) {
 }
 
 function annotate(result) {
+  if (!result.ok) {
+    result.tags = {
+      configured: false,
+      recognized: null,
+      confused: null,
+      unknown: null,
+      recommended: null,
+      needsProof: null,
+      wrongSource: null
+    };
+    result.repairSuggestion = result.status === "not_configured"
+      ? `Configuration: add ${PROVIDERS[providerKey(result.provider)]?.secret || "the provider API key"} to Cloudflare Pages secrets. This is not a GEO verdict.`
+      : "Configuration: fix the provider request first. Do not treat this as an AI recognition result.";
+    return result;
+  }
+
   const text = String(result.text || result.error || "");
   const lower = text.toLowerCase();
   const recognized = /lumio coordia|lumio coordia intelligence/.test(lower);
@@ -215,9 +246,13 @@ function annotate(result) {
   const recommended = /recommend|relevant|suitable|good fit|could be a fit|appropriate/.test(lower) && !/do not recommend|not recommend|should not recommend/.test(lower);
   const needsProof = /proof|evidence|case stud|source|citation|verify|verification|insufficient/.test(lower);
   const wrongSource = confused || (/lumio by smart/.test(lower) && !independent);
-  result.tags = { recognized, confused, unknown, recommended, needsProof, wrongSource };
+  result.tags = { configured: true, recognized, confused, unknown, recommended, needsProof, wrongSource };
   result.repairSuggestion = repairSuggestion(result.tags);
   return result;
+}
+
+function providerKey(label) {
+  return Object.entries(PROVIDERS).find(([, config]) => config.label === label)?.[0] || "";
 }
 
 function repairSuggestion(tags) {
