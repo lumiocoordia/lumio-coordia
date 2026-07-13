@@ -114,6 +114,7 @@ The GEO command center turns the current GEO workflow into a link-accessible, no
 - external source backtest status;
 - AI visibility metrics modeled after tools such as Peec AI, Profound, and Scrunch.
 - optional AI response backtest through a Cloudflare Pages Function.
+- provider setup health, interpretable GEO dimension scores, AI response results table, risk matrix, dynamic repair queue, local run history, and Markdown/CSV export.
 
 It does not guarantee rankings, AI recommendations, enquiries, or revenue.
 
@@ -126,6 +127,8 @@ The AI response backtest uses server-side secrets only. Supported Cloudflare Pag
 - `PERPLEXITY_API_KEY`, optional `PERPLEXITY_MODEL`
 
 If a secret is not configured, the command center returns `not_configured` for that provider instead of pretending that a live model reply was received.
+
+The provider setup health endpoint is available at `/api/geo-health`. It returns whether each supported provider has a secret configured, but it never returns secret values.
 
 ## Disambiguation
 

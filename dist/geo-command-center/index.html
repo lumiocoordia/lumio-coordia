@@ -880,6 +880,23 @@
             </div>
           </section>
 
+          <section class="module" id="run-history">
+            <div class="module-head">
+              <div>
+                <h2>Run history</h2>
+                <p>Every AI backtest is stored locally in this browser so trend signals can be compared over time.</p>
+                <span class="zh">每次 AI 回测都会储存在这个浏览器本地，之后可以比较识别率、混淆率、unknown 比例有没有改善。</span>
+              </div>
+              <span class="tag">Local trend</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Date</th><th>Prompt</th><th>Configured</th><th>Recognition</th><th>Unknown</th><th>Risk</th></tr></thead>
+                <tbody id="history-table"><tr><td colspan="6">No AI backtest history yet.</td></tr></tbody>
+              </table>
+            </div>
+          </section>
+
           <section class="module">
             <div class="module-head">
               <div>
@@ -970,9 +987,54 @@
     ];
 
     const $ = (selector) => document.querySelector(selector);
+    const HISTORY_KEY = "lumio-geo-backtest-history-v1";
+    let latestBacktest = null;
 
     function setLog(message) {
       $("#console-log").textContent = message;
+    }
+
+    function setMetric(id, value, note) {
+      const valueEl = $(`#${id}`);
+      const noteEl = $(`#${id}-note`);
+      if (valueEl) valueEl.textContent = value;
+      if (noteEl) noteEl.textContent = note;
+    }
+
+    function percent(part, total) {
+      if (!total) return "--";
+      return `${Math.round((part / total) * 100)}`;
+    }
+
+    async function loadProviderHealth() {
+      const host = $("#provider-health-grid");
+      host.innerHTML = `<div class="health-card"><strong>Checking provider setup...</strong><small>读取 Cloudflare provider 状态。</small></div>`;
+      try {
+        const response = await fetch("/api/geo-health", { cache: "no-store" });
+        const data = await response.json();
+        renderProviderHealth(data.providers || []);
+      } catch (error) {
+        host.innerHTML = `<div class="health-card"><strong>Health check failed</strong><small>${escapeHtml(error.message)}</small></div>`;
+        setMetric("metric-configured", "--", "Provider health unavailable.");
+      }
+    }
+
+    function renderProviderHealth(providers) {
+      const host = $("#provider-health-grid");
+      const connected = providers.filter((provider) => provider.configured).length;
+      setMetric("metric-configured", `${connected}/${providers.length || 0}`, `${connected} provider(s) connected.`);
+      if (!providers.length) {
+        host.innerHTML = `<div class="health-card"><strong>No provider data.</strong><small>没有 provider 状态。</small></div>`;
+        return;
+      }
+      host.innerHTML = providers.map((provider) => `
+        <div class="health-card">
+          <strong>${provider.provider}</strong>
+          <small>${provider.model}</small>
+          <small>${provider.secret}</small>
+          <span class="status-dot ${provider.configured ? "ok" : "warn"}">${provider.status}</span>
+        </div>
+      `).join("");
     }
 
     function renderPrompts() {
@@ -1016,6 +1078,9 @@
       select.addEventListener("change", setPrompt);
       setPrompt();
       $("#run-ai-backtest").addEventListener("click", runAiBacktest);
+      $("#export-markdown").addEventListener("click", exportMarkdown);
+      $("#export-csv").addEventListener("click", exportCsv);
+      $("#clear-history").addEventListener("click", clearHistory);
     }
 
     function selectedProviders() {
@@ -1063,6 +1128,107 @@
       }).join("");
     }
 
+    function updateBacktestDashboard(results, prompt) {
+      const real = results.filter((result) => result.tags?.configured === true);
+      const configured = real.length;
+      const total = results.length;
+      const recognized = real.filter((result) => result.tags?.recognized).length;
+      const confused = real.filter((result) => result.tags?.confused || result.tags?.wrongSource).length;
+      const unknown = real.filter((result) => result.tags?.unknown || result.tags?.recognized === false).length;
+      const recommended = real.filter((result) => result.tags?.recommended).length;
+      const proof = real.filter((result) => result.tags?.needsProof).length;
+      setMetric("metric-configured", `${configured}/${total}`, configured ? `${configured} real model reply/replies.` : "Only setup status available.");
+      setMetric("metric-recognition", percent(recognized, configured), configured ? `${recognized}/${configured} recognized LUMIO.` : "No configured provider result yet.");
+      setMetric("metric-confusion", percent(confused, configured), configured ? `${confused}/${configured} confused or wrong-source.` : "No configured provider result yet.");
+      setMetric("metric-unknown", percent(unknown, configured), configured ? `${unknown}/${configured} unknown or not recognized.` : "No configured provider result yet.");
+      setMetric("metric-recommendation", percent(recommended, configured), configured ? `${recommended}/${configured} relevant/recommended.` : "No configured provider result yet.");
+      setMetric("metric-proof", percent(proof, configured), configured ? `${proof}/${configured} asked for proof/source.` : "No configured provider result yet.");
+      renderResultsTable(results);
+      renderRiskMatrix(results);
+      renderDynamicRepairs(results);
+      latestBacktest = {
+        date: new Date().toISOString(),
+        prompt,
+        results,
+        summary: { configured, total, recognized, confused, unknown, recommended, proof }
+      };
+      saveHistory(latestBacktest);
+      renderHistory();
+    }
+
+    function renderResultsTable(results) {
+      const body = $("#ai-result-table");
+      if (!results.length) {
+        body.innerHTML = `<tr><td colspan="5">No AI result yet.</td></tr>`;
+        return;
+      }
+      body.innerHTML = results.map((result) => {
+        const tags = result.tags || {};
+        const recognition = tags.configured
+          ? tags.recognized ? "Recognized" : tags.unknown ? "Unknown" : "Not recognized"
+          : "Setup gap";
+        const risk = riskForResult(result);
+        return `
+          <tr>
+            <td>${result.provider}<span class="zh">${result.model || ""}</span></td>
+            <td>${result.status || "ok"}</td>
+            <td>${recognition}</td>
+            <td>${risk.name}</td>
+            <td>${result.repairSuggestion || risk.repair}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function riskForResult(result) {
+      const tags = result.tags || {};
+      if (!tags.configured) return { name: "Setup gap", cause: result.status || "not configured", repair: result.repairSuggestion || "Configure provider secret first." };
+      if (tags.wrongSource || tags.confused) return { name: "Brand confusion", cause: "AI may merge LUMIO with another Lumio.", repair: "Strengthen disambiguation across source pages and profiles." };
+      if (tags.unknown || tags.recognized === false) return { name: "Entity weak", cause: "AI did not clearly recognize LUMIO.", repair: "Strengthen exact entity phrase and official citation pages." };
+      if (tags.needsProof) return { name: "Proof pressure", cause: "AI asks for more evidence or source proof.", repair: "Add proof-safe case evidence and public-vs-client-reported boundaries." };
+      if (tags.recommended) return { name: "Positive signal", cause: "AI sees LUMIO as relevant in context.", repair: "Monitor and repeat after indexing/source refresh." };
+      return { name: "Manual review", cause: "Answer needs human judgement.", repair: "Review answer and decide whether source pages need improvement." };
+    }
+
+    function renderRiskMatrix(results) {
+      const body = $("#risk-matrix");
+      if (!results.length) {
+        body.innerHTML = `<tr><td colspan="4">No risk matrix yet.</td></tr>`;
+        return;
+      }
+      body.innerHTML = results.map((result) => {
+        const risk = riskForResult(result);
+        return `
+          <tr>
+            <td>${risk.name}</td>
+            <td>${risk.cause}</td>
+            <td>${result.provider}</td>
+            <td>${risk.repair}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function renderDynamicRepairs(results) {
+      const host = $("#dynamic-repair-list");
+      if (!results.length) {
+        host.innerHTML = "";
+        return;
+      }
+      const priorities = results.map((result) => {
+        const risk = riskForResult(result);
+        const priority = risk.name === "Setup gap" ? "P0" : risk.name === "Brand confusion" || risk.name === "Entity weak" ? "P1" : risk.name === "Proof pressure" ? "P2" : "P3";
+        return { provider: result.provider, priority, ...risk };
+      });
+      host.innerHTML = priorities.map((item) => `
+        <div class="row">
+          <span class="dot ${item.priority === "P0" || item.priority === "P1" ? "warn" : "pass"}">${item.priority}</span>
+          <div><strong>${item.name} - ${item.provider}</strong><small>${item.cause}</small><small class="zh">${item.repair}</small></div>
+          <span class="pill">${item.priority}</span>
+        </div>
+      `).join("");
+    }
+
     function escapeHtml(value) {
       return String(value || "")
         .replaceAll("&", "&amp;")
@@ -1090,13 +1256,137 @@
           body: JSON.stringify({ prompt, providers })
         });
         const data = await response.json();
-        renderAiResults(data.results || [{ provider: "system", ok: false, status: response.status, error: data.error || "Unknown response" }]);
+        const results = data.results || [{ provider: "system", ok: false, status: response.status, error: data.error || "Unknown response", tags: { configured: false } }];
+        renderAiResults(results);
+        updateBacktestDashboard(results, prompt);
       } catch (error) {
-        renderAiResults([{ provider: "system", ok: false, status: "network_error", error: error.message }]);
+        const results = [{ provider: "system", ok: false, status: "network_error", error: error.message, tags: { configured: false } }];
+        renderAiResults(results);
+        updateBacktestDashboard(results, prompt);
       } finally {
         button.disabled = false;
         button.textContent = "Run AI backtest";
       }
+    }
+
+    function readHistory() {
+      try {
+        return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveHistory(entry) {
+      const history = [entry, ...readHistory()].slice(0, 30);
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    }
+
+    function renderHistory() {
+      const body = $("#history-table");
+      const history = readHistory();
+      if (!history.length) {
+        body.innerHTML = `<tr><td colspan="6">No AI backtest history yet.</td></tr>`;
+        return;
+      }
+      body.innerHTML = history.slice(0, 10).map((entry) => {
+        const summary = entry.summary || {};
+        const configured = `${summary.configured || 0}/${summary.total || 0}`;
+        const recognition = percent(summary.recognized || 0, summary.configured || 0);
+        const unknown = percent(summary.unknown || 0, summary.configured || 0);
+        const risk = (summary.confused || 0) + (summary.unknown || 0) + (summary.proof || 0);
+        return `
+          <tr>
+            <td>${new Date(entry.date).toLocaleString()}</td>
+            <td>${escapeHtml(String(entry.prompt || "").slice(0, 86))}</td>
+            <td>${configured}</td>
+            <td>${recognition}</td>
+            <td>${unknown}</td>
+            <td>${risk}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function exportMarkdown() {
+      if (!latestBacktest) {
+        setLog("No AI backtest result to export yet.");
+        return;
+      }
+      const lines = [
+        "# LUMIO GEO AI Backtest",
+        "",
+        `Date: ${latestBacktest.date}`,
+        "",
+        "## Prompt",
+        latestBacktest.prompt,
+        "",
+        "## Summary",
+        `- Configured providers: ${latestBacktest.summary.configured}/${latestBacktest.summary.total}`,
+        `- Recognized: ${latestBacktest.summary.recognized}`,
+        `- Confused: ${latestBacktest.summary.confused}`,
+        `- Unknown / not recognized: ${latestBacktest.summary.unknown}`,
+        `- Recommended / relevant: ${latestBacktest.summary.recommended}`,
+        `- Proof pressure: ${latestBacktest.summary.proof}`,
+        "",
+        "## Results",
+        ...latestBacktest.results.flatMap((result) => [
+          `### ${result.provider} (${result.model || ""})`,
+          `Status: ${result.status || "ok"}`,
+          `Repair: ${result.repairSuggestion || ""}`,
+          "",
+          result.text || result.error || "",
+          ""
+        ])
+      ];
+      downloadText("lumio-geo-backtest.md", lines.join("\n"));
+    }
+
+    function exportCsv() {
+      if (!latestBacktest) {
+        setLog("No AI backtest result to export yet.");
+        return;
+      }
+      const rows = [["date", "provider", "model", "status", "recognized", "confused", "unknown", "recommended", "needs_proof", "repair"]];
+      for (const result of latestBacktest.results) {
+        const tags = result.tags || {};
+        rows.push([
+          latestBacktest.date,
+          result.provider,
+          result.model || "",
+          result.status || "ok",
+          tags.recognized,
+          tags.confused,
+          tags.unknown,
+          tags.recommended,
+          tags.needsProof,
+          result.repairSuggestion || ""
+        ]);
+      }
+      downloadText("lumio-geo-backtest.csv", rows.map((row) => row.map(csvCell).join(",")).join("\n"));
+    }
+
+    function csvCell(value) {
+      return `"${String(value ?? "").replaceAll('"', '""')}"`;
+    }
+
+    function downloadText(filename, text) {
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function clearHistory() {
+      localStorage.removeItem(HISTORY_KEY);
+      latestBacktest = null;
+      renderHistory();
+      setLog("Local AI backtest history cleared.");
     }
 
     function renderRepairs() {
@@ -1244,6 +1534,8 @@
     renderBacktestForm();
     renderRepairs();
     renderExternal();
+    renderHistory();
+    loadProviderHealth();
     $("#run-check").addEventListener("click", runCheck);
   </script>
 </body>
