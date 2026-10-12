@@ -1,0 +1,6 @@
+# Reviewed 2026-10-12: these exact historical matches contain the same Supabase
+# sb_publishable_ key, intended for public browser use. This does not validate
+# live RLS policies. No general key, path, rule, or current-file suppression.
+c2e964b5616b62a0288fc5e881572a572aa8b1ea:dist/index.html:generic-api-key:782
+c2e964b5616b62a0288fc5e881572a572aa8b1ea:lumio-supercraft-draft.html:generic-api-key:779
+3a80468f08f176ecd3e76a0258a7673c5bef68e7:dist/index.html:generic-api-key:2644

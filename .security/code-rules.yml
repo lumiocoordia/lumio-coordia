@@ -1,0 +1,63 @@
+# Original local policy rules. SPDX-License-Identifier: MIT
+rules:
+  - id: dynamic-node-shell-command
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: Pass untrusted values as execFile/spawn arguments instead of constructing a shell command.
+    pattern-either:
+      - pattern: exec(`...${$VALUE}...`, ...)
+      - pattern: execSync(`...${$VALUE}...`, ...)
+      - pattern: $CP.exec(`...${$VALUE}...`, ...)
+      - pattern: $CP.execSync(`...${$VALUE}...`, ...)
+  - id: request-data-to-eval
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: Request and URL data must not be evaluated as JavaScript.
+    mode: taint
+    pattern-sources:
+      - pattern: $REQ.query
+      - pattern: $REQ.body
+      - pattern: $REQ.params
+      - pattern: location.search
+      - pattern: window.location.search
+    pattern-sinks:
+      - pattern: eval($X)
+      - pattern: new Function(..., $X)
+  - id: browser-input-to-html
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: Use textContent or a reviewed HTML sanitizer for browser-controlled input.
+    mode: taint
+    pattern-sources:
+      - pattern: location.search
+      - pattern: location.hash
+      - pattern: window.location.search
+      - pattern: window.location.hash
+      - pattern: document.location.search
+      - pattern: document.location.hash
+    pattern-sinks:
+      - pattern: $EL.innerHTML = $X
+      - pattern: document.write($X)
+      - pattern: $EL.insertAdjacentHTML($POS, $X)
+  - id: dynamic-python-shell-command
+    languages: [python]
+    severity: ERROR
+    message: Pass command arguments as a list with shell=False.
+    pattern-either:
+      - pattern: subprocess.run(f"...{$X}...", ..., shell=True, ...)
+      - pattern: subprocess.check_output(f"...{$X}...", ..., shell=True, ...)
+      - pattern: subprocess.call(f"...{$X}...", ..., shell=True, ...)
+      - pattern: os.system(f"...{$X}...")
+  - id: python-input-eval
+    languages: [python]
+    severity: ERROR
+    message: Do not evaluate text read from user input or an HTTP request.
+    mode: taint
+    pattern-sources:
+      - pattern: input(...)
+      - pattern: request.args
+      - pattern: request.form
+      - pattern: request.json
+    pattern-sinks:
+      - pattern: eval($X, ...)
+      - pattern: exec($X, ...)

@@ -1,0 +1,73 @@
+name: Security
+
+on:
+  push:
+    branches: [main, 'codex/free-security-controls-*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  security:
+    name: secrets-code-dependencies
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      SEMGREP_SEND_METRICS: 'off'
+      SEMGREP_ENABLE_VERSION_CHECK: '0'
+      OTEL_SDK_DISABLED: 'true'
+      DO_NOT_TRACK: '1'
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Install pinned scanners
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/security-tools"
+          curl --fail --location --silent --show-error --proto '=https' --tlsv1.2 \
+            https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz \
+            --output "$RUNNER_TEMP/security-tools/gitleaks.tar.gz"
+          echo '551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  '"$RUNNER_TEMP/security-tools/gitleaks.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/security-tools/gitleaks.tar.gz" -C "$RUNNER_TEMP/security-tools" gitleaks
+          curl --fail --location --silent --show-error --proto '=https' --tlsv1.2 \
+            https://github.com/google/osv-scanner/releases/download/v2.6.0/osv-scanner_linux_amd64 \
+            --output "$RUNNER_TEMP/security-tools/osv-scanner"
+          echo 'ca69b3d3cd08f889a49dc0a383122f71cc528b83803671df5fd874d97485b108  '"$RUNNER_TEMP/security-tools/osv-scanner" | sha256sum --check
+          chmod 700 "$RUNNER_TEMP/security-tools/gitleaks" "$RUNNER_TEMP/security-tools/osv-scanner"
+          python -m venv "$RUNNER_TEMP/security-tools/semgrep"
+          "$RUNNER_TEMP/security-tools/semgrep/bin/python" -m pip --isolated install \
+            --index-url https://pypi.org/simple --only-binary=:all: -r .security/requirements.txt
+      - name: Check secrets in files and Git history
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/security-tools/gitleaks" dir . \
+            --config .security/gitleaks.toml --gitleaks-ignore-path /dev/null \
+            --ignore-gitleaks-allow --redact=100 --no-banner --no-color
+          "$RUNNER_TEMP/security-tools/gitleaks" git . --log-opts=--all \
+            --config .security/gitleaks.toml --gitleaks-ignore-path .security/reviewed-history.ignore \
+            --ignore-gitleaks-allow --redact=100 --no-banner --no-color
+      - name: Check code with local policy rules
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .security/scan_code.py "$RUNNER_TEMP/security-tools/semgrep/bin/semgrep"
+      - name: Check known dependency vulnerabilities
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/security-tools/osv-scanner" scan source --recursive . \
+            --no-resolve --no-call-analysis=go --no-call-analysis=rust
