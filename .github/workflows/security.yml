@@ -56,10 +56,12 @@ jobs:
           set -euo pipefail
           "$RUNNER_TEMP/security-tools/gitleaks" dir . \
             --config .security/gitleaks.toml --gitleaks-ignore-path /dev/null \
-            --ignore-gitleaks-allow --redact=100 --no-banner --no-color
+            --ignore-gitleaks-allow --redact=100 --no-banner --no-color 2>&1 | tee "$RUNNER_TEMP/security-current.log"
+          if grep -E '(^|[[:space:]])(ERR|FTL)([[:space:]]|$)' "$RUNNER_TEMP/security-current.log"; then exit 2; fi
           "$RUNNER_TEMP/security-tools/gitleaks" git . --log-opts=--all \
             --config .security/gitleaks.toml --gitleaks-ignore-path .security/reviewed-history.ignore \
-            --ignore-gitleaks-allow --redact=100 --no-banner --no-color
+            --ignore-gitleaks-allow --redact=100 --no-banner --no-color 2>&1 | tee "$RUNNER_TEMP/security-history.log"
+          if grep -E '(^|[[:space:]])(ERR|FTL)([[:space:]]|$)' "$RUNNER_TEMP/security-history.log"; then exit 2; fi
       - name: Check code with local policy rules
         shell: bash
         run: |
