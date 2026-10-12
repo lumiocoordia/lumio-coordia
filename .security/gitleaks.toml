@@ -1,0 +1,7 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Exact reviewed Supabase publishable key; live RLS unverified"
+regexTarget = "secret"
+regexes = ['\Asb_publishable_Ff6_46rAYg_d7LMV2zzqgQ_1yaX3S\-p\z']

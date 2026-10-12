@@ -1,0 +1,2 @@
+# Tooling only. Repository application code is never installed or executed.
+semgrep==1.180.0
